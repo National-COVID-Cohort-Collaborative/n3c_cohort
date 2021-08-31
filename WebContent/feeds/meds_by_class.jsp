@@ -3,7 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-    	FROM (SELECT class, name, SPLIT_PART(name, ' ', 1) AS set_name, total,
+    	FROM (SELECT class, name, SPLIT_PART(name, ' ', 1) AS set_name, MD5(name) AS set_hash, total,
     	 all__hospitalized_and_not_, all__hospitalized_and_not__1, hospitalized,
     	 all__hospitalized_and_not__2, age, trend
          FROM enclave_cohort.meds) AS foo;
