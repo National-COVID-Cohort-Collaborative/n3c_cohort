@@ -36,9 +36,9 @@ $.getJSON("feeds/preprints.jsp", function(data){
 	$('#xrviv_publications').DataTable( {
     	data: data,
        	paging: true,
-    	pageLength: 5,
+    	pageLength: 10,
     	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-    	order: [[0, 'asc']],
+    	order: [[3, 'desc']],
      	columns: [
 	       	{ data: 'doi', visible: true, orderable: true,
         		render: function ( data, type, row ) {
