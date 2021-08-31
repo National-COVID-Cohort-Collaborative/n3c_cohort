@@ -53,7 +53,7 @@
 				
 			legend.append("rect")
 				.attr("x", 0)
-				.attr("width", 75)
+				.attr("width", 100)
 				.attr("height", 25)
 				.attr("fill", function(d) { return color(d.cumulative); })
 				.on("mouseover",function(d,i){
@@ -117,7 +117,7 @@
 				});
 		
 			legend.append("text")
-				.attr("x", 80)
+				.attr("x", 110)
 				.attr("y", 13.5)
 				.attr("dy", "0.32em")
 				.text(function(d) { return d.name;})

@@ -74,8 +74,12 @@
 }
 
 
-@media (min-width: 768px) and (max-width: 946px){
-	#geographic_legend svg > g{
+
+
+@media all 
+and (min-width: 769px) 
+and (max-width: 1076px){
+	.geo #geographic_legend svg{
 		transform: scale(0.7);
 	}
 }
@@ -105,16 +109,16 @@
 	</div>
 </div>
 
-<div class="row geo">
+<div class="row geo" style="max-width: 1300px; margin: auto;">
 	<div class="col-xs-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Geographic Distribution of N3C Cohort</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-4 col-lg-3">
 						<div id="geographic_legend"></div>
 					</div>
-					<div class="col-xs-12 col-md-9">
+					<div class="col-xs-12 col-md-8 col-lg-9">
 						<div id="geographic"></div>
 					</div>
 				</div>
