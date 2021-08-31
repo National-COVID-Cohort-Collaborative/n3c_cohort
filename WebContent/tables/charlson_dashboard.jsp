@@ -62,28 +62,28 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 	
 
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['value'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['value'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['mild'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['mild'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['mild_ed'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['mild_ed'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['moderate'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['moderate'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['severe'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['severe'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['dead_w_covid'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['dead_w_covid'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['x__all'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['x__all'].toString()) + '</span>';
 		footer_row.appendChild(td);
 	var td = document.createElement("td");
-		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + json['rows'][json['rows'].length-1]['hospital'].toString() + '</span>';
+		td.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + addCommas(json['rows'][json['rows'].length-1]['hospital'].toString()) + '</span>';
 		footer_row.appendChild(td);
 
 	
@@ -105,13 +105,48 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
     	order: [[5, 'desc']],
      	columns: [
         	{ data: 'value', visible: true, orderable: true },
-        	{ data: 'mild', visible: true, orderable: true },
-        	{ data: 'mild_ed', visible: true, orderable: true },
-        	{ data: 'moderate', visible: true, orderable: true },
-        	{ data: 'severe', visible: true, orderable: true },
-        	{ data: 'dead_w_covid', visible: true, orderable: true },
-        	{ data: 'x__all', visible: true, orderable: true },
-        	{ data: 'hospital', visible: true, orderable:true }
+        	{
+        	    data: 'mild', visible: true, orderable: true,
+        	    render: function(data) {
+        	        return parseFloat(data).toPrecision(3) + "%";
+                }
+        	},
+        	{
+        	    data: 'mild_ed', visible: true, orderable: true,
+        	    render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+            },
+        	{
+        	    data: 'moderate', visible: true, orderable: true,
+                render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+            },
+        	{
+        	    data: 'severe', visible: true, orderable: true,
+                render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+            },
+        	{
+        	    data: 'dead_w_covid', visible: true, orderable: true,
+                render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+            },
+        	{
+        	    data: 'x__all', visible: true, orderable: true,
+                render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+             },
+        	{
+        	    data: 'hospital', visible: true, orderable:true,
+                render: function(data) {
+                    return parseFloat(data).toPrecision(3) + "%";
+                }
+             }
     	]	
 	} );
 
@@ -125,4 +160,17 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 	});
 	
 });
+
+
+function addCommas(str) {
+    str += '';
+    var x = str.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
 </script>
