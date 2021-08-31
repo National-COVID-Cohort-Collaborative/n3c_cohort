@@ -3,6 +3,12 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 <style>
+/*table.drilldown tbody td {
+    border: 1px solid darkgoldenrod;
+}
+table.dataTable tbody td {
+    border: 1px solid blue;
+}*/
 th.dt-center, td.dt-center {
   text-align: center;
 }
@@ -12,15 +18,19 @@ th.dt-center, td.dt-center {
   }
   table.drilldown>tbody>tr>td.covid-positive {
     width: 14.5%;
+    padding-right: 0.6%;
   }
   table.drilldown>tbody>tr>td.covid-positive-7d {
     width: 19.83%;
+    padding-right: 0.5%;
   }
   table.drilldown>tbody>tr>td.covid-positive-hosp {
     width: 11.6%;
+    padding-right: 0.6%;
   }
   table.drilldown>tbody>tr>td.covid-med8 {
     width: 14.5%;
+    padding-right: 0.4%;
   }
 }
 @media only screen
@@ -30,9 +40,11 @@ th.dt-center, td.dt-center {
   }
   table.drilldown>tbody>tr>td.covid-positive {
     width: 14.6%;
+    padding-left: 0.7%;
   }
   table.drilldown>tbody>tr>td.covid-positive-7d {
     width: 20%;
+    padding-left: 0.6%;
   }
   table.drilldown>tbody>tr>td.covid-positive-hosp {
     width: 11.6%;
@@ -46,13 +58,37 @@ th.dt-center, td.dt-center {
 }
 @media only screen and (max-device-width: 1440px) {
   table.drilldown>tbody>tr>td.spacer {
-    width: 35.4%;
+    width: 36.4%;
   }
   table.drilldown>tbody>tr>td.covid-positive {
     width: 14.6%;
+    padding-left: 1%;
   }
   table.drilldown>tbody>tr>td.covid-positive-7d {
     width: 20%;
+    padding-left: 1.3%;
+  }
+  table.drilldown>tbody>tr>td.covid-positive-hosp {
+    width: 11.6%;
+    padding-left: 1.3%;
+  }
+  table.drilldown>tbody>tr>td.covid-med8,
+  table.drilldown>tbody>tr>td.covid-med8.pad3,
+  table.drilldown>tbody>tr>td.covid-med8.pad5 {
+    padding-left: 1.6% !important;
+  }
+}
+@media only screen and (max-device-width: 1280px) {
+  table.drilldown>tbody>tr>td.spacer {
+    width: 36.9%;
+  }
+  table.drilldown>tbody>tr>td.covid-positive {
+    width: 14.6%;
+    padding-right: 1.3%;
+  }
+  table.drilldown>tbody>tr>td.covid-positive-7d {
+    width: 20%;
+    padding-right: 1%;
   }
   table.drilldown>tbody>tr>td.covid-positive-hosp {
     width: 11.6%;
@@ -60,7 +96,8 @@ th.dt-center, td.dt-center {
   table.drilldown>tbody>tr>td.covid-med8,
   table.drilldown>tbody>tr>td.covid-med8.pad3,
   table.drilldown>tbody>tr>td.covid-med8.pad5 {
-    padding-left: 3% !important;
+    padding-left: 2.3% !important;
+    width: 13.5%;
   }
 }
 @media only screen and (max-device-width: 1152px) {
