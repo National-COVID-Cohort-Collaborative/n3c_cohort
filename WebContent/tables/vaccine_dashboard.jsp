@@ -32,7 +32,7 @@ $.getJSON("feeds/vaccine.jsp", function(data){
 
         var th = document.createElement("th");
         th.innerHTML = '<span style="color:#FFF; font-weight:600; font-size:16px;">' + label + '</span>';
-        th.style.backgroundColor = "#666";
+        th.style.backgroundColor = "#2d5985";
         header_row_top.appendChild(th);
 	}
 

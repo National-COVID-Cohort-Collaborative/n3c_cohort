@@ -46,7 +46,7 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
                 if (header.label == "")
                     th.style.border = "0px";
                 else
-                    th.style.backgroundColor = "#666";
+                    th.style.backgroundColor = "#2d5985";
                 th.style.textAlign = "center";
                 header_row_top.appendChild(th);
          })
@@ -66,7 +66,7 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 
         var th = document.createElement("th");
         th.innerHTML = '<span style="color:#FFF; font-weight:600; font-size:16px;">' + label + '</span>';
-        th.style.backgroundColor = "#666";
+        th.style.backgroundColor = "#2d5985";
         header_row_bottom.appendChild(th);
 	}
 
