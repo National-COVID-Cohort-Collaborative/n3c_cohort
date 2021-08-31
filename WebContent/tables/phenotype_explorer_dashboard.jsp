@@ -77,7 +77,7 @@ div.phenotype-description {
 var phenotypes = {};
 var peFilter = [];
 
-$.getJSON("feeds/phenotype_explorer.jsp", (data) => {
+$.getJSON("feeds/phenotypes.jsp", (data) => {
     let json = $.parseJSON(JSON.stringify(data));
 
     json['phenotypes'].forEach((row, i) => {
