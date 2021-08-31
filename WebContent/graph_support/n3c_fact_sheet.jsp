@@ -1,7 +1,7 @@
 <div style="text-align:center; font-size:16px;">
 	<div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; padding: 0px;">
 		<div class="col-xs-12" style="margin-bottom:10px;">
-			<h3 style="margin-top:0px;">Release Set:	<span id="date"></span></h2>
+			<h4 style="margin-top:0px;">Release Set:	<span id="date"></span></h4>
 			<strong>Production version:</strong> <span id="production_date">&nbsp;</span></p>
 		</div>
 	</div>
