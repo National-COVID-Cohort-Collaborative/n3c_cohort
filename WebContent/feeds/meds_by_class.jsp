@@ -8,9 +8,9 @@
     "headers": [
         {"value":"class", "label":"Class"},
         {"value":"name", "label":"Medication"},
-        {"value":"total", "label":"Total"},
-        {"value":"all__hospitalized_and_not_", "label":"COVID+"},
-        {"value":"all__hospitalized_and_not__1", "label":"Not Hospitalized"},
+        {"value":"total", "label":"All COVID"},
+        {"value":"all__hospitalized_and_not_", "label":"All (hospitalized and not)"},
+        {"value":"all__hospitalized_and_not__1", "label":"All (hospitalized and not)"},
         {"value":"hospitalized", "label":"Hospitalized"},
         {"value":"all__hospitalized_and_not__2", "label":"All (hospitalized and not)"},
         {"value":"trend", "label":"Trend"},
