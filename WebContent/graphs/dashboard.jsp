@@ -146,9 +146,13 @@ and (max-width: 1076px){
 			<div class="panel-heading">N3C Contributing Sites</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12 col-md-8 col-lg-12">
+					<div class="col-xs-12 col-md-8 col-lg-8">
 						<div id="graph"></div>
 					</div>
+					<div class="col-xs-12 col-md-8 col-lg-4">
+ 						<div id="site-roster"></div>
+						<jsp:include page="../tables/site_roster.jsp"/>
+ 					</div>
 				</div>
 			</div>
 		</div>

@@ -29,6 +29,7 @@ WebContent/feeds/severity.jsp -text
 WebContent/feeds/severity_detail.jsp -text
 WebContent/feeds/severity_temp.jsp -text
 WebContent/feeds/siteLocations.jsp -text
+WebContent/feeds/siteRoster.jsp -text
 WebContent/feeds/total_by_source_count_weekly_int.jsp -text
 WebContent/footer.jsp -text
 WebContent/graph_support/cohort_map.jsp -text
@@ -101,4 +102,5 @@ WebContent/tables/models.jsp -text
 WebContent/tables/overall_stats.jsp -text
 WebContent/tables/peak.jsp -text
 WebContent/tables/severity.jsp -text
+WebContent/tables/site_roster.jsp -text
 /pom.xml -text

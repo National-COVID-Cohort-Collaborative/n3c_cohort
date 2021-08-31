@@ -194,3 +194,14 @@ rect.disabled {
 .panel-footer{
     padding: 0px 15px 0px 15px;
 }
+
+/* -------------- Site Map ---------------------  */
+
+.site_wrapper {
+    font-family: tahoma;
+    font-size: 10px;
+    position: relative;
+    clear: both;
+    *zoom: 1;
+    zoom: 1;
+}

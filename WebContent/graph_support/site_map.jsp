@@ -40,9 +40,9 @@
 				.attr("height", height);
 
 			// Color Scale For Legend and Map 
-			//var color = d3.scaleOrdinal() 
-			//	.domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
-			//	.range(["#bce4d8", "#b6e1d8", "#a8d9d4", "#a4d8d3", "#9ed4d2", "#80c3cb", "#65b4c3", "#3791b0", "#2d5985"]);
+			var color = d3.scaleOrdinal() 
+				.domain(["Y", "N"])
+				.range(["#6b486b", "#ff8c00"]);
 
 			var dataArray = [];
 
@@ -51,11 +51,6 @@
 			for (var d = 0; d < states.length; d++) {
 				dataArray.push(parseFloat(states[d].count))
 			}
-
-			var color = d3.scaleLinear()
-				.domain([d3.min(dataArray, function(d) { return d; }), d3.max(dataArray, function(d) { return d; })])
-				.range(["#bce4d8", "#2d5985"]);
-
 
 			// Load GeoJSON data and merge with cohort data
 			d3.json("${param.state_page}", function(json) {
@@ -101,14 +96,14 @@
 					var tool_tip = d3.tip()
 						.attr("class", "d3-tip")
 						.offset([-8, 0])
-						.html(function(d) { return d.site; });
+						.html(function(d) { return d.site + org_label(d.description) + status_label(d.status); });
 					svg.call(tool_tip);
 	
 					svg.selectAll("circle")
 						.data(sites)
 						.enter().append("svg:circle")
 						.style("stroke", "#fff")
-						.style("fill", function(d) { return color(d.id % 10); })
+						.style("fill", function(d) { return color(d.status); })
 						//.on("click", function(d) { window.open(d.url, "_self"); })
 						.attr("cx", function(d, i) { return positions[i][0]; })
 						.attr("cy", function(d, i) { return positions[i][1]; })
@@ -119,6 +114,18 @@
 			});
 		};
 	});
+
+	function org_label(x) {
+		if (x == "HUB")
+			return "<br>CTSA Hub";
+		return "<br>N3C Affiliate";
+	}
+
+	function status_label(x) {
+		if (x == "Y")
+			return "<br>Data visible in Enclave";
+		return "<br>Data submitted to Enclave";
+	}
 
 </script>
 
