@@ -123,7 +123,7 @@ div.phenotype-description {
                     <div class="card other-cards other-card0">
                         <div class="inner-card">
                             <div class="top-row">
-                                <span class="icon fa fa-heart-rate">
+                                <span class="icon fa fa-procedures">
                                 </span>
                                 <div class="value-large" id="hospitalizedSummary">
                                     <span></span>
