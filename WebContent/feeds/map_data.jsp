@@ -4,7 +4,7 @@
 	"regions":
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	select jsonb_pretty(jsonb_agg(foo))
-	from (select id,name,sum(num_patients) as cumulative from enclave_cohort.atients_subregion_for_map,enclave_cohort.map_region where name=subregion group by 1,2 order by 3) as foo;
+	from (select id,name,sum(num_patients) as cumulative from enclave_cohort.num_patients_subregion_for_map,enclave_cohort.map_region where name=subregion group by 1,2 order by 3) as foo;
 </sql:query>
 <c:forEach items="${projects.rows}" var="row" varStatus="rowCounter">
 	${row.jsonb_pretty}

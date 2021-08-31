@@ -124,7 +124,7 @@
 			</jsp:include>
 
 <sql:query var="facts" dataSource="jdbc/N3CCohort">
-	select max(sum) from enclave_cohort.age_hist_data;
+	select max(sum) from enclave_cohort.scrub_age_hist_data;
 </sql:query>
 <c:forEach items="${facts.rows}" var="row" varStatus="rowCounter">
 	<c:set var="max_age_value" value="${row.max}" />
@@ -175,7 +175,7 @@
 </jsp:include>
 
 <sql:query var="facts" dataSource="jdbc/N3CCohort">
-	select max(sum) from enclave_cohort.race_hist_data;
+	select max(sum) from enclave_cohort.scrub_race_hist_data;
 </sql:query>
 <c:forEach items="${facts.rows}" var="row" varStatus="rowCounter">
 	<c:set var="max_race_value" value="${row.max}" />

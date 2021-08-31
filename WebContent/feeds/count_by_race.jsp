@@ -10,7 +10,7 @@
 			seq,
 			(select jsonb_agg(sub)
 			 from (select bar.ethnicity,sum
-			 		from enclave_cohort.race_hist_data as bar, enclave_cohort.ethnicity_map
+			 		from enclave_cohort.scrub_race_hist_data as bar, enclave_cohort.ethnicity_map
 			 		where ethnicity_map.ethnicity=bar.ethnicity
 			 		  and race_map.value=bar.race
 			 		  and covid_status_name = ?
