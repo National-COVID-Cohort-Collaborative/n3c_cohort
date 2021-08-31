@@ -98,7 +98,7 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
        	paging: false,
 	 	bInfo: false,
 	 	searching: false,
-    	order: [[0, 'asc'],[1, 'asc']],
+    	order: [[5, 'desc']],
      	columns: [
         	{ data: 'value', visible: true, orderable: true },
         	{ data: 'mild', visible: true, orderable: true },
