@@ -24,6 +24,9 @@
 
 		<c:choose>
 			<c:when test="${empty param.org and empty param.state}">
+				<form action="mapping.jsp">
+					Pattern: <input type="text" name="org">
+				</form>
 				<sql:query var="orgs" dataSource="jdbc/N3CCohort">
 					select distinct institutionid,institutionname from enclave_cohort.feedout
 					where institutionid not in (select institutionid from enclave_cohort.map_site)
@@ -31,21 +34,46 @@
 				</sql:query>
 				<ul>
 					<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
-						<li><a href="mapping.jsp?org=${row.institutionid}&name=${row.institutionname}">${row.institutionname}</a>
+						<li>${row.institutionname}
 					</c:forEach>
 				</ul>
 			</c:when>
 			<c:when test="${empty param.state}">
-				<h3>${param.name}</h3>
-				<sql:query var="orgs" dataSource="jdbc/N3CCohort">
-					select name,abbrev from enclave_cohort.map_state
-					order by name
-				</sql:query>
-				<ul>
-					<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
-						<li><a href="submit_mapping.jsp?org=${param.org}&state=${row.abbrev}">${row.name}</a>
-					</c:forEach>
-				</ul>
+				<div class="container-fluid" style="width: 100%">
+					<form method='GET' action='submit_mapping.jsp'>
+		<div class="container-fluid" style="float: left; width: 100%">
+			<button type="submit" name="action" value="submit">Submit</button>
+			</div>
+						<div class="container-fluid" style="float: left; width: 30%">
+							<sql:query var="orgs" dataSource="jdbc/N3CCohort">
+					select distinct institutionid,institutionname from enclave_cohort.feedout
+					where institutionname ~ ?
+					order by institutionname
+					<sql:param>${param.org}</sql:param>
+							</sql:query>
+							<ul>
+								<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
+									<input id="org" name=org type="radio" value="${row.institutionid}">${row.institutionname}<br>
+								</c:forEach>
+							</ul>
+						</div>
+
+						<div class="container-fluid" style="float: left; width: 70%">
+							<h3>${param.name}</h3>
+							<sql:query var="orgs" dataSource="jdbc/N3CCohort">
+					select id,org_name from enclave_cohort.ken_master
+					where org_name ~ ?
+					order by org_name
+					<sql:param>${param.org}</sql:param>
+							</sql:query>
+							<ul>
+								<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
+									<input id="id" name=id type="radio" value="${row.id}">${row.org_name}<br>
+								</c:forEach>
+							</ul>
+						</div>
+					</form>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<sql:update dataSource="jdbc/N3CCohort">
@@ -57,7 +85,9 @@
 			</c:otherwise>
 		</c:choose>
 
-		<jsp:include page="../footer.jsp" flush="true" />
+		<div class="container-fluid" style="float: left; width: 100%">
+			<jsp:include page="../footer.jsp" flush="true" />
+		</div>
 	</div>
 </body>
 </html>
