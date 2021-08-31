@@ -49,7 +49,7 @@
 				.selectAll("g")
 				.data(regions)
 				.enter().append("g")
-				.attr("transform", function(d, i) { return "translate(0," + i * 27 + ")"; });
+				.attr("transform", function(d, i) { return "translate(0," + ((i * 27) + 20) + ")"; });
 				
 			legend.append("rect")
 				.attr("x", 0)
@@ -79,11 +79,13 @@
 				});
 				
 			svg.append("text")
-			.attr("x", 0)
-			.attr("y", 0)
-			.attr("dy", "0.8em")
-			.attr("fill", "black")
-			.text("Total Patients in Region");
+				.attr("x", 0)
+				.attr("y", 0)
+				.attr("dy", ".9em")
+				.attr("font-weight", 600)
+				.attr("font-size", "16px")
+				.attr("fill", "black")
+				.text("Total Patients in Region");
 
 			legend.append("text")
 				.attr("x", 5)
