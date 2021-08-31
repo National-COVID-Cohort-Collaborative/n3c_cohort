@@ -26,7 +26,7 @@ $.getJSON("feeds/vaccine.jsp", function(data){
 	// Build the headers
 	for (i in col) {
 	    label = col[i].toString();
-	    console.log({label});
+
 	    if (label == "Description")
 	        continue;
 
