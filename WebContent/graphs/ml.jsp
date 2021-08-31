@@ -32,19 +32,19 @@
 							<div class="row">
 								<div class="col-xs-12 col-md-6">
 									<p class="secondary-heading">"Severe Clinical Course" was coded in the presence<br> of any of the following outcomes:</p>
-									<p style="text-align:center;">Hospitalization with death</br>
-									Discharge to hospice</br>
-									Invasive mechanical ventilation</br>
-									Extracorporeal membrane oxygenation (ECMO) </br></p>
+									<p style="text-align:center;">Hospitalization with death<br>
+									Discharge to hospice<br>
+									Invasive mechanical ventilation<br>
+									Extracorporeal membrane oxygenation (ECMO) <br></p>
 								</div>
 								<div class="col-xs-12 col-md-6">
 									<p class="secondary-heading">Models Include:</p>
 									<p style="text-align:center;">Random Forest (AUROC 0.86)<br>
 									<a href="https://github.com/dmlc/xgboost">XGBoost</a> (AUROC 0.87)<br>
-									Logistic Regression </br>
-									Logistic Regression w/L1 Penalty</br>
-									Logistic Regression w/L2 Penalty</br>
-									Logistic Regression w/Elastic Net Regularization</br>
+									Logistic Regression <br>
+									Logistic Regression w/L1 Penalty<br>
+									Logistic Regression w/L2 Penalty<br>
+									Logistic Regression w/Elastic Net Regularization<br>
 									Ridge Classifier</p>
 								</div>
 							</div>
