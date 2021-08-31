@@ -12,7 +12,7 @@
         {"value":"mild_ed", "label":"Mild ED"},
         {"value":"moderate", "label":"Moderate"},
         {"value":"severe", "label":"Severe"},
-        {"value":"dead_w_covid", "label":"Dead w/ COVID"}
+        {"value":"dead_w_covid", "label":"Mortality/Hospice"}
     ],
     "rows" : 
 <c:forEach items="${projects.rows}" var="row" varStatus="rowCounter">
