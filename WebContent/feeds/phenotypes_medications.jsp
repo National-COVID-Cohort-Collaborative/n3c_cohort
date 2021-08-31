@@ -10,7 +10,8 @@
                 SUM(mild) AS mild,
                 SUM(mild_ed) AS mild_ed,
                 SUM(moderate) AS moderate,
-                SUM(severe) AS severe
+                SUM(severe) AS severe,
+                SUM(unaffected) AS unaffected
                 FROM enclave_data.clamped_med_usage_by_severity
                 WHERE variable = ?
                 GROUP BY phenotypeid, value, variable

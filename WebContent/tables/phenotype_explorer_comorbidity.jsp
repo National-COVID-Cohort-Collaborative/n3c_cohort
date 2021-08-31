@@ -1,4 +1,3 @@
-
 <div class="row"><h3>Select Phenotype</h3></div>
 <select id="phenotype-selector" style="width: 100%"></select>
 <h4 class="page-header">Phenotype Summary</h4>
@@ -112,8 +111,9 @@
     <h4 class="page-header"><strong>Comorbidity distribution within cohort</strong></h4>
 </div>
 <script type="text/javascript">
-var phenotypes = {};
-var peFilter = [];
+var phenotypes = {},
+    peFilter = [],
+    allCohortCount = 0;
 
 $.getJSON("feeds/phenotypes.jsp", (data) => {
     let json = $.parseJSON(JSON.stringify(data));
@@ -140,16 +140,16 @@ $('#phenotype-selector').on('select2:select', (e) => {
 
 // Phenotype details
 function phenotypeDetails(phenotypeId) {
-    phenotype = phenotypes['pe_' + phenotypeId];
+    const phenotype = phenotypes['pe_' + phenotypeId];
 
-    if (jQuery.isEmptyObject(phenotype))
+    if (! Object.keys(phenotype).length)
         return;
 
-    let allCohortCount = phenotypes['pe_1'].count;
+    allCohortCount = phenotypes['pe_1'].count;
     let phenotypeCount = phenotypes['pe_' + phenotypeId].count;
 
     $.each(phenotype, (field, value) => {
-        selector = '#' + field;
+        let selector = '#' + field;
 
         if (!value) {
             $(selector).hide();
@@ -172,7 +172,7 @@ function phenotypeDetails(phenotypeId) {
             let json = $.parseJSON(JSON.stringify(data))
 
             allCount = json[statCategory].all;
-            subCount = json[statCategory].sub || allCount;
+            subCount = phenotypeId == 1 ? allCount : json[statCategory].sub;
 
             let allStat = ((allCount/allCohortCount) * 100).toFixed(1);
             let subStat = ((subCount/phenotypeCount) * 100).toFixed(1);

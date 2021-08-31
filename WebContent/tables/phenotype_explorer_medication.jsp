@@ -9,11 +9,11 @@
                 <div class="value-large" id="medCount"><span></span></div>
             </div>
             <div class="title" id="medName">
-                <span></span> cohort size
+                <span></span> Total Patients
             </div>
         </div>
     </div>
-    <!--<div class="card other-cards other-card0">
+    <div class="card other-cards other-card0">
         <div class="inner-card">
             <div class="top-row">
                 <span class="icon fa fa-user-plus"></span>
@@ -24,9 +24,9 @@
             <div class="title">
                 COVID positive
                 <div class="subtitle" id="medCovidStat">
-                    <span id="medCovidSubStat"></span>% of medication vs
+                    Selected <span id="medCovidSelectedStat"></span>%
                     <br>
-                    <span id="medCovidAllStat"></span>% all patients
+                    Total <span id="medCovidCohortStat"></span>%
                 </div>
             </div>
         </div>
@@ -34,8 +34,8 @@
     <div class="card other-cards other-card0">
         <div class="inner-card">
             <div class="top-row">
-                        <span class="icon fa fa-procedures">
-                        </span>
+                <span class="icon fa fa-procedures">
+                </span>
                 <div class="value-large" id="medHospitalizedSummary">
                     <span></span>
                 </div>
@@ -43,9 +43,9 @@
             <div class="title">
                 Hospitalized
                 <div class="subtitle" id="medHospitalizedStat">
-                    <span id="medHospitalizedSubStat"></span>% of medication vs
+                    Selected <span id="medHospitalizedSelectedStat"></span>%
                     <br>
-                    <span id="medHospitalizedAllStat"></span>% all patients
+                    Total <span id="medHospitalizedCohortStat"></span>%
                 </div>
             </div>
         </div>
@@ -62,13 +62,13 @@
             <div class="title">
                 Severe outcome
                 <div class="subtitle" id="medDeathStat">
-                    <span id="medDeathSubStat"></span>% of medication vs
+                    Selected <span id="medDeathSelectedStat"></span>%
                     <br>
-                    <span id="medDeathAllStat"></span>% all patients
+                    Total <span id="medDeathCohortStat"></span>%
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 </div>
 <div id="pe-med-chart" style="margin-top: 25px"></div>
 <jsp:include page="../graphs/phenotype_explorer_medication.jsp">
