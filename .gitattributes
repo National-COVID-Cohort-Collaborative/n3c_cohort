@@ -71,6 +71,7 @@ WebContent/graphs/labs.jsp -text
 WebContent/graphs/medications.jsp -text
 WebContent/graphs/medications_by_medication.jsp -text
 WebContent/graphs/medications_by_severity.jsp -text
+WebContent/graphs/ml.jsp -text
 WebContent/graphs/rowFreqData.jsp -text
 WebContent/graphs/scatter.jsp -text
 WebContent/graphs/severity.jsp -text

@@ -50,8 +50,9 @@ table.dataTable thead .sorting_asc {
 		<p>&nbsp;</p>
 		<ul class="nav nav-tabs" style="font-size: 16px;">
 			<li class="active"><a data-toggle="tab" href="#dashboard">The Cohort</a></li>
-			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
 			<li><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
+			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
+			<li><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -60,6 +61,9 @@ table.dataTable thead .sorting_asc {
 			</div>
 			<div class="tab-pane fade" id="clinical">
 				<jsp:include page="graphs/clinical.jsp" flush="true" />
+			</div>
+			<div class="tab-pane fade" id="ml">
+				<jsp:include page="graphs/ml.jsp" flush="true" />
 			</div>
 			<div class="tab-pane fade" id="collaborative">
 				<jsp:include page="graphs/collaborative.jsp" flush="true" />
