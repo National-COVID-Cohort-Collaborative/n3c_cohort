@@ -1,7 +1,5 @@
-<script src="resources/select2.min.js"></script>
-<style type="text/css" media="all">
-@import "resources/select2.min.css";
-</style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <style>
 div.phenotype-details {
     margin-top: 20px;
@@ -36,14 +34,12 @@ div.phenotype-description {
                 <div class="col-xs-3 pe-filter"><input type="radio" name="pe_filter" id="vitals" value="vitals"> <label for="vitals">Labs &amp; Vitals</label></div>
             </div>
             <div class="phenotype-body">
-                <div class="row">
-                    <select class="phenotype-selector" style="width: 100%">
-                        <option value="1" selected="selected">All Patients</option>
-                    </select>
-                </div>
+                <select class="phenotype-selector" style="width: 100%"></select>
                 <div class="phenotype-description">
-                    <div class="title">Clinical Description</div>
-                    <span id="clinicaldescription">This is the clinical Description</span>
+                    <div id="clinicaldescription">
+                        <div class="title">Clinical Description</div>
+                        <span></span>
+                    </div>
                 </div>
                 <div class="phenotype-details">
                     <div class="panel-group" id="pe_accordion">
@@ -55,13 +51,20 @@ div.phenotype-description {
                             </div>
                             <div id="pe_collapseOne" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <div><strong>Cohort name</strong></div>
-                                    <span id="cohortname">[PL 316139001] Heart failure referent concept incident cohort: First occurrence of referent concept + descendants with >=365d prior observation</span>
+                                    <div id="cohortname">
+                                        <div><strong>Cohort name</strong><br/></div>
+                                        <span></span>
+                                    </div>
 
-                                    <div class="title">Cohort JSON</div>
-                                    <blockquote class="blockquote">
-                                    {"cdmVersionRange": ">=5.0.0", "PrimaryCriteria": {"CriteriaList": [{"ConditionOccurrence": {"CodesetId": 0, "First": true, "ConditionTypeExclude": false}}], "ObservationWindow": {"PriorDays": 365, "PostDays": 0}, "PrimaryCriteriaLimit": {"Type": "First"}}, "ConceptSets": [{"id": 0, "name": "Heart failure", "expression": {"items": [{"concept": {"CONCEPT_ID": 316139, "CONCEPT_NAME": "Heart failure", "STANDARD_CONCEPT": "S", "STANDARD_CONCEPT_CAPTION": "Standard", "INVALID_REASON": "V", "INVALID_REASON_CAPTION": "Valid", "CONCEPT_CODE": "84114007", "DOMAIN_ID": "Condition", "VOCABULARY_ID": "SNOMED", "CONCEPT_CLASS_ID": "Clinical Finding"}, "isExcluded": false, "includeDescendants": true, "includeMapped": false}]}}], "QualifiedLimit": {"Type": "First"}, "ExpressionLimit": {"Type": "First"}, "InclusionRules": [], "CensoringCriteria": [], "CollapseSettings": {"CollapseType": "ERA", "EraPad": 0}, "CensorWindow": {}}
-                                    </blockquote>
+                                    <div id="logicdescription">
+                                        <div class="title">Logic Description</div>
+                                        <span></span>
+                                    </div>
+
+                                    <div id="cohortjson">
+                                        <div class="title">Cohort JSON</div>
+                                        <blockquote class="blockquote"><span></span></blockquote>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,27 +74,48 @@ div.phenotype-description {
 	</div>
 </div>
 <script>
-$(function() {
-    $('.phenotype-selector').select2({
-        ajax: {
-            url: 'feeds/phenotypes.jsp',
-            dataType: 'json',
-            minimumInputLength: 2,
-            processResults: (data) => {
-                return {
-                    results: data.rows
-                };
-            },
-            success: (event, response) => {
-                console.log(response);
-                Select2.constructor.__super__.trigger.call(Select2, 'select', event.params.args);
-            }
-        }
+var phenotypes = {};
+var peFilter = [];
+
+$.getJSON("feeds/phenotype_explorer.jsp", (data) => {
+    let json = $.parseJSON(JSON.stringify(data));
+
+    json['phenotypes'].forEach((row, i) => {
+        let peIndex = 'pe_' + row.phenotypeid;
+        phenotypes[peIndex] = row;
+
+        // build phenotype dropdown
+        peFilter.push({id: row.phenotypeid, text: row.phenotypename});
     });
 
-    $('.phenotype-selector').on('select2:select', (e) => {
-        var data = e.params.data;
-        console.log(data);
-    });
+    $('.phenotype-selector').select2({data: peFilter});
+
+    // show the default phenotype
+    phenotypeDetails(1);
 });
+
+// onSelect -> search thru main collection and retrieve data
+$('.phenotype-selector').on('select2:select', (e) => {
+    var data = e.params.data;
+    phenotypeDetails(data.id);
+});
+
+// Phenotype details
+function phenotypeDetails(phenotypeId) {
+    phenotype = phenotypes['pe_' + phenotypeId];
+
+    if (jQuery.isEmptyObject(phenotype))
+        return;
+
+    $.each(phenotype, (field, value) => {
+        selector = '#' + field;
+
+        if (!value) {
+            $(selector).hide();
+        } else {
+            $(selector + " span").text(value);
+            $(selector).show();
+        }
+    });
+}
 </script>
