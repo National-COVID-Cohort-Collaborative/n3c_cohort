@@ -8,6 +8,7 @@
 {
     "headers": [
         {"value":"pmid", "label":"PMID"},
+        {"value":"pmcid", "label":"PubMed Central"},
         {"value":"title", "label":"Title"},
         {"value":"journal", "label":"Journal"},
         {"value":"volume", "label":"Volume"},

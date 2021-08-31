@@ -45,6 +45,12 @@ $.getJSON("feeds/papers.jsp", function(data){
         			return '<a href="https://pubmed.ncbi.nlm.nih.gov/'+ row.pmid + '"><span style="color:#376076";>' + row.pmid + '<\/span></a>';
              		}
         		},
+   	       	{ data: 'pmcid', visible: true, orderable: true,
+           		render: function ( data, type, row ) {
+           			if (row.pmcid == null) return '';
+           			return '<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC'+ row.pmcid + '"><span style="color:#376076";>' + row.pmcid + '<\/span></a>';
+                	}
+           		},
         	{ data: 'title', orderable: true },
         	{ data: 'journal', orderable: true },
         	{ data: 'volume', orderable: true },
