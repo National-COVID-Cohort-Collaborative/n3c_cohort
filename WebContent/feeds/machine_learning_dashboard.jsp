@@ -33,7 +33,7 @@
     "headers": [
         {"value":"variable", "label":"Variable"},
         {"value":"randomforest_feature_rank", "label":"Random Forest"},
-        {"value":"xgboost_feature_ran", "label":"XG Boost"},
+        {"value":"xgboost_feature_ran", "label":"XGBoost"},
         {"value":"logisticregression_none_feature_rank", "label":"None"},
         {"value":"logisticregression_l1_feature_rank", "label":"L1"},
         {"value":"logisticregression_l2_feature_rank", "label":"L2"},
