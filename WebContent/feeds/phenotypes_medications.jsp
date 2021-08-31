@@ -3,20 +3,20 @@
 
 <sql:query var="meds" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo order by name))
-            	FROM (
-            	    SELECT mild, value, severe, mild_ed, moderate, variable AS name, dead_w_covid,
-            	     phenotypename AS phenotype, md5(variable) AS variable, md5(phenotypename) AS hashid
-                     FROM enclave_data.clamped_med_usage_by_severity meds
-                     LEFT JOIN enclave_data.phenotype_final pe ON (meds.phenotypeid=pe.phenotypeid)
-            	<c:choose>
-                	<c:when test="${not empty param.pid}">
-                    WHERE meds.phenotypeid IN (1, ${param.pid})
-                	</c:when>
-                	<c:otherwise>
-                    WHERE meds.phenotypeid=1
-                	</c:otherwise>
-                </c:choose>
-                ) AS foo;
+        	FROM (
+        	    SELECT mild, value, severe, mild_ed, moderate, variable AS name, dead_w_covid,
+        	     phenotypename AS phenotype, md5(variable) AS variable, md5(phenotypename) AS hashid
+                 FROM enclave_data.clamped_med_usage_by_severity meds
+                 LEFT JOIN enclave_data.phenotype_final pe ON (meds.phenotypeid=pe.phenotypeid)
+        	<c:choose>
+            	<c:when test="${not empty param.pid}">
+                WHERE meds.phenotypeid IN (1, ${param.pid})
+            	</c:when>
+            	<c:otherwise>
+                WHERE meds.phenotypeid=1
+            	</c:otherwise>
+            </c:choose>
+            ) AS foo;
 </sql:query>
 {
    "headers": [
