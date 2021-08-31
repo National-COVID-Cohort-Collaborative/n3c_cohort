@@ -3,7 +3,12 @@
 
 <sql:query var="phenotypes" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-        	FROM (SELECT * FROM enclave_data.phenotype_final ORDER BY phenotypeid)
+        	FROM (SELECT
+        			case when phenotypeid = 1 then ' ' else phenotypename end,
+        			phenotypeid,count,phenotypename,referentconceptid,clinicaldescription,literaturereview,
+        			phenotypenotes,webapicohortid,cohortname,logicdescription,cohortid,
+        			jsonb_pretty(cohortjson::jsonb) as cohortjson
+        		  FROM enclave_data.phenotype_final ORDER BY 1)
          AS foo;
 </sql:query>
 {

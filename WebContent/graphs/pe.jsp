@@ -176,7 +176,7 @@ div.phenotype-description {
 
                                     <div id="cohortjson">
                                         <div class="title">Cohort JSON</div>
-                                        <blockquote class="blockquote"><span></span></blockquote>
+                                        <pre><span></span></pre>
                                     </div>
                                 </div>
                             </div>
