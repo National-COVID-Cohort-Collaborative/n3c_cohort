@@ -255,7 +255,7 @@ and (max-width: 1076px){
 			<jsp:include page="../graph_support/site_map.jsp" flush="true">
 				<jsp:param name="ld" value="300" />
 				<jsp:param name="map_type" value="${param.map_type}" />
-				<jsp:param name="state_page" value="graph_support/us_states.jsp" />
+				<jsp:param name="state_page" value="graph_support/us-states.json" />
 				<jsp:param name="data_page" value="feeds/map_data.jsp" />
 				<jsp:param name="site_page" value="feeds/siteLocations.jsp" />
 				<jsp:param name="dom_element" value="#graph" />
