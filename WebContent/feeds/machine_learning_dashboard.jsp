@@ -3,7 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	select json_agg(foo)
-	from (select variable, 
+	from (select label as variable, 
 		randomforest_feature_rank, 
 		xgboost_feature_rank, 
 		logisticregression_none_feature_rank, 
@@ -19,7 +19,9 @@
 		logisticregression_elasticnet_feature_rank+
 		ridgeclassifier_feature_rank)/7)::numeric, 2) as mean
 	from enclave_cohort_paper.generate_models_and_summary_info
-	where 
+	join enclave_cohort_paper.ml_variable_mapping  
+	on (enclave_cohort_paper.generate_models_and_summary_info.variable = enclave_cohort_paper.ml_variable_mapping.var)
+	where
 		randomforest_feature_rank is not null and
 		xgboost_feature_rank  is not null and
 		logisticregression_none_feature_rank is not null and
