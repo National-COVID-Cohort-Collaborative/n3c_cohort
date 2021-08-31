@@ -3,25 +3,28 @@
 
 <sql:query var="meds" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-        	FROM (SELECT * FROM enclave_data.clamped_med_usage_by_severity
+        	FROM (
+        	    SELECT mild, value, severe, mild_ed, moderate, variable AS name, dead_w_covid,
+        	     phenotypename AS phenotype, md5(variable) AS variable, md5(phenotypename) AS hashid
+                 FROM enclave_data.clamped_med_usage_by_severity meds
+                 LEFT JOIN enclave_data.phenotype_final pe ON (meds.phenotypeid=pe.phenotypeid)
         	<c:choose>
             	<c:when test="${not empty param.pid}">
-                WHERE phenotypeid IN (1, ${param.pid})
+                WHERE meds.phenotypeid IN (1, ${param.pid})
             	</c:when>
             	<c:otherwise>
-                WHERE phenotypeid=1
+                WHERE meds.phenotypeid=1
             	</c:otherwise>
             </c:choose>
-        	 ORDER BY variable)
-         AS foo;
+            order by variable) AS foo;
 </sql:query>
 {
    "headers": [
-           {"value":"dead_w_covid", "label":"Death"},
            {"value":"mild", "label":"Mild"},
            {"value":"mild_ed", "label":"Mild ED"},
            {"value":"moderate", "label":"Moderate"},
-           {"value":"severe", "label":"Severe"}
+           {"value":"severe", "label":"Severe"},
+           {"value":"dead_w_covid", "label":"Dead"}
        ],
     "rows":
     <c:forEach items="${meds.rows}" var="row" varStatus="rowCounter">
