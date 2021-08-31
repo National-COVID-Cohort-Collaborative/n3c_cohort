@@ -31,15 +31,19 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 		header_row_top.appendChild(th);
 	
 	var th = document.createElement("th");
-		th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;"> Mild </span>';
+		th.innerHTML = '<span style="color:#333; font-weight:600; width:95%; margin:auto; border-bottom:1px solid black; display:table; font-size:16px;"> Mild </span>';
 		th.setAttribute("colspan", "2");
 		th.style.textAlign = "center";
+		th.style.border = "none";
+		th.style.padding = "0px";
 		header_row_top.appendChild(th);
 		
 	var th = document.createElement("th");
-		th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;"> Hospitalized </span>';
+		th.innerHTML = '<span style="color:#333; font-weight:600; width:95%; margin:auto; border-bottom:1px solid black; display:table; font-size:16px;"> Hospitalized </span>';
 		th.setAttribute("colspan", "3");
 		th.style.textAlign = "center";
+		th.style.border = "none";
+		th.style.padding = "0px";
 		header_row_top.appendChild(th);
 		
 	// Auto generate 2nd level headers that don't span 2 rows
