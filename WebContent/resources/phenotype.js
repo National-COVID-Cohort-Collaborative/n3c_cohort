@@ -1,72 +1,90 @@
-function buildPhenotypeData(json, headers) {
-    let phenotypeData = new Map();
-    let phenotypeTrue = new Map();
+/**
+ * Group array of Objects by key
+ * @param json
+ * @returns [{}]
+ */
+function dataGrouped(json) {
+    let grouped = Object.values(json
+        .reduce((acc, {mild, severe, mild_ed, moderate, unaffected, dead_w_covid, ...r}) => {
+            let key = r.variable;
+            acc[key] = (acc[key] || {
+                ...r,
+                mild: 0,
+                severe: 0,
+                mild_ed: 0,
+                moderate: 0,
+                unaffected: 0,
+                dead_w_covid: 0
+            });
+            return (
+                acc[key].mild += mild,
+                    acc[key].severe += severe,
+                    acc[key].mild_ed += mild_ed,
+                    acc[key].moderate += moderate,
+                    acc[key].unaffected += unaffected,
+                    acc[key].dead_w_covid += dead_w_covid,
+                    acc);
+        }, {}));
 
-    json.forEach((row, i) => {
-        let currKey = {}
+    return grouped;
+}
 
-        if (! phenotypeData.has(row['variable'])) {
-            phenotypeData.set(row['variable'], row);
+/**
+ * Calculate the percentage values of the True / All data
+ * @param dataAll [[]]
+ * @param dataTrue [[]]
+ * @param allowedKeys [[]]
+ * @returns {*}
+ */
+function dataPercentage(dataAll, dataTrue, allowedKeys) {
+    const calculated = dataAll.map(row => {
+        let trueValue = dataTrue.filter(obj => obj.variable === row.variable).pop()
+        let calculatedRow = {}
 
-            if (row['value']) { // if value is true, push to stack
-                headers.map(header => currKey[header] = isNaN(row[header]) ? 0 : row[header]);
-                phenotypeTrue.set(row['variable'], currKey);
-            }
-        } else {
-            let tmpValues = Object.entries(phenotypeData.get(row['variable']));
+        for (const [category, value] of Object.entries(row)) {
+            if (! allowedKeys.includes(category)) {
+                calculatedRow[category] = value;
+            } else {
 
-            for (const [key, value] of tmpValues) {
+                let percentage = 0;
 
-                if (! headers.includes(key))
-                    currKey[key] = value;
-                else
-                    currKey[key] = value + row[key];
-            }
-
-            phenotypeData.set(row['variable'], currKey);
-
-            // compute all "value = true"
-            if (row['value']) {
-                let currTruKey = {};
-
-                headers.map(header => currTruKey[header] = isNaN(row[header]) ? 0 : row[header]);
-
-                if (! phenotypeTrue.has(row['variable'])) {
-                    phenotypeTrue.set(row['variable'], currTruKey);
-                } else {
-                    let tmpTruValues = Object.entries(phenotypeTrue.get(row['variable']));
-
-                    for (const [key, value] of tmpTruValues) {
-                        currTruKey[key] += value;
-                    }
+                if (value && trueValue.hasOwnProperty(category)) {
+                    percentage = ((trueValue[category] / value) * 100);
                 }
 
-                phenotypeTrue.set(row['variable'], currTruKey);
+                calculatedRow[category] = percentage; //.toFixed(3);
             }
         }
+
+        return calculatedRow;
     });
 
-    for (let [key, entries] of phenotypeData.entries()) {
-        let trueValue = phenotypeTrue.get(key);
 
-        if (! trueValue)
-            continue;
+    return calculated;
+}
 
-        for (const [category, value] of Object.entries(entries)) {
-            if ( ! headers.includes(category))
-                continue;
+/**
+ * Filtered an object to contain only allowed keys
+ * @param unfiltered [{}]
+ * @param allowed []
+ * @returns {{}}
+ */
+function filterObject(unfiltered, allowed) {
+    const filtered = Object.keys(unfiltered)
+        .filter(key => allowed.includes(key))
+        .reduce((obj, key) => {
+            obj[key] = unfiltered[key];
+            return obj;
+        }, {});
 
-            let percentage = 0;
+    return filtered;
+}
 
-            if (value && trueValue.hasOwnProperty(category)) {
-                percentage = ((trueValue[category] / value) * 100);
-            }
-
-
-            entries[category] = percentage.toFixed(3);
-        }
-        phenotypeData.set(key, entries);
-    }
-
-    return phenotypeData;
+/**
+ * Sum all values in an object
+ * @param obj {{}}
+ * @returns number
+ */
+function sumObject(obj) {
+    return Object.values(obj).reduce((a, b) => a + b)
 }
