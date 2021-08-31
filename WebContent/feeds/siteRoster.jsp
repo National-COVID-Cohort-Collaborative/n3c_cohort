@@ -10,7 +10,7 @@
 			url,
 			type,
 			status
-		from enclave_cohort.map_sites_new
+		from n3c_maps.sites
 		) as foo;
 </sql:query>
 {
