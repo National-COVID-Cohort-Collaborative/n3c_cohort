@@ -1,86 +1,35 @@
-<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-<script>
+<script type="text/javascript">
 var comorbidityTable;
-var comorbidityTrue;
-
-/**
- *  Load additional details for the given Phenotype
- */
-function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
-    comorbidityTable = [];
-    comorbidityTrue = new Map();
+function comorbidityForPhenotype(phenotypeId) {
+   comorbidityTable = [];
 
     $.getJSON("feeds/phenotypes_comorbidity.jsp?pid=" + phenotypeId, (data) => {
         let json = $.parseJSON(JSON.stringify(data))
         let headers = json['headers'].map(item => item.value)
 
         let comorbidityAll = new Map();
+        comorbidityAll = buildPhenotypeData(json['rows'], headers);
 
-        json['rows'].forEach((row, i) => {
-            let currKey = {}
-
-            headers.forEach(header => {
-                currKey[header] = row[header];
-            });
-
-            if (! comorbidityAll.has(row['variable'])) {
-                comorbidityAll.set(row['variable'], currKey);
-
-                if (row['value']) { // if value is true, push to stack
-                    comorbidityTrue.set(row['variable'], currKey);
-                }
-            } else {
-                let tmpValues = Object.entries(comorbidityAll.get(row['variable']));
-
-                for (const [key, value] of tmpValues) {
-                    currKey[key] += value;
-                }
-
-                comorbidityAll.set(row['variable'], currKey);
-
-                // compute all "value = true"
-                if (row['value']) {
-                    let currTruKey = {};
-
-                    headers.forEach(header => {
-                        currTruKey[header] = row[header];
-                    });
-
-                    if (! comorbidityTrue.has(row['variable'])) {
-                        comorbidityTrue.set(row['variable'], currTruKey);
-                    } else {
-                        let tmpTruValues = Object.entries(comorbidityTrue.get(row['variable']));
-
-                        for (const [key, value] of tmpTruValues) {
-                            currTruKey[key] += value;
-                        }
-                    }
-
-                    comorbidityTrue.set(row['variable'], currTruKey);
-                }
-            }
-        });
-
+        // TODO: revisit why HIV -> Severe number is off
         // build the data for the comorbidity table
         comorbidityAll.forEach(buildComorbidityTable);
 
         // Build the Comorbidity DataTable
-        var peComorbidityTable;
-        if ($.fn.dataTable.isDataTable('#phenotype_comorbidity_table')) {
-            peComorbidityTable = $('#phenotype_comorbidity_table').DataTable();
+        let peComorbidityTable;
+        if ($.fn.dataTable.isDataTable('#pe_comorbidity_table')) {
+            peComorbidityTable = $('#pe_comorbidity_table').DataTable();
             peComorbidityTable.clear().draw();
             peComorbidityTable.rows.add(comorbidityTable).draw();
         } else {
             var table = document.createElement("table");
                 table.className = 'table table-hover';
                 table.style.width = '100%';
-                table.id = "phenotype_comorbidity_table";
+                table.id = "pe_comorbidity_table";
 
-            var divContainer = document.getElementById("phenotype-explorer-comorbidity");
+            var divContainer = document.getElementById("pe-comorbidity");
             divContainer.appendChild(table);
 
-            peComorbidityTable = $('#phenotype_comorbidity_table').DataTable( {
+            peComorbidityTable = $('#pe_comorbidity_table').DataTable( {
                 data: comorbidityTable,
                 paging: false,
                 retrieve: true,
@@ -109,14 +58,11 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
 function buildComorbidityTable(comorbidity, variable) {
     let comorbidityRow = {};
 
-    comorbidityRow['variable'] = variable.replace('_', ' ');
     for (const [key, value] of Object.entries(comorbidity)) {
-        let trueValue = comorbidityTrue.get(variable);
-        let percentage = ((trueValue[key] / value) * 100).toFixed(3);
-        comorbidityRow[key] = percentage + '%';
+        comorbidityRow[key] = value + '%';
     }
-    comorbidityTable.push(comorbidityRow);
+    comorbidityRow['variable'] = variable.replaceAll('_', ' ');
 
-    return comorbidityTable;
+    comorbidityTable.push(comorbidityRow);
 }
 </script>
