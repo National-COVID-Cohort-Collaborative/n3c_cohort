@@ -103,8 +103,8 @@
 									<p style="text-align:center;">Random Forest (AUROC 0.86)<br>
 									<a href="https://github.com/dmlc/xgboost">XGBoost</a> (AUROC 0.87)<br>
 									Logistic Regression </br>
-									Logistic Regression w/L1 Penality</br>
-									Logistic Regression w/L2 Penality</br>
+									Logistic Regression w/L1 Penalty</br>
+									Logistic Regression w/L2 Penalty</br>
 									Logistic Regression w/Elastic Net Regularization</br>
 									Ridge Classifier</p>
 								</div>
