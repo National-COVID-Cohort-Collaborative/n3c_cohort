@@ -16,7 +16,7 @@ $.getJSON("feeds/preprints.jsp", function(data){
 	table.className = 'table table-hover';
 	table.style.width = '100%';
 	table.style.textAlign = "left";
-	table.id="publications";
+	table.id="xrviv_publications";
 
 	var header= table.createTHead();
 	var header_row = header.insertRow(0); 
@@ -33,7 +33,7 @@ $.getJSON("feeds/preprints.jsp", function(data){
 
 	var data = json['rows'];
 
-	$('#publications').DataTable( {
+	$('#xrviv_publications').DataTable( {
     	data: data,
        	paging: true,
     	pageLength: 5,
