@@ -61,7 +61,6 @@
 
             renderMedicationChart(medicationsChartData);
 
-            //const medCohort = medicationGroup.filter(obj => obj.variable === "All_Patients").pop();
             const summaryData = {
                 'medication': medication,
                 'medData': medAllGrouped,
