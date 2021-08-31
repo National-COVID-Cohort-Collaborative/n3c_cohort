@@ -13,7 +13,8 @@
 }
 
 .ml .panel-heading,
-.meds .panel-heading{
+.meds .panel-heading,
+.vaccine .panel-heading {
     font-size: 25px;
     color: #376076;
     font-weight: normal;
@@ -58,18 +59,26 @@
 .row{
 	margin:auto;
 }
-
 </style>
 
-
+<div class="row vaccine">
+    <div class="col-xs-12">
+        <div class="panel-primary">
+            <div class="panel-heading">Vaccine Data</div>
+            <div class="panel-body">
+                <div id="vaccine-dashboard"></div>
+                <jsp:include page="/tables/vaccine_dashboard.jsp"/>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row meds">
     <div class="col-xs-12">
-        <div class="panel panel-primary">
+        <div class="panel-primary">
             <div class="panel-heading">Medications Table</div>
             <div class="panel-body">
                 <div id="medication-dashboard"></div>
                 <jsp:include page="/tables/medication_dashboard.jsp"/>
-                <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
             </div>
         </div>
     </div>
