@@ -4,7 +4,9 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 <sql:query var="team" dataSource="jdbc/N3CCohort">
-     select nid,title,regexp_replace(regexp_replace(summary,'[\r\n]+','','g'),'["]','&quot;','g') as description,cross_cutting::boolean from n3c_admin.domain_team order by title;
+select jsonb_agg(foo) as foo
+from
+     (select nid,title,regexp_replace(regexp_replace(summary,'[\r\n]+','','g'),'["]','&quot;','g') as description,cross_cutting::boolean from n3c_admin.domain_team order by title) as foo;
 </sql:query>
 
 {
@@ -13,15 +15,10 @@
         {"value":"description", "label":"Description"},
         {"value":"cross_cutting", "label":"Cross Cutting"}
     ],
-    "rows" : [
+    "rows" :
     <c:forEach items="${team.rows}" var="row" varStatus="rowCounter">
-	    {
-	    	"nid":"${row.nid}",
-	    	"title":"${row.title}",
-	        "description":"${row.description}",
-	        "cross_cutting":"${row.cross_cutting}"
-	    }<c:if test="${!rowCounter.last}">,</c:if>
-</c:forEach>
-    ]
+	    ${row.foo}
+	</c:forEach>
+
 }
        
