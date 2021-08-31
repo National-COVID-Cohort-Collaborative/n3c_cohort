@@ -29,9 +29,9 @@
 			var legendLocation = [];
 			var legendPosition = [];
 			
-			// D3 Projection
+			// D3 Projection 
 			var projection = d3.geoAlbersUsa()
-				.translate([width / 2, height / 2]) // translate to center of screen
+				.translate([width / 2, (height / 2)+20]) // translate to center of screen
 				.scale([width]); // scale things down so see entire US
 
 			// Define path generator
@@ -44,7 +44,7 @@
 			var svg = d3.select("${param.dom_element}")
 				.append("svg")
 				.attr("width", width)
-				.attr("height", height);
+				.attr("height", height+20);
 
 			// Color Scale For Legend and Map 
 			var color = d3.scaleOrdinal() 
@@ -52,8 +52,8 @@
 				.range(["#6b486b", "#bce4d8"]);
 
 			var stroke = d3.scaleOrdinal() 
-			.domain(["Yes", "No"])
-			.range(["#fff", "#6b486b"]);
+				.domain(["Yes", "No"])
+				.range(["#fff", "#6b486b"]);
 
 			var dataArray = [];
 
@@ -125,19 +125,19 @@
 				});
 
 				svg.append("circle")
-					.attr("cx", width*0.56)
-					.attr("cy",40)
+					.attr("cx", 5)
+					.attr("cy",8)
 					.attr("r", 4)
 					.style("stroke", stroke("Yes"))
 					.style("fill", color("Yes"))
 				svg.append("circle")
-					.attr("cx",width*0.56)
-					.attr("cy",55)
+					.attr("cx", 5)
+					.attr("cy",20)
 					.attr("r", 4)
 					.style("stroke", stroke("No"))
 					.style("fill", "#fff")
-				svg.append("text").attr("x", width*0.56 + 20).attr("y", 40).text("Data Available").style("font-size", "12px").attr("alignment-baseline","middle")
-				svg.append("text").attr("x", width*0.56 + 20).attr("y", 55).text("Data transfer signed, pending availability").style("font-size", "12px").attr("alignment-baseline","middle")
+				svg.append("text").attr("x", 15).attr("y", 8).text("Data Available").style("font-size", "12px").attr("alignment-baseline","middle")
+				svg.append("text").attr("x", 15).attr("y", 20).text("Data transfer signed, pending availability").style("font-size", "12px").attr("alignment-baseline","middle")
 			});
 		};
 	});

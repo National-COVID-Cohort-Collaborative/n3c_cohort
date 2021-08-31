@@ -86,7 +86,6 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
 	 	"columnDefs": [ {
 	 	    "targets": [1,2,3,4,5,6,7,8],
 	 	   	"createdCell": function (td, cellData, rowData, row, col) {
-	    		console.log(cellData);
 	    		if ( cellData < 32 ) {
 	    			$(td).css('color', 'white');
 	    		}else{

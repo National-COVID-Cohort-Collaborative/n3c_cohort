@@ -2,131 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
-
-
-<style> /* set the CSS */
-
-/* svg { */
-/*   border: 1px solid #ccc; */
-/* } */
-
-.axis line,
-.axis path {
-  shape-rendering: crispEdges;
-  fill: transparent;
-  stroke: #555;
-}
-.axis text {
-  font-size: 11px;
-}
-
-
-.panel-primary .panel-heading{
-	background-color: white;
-	border: none;
-    text-align: center;
-}
-
-.geo .panel-heading,
-.stats .panel-heading,
-.comor .panel-heading{
-    font-size: 25px;
-    color: #376076;
-    font-weight: normal;
-}
-
-.age_sex .panel-heading,
-.race_ethnicity .panel-heading{
-    font-size: 18px;
-    color: #333;
-    font-weight: strong;
-}
-
-.panel-primary {
-    border-color: lightgray;
-/*     margin: 10px; */
-}
-
-.first_heading{
-	text-align:center;
-	font-size: 25px;
-	font-weight: normal; 
-	color: #376076;
-}
-
-.bar.left {
-  fill: #2d5985;
-}
-.bar.right {
-  fill: #bce4d8;
-}
-
-.bar{
-	fill-opacity: 1;
-}
-
-.age_sex .grid .tick line{
-	stroke:lightgray;
-}
-
-.age_sex .grid .domain{
-	stroke: white !important;
-}
-
-
-
-
-@media all 
-and (min-width: 769px) 
-and (max-width: 1076px){
-	.geo #geographic_legend svg{
-		transform: scale(0.7);
-	}
-}
-
-.table-hover tbody tr:hover td, 
-.table-hover tbody tr:hover th {
-  border-top: 2px solid black !important;
-  border-bottom: 2px solid black !important;
-}
-
-#overall_stats strong{
-	color:#376076;
-}
-</style>
-    <style>   
-    .d3-tip {
-      line-height: 1;
-      padding: 6px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      border-radius: 4px;
-      font-size: 12px;
-    }
- 
-    /* Creates a small triangle extender for the tooltip */
-    .d3-tip:after {
-      box-sizing: border-box;
-      display: inline;
-      font-size: 10px;
-      width: 100%;
-      line-height: 1;
-      color: rgba(0, 0, 0, 0.8);
-      content: "\25BC";
-      position: absolute;
-      text-align: center;
-    }
- 
-    /* Style northward tooltips specifically */
-    .d3-tip.n:after {
-      margin: -2px 0 0 0;
-      top: 100%;
-      left: 0;
-    }
-    </style>
-
-
-
 <div class="row stats">
 	<div class="col-xs-12 ">
 		<div class=" panel-primary">
@@ -146,10 +21,10 @@ and (max-width: 1076px){
 			<div class="panel-heading">N3C Contributing Sites</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12 col-md-8 col-lg-8">
+					<div class="col-xs-12 col-md-12 col-lg-8">
 						<div id="graph"></div>
 					</div>
-					<div class="col-xs-12 col-md-8 col-lg-4">
+					<div class="col-xs-12 col-md-12 col-lg-4">
  						<div id="site-roster"></div>
 						<jsp:include page="../tables/site_roster.jsp"/>
  					</div>
@@ -164,7 +39,7 @@ and (max-width: 1076px){
 <div class="row row-no-gutters age_sex">
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Lab-confirmed Negative</div>
+			<div class="panel-heading panel_secondary_heading">Lab-confirmed Negative</div>
 			<div class="panel-body">
 				<div id="demographic-negative"></div>
 			</div>
@@ -172,7 +47,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Lab-confirmed Positive</div>
+			<div class="panel-heading panel_secondary_heading">Lab-confirmed Positive</div>
 			<div class="panel-body">
 				<div id="demographic-positive"></div>
 			</div>
@@ -180,7 +55,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">No COVID Test</div>
+			<div class="panel-heading panel_secondary_heading">No COVID Test</div>
 			<div class="panel-body">
 				<div id="demographic-none"></div>
 			</div>
@@ -188,7 +63,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Suspected COVID</div>
+			<div class="panel-heading panel_secondary_heading">Suspected COVID</div>
 			<div class="panel-body">
 				<div id="demographic-suspected"></div>
 			</div>
@@ -201,7 +76,7 @@ and (max-width: 1076px){
 <div class="row row-no-gutters race_ethnicity">
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Lab-confirmed Negative</div>
+			<div class="panel-heading panel_secondary_heading">Lab-confirmed Negative</div>
 			<div class="panel-body">
 				<div id="race-negative"></div>
 				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
@@ -210,7 +85,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Lab-confirmed Positive</div>
+			<div class="panel-heading panel_secondary_heading">Lab-confirmed Positive</div>
 			<div class="panel-body">
 				<div id="race-positive"></div>
 				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
@@ -219,7 +94,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">No COVID Test</div>
+			<div class="panel-heading panel_secondary_heading">No COVID Test</div>
 			<div class="panel-body">
 				<div id="race-none"></div>
 				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
@@ -228,7 +103,7 @@ and (max-width: 1076px){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Suspected COVID</div>
+			<div class="panel-heading panel_secondary_heading">Suspected COVID</div>
 			<div class="panel-body">
 				<div id="race-suspected"></div>
 				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
@@ -237,20 +112,7 @@ and (max-width: 1076px){
 	</div>
 </div>
 
-<div class="row comor">
-	<div class="col-xs-12">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Comorbidity Distribution of COVID+ in N3C Cohort</div>
-			<div class="panel-body">
-				<div id="charlson-dashboard"></div>
-				<jsp:include page="../tables/charlson_dashboard.jsp"/>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
-				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 			<jsp:include page="../graph_support/site_map.jsp" flush="true">
 				<jsp:param name="ld" value="300" />

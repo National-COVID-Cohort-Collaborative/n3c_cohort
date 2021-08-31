@@ -96,6 +96,7 @@ WebContent/resources/d3-tip.js -text
 WebContent/resources/d3.tip.v0.6.3.js -text
 WebContent/resources/d3.v3.min.js -text
 WebContent/resources/d3.v4.min.js -text
+WebContent/resources/main_style.css -text
 WebContent/resources/n3c_login_style.css -text
 WebContent/sites/mapping.jsp -text
 WebContent/sites/submit_mapping.jsp -text

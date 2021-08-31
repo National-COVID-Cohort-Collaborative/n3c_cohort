@@ -1,83 +1,48 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<style> /* set the CSS */
 
-/* svg { */
-/*   border: 1px solid #ccc; */
-/* } */
-.panel-primary .panel-heading{
-	background-color: white;
-	border: none;
-    text-align: center;
-}
-
-.ml .panel-heading,
-.meds .panel-heading,
-.vaccine .panel-heading {
-    font-size: 25px;
-    color: #376076;
-    font-weight: normal;
-}
-
-.panel-primary {
-    border-color: lightgray;
-/*     margin: 10px; */
-}
-
-.first_heading{
-	text-align:center;
-	font-size: 25px;
-	font-weight: normal; 
-	color: #376076;
-}
-
-#machine-learning-dashboard,
-#medication-dashboard{
-	overflow:scroll;
-}
-
-.secondary-title{
-	text-align:center; 
-	font-size:18px;
-	color:#376076;
-	font-weight:500;
-}
-
-.table-description{
-	padding-left:20px; 
-	padding-right:20px; 
-	font-size:16px;
-}
-
-.secondary-heading{
-	text-align:center;
-	font-size:16px;
-	font-weight:500;
-}
-
-.row{
-	margin:auto;
-}
-</style>
+<div class="row comor top_panel">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Comorbidity Distribution of COVID+ in N3C Cohort</div>
+			<div class="panel-body">
+				<div id="charlson-dashboard" class="table_container"></div>
+				<jsp:include page="../tables/charlson_dashboard.jsp"/>
+				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
+				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="row vaccine">
-    <div class="col-xs-6 mx-auto">
-        <div class="panel-primary">
+    <div class="col-xs-12">
+        <div class="panel panel-primary">
             <div class="panel-heading">Vaccine Data</div>
             <div class="panel-body">
-                <div id="vaccine-dashboard"></div>
-                <jsp:include page="/tables/vaccine_dashboard.jsp"/>
+            	<div class="row">
+            		<div class="col-xs-12 col-md-6" style="text-align:left;">
+            			<p style="font-size:16px;">This table shows the number of patients who have received a COVID-19 vaccination within the N3C Data Enclave by the vaccine manufacturer. 
+            			For more information on the vaccines themselves, please visit the 
+            			<a href="https://www.fda.gov/emergency-preparedness-and-response/coronavirus-disease-2019-covid-19/covid-19-vaccines">FDA's COVID-19 Vaccine Information Page.</a></p>
+            		</div>
+            		<div class="col-xs-12 col-md-6">
+            			<div id="vaccine-dashboard" class="table_container"></div>
+                		<jsp:include page="/tables/vaccine_dashboard.jsp"/>
+            		</div>
+            	</div>
             </div>
         </div>
     </div>
 </div>
 <div class="row meds">
     <div class="col-xs-12">
-        <div class="panel-primary">
+        <div class="panel panel-primary">
             <div class="panel-heading">Medications Table</div>
             <div class="panel-body">
-                <div id="medication-dashboard"></div>
+                <div id="medication-dashboard" class="table_container"></div>
                 <jsp:include page="/tables/medication_dashboard.jsp"/>
             </div>
         </div>

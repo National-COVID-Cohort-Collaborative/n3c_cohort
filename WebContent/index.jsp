@@ -23,6 +23,7 @@
 
 <style type="text/css" media="all">
 @import "resources/n3c_login_style.css";
+@import "resources/main_style.css";
 </style>
 
 <style type="text/css">

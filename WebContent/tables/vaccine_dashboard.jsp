@@ -42,12 +42,13 @@ $.getJSON("feeds/vaccine.jsp", function(data){
 	$('#vaccine_table').DataTable( {
         data: json['rows'],
         paging: false,
+        bInfo: false,
         searching: false,
-        order: [[0, 'asc']],
+        order: [[1, 'desc']],
         'columnDefs': [{"className": "dt-center", "targets": "_all"}],
         columns: [
-            { data: 'common_name', visible: true, orderable: true },
-            { data: 'count', visible: true, orderable: true }
+            { data: 'common_name', visible: true, orderable: false },
+            { data: 'count', visible: true, orderable: false }
         ]
     } );
 });

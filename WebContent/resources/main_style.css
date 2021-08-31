@@ -1,0 +1,139 @@
+/* General Styling //////////////////////////////////////////////////////////// */
+.row{
+	margin:auto;
+}
+
+
+.top_panel{
+	margin-top:20px;
+}
+
+/* Tables ///////////// */
+.table_container{
+	overflow:scroll;
+}
+
+.table-description{
+	padding-left:20px; 
+	padding-right:20px; 
+	font-size:16px;
+}
+
+.table-hover tbody tr:hover td, 
+.table-hover tbody tr:hover th {
+  border-top: 2px solid black !important;
+  border-bottom: 2px solid black !important;
+}
+
+
+/* Panels & Headings ///////////// */
+.panel-primary {
+    border-color: lightgray;
+}
+
+.panel-primary .panel-heading{
+	background-color: white;
+	border: none;
+    text-align: center;
+    font-size: 25px;
+    color: #376076;
+    font-weight: normal;
+}
+
+.panel-heading.panel_secondary_heading{
+    font-size: 18px;
+    color: #333;
+}
+
+.first_heading{
+	text-align:center;
+	font-size: 25px;
+	font-weight: normal; 
+	color: #376076;
+}
+
+.secondary-heading{
+	text-align:center;
+	font-size:16px;
+	font-weight:500;
+}
+
+.secondary-title{
+	text-align:center; 
+	font-size:18px;
+	color:#376076;
+	font-weight:500;
+}
+
+/* D3 Tooltips ///////////// */
+.d3-tip {
+   line-height: 1;
+   padding: 6px;
+   background: rgba(0, 0, 0, 0.8);
+   color: #fff;
+   border-radius: 4px;
+   font-size: 12px;
+ }
+ 
+    /* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+   box-sizing: border-box;
+   display: inline;
+   font-size: 10px;
+   width: 100%;
+   line-height: 1;
+   color: rgba(0, 0, 0, 0.8);
+   content: "\25BC";
+   position: absolute;
+   text-align: center;
+ }
+ 
+	/* Style northward tooltips specifically */
+.d3-tip.n:after {
+  margin: -2px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+/* The Cohort Styling ///////////////////////////////////////////////////// */
+.axis line,
+.axis path {
+  shape-rendering: crispEdges;
+  fill: transparent;
+  stroke: #555;
+}
+.axis text {
+  font-size: 11px;
+}
+
+.bar.left {
+  fill: #2d5985;
+}
+.bar.right {
+  fill: #bce4d8;
+}
+
+.bar{
+	fill-opacity: 1;
+}
+
+.age_sex .grid .tick line{
+	stroke:lightgray;
+}
+
+.age_sex .grid .domain{
+	stroke: white !important;
+}
+
+
+@media all 
+and (min-width: 769px) 
+and (max-width: 1076px){
+	.geo #geographic_legend svg{
+		transform: scale(0.7);
+	}
+}
+
+#overall_stats strong{
+	color:#376076;
+}
