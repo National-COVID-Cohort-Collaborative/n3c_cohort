@@ -3,13 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-	FROM (select
-			doi,
-			title,
-			site,
-			pub_date,
-			(select jsonb_agg(bar) from (select rank,name,institution from covid_biorxiv.biorxiv_current_author where biorxiv_current_author.doi=biorxiv_current.doi order by rank) as bar) as authors
-			from covid_biorxiv.biorxiv_current natural join n3c_pubs.match) as foo;
+	FROM (select * from n3c_pubs.biorxiv_cache) as foo;
 </sql:query>
 {
     "headers": [

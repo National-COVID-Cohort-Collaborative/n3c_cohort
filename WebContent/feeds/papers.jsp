@@ -3,16 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-	FROM (SELECT 
-			match.pmid,
-			article_title as title,
-			medline_ta as journal,
-			volume,
-			issue,
-			(pub_date_year||'-'||pub_date_month||'-'||pub_date_day)::date as published,
-			medline_pgn as pages,
-			(select jsonb_agg(bar) from (select seqnum,last_name,fore_name as first_name from covid_litcovid.author where author.pmid=article.pmid order by seqnum) as bar) as authors
-           FROM covid_litcovid.medline_journal_info natural join covid_litcovid.article_title natural join covid_litcovid.article natural join n3c_pubs.match) AS foo;
+	FROM (select * from n3c_pubs.litcovid_cache) AS foo;
 </sql:query>
 {
     "headers": [
