@@ -35,6 +35,7 @@
     
     path.registration{
     	stroke: #376076;
+    	stroke-width:2.8px;
     }
 
     
@@ -61,9 +62,9 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 //set the dimensions and margins of the graph
-	var reg_margin = {top: 30, right: 170, bottom: 30, left: 50},
+	var reg_margin = {top: 30, right: 100, bottom: 30, left: 50},
 		reg_width = 960 - reg_margin.left - reg_margin.right,
-		reg_height = 200 - reg_margin.top - reg_margin.bottom;
+		reg_height = 600 - reg_margin.top - reg_margin.bottom;
 	
 	
 	d3.json("${param.data_page}", function(error, data2) {	
@@ -75,7 +76,7 @@
 				if (newWidth > 0) {
 					d3.select("${param.dom_element}").select("svg").remove();
 					reg_width = newWidth - reg_margin.left - reg_margin.right;
-					reg_height = (reg_width/4) - reg_margin.top - reg_margin.bottom;
+					reg_height = (reg_width/2) - reg_margin.top - reg_margin.bottom;
 					draw_regs();
 				}
 			});
@@ -130,15 +131,26 @@
 		    	.attr("dy", ".35em")
 		    	.attr("text-anchor", "start")
 		    	.attr("class", "registration")
-		    	.text("Registrations: (" + String(data2[data2.length-1].registrations)+ ")");
+		    	.text("Users: (" + String(data2[data2.length-1].registrations)+ ")");
 		
 		
 		  	// Axis
 			reg_svg.append("g")
 				.attr("transform", "translate(0," + reg_height + ")")
-				.call(d3.axisBottom(reg_x));
+				.call(d3.axisBottom(reg_x).tickFormat(function(date){
+				       if (d3.timeYear(date) < date) {
+				           return d3.timeFormat('%b')(date);
+				         } else {
+				           return d3.timeFormat('%Y')(date);
+				         }
+				      }))
+				.selectAll("text")  
+					.style("text-anchor", "end")
+					.attr("dx", "-.8em")
+					.attr("dy", ".15em")
+					.attr("transform", "rotate(-65)");
 			reg_svg.append("g")
-				.call(d3.axisLeft(reg_y));
+				.call(d3.axisLeft(reg_y).ticks(5));
 			
 			//tooltip line
 			var reg_tooltipLine = reg_svg.append('line');
@@ -168,7 +180,7 @@
 			reg_focus.append("text")
 				.attr("x", 18)
 				.attr("y", 18)
-				.text("Regist.:");
+				.text("Users:");
 		
 			reg_focus.append("text")
 				.attr("class", "tooltip-registration")
@@ -202,7 +214,7 @@
 			    reg_tooltipLine.attr('stroke', 'black')
 		    		.attr("transform", "translate(" + reg_x(d.date) + "," + 0 + ")")
 		    		.attr('y1', 0)
-		    		.attr('y2', height);
+		    		.attr('y2', reg_height);
 			}
 		};
 	});

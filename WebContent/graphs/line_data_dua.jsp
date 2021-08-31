@@ -36,9 +36,11 @@
     
     path.duas{
     	stroke: #2d5985;
+    	stroke-width:2.8px;
     }
     path.dtas{
     	stroke:#6b496b;
+    	stroke-width:2.8px;
     }
     
     
@@ -69,9 +71,9 @@
 <script>
 
 // set the dimensions and margins of the graph
-	var margin = {top: 30, right: 170, bottom: 30, left: 50},
+	var margin = {top: 30, right: 100, bottom: 60, left: 50},
 	    width = 960 - margin.left - margin.right,
-	    height = 200 - margin.top - margin.bottom;
+	    height = 600 - margin.top - margin.bottom;
 	
 	d3.json("${param.data_page}", function(error, data) {	
 		if (error) throw error;
@@ -82,7 +84,7 @@
 				if (newWidth > 0) {
 					d3.select("${param.dom_element}").select("svg").remove();
 					width = newWidth - margin.left - margin.right;
-					height = (width/4) - margin.top - margin.bottom;
+					height = width/2 - margin.top - margin.bottom;
 					draw_dta_dua();
 				}
 			});
@@ -151,12 +153,24 @@
 			    	.attr("class", "dtas")
 			    	.text("DTAs (" + String(data[data.length-1].dtas)+ ")");
 			
+				//.tickFormat(d3.time.format("%H")))
 			  	// Axis
 				dua_dta_svg.append("g")
 					.attr("transform", "translate(0," + height + ")")
-					.call(d3.axisBottom(x));
+					.call(d3.axisBottom(x).tickFormat(function(date){
+					       if (d3.timeYear(date) < date) {
+					           return d3.timeFormat('%b')(date);
+					         } else {
+					           return d3.timeFormat('%Y')(date);
+					         }
+					      }))
+					.selectAll("text")  
+    					.style("text-anchor", "end")
+    					.attr("dx", "-.8em")
+    					.attr("dy", ".15em")
+    					.attr("transform", "rotate(-65)");
 				dua_dta_svg.append("g")
-					.call(d3.axisLeft(y));
+					.call(d3.axisLeft(y).ticks(5));
 				
 				//tooltip line
 				var tooltipLine = dua_dta_svg.append('line');
