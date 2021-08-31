@@ -31,7 +31,8 @@
 	color: #376076;
 }
 
-#machine-learning-dashboard{
+#machine-learning-dashboard,
+#medication-dashboard{
 	overflow:scroll;
 }
 

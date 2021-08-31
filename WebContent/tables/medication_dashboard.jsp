@@ -1,6 +1,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<style>
+th.dt-center, td.dt-center { text-align: center; }
+</style>
 <script>
 $.getJSON("feeds/meds_by_class.jsp", function(data){
 
@@ -22,16 +25,14 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	// Hard Coded top level headers
 	var staticHeaders = [
 	    [
-            {"label":"", "colspan": 1},
-            {"label":"COVID Positive Patients", "colspan": 4},
-            {"label":"", "colspan":2}
+            {"label":"", "colspan": 3},
+            {"label":"COVID+ (n = " + $('#positive').text() + ")", "colspan": 4},
         ],
         [
-            {"label":"", "colspan": 1},
+            {"label":"", "colspan": 3},
             {"label":"Any time", "colspan": 1},
             {"label":"Medication prescribed within +/-7 days of Covid Diagnosis", "colspan": 2},
             {"label":"Med Rx -8 days of Dx", "colspan": 1},
-            {"label":"", "colspan":2}
         ]
     ];
 
@@ -57,6 +58,10 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	    label = col[i].toString();
 	    if (label == "Age" || label == "Trend") // skip age and trend for now
 	        continue;
+
+	    if (label === "All COVID") // append Covid+ value
+	        label += "+/- (N = " + $('#positive').text() + ")";
+
         var th = document.createElement("th");
         th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + label + '</span>';
         header_row_bottom.appendChild(th);
@@ -68,15 +73,58 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	$('#meds_table').DataTable( {
         	data: json['rows'],
            	paging: false,
-        	order: [[5, 'desc']],
+        	order: [[0, 'asc']],
+        	'columnDefs': [{"className": "dt-center", "targets": "_all"}],
          	columns: [
             	{ data: 'class', visible: true, orderable: true },
-            	{ data: 'name', visible: true, orderable: true },
+            	{
+            	    data: 'name', visible: true, orderable: true,
+            	    render: function (data) {
+            	        return data.toLowerCase();
+                    }
+                },
             	{ data: 'total', visible: true, orderable: true },
             	{ data: 'all__hospitalized_and_not_', visible: true, orderable: true },
-            	{ data: 'all__hospitalized_and_not__1', visible: true, orderable: true },
-            	{ data: 'hospitalized', visible: true, orderable: true },
-            	{ data: 'all__hospitalized_and_not__2', visible: true, orderable: true }
+            	{
+            	    data: 'all__hospitalized_and_not__1', visible: true, orderable: true,
+            	    render: function ( data, type, row, meta ) {
+                        if (type === 'sort') {
+                            return isNaN(row.all__hospitalized_and_not__1) ? 0 : row.all__hospitalized_and_not__1;
+                        } else if (type === 'display') {
+                            return row.all__hospitalized_and_not__1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                },
+            	{
+            	    data: 'hospitalized', visible: true, orderable: true,
+            	    render: function ( data, type, row, meta ) {
+            	        if (type === 'sort') {
+                            return isNaN(row.hospitalized) ? 0 : row.hospitalized;
+                        } else if (type === 'display') {
+                            return row.hospitalized;
+                        } else {
+                            return 0;
+                        }
+            	    }
+            	},
+            	{
+            	    data: 'all__hospitalized_and_not__2', visible: true, orderable: true,
+            	    render: function ( data, type, row, meta ) {
+            	        var covidAll = row.all__hospitalized_and_not_;
+            	        var covid7d = row.all__hospitalized_and_not__1;
+            	        var med8 = isNaN(parseInt(covid7d)) ? 0 : (parseInt(covidAll) - parseInt(covid7d));
+
+            	        if (type === 'sort') {
+            	            return med8;
+                        } else if (type === 'display') {
+            	            return med8 > 0 ? med8 : 'N/A';
+                        } else {
+                            return med8;
+                        }
+                    }
+                 }
         	]
     	} );
 });
