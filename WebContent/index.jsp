@@ -49,13 +49,21 @@ table.dataTable thead .sorting_asc {
 				tracking issue.</a></p>
 		</div>
 		<p>&nbsp;</p>
-		<ul class="nav nav-tabs lazyload" style="font-size: 16px;">
+		<ul class="nav nav-tabs" style="font-size: 16px;">
 			<li class="active"><a data-toggle="tab" href="#dashboard">The Cohort</a></li>
+			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
+			<li><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
 		</ul>
 
 		<div class="tab-content">
 			<div class="tab-pane fade in active" id="dashboard">
 				<jsp:include page="graphs/dashboard.jsp" flush="true" />
+			</div>
+			<div class="tab-pane fade" id="clinical">
+				<jsp:include page="graphs/clinical.jsp" flush="true" />
+			</div>
+			<div class="tab-pane fade" id="collaborative">
+				<jsp:include page="graphs/collaborative.jsp" flush="true" />
 			</div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
