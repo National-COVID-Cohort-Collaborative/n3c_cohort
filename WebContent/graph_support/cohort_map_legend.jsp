@@ -85,7 +85,7 @@
 				.attr("font-weight", 600)
 				.attr("font-size", "16px")
 				.attr("fill", "black")
-				.text("Total Patients in Region");
+				.text("# Persons (COVID + and -) in Region");
 
 			legend.append("text")
 				.attr("x", 5)

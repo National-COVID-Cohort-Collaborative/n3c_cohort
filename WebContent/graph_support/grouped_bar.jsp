@@ -5,7 +5,7 @@
 
 d3.json("${param.data_page}", function(data) {
 
-    var margin = {top: 0, right: 10, bottom: 20, left: 50};
+    var margin = {top: 0, right: 13, bottom: 20, left: 50};
     var width = 1400 - margin.left - margin.right;
     var height = 400 - margin.top - margin.bottom;
     <c:choose>
@@ -17,7 +17,7 @@ d3.json("${param.data_page}", function(data) {
 	</c:otherwise>
 	</c:choose>
     
-	const color = d3.scaleOrdinal(d3.schemeCategory10);
+	const color = d3.scaleOrdinal().range(["#2d5985", "#8a89a6", "#bce4d8"]);
     
 	var myObserver = new ResizeObserver(entries => {
 		entries.forEach(entry => {

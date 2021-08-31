@@ -55,10 +55,10 @@
 }
 
 .bar.left {
-  fill: #6b486b;
+  fill: #2d5985;
 }
 .bar.right {
-  fill: #a05d56;
+  fill: #bce4d8;
 }
 
 .bar{
@@ -120,6 +120,7 @@ and (max-width: 1076px){
 					</div>
 					<div class="col-xs-12 col-md-8 col-lg-9">
 						<div id="geographic"></div>
+			<div id="graph"></div>
 					</div>
 				</div>
 			</div>
@@ -216,6 +217,11 @@ and (max-width: 1076px){
 	</div>
 </div>
 
+			<jsp:include page="../graph_support/labelledMap.jsp" flush="true">
+				<jsp:param name="ld" value="300" />
+				<jsp:param name="map_type" value="${param.map_type}" />
+				<jsp:param name="data_page" value="ctsaInstitutionMapData.jsp?mode=usa" />
+			</jsp:include>
 <jsp:include page="../graph_support/cohort_map.jsp">
 	<jsp:param name="data_page" value="feeds/map_data.jsp" />
 	<jsp:param name="state_page" value="graph_support/us_states.jsp" />

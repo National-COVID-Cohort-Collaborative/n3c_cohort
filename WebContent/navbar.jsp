@@ -13,10 +13,10 @@
 				<li class="nav-item">
 					<a class="nav-link" href="admin.jsp">Admin</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://cd2h.org">CD2H</a>
+				</li>
 			</c:if>
-			<li class="nav-item">
-				<a class="nav-link" href="https://cd2h.org">CD2H</a>
-			</li>
 		</ul>
 	</div>
 </nav>

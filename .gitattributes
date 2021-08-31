@@ -33,11 +33,13 @@ WebContent/footer.jsp -text
 WebContent/graph_support/cohort_map.jsp -text
 WebContent/graph_support/cohort_map_legend.jsp -text
 WebContent/graph_support/grouped_bar.jsp -text
+WebContent/graph_support/labelledMap.jsp -text
 WebContent/graph_support/map_data.jsp -text
 WebContent/graph_support/n3c_fact_sheet.jsp -text
 WebContent/graph_support/pieChart.jsp -text
 WebContent/graph_support/pyramid.jsp -text
 WebContent/graph_support/scatterplot.jsp -text
+WebContent/graph_support/us-states.json -text
 WebContent/graph_support/us_states.jsp -text
 WebContent/graph_support/verticalBarChart.jsp -text
 WebContent/graph_support/verticalBarChart_v4.jsp -text
@@ -82,6 +84,8 @@ WebContent/resources/d3.tip.v0.6.3.js -text
 WebContent/resources/d3.v3.min.js -text
 WebContent/resources/d3.v4.min.js -text
 WebContent/resources/n3c_login_style.css -text
+WebContent/sites/mapping.jsp -text
+WebContent/sites/submit_mapping.jsp -text
 WebContent/tables/blood.jsp -text
 WebContent/tables/characteristics.jsp -text
 WebContent/tables/charlson.jsp -text

@@ -5,18 +5,19 @@
 	select jsonb_pretty(jsonb_agg(done))
 	from (
 		select
-			race,
+			value as race,
 			abbrev,
 			seq,
 			(select jsonb_agg(sub)
-			 from (select ethnicity,sum
-			 	   from enclave_cohort.race_hist_data as bar
-			 	   where race_map2.race=bar.race
-			 	     and covid_status_name = ?
-			 	   ) as sub
+			 from (select bar.ethnicity,sum
+			 		from enclave_cohort.race_hist_data as bar, enclave_cohort.ethnicity_map
+			 		where ethnicity_map.ethnicity=bar.ethnicity
+			 		  and race_map.value=bar.race
+			 		  and covid_status_name = ?
+			 		  order by seq ) as sub
 			 ) as values
 		from
-			enclave_cohort.race_map2
+			enclave_cohort.race_map
 		order by seq
 	) as done;
 	<sql:param>${param.status}</sql:param>

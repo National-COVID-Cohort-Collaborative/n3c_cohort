@@ -119,13 +119,13 @@ d3.json("${param.data_page}", function(data) {
 		// SET UP AXES ********************************************************************
 		var yAxisLeft = d3.axisRight()
 			.scale(yScale)
-			.tickSize(4, 0)
-			.tickPadding(margin.middle - 4)
+			.tickSize(0, 0)
+			.tickPadding(margin.middle)
 			.tickValues(yScale.domain().filter(function(d,i){ return !(i%10)}));
 		
 		var yAxisRight = d3.axisLeft()
 			.scale(yScale)
-			.tickSize(4, 0)
+			.tickSize(0, 0)
 			.tickFormat('')
 			.tickValues(yScale.domain().filter(function(d,i){ return !(i%10)}));;
 		
@@ -213,7 +213,7 @@ d3.json("${param.data_page}", function(data) {
 			.attr('class', 'bar left')
 			.attr('x', 0)
 			.attr('y', function(d) { return yScale(d.group); })
-			.style("stroke", "#6b486b")
+			.style("stroke", "#2d5985")
 			.style("stroke-width", 1)
 			.attr('width', function(d) { return xScale(d.left); })
 			.attr('height', yScale.bandwidth());
@@ -224,7 +224,7 @@ d3.json("${param.data_page}", function(data) {
 			.attr('class', 'bar right')
 			.attr('x', 0)
 			.attr('y', function(d) { return yScale(d.group); })
-			.style("stroke", "#a05d56")
+			.style("stroke", "#bce4d8")
 			.style("stroke-width", 1)
 			.attr('width', function(d) { return xScale(d.right); })
 			.attr('height', yScale.bandwidth());
