@@ -52,18 +52,24 @@
 				    	</table>
 					</div>
 				</div>
-<!-- 				<div class="row"> -->
-<!-- 					<div id="dua_line"> -->
-<%-- 						<jsp:include page="../graphs/line_data_dua.jsp"> --%>
-<%--                 			<jsp:param name="dom_element" value="#dua_line" /> --%>
-<%--                 		</jsp:include> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
 				<div class="row">
-					<div id="registration_line">
-						<jsp:include page="../graphs/line_registrations.jsp">
-                			<jsp:param name="dom_element" value="#registration_line" />
-                		</jsp:include>
+					<div class="col-xs-12">
+						<div id="dua_line">
+							<jsp:include page="../graphs/line_data_dua.jsp">
+                				<jsp:param name="data_page" value="feeds/line_dta_dua_regs.jsp" />
+                				<jsp:param name="dom_element" value="#dua_line" />
+                			</jsp:include>
+                		</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div id="registration_line">
+							<jsp:include page="../graphs/line_registrations.jsp">
+								<jsp:param name="data_page" value="feeds/line_dta_dua_regs.jsp" />
+								<jsp:param name="dom_element" value="#registration_line" />
+							</jsp:include>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -71,8 +77,9 @@
 	</div>	
 </div>
 
+
 <div class="row comor" style="margin-top:30px;">
-	<div class="col-xs-6">
+	<div class="col-xs-12 col-md-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Data Transfer Agreements</div>
 			<div class="panel-body">
@@ -84,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-6">
+	<div class="col-xs-12 col-md-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Data Use Agreements</div>
 			<div class="panel-body">
@@ -117,7 +124,7 @@
 			<div class="panel-heading">Project Roster</div>
 			<div class="panel-body">
 				<div id="project-roster"></div>
-				<jsp:include page="../tables/project_roster.jsp"/>
+				<jsp:include page="../tables/project_roster_styled.jsp"/>
 				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
@@ -125,3 +132,6 @@
 		</div>
 	</div>
 </div>
+
+
+

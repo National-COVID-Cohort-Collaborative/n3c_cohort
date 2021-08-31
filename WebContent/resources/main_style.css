@@ -137,3 +137,12 @@ and (max-width: 1076px){
 #overall_stats strong{
 	color:#376076;
 }
+
+
+/* The Collaborative Styling ///////////////////////////////////////////////////// */
+@media(max-width:992px){
+	#registration_line,
+	#dua_line{
+		display:none;
+	}
+}

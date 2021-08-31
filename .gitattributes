@@ -24,6 +24,7 @@ WebContent/feeds/dta_roster.jsp -text
 WebContent/feeds/dua_roster.jsp -text
 WebContent/feeds/fact_sheet.jsp -text
 WebContent/feeds/filled.jsp -text
+WebContent/feeds/line_dta_dua_regs.jsp -text
 WebContent/feeds/machine_learning_dashboard.jsp -text
 WebContent/feeds/map_data.jsp -text
 WebContent/feeds/meds.jsp -text
@@ -69,6 +70,8 @@ WebContent/graphs/columnFreqData.jsp -text
 WebContent/graphs/dashboard.jsp -text
 WebContent/graphs/home.jsp -text
 WebContent/graphs/labs.jsp -text
+WebContent/graphs/line_data_dua.jsp -text
+WebContent/graphs/line_registrations.jsp -text
 WebContent/graphs/medications.jsp -text
 WebContent/graphs/medications_by_medication.jsp -text
 WebContent/graphs/medications_by_severity.jsp -text
@@ -116,6 +119,7 @@ WebContent/tables/models.jsp -text
 WebContent/tables/overall_stats.jsp -text
 WebContent/tables/peak.jsp -text
 WebContent/tables/project_roster.jsp -text
+WebContent/tables/project_roster_styled.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
 /pom.xml -text
