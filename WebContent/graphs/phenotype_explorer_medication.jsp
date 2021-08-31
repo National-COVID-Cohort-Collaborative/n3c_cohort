@@ -37,10 +37,10 @@
             let json = $.parseJSON(JSON.stringify(data))
             let headers = json['headers'].map(item => item.value);
 
-            let medicationGroup = dataGrouped(json['rows']);
+            let medAllGrouped = dataGrouped(json['rows']);
             let medTrueData = json['rows'].filter(row => row.value);
             let medTrueGrouped = dataGrouped(medTrueData);
-            let medPercentage = dataPercentage(medicationGroup, medTrueGrouped, headers);
+            let medPercentage = dataPercentage(medAllGrouped, medTrueGrouped, headers);
 
             json['headers'].map(category => {
                 let currObj = {}
@@ -59,34 +59,51 @@
                 medicationsChartData.push(currObj); // each category
             });
 
-            const medCohort = medicationGroup.filter(obj => obj.variable === "All_Patients").pop();
-            const medCohortFiltered = filterObject(medCohort, headers);
-            renderMedicationSummary(medication, medCohortFiltered, medPercentage);
-
             renderMedicationChart(medicationsChartData);
+
+            //const medCohort = medicationGroup.filter(obj => obj.variable === "All_Patients").pop();
+            const summaryData = {
+                'medication': medication,
+                'medData': medAllGrouped,
+                'medPercentage': medPercentage,
+                'headers': headers
+            }
+            renderMedicationSummary(summaryData);
         });
     }
 
-    function renderMedicationSummary(medication, medCohort, medPercentage)
+    function renderMedicationSummary(data)
     {
-        $("#medName span").text(medication.replaceAll('_',' '));
-        $("#medCount span").text(sumObject(medCohort).toLocaleString());
+        let headers = Object.assign([], data.headers);
+        headers.push('unaffected');
 
-        /* TODO: need to clarify with Ken
-        const medCalculated = medPercentage.filter(obj => obj.variable === medication).pop();
-        const medCohortCalculated = medPercentage.filter(obj => obj.variable === "All_Patients").pop();
+        let medCohort = data.medData.filter(obj => obj.variable === "All_Patients").pop()
+        let medSelected = data.medData.filter(obj => obj.variable !== "All_Patients").pop()
 
-        // medication
-        const medCovid = medCalculated.dead_w_covid;
-        const medHospitalized = medCalculated.moderate + medCalculated.severe + medCalculated.dead_w_covid;
-        const medSevere = medCalculated.severe + medCalculated.dead_w_covid;
+        let medCohortSum = sumObject(filterObject(medCohort, headers));
+        let medSelectedSum = sumObject(filterObject(medSelected, headers));
 
-        // all cohort medication
-        const medCohortCovid = medCalculated.dead_w_covid;
-        const medCohortHospitalized = medCohortCalculated.moderate
-            + medCohortCalculated.severe
-            + medCohortCalculated.dead_w_covid;
-        const medCohortSevere = medCohortCalculated.severe + medCohortCalculated.dead_w_covid;*/
+        $("#medName span").text(data.medication.replaceAll('_',' '));
+        $("#medCount span").text(medSelectedSum.toLocaleString());
+
+        let covidPositive = sumObject(filterObject(medSelected, data.headers));
+        let covidPositiveCohort = sumObject(filterObject(medCohort, data.headers));
+        $("#medCovidSummary span").text(covidPositive.toLocaleString());
+        $("#medCovidSelectedStat").text(((covidPositive/medSelectedSum) * 100).toFixed(1));
+        $("#medCovidCohortStat").text(((covidPositiveCohort/medCohortSum) * 100).toFixed(1));
+
+        let hospitalized = sumObject(filterObject(medSelected, ["moderate", "severe", "dead_w_covid"]));
+        let hospitalizedCohort = sumObject(filterObject(medCohort, ["moderate", "severe", "dead_w_covid"]));
+        $("#medHospitalizedSummary span").text(hospitalized.toLocaleString());
+        $("#medHospitalizedSelectedStat").text(((hospitalized/medSelectedSum) * 100).toFixed(1));
+        $("#medHospitalizedCohortStat").text(((hospitalizedCohort/medCohortSum) * 100).toFixed(1));
+
+        let death = sumObject(filterObject(medSelected, ["severe", "dead_w_covid"]));
+        let deathCohort = sumObject(filterObject(medCohort, ["severe", "dead_w_covid"]));
+        $("#medDeathSummary span").text(death.toLocaleString());
+        $("#medDeathSelectedStat").text(((death/medSelectedSum) * 100).toFixed(1));
+        $("#medDeathCohortStat").text(((deathCohort/medCohortSum) * 100).toFixed(1));
+
     }
 
     function renderMedicationChart(data) {
