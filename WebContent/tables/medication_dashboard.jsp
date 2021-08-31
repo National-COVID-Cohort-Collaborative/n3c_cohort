@@ -26,7 +26,7 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	var staticHeaders = [
 	    [
             {"label":"", "colspan": 3},
-            {"label":"COVID+ (n = " + $('#positive').text() + ")", "colspan": 4},
+            {"label":"COVID Positive (n = " + $('#positive').text() + ")", "colspan": 4},
         ],
         [
             {"label":"", "colspan": 3},
@@ -59,8 +59,8 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	    if (label == "Age" || label == "Trend") // skip age and trend for now
 	        continue;
 
-	    if (label === "All COVID") // append Covid+ value
-	        label += "+/- (N = " + $('#positive').text() + ")";
+	    if (label === "N3C") // append "Persons" value
+	        label += "<br/>(N = " + $('#persons').text() + ")";
 
         var th = document.createElement("th");
         th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + label + '</span>';
