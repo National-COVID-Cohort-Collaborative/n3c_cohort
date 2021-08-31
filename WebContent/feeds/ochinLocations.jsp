@@ -3,7 +3,7 @@
 
 <sql:query var="sites" dataSource="jdbc/N3CCohort">
 	select jsonb_pretty(jsonb_agg(foo)) from (
-		select site,id,url,type,data_model,status,latitude,longitude from enclave_cohort.map_sites_new
+		select site,'' as id,'' as url,'OCHIN' as type,'pending' as data_model,'OCHIN site, pending' as status,latitude,longitude from ochin.organization
 	) as foo;
 </sql:query>
 

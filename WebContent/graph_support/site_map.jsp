@@ -93,6 +93,34 @@
 					.style("stroke-width", "1")
 					.style("fill", "#bce4d8");
 				
+				d3.json("feeds/ochinLocations.jsp", function(graph) {
+					var locationBySite = [],
+						positions = [];
+	
+					var sites = graph.sites.filter(function(site) {
+						var location = [site.longitude, site.latitude];
+						locationBySite[site.id] = projection(location);
+						positions.push(projection(location));
+						return true;
+					});
+	
+					var tool_tip = d3.tip()
+						.attr("class", "d3-tip")
+						.offset([-8, 0])
+						.html(function(d) { return d.site + org_label(d.data_model) + status_label(d.status); });
+					svg.call(tool_tip);
+	
+					svg.selectAll("path")
+						.data(sites)
+						.enter().append("path")
+    				.attr("d", function(d) {return d3.symbol().type(d3.symbolDiamond).size("20")()})
+					.attr("transform", function(d, i) {return "translate("+positions[i][0]+", "+positions[i][1]+")";})
+      				.attr("stroke", stroke("No"))
+      				.attr("fill",color("No"))
+						.on("mouseover", tool_tip.show)
+						.on("mouseout", tool_tip.hide);
+				});
+
 				d3.json("${param.site_page}", function(graph) {
 					var locationBySite = [],
 						positions = [];
@@ -136,8 +164,14 @@
 					.attr("r", 4)
 					.style("stroke", stroke("No"))
 					.style("fill", "#fff")
-				svg.append("text").attr("x", 15).attr("y", 8).text("Data Available").style("font-size", "12px").attr("alignment-baseline","middle")
+				svg.append("path")
+    				.attr("d", function(d) {return d3.symbol().type(d3.symbolDiamond).size("20")()})
+					.attr("transform", function(d, index) {return "translate(5, 32)";})
+      				.attr("stroke", "black")
+      				.attr("fill", "#fff")
+ 				svg.append("text").attr("x", 15).attr("y", 8).text("Data Available").style("font-size", "12px").attr("alignment-baseline","middle")
 				svg.append("text").attr("x", 15).attr("y", 20).text("Data transfer signed, pending availability").style("font-size", "12px").attr("alignment-baseline","middle")
+				svg.append("text").attr("x", 15).attr("y", 32).text("OCHIN contributing site").style("font-size", "12px").attr("alignment-baseline","middle")
 			});
 		};
 	});

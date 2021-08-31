@@ -30,6 +30,7 @@ WebContent/feeds/map_data.jsp -text
 WebContent/feeds/meds.jsp -text
 WebContent/feeds/meds_by_class.jsp -text
 WebContent/feeds/models.jsp -text
+WebContent/feeds/ochinLocations.jsp -text
 WebContent/feeds/peak.jsp -text
 WebContent/feeds/project_roster.jsp -text
 WebContent/feeds/severity.jsp -text
