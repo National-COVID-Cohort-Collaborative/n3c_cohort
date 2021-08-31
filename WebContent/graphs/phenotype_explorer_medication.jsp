@@ -1,229 +1,258 @@
 <style type="text/css">
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
 
-.y.axis path,
-.y.axis line {
-  display: none;
-}
+    .y.axis path,
+    .y.axis line {
+        display: none;
+    }
 
-.x.axis path {
-  stroke: #999;
-}
+    .x.axis path {
+        stroke: #999;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        height: auto;
+        background: none repeat scroll 0 0 #182026;
+        /*border: 1px solid #6F257F;*/
+        color: #fff;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px;
+    }
 </style>
 <script>
-var phenotypeMedications;
-var medicationSelector = [];
-var phenotypeCategories = [];
-var cohortMedications = new Map();
+    function chartForMedication(medication) {
+        let medicationsChartData = [];
+        let medicationsFeedUrl = "feeds/phenotypes_medications.jsp?name=" + medication;
 
-function medicationsForPhenotype(phenotypeId) {
-    buildPhenotypeMedicationData(phenotypeId)
-}
+        $.getJSON(medicationsFeedUrl, (data) => {
+            let json = $.parseJSON(JSON.stringify(data))
+            let headers = json['headers'].map(item => item.value);
 
-function buildPhenotypeMedicationData(phenotypeId) {
-    phenotypeMedications = new Map();
+            let medicationGroup = dataGrouped(json['rows']);
+            let medTrueData = json['rows'].filter(row => row.value);
+            let medTrueGrouped = dataGrouped(medTrueData);
+            let medPercentage = dataPercentage(medicationGroup, medTrueGrouped, headers);
 
-    let medicationsFeedUrl = "feeds/phenotypes_medications.jsp";
-    if (phenotypeId != 1) {
-        medicationsFeedUrl += "?pid=" + phenotypeId;
-    }
+            json['headers'].map(category => {
+                let currObj = {}
 
-    $.getJSON(medicationsFeedUrl, (data) => {
-        let json = $.parseJSON(JSON.stringify(data))
-        phenotypeCategories = json['headers'];
+                currObj["category"] = category.label
+                currObj["values"] = [];
 
-        let headers = phenotypeCategories.map(item => item.value);
-        let cohortMedicationsIn = json["rows"].filter(f => f.phenotype == "All Patients");
-        cohortMedications = buildPhenotypeData(cohortMedicationsIn, headers);
+                medPercentage.forEach(med => {
+                    let currKey = {}
 
-        if (phenotypeId != 1) {
-            let selectedPhenotype = $("${param.pe_selector} :selected").text();
-            let phenotypeMedicationsIn = json["rows"].filter(f => f.phenotype == selectedPhenotype);
+                    currKey["phenotype"] = med.variable.replaceAll('_',' ');
+                    currKey["value"] = parseFloat(med[category.value]).toFixed(3);
+                    currObj["values"].push(currKey); // each category properties
+                });
 
-            phenotypeMedications = buildPhenotypeData(phenotypeMedicationsIn, headers);
-        }
+                medicationsChartData.push(currObj); // each category
+            });
 
-        medicationsDropDown(phenotypeId);
-    });
-}
+            const medCohort = medicationGroup.filter(obj => obj.variable === "All_Patients").pop();
+            const medCohortFiltered = filterObject(medCohort, headers);
+            renderMedicationSummary(medication, medCohortFiltered, medPercentage);
 
-function medicationsDropDown(phenotypeId) {
-    // selectors
-    let medicationsData = phenotypeId == 1 ? cohortMedications : phenotypeMedications;
-    medicationsData.forEach(buildMedicationsDropDown);
-
-    $("${param.med_selector}").select2({data: medicationSelector});
-    chartForMedication($("${param.med_selector} :selected").val());
-}
-
-function buildMedicationsDropDown(medications, key) {
-    medicationSelector.push({id: key, text: medications.name.replaceAll('_', ' ')});
-}
-
-function chartForMedication(medicationId) {
-    let allMedications = [];
-    let medicationsChartData = [];
-
-    if (phenotypeMedications.size) {
-        let currMedication = phenotypeMedications.get(medicationId);
-        allMedications.push(currMedication);
-    }
-
-    let currMedicationAll = cohortMedications.get(medicationId);
-    allMedications.push(currMedicationAll);
-
-    phenotypeCategories.map(category => {
-        let currObj = {}
-
-        currObj["category"] = category.label
-        currObj["values"] = [];
-
-        allMedications.forEach(med => {
-            let currKey = {}
-
-            currKey["phenotype"] = med.phenotype;
-            currKey["value"] = parseFloat(med[category.value]);
-            currObj["values"].push(currKey);
+            renderMedicationChart(medicationsChartData);
         });
+    }
 
-        medicationsChartData.push(currObj);
-    });
+    function renderMedicationSummary(medication, medCohort, medPercentage)
+    {
+        $("#medName span").text(medication.replaceAll('_',' '));
+        $("#medCount span").text(sumObject(medCohort).toLocaleString());
 
-    renderMedicationChart(medicationsChartData);
-}
+        /* TODO: need to clarify with Ken
+        const medCalculated = medPercentage.filter(obj => obj.variable === medication).pop();
+        const medCohortCalculated = medPercentage.filter(obj => obj.variable === "All_Patients").pop();
 
-function renderMedicationChart(data) {
-    // set the dimensions and margins of the graph
-    //var margin = {top: 30, right: 100, bottom: 60, left: 100},
-    var margin = {top: 70, right: 50, bottom: 35, left: 100},
-    width = 900 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+        // medication
+        const medCovid = medCalculated.dead_w_covid;
+        const medHospitalized = medCalculated.moderate + medCalculated.severe + medCalculated.dead_w_covid;
+        const medSevere = medCalculated.severe + medCalculated.dead_w_covid;
 
-    var x0 = d3.scaleBand().rangeRound([0, width]).padding(0.3);
-    var x1 = d3.scaleBand().padding(0.3);
-    var y = d3.scaleLinear().range([height, 0]);
-    var xAxis = d3.axisBottom(x0).scale(x0).tickSize(0);
-    var yAxis = d3.axisLeft(y).tickFormat((d) => { return d + "%" })
+        // all cohort medication
+        const medCohortCovid = medCalculated.dead_w_covid;
+        const medCohortHospitalized = medCohortCalculated.moderate
+            + medCohortCalculated.severe
+            + medCohortCalculated.dead_w_covid;
+        const medCohortSevere = medCohortCalculated.severe + medCohortCalculated.dead_w_covid;*/
+    }
 
-    // remove any existing svg
-    d3.select("${param.med_chart_container}").select('svg').remove();
+    function renderMedicationChart(data) {
+        // set the dimensions and margins of the graph
+        //var margin = {top: 30, right: 100, bottom: 60, left: 100},
+        var margin = {top: 70, right: 50, bottom: 35, left: 100},
+            width = 900 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
 
-    // create the chart
-    var svg = d3.select("${param.med_chart_container}").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var x0 = d3.scaleBand().rangeRound([0, width]).padding(0.3);
+        var x1 = d3.scaleBand().padding(0.3);
+        var y = d3.scaleLinear().range([height, 0]);
+        var xAxis = d3.axisBottom(x0).scale(x0).tickSize(0);
+        var yAxis = d3.axisLeft(y).tickSize(10).tickFormat((d) => { return d + "%" })
 
-    let categoriesNames = data.map((d) => { return d.category; });
-    let phenotypes = data[0].values.map((d) => { return d.phenotype; });
-    let subGroup = data.map((d) => { return d.values })
-        .slice(data.length-1)
-        .map((n) => { return n })[0]
-        .map((i) => { return i.phenotype });
+        // remove any existing svg
+        d3.select("${param.med_chart_container}").select('svg').remove();
 
-    var color = d3.scaleOrdinal()
-        .domain(subGroup)
-        .range(subGroup.length > 1 ? ["#4B8AC0", "#A76BAD"] : ["#4B8AC0"]);
+        // create the chart
+        var svg = d3.select("${param.med_chart_container}").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    x0.domain(categoriesNames);
-    x1.domain(phenotypes).rangeRound([0, x0.bandwidth()]);
-    y.domain([0, d3.max(data, (category) => { return d3.max(category.values, (d) => { return d.value; }); })]);
+        let categoriesNames = data.map((d) => { return d.category; });
+        let phenotypes = data[0].values.map((d) => { return d.phenotype; });
+        let subGroup = data.map((d) => { return d.values })
+            .slice(data.length-1)
+            .map((n) => { return n })[0]
+            .map((i) => { return i.phenotype });
 
-    svg.append("g")
-       .attr("class", "x axis")
-       .attr("transform", "translate(0," + height + ")")
-       .call(xAxis);
+        var color = d3.scaleOrdinal()
+            .domain(subGroup)
+            .range(["#4B8AC0", "#A76BAD"]);
 
-    svg.append("g")
-       .attr("class", "y axis")
-      //.style('opacity','0')
-       .call(yAxis)
-       .append("text")
-       .attr("transform", "rotate(-90)")
-       .attr("y", 6)
-       .attr("dy", "-5.5em")
-       .attr("dx", "-15.8em")
-       .attr("letter-spacing", "0.3em")
-       .attr("stroke", "black")
-       .attr("text-anchor", "end")
-      //.attr("font-weight", "bold")
-       .attr("font-variant", "small-caps")
-       .text("Percentage of Patients");
+        // tooltip
+        var tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "toolTip");
 
-    svg.select('.y')
-       .transition()
-       .duration(500)
-       .delay(1300)
-       .style('opacity','1');
+        x0.domain(categoriesNames);
+        x1.domain(phenotypes).rangeRound([0, x0.bandwidth()]);
+        y.domain([0, d3.max(data, (category) => {
+            return d3.max(category.values, (d) => {
+                return d.value;
+            });
+        })]);
 
-    var slice = svg.selectAll(".slice")
-        .data(data)
-        .enter().append("g")
-        .attr("class", "g")
-        .attr("transform", (d) => { return "translate(" + x0(d.category) + ",0)"; });
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
 
-    slice.selectAll("rect")
-         .data((d) => { return d.values; })
-         .enter().append("rect")
-         .attr("width", x1.bandwidth())
-         .attr("x", (d) => { return x1(d.phenotype); })
-         .style("fill", (d) => { return color(d.phenotype) })
-         .attr("y", (d) => { return y(0); })
-         .attr("height", (d) => { return height - y(0); })
-         .on("mouseover", function(d) {
-            d3.select(this).style("fill", d3.rgb(color(d.phenotype)).darker(2));
-         })
-         .on("mouseout", function(d) {
-            d3.select(this).style("fill", color(d.phenotype));
-         });
+        svg.append("g")
+            .attr("class", "y axis")
+            //.style('opacity','0')
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "-5.5em")
+            .attr("dx", "-15.8em")
+            .attr("letter-spacing", "0.3em")
+            .attr("stroke", "black")
+            .attr("text-anchor", "end")
+            //.attr("font-weight", "bold")
+            .attr("font-variant", "small-caps")
+            .text("Percentage of Patients");
 
-    slice.selectAll("rect")
-         .transition()
-         .delay((d) => {return Math.random()*1000;})
-         .duration(1000)
-         .attr("y", (d) => { return y(d.value); })
-         .attr("height", (d) => { return height - y(d.value); });
+        svg.select('.y')
+            .transition()
+            .duration(500)
+            .delay(1300)
+            .style('opacity','1');
 
-    //Legend
-    var legendContainer = svg.append('g')
-        .attr('transform', "translate(" + (margin.left - 100) + ", -50)")
+        var slice = svg.selectAll(".slice")
+            .data(data)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform", (d) => { return "translate(" + x0(d.category) + ",0)"; });
 
-    var legend = legendContainer.selectAll(".legend")
-         .data(data[0].values.map((d) => { return d.phenotype; }))
-         .enter().append("g")
-         .attr("class", "legend")
-         .attr("transform", (d,i) => { return "translate(0," + i * 20 + ")"; })
-         .style("opacity","0");
+        slice.selectAll("rect")
+            .data((d) => { return d.values; })
+            .enter().append("rect")
+            .attr("width", x1.bandwidth())
+            .attr("x", (d) => { return x1(d.phenotype); })
+            .style("fill", (d) => { return color(d.phenotype) })
+            .attr("y", (d) => { return y(0); })
+            .attr("height", (d) => { return height - y(0); })
+            .on("mouseover", function(d) {
+                d3.select(this).style("fill", d3.rgb(color(d.phenotype)).darker(2));
+            })
+            .on("mousemove", function(d){
+                tooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 70 + "px")
+                    .style("display", "inline-block")
+                    .text(d.value + '%');
+            })
+            .on("mouseout", function(d) {
+                d3.select(this).style("fill", color(d.phenotype));
+                tooltip.style("display", "none");
+            });
 
-    legend.append("rect")
-          .attr("x", width - 5)
-          .attr("width", 18)
-          .attr("height", 18)
-          .style("fill", (d) => { return color(d); });
+        slice.selectAll("rect")
+            .transition()
+            .delay((d) => {return Math.random()*1000;})
+            .duration(1000)
+            .attr("y", (d) => { return y(d.value); })
+            .attr("height", (d) => { return height - y(d.value); });
 
-    legend.append("text")
-          .attr("x", width - 24)
-          .attr("y", 9)
-          .attr("dy", ".35em")
-          .attr("font-variant", "small-caps")
-          .style("text-anchor", "end")
-          .text(function(d) {return d; });
+        //Legend
+        var legendContainer = svg.append('g')
+            .attr('transform', "translate(" + (margin.left - 100) + ", -50)")
 
-      legend.transition()
+        var legend = legendContainer.selectAll(".legend")
+            .data(data[0].values.map((d) => { return d.phenotype}))
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", (d,i) => { return "translate(0," + i * 20 + ")"; })
+            .style("opacity","0");
+
+        legend.append("rect")
+            .attr("x", width - 15)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", (d) => { return color(d); });
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .attr("font-variant", "capitalize")
+            .style("text-anchor", "end")
+            .text(function(d) {return d; });
+
+        legend.transition()
             .duration(500)
             .delay((d,i) => { return 1300 + 100 * i; })
             .style("opacity","1");
-}
+    }
 
-$("${param.med_selector}").on('select2:select', (e) => {
-    let data = e.params.data;
+    // medication selection event handler
+    $("${param.med_selector}").on('select2:select', (e) => {
+        let data = e.params.data;
 
-    chartForMedication(data.id);
-});
+        chartForMedication(data.id);
+    });
+
+    let  medicationSelection = [];
+    $.getJSON("feeds/medications.jsp", (data) => {
+        let json = $.parseJSON(JSON.stringify(data));
+
+        json.map((entry) => {
+            let selectData = {};
+            for (const [key, value] of Object.entries(entry)) {
+                selectData["id"] = value;
+                selectData["text"] = value.replaceAll('_', ' ');
+
+                medicationSelection.push(selectData);
+            }
+        });
+
+        $("${param.med_selector}").select2({data: medicationSelection});
+
+        chartForMedication($("${param.pe_selector} :selected").val());
+    });
 </script>

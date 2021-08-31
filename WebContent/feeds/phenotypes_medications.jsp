@@ -2,21 +2,20 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <sql:query var="meds" dataSource="jdbc/N3CCohort">
-	SELECT jsonb_pretty(jsonb_agg(foo order by name))
+	SELECT jsonb_pretty(jsonb_agg(foo))
         	FROM (
-        	    SELECT mild, value, severe, mild_ed, moderate, variable AS name, dead_w_covid,
-        	     phenotypename AS phenotype, md5(variable) AS variable, md5(phenotypename) AS hashid
-                 FROM enclave_data.clamped_med_usage_by_severity meds
-                 LEFT JOIN enclave_data.phenotype_final pe ON (meds.phenotypeid=pe.phenotypeid)
-        	<c:choose>
-            	<c:when test="${not empty param.pid}">
-                WHERE meds.phenotypeid IN (1, ${param.pid})
-            	</c:when>
-            	<c:otherwise>
-                WHERE meds.phenotypeid=1
-            	</c:otherwise>
-            </c:choose>
+                SELECT phenotypeid, value,
+                CASE WHEN phenotypeid = 1 THEN 'All_Patients' ELSE variable END As variable,
+                SUM(dead_w_covid) AS dead_w_covid,
+                SUM(mild) AS mild,
+                SUM(mild_ed) AS mild_ed,
+                SUM(moderate) AS moderate,
+                SUM(severe) AS severe
+                FROM enclave_data.clamped_med_usage_by_severity
+                WHERE variable = ?
+                GROUP BY phenotypeid, value, variable
             ) AS foo;
+    <sql:param value="${param.name}"/>
 </sql:query>
 {
    "headers": [
