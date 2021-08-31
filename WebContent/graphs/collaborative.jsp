@@ -7,10 +7,10 @@
 			<div class="panel-heading">Engagement and Registration Statistics</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-sm-12 col-md-6" id="instituions_metrics">
+					<div class="col-xs-12 col-lg-6" id="instituions_metrics">
 						<table class="table table-hover">
 		    				<thead>
-		    					<tr><th>Institutions / DUAs</th><th>Count</th></tr>
+		    					<tr><th>Institutions</th><th>Count</th></tr>
 		    				</thead>
 		    				<sql:query var="duas" dataSource="jdbc/N3CCohort">
 		        				select count(*) from n3c_admin.dua_master where duaexecuted is not null;
@@ -24,12 +24,29 @@
 		    				<c:forEach items="${duas.rows}" var="row" varStatus="rowCounter">
 		        				<tr><td>DUA Institutions with Registered Users</td><td align=right>${row.count}</td></tr>
 		    				</c:forEach>
+		    				<sql:query var="dtas" dataSource="jdbc/N3CCohort">
+		        				select count(*) from n3c_admin.dta_master where dtaexecuted is not null;
+		    				</sql:query>
+		    				<c:forEach items="${dtas.rows}" var="row" varStatus="rowCounter">
+		        				<tr><td>Institutions with Executed DTAs</td><td align=right>${row.count}</td></tr>
+		    				</c:forEach>
 	    				</table>
 					</div>
-					<div class="col-sm-12 col-md-6" id="user_metrics">
+					<div class="col-xs-12 col-lg-6">
+						<div id="dua_line">
+							<jsp:include page="../graphs/line_data_dua.jsp">
+                				<jsp:param name="data_page" value="feeds/line_dta_dua_regs.jsp" />
+                				<jsp:param name="dom_element" value="#dua_line" />
+                			</jsp:include>
+                		</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 col-lg-6" id="user_metrics">
 						<table class="table table-hover">
 				    		<thead>
-				    			<tr><th>User Registrations</th><th>Count</th></tr>
+				    			<tr><th>Users</th><th>Count</th></tr>
 				    		</thead>
 				    		<sql:query var="duas" dataSource="jdbc/N3CCohort">
 				        		select count(*) from n3c_admin.registration;
@@ -51,19 +68,7 @@
 				    		</c:forEach>
 				    	</table>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div id="dua_line">
-							<jsp:include page="../graphs/line_data_dua.jsp">
-                				<jsp:param name="data_page" value="feeds/line_dta_dua_regs.jsp" />
-                				<jsp:param name="dom_element" value="#dua_line" />
-                			</jsp:include>
-                		</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-lg-6 col-xs-12">
 						<div id="registration_line">
 							<jsp:include page="../graphs/line_registrations.jsp">
 								<jsp:param name="data_page" value="feeds/line_dta_dua_regs.jsp" />
