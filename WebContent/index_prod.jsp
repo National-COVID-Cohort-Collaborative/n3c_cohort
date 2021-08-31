@@ -41,7 +41,8 @@ table.dataTable thead .sorting_asc {
 			<img src="images/n3c_logo.png" class="n3c_logo_header" alt="N3C Logo">N3C Cohort Exploration
 		</h2>
 		<div class = "row" style="margin:auto; padding-left:10%; padding-right:10%; font-size:16px;">
-			<p><span style="font-size:20px; font-weight:500;">Ready to dive into the data?</span>&emsp;View and analyze data in our secure N3C Data Enclave. The data include harmonized de-identified information from electronic health records.
+			<p><span style="font-size:20px; font-weight:500;">Ready to dive into the data?</span>&emsp;View and analyze data in our secure N3C Data Enclave.
+			The data include harmonized de-identified information from electronic health records.
 			The Data Enclave is open to academic researchers, clinicians, and citizen scientists. <a href="https://covid.cd2h.org/enclave" style="font-weight:600;">Register for an account now!</a></p>
 		
 			<p>You are encouraged to submit suggestions for
@@ -54,6 +55,7 @@ table.dataTable thead .sorting_asc {
 			<li><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
 			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
 			<li><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
+			<li><a data-toggle="tab" href="#pubs">Publications</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -68,6 +70,9 @@ table.dataTable thead .sorting_asc {
 			</div>
 			<div class="tab-pane fade" id="collaborative">
 				<jsp:include page="graphs/collaborative.jsp" flush="true" />
+			</div>
+            <div class="tab-pane fade" id="pubs">
+				<jsp:include page="graphs/publications.jsp" flush="true" />
 			</div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
