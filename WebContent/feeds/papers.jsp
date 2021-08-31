@@ -14,6 +14,18 @@
 			(select jsonb_agg(bar) from (select seqnum,last_name,fore_name as first_name from covid_litcovid.author where author.pmid=article.pmid order by seqnum) as bar) as authors
            FROM covid_litcovid.medline_journal_info natural join covid_litcovid.article_title natural join covid_litcovid.article natural join n3c_pubs.match) AS foo;
 </sql:query>
+{
+    "headers": [
+        {"value":"pmid", "label":"PMID"},
+        {"value":"title", "label":"Title"},
+        {"value":"journal", "label":"Journal"},
+        {"value":"volume", "label":"Volume"},
+        {"value":"issue", "label":"Issue"},
+        {"value":"published", "label":"Published"},
+        {"value":"pages", "label":"Pages"}
+    ],
+    "rows" : 
 <c:forEach items="${projects.rows}" var="row" varStatus="rowCounter">
 	${row.jsonb_pretty}
 </c:forEach>
+}
