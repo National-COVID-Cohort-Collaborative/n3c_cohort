@@ -128,16 +128,6 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Project Roster</div>
 			<div class="panel-body">
-<form action="">
-<label for="cars">Project status:</label>
-	<select name="cars" id="cars" form="carform">
-  <option value="volvo">All</option>
-  <option value="saab">Active</option>
-  <option value="opel">Completed</option>
-  <option value="audi">Operational</option>
-</select>
-</form>
-<br>
 				<div id="project-roster"></div>
 				<jsp:include page="../tables/project_roster_styled.jsp"/>
 				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
