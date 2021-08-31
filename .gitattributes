@@ -19,6 +19,8 @@ WebContent/feeds/charlson_dashboard.jsp -text
 WebContent/feeds/charlson_scatter.jsp -text
 WebContent/feeds/count_by_age.jsp -text
 WebContent/feeds/count_by_race.jsp -text
+WebContent/feeds/dta_roster.jsp -text
+WebContent/feeds/dua_roster.jsp -text
 WebContent/feeds/fact_sheet.jsp -text
 WebContent/feeds/filled.jsp -text
 WebContent/feeds/machine_learning_dashboard.jsp -text
@@ -27,6 +29,7 @@ WebContent/feeds/meds.jsp -text
 WebContent/feeds/meds_by_class.jsp -text
 WebContent/feeds/models.jsp -text
 WebContent/feeds/peak.jsp -text
+WebContent/feeds/project_roster.jsp -text
 WebContent/feeds/severity.jsp -text
 WebContent/feeds/severity_detail.jsp -text
 WebContent/feeds/severity_temp.jsp -text
@@ -82,6 +85,7 @@ WebContent/head.jsp -text
 WebContent/images/n3c_logo.png -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
+WebContent/index_prod.jsp -text
 WebContent/navbar.jsp -text
 WebContent/resources/MT.BootstrapLazyloader.js -text
 WebContent/resources/autocomplete.css -text
@@ -98,6 +102,8 @@ WebContent/tables/characteristics.jsp -text
 WebContent/tables/charlson.jsp -text
 WebContent/tables/charlson_dashboard.jsp -text
 WebContent/tables/datatableC.html -text
+WebContent/tables/dta_roster.jsp -text
+WebContent/tables/dua_roster.jsp -text
 WebContent/tables/filled.jsp -text
 WebContent/tables/jquery.hottie.js -text
 WebContent/tables/machine_learning_dashboard.jsp -text
@@ -105,6 +111,7 @@ WebContent/tables/meds.jsp -text
 WebContent/tables/models.jsp -text
 WebContent/tables/overall_stats.jsp -text
 WebContent/tables/peak.jsp -text
+WebContent/tables/project_roster.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
 /pom.xml -text
