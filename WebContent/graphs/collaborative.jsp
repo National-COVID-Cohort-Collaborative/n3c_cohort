@@ -108,7 +108,11 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Domain Team Roster</div>
 			<div class="panel-body">
-				<p>Coming soon...</p>
+				<div id="domain-team-roster"></div>
+				<jsp:include page="../tables/domain_team_roster.jsp"/>
+				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
+				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 			</div>
 		</div>
 	</div>
