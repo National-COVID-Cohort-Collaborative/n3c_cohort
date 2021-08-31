@@ -4,6 +4,9 @@
 var comorbidityTable;
 var comorbidityTrue;
 
+/**
+ *  Load additional details for the given Phenotype
+ */
 function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
     comorbidityTable = [];
     comorbidityTrue = new Map();
@@ -24,7 +27,7 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
             if (! comorbidityAll.has(row['variable'])) {
                 comorbidityAll.set(row['variable'], currKey);
 
-                if (row['value']) {
+                if (row['value']) { // if value is true, push to stack
                     comorbidityTrue.set(row['variable'], currKey);
                 }
             } else {
@@ -36,6 +39,7 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
 
                 comorbidityAll.set(row['variable'], currKey);
 
+                // compute all "value = true"
                 if (row['value']) {
                     let currTruKey = {};
 
@@ -56,11 +60,12 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
                     comorbidityTrue.set(row['variable'], currTruKey);
                 }
             }
-
         });
 
+        // build the data for the comorbidity table
         comorbidityAll.forEach(buildComorbidityTable);
 
+        // Build the Comorbidity DataTable
         var peComorbidityTable;
         if ($.fn.dataTable.isDataTable('#phenotype_comorbidity_table')) {
             peComorbidityTable = $('#phenotype_comorbidity_table').DataTable();
@@ -98,6 +103,9 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
     });
 }
 
+/**
+ * Build the Comorbidity Table Object
+ */
 function buildComorbidityTable(comorbidity, variable) {
     let comorbidityRow = {};
 
