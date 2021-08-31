@@ -32,8 +32,8 @@ text {
 
 <script>
 
-var width = 700,
-    height = 600,
+var width = 921,
+    height = 461,
     radius = 4, 
     map_scale = 900;
 
@@ -44,7 +44,6 @@ if ("${param.map_type}" == 'world'){
 		if (error) {
 			throw error;
 		}
-		width = 900;
 		console.log(error);
 	 	states.selectAll("path")
 	   		.data(collection.features)
@@ -79,7 +78,7 @@ var projection = d3.geo.azimuthal()
  var path = d3.geo.path()
  .projection(projection);
 
- var svg = d3.select("#graph").insert("svg:svg", "h2")
+ var svg = d3.select("${param.dom_element}").insert("svg:svg", "h2")
  .attr("width", width)
  .attr("height", height);
 
@@ -103,7 +102,7 @@ var projection = d3.geo.azimuthal()
  				.domain(d3.range(0,16))
  				.range(["#fff","#eee","#ddd","#ccc","#bbb","#aaa","#999","#888","#777","#666","#555","#444","#333","#222","#111","#000"]);
 
- var svg = d3.select("#graph").append("svg")
+ var svg = d3.select("${param.dom_element}").append("svg")
  	 .attr("xmlns","http://www.w3.org/2000/svg")
      .attr("width", width)
      .attr("height", height);
@@ -113,7 +112,7 @@ var projection = d3.geo.azimuthal()
  locationBySite = [],
  positions = [];
 
-d3.select(window).on('resize', function() { });
+d3.select(window).on('resize', function() { alert(d3.select("${param.dom_element}").node().width); });
 	
 d3.json("${param.data_page}", function(graph) {
      var sites = graph.sites.filter(function(site) {

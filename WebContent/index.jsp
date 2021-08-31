@@ -19,7 +19,7 @@
 	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
 <script src="resources/d3.v4.min.js"></script>
-<script src="resources/d3.tip.v0.6.3.js"></script>
+<script src="resources/d3-tip.js"></script>
 
 <style type="text/css" media="all">
 @import "resources/n3c_login_style.css";

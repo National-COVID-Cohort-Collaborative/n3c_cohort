@@ -94,6 +94,37 @@ and (max-width: 1076px){
 	color:#376076;
 }
 </style>
+    <style>   
+    .d3-tip {
+      line-height: 1;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+ 
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+ 
+    /* Style northward tooltips specifically */
+    .d3-tip.n:after {
+      margin: -2px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+    </style>
+
 
 
 <div class="row stats">
@@ -112,15 +143,11 @@ and (max-width: 1076px){
 <div class="row geo" style="max-width: 1300px; margin: auto;">
 	<div class="col-xs-12">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Geographic Distribution of N3C Cohort</div>
+			<div class="panel-heading">N3C Contributing Sites</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12 col-md-4 col-lg-3">
-						<div id="geographic_legend"></div>
-					</div>
-					<div class="col-xs-12 col-md-8 col-lg-9">
-						<div id="geographic"></div>
-			<div id="graph"></div>
+					<div class="col-xs-12 col-md-8 col-lg-12">
+						<div id="graph"></div>
 					</div>
 				</div>
 			</div>
@@ -217,23 +244,14 @@ and (max-width: 1076px){
 	</div>
 </div>
 
-			<jsp:include page="../graph_support/labelledMap.jsp" flush="true">
+			<jsp:include page="../graph_support/site_map.jsp" flush="true">
 				<jsp:param name="ld" value="300" />
 				<jsp:param name="map_type" value="${param.map_type}" />
-				<jsp:param name="data_page" value="feeds/siteLocations.jsp" />
+				<jsp:param name="state_page" value="graph_support/us_states.jsp" />
+				<jsp:param name="data_page" value="feeds/map_data.jsp" />
+				<jsp:param name="site_page" value="feeds/siteLocations.jsp" />
+				<jsp:param name="dom_element" value="#graph" />
 			</jsp:include>
-<jsp:include page="../graph_support/cohort_map.jsp">
-	<jsp:param name="data_page" value="feeds/map_data.jsp" />
-	<jsp:param name="state_page" value="graph_support/us_states.jsp" />
-	<jsp:param name="dom_element" value="#geographic" />
-</jsp:include>
-
-<jsp:include page="../graph_support/cohort_map_legend.jsp">
-	<jsp:param name="data_page" value="feeds/map_data.jsp" />
-	<jsp:param name="state_page" value="graph_support/us_states.jsp" />
-	<jsp:param name="dom_element" value="#geographic_legend" />
-</jsp:include>
-
 
 <sql:query var="facts" dataSource="jdbc/N3CCohort">
 	select max(sum) from enclave_cohort.age_hist_data;
