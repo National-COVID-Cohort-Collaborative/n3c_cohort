@@ -77,7 +77,12 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
         	'columnDefs': [{"className": "dt-center", "targets": "_all"}],
          	columns: [
             	{ data: 'class', visible: true, orderable: true },
-            	{ data: 'name', visible: true, orderable: true },
+            	{
+            	    data: 'name', visible: true, orderable: true,
+            	    render: function (data) {
+            	        return data.toLowerCase();
+                    }
+                },
             	{ data: 'total', visible: true, orderable: true },
             	{ data: 'all__hospitalized_and_not_', visible: true, orderable: true },
             	{
