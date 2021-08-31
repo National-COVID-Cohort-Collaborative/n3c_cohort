@@ -8,7 +8,9 @@
         			phenotypeid,count,phenotypename,referentconceptid,clinicaldescription,literaturereview,
         			phenotypenotes,webapicohortid,cohortname,logicdescription,cohortid,
         			jsonb_pretty(cohortjson::jsonb) as cohortjson
-        		  FROM enclave_data.phenotype_final ORDER BY 1)
+        		  FROM enclave_data.phenotype_final
+        		  WHERE logicdescription != 'NA'
+                  ORDER BY 1)
          AS foo;
 </sql:query>
 {
