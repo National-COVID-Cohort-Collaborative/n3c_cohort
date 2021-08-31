@@ -21,8 +21,10 @@ WebContent/feeds/count_by_age.jsp -text
 WebContent/feeds/count_by_race.jsp -text
 WebContent/feeds/fact_sheet.jsp -text
 WebContent/feeds/filled.jsp -text
+WebContent/feeds/machine_learning_dashboard.jsp -text
 WebContent/feeds/map_data.jsp -text
 WebContent/feeds/meds.jsp -text
+WebContent/feeds/meds_by_class.jsp -text
 WebContent/feeds/models.jsp -text
 WebContent/feeds/peak.jsp -text
 WebContent/feeds/severity.jsp -text
@@ -98,6 +100,7 @@ WebContent/tables/charlson_dashboard.jsp -text
 WebContent/tables/datatableC.html -text
 WebContent/tables/filled.jsp -text
 WebContent/tables/jquery.hottie.js -text
+WebContent/tables/machine_learning_dashboard.jsp -text
 WebContent/tables/meds.jsp -text
 WebContent/tables/models.jsp -text
 WebContent/tables/overall_stats.jsp -text
