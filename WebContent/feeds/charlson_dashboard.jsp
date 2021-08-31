@@ -12,7 +12,7 @@
 </sql:query>
 {
     "headers": [
-        {"value":"value", "label":"Value"},
+        {"value":"value", "label":"Condition"},
         {"value":"mild", "label":"Mild"},
         {"value":"mild_ed", "label":"Mild ED"},
         {"value":"moderate", "label":"Moderate"},
