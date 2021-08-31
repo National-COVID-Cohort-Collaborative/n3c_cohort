@@ -59,11 +59,12 @@
                 medicationsChartData.push(currObj); // each category
             });
 
-            renderMedicationChart(medicationsChartData);
+            // renderMedicationChart(medicationsChartData);
 
             const summaryData = {
                 'medication': medication,
                 'medData': medAllGrouped,
+                'medTrueData': medTrueGrouped,
                 'medPercentage': medPercentage,
                 'headers': headers
             }
@@ -76,12 +77,12 @@
         let headers = Object.assign([], data.headers);
         headers.push('unaffected');
 
-        let medCohort = data.medData.filter(obj => obj.variable === "All_Patients").pop()
-        let medSelected = data.medData.filter(obj => obj.variable !== "All_Patients").pop()
+        let medCohort = data.medData[0];
+        let medSelected = data.medTrueData[0];
 
         let medCohortSum = sumObject(filterObject(medCohort, headers));
         let medSelectedSum = sumObject(filterObject(medSelected, headers));
-
+        let medSelectedToCohortPercent = ((medSelectedSum/medCohortSum)*100).toFixed(1);
         $("#medName span").text(data.medication.replaceAll('_',' '));
         $("#medCount span").text(medSelectedSum.toLocaleString());
 
@@ -102,7 +103,36 @@
         $("#medDeathSummary span").text(death.toLocaleString());
         $("#medDeathSelectedStat").text(((death/medSelectedSum) * 100).toFixed(1));
         $("#medDeathCohortStat").text(((deathCohort/medCohortSum) * 100).toFixed(1));
+        $("#sMedName").text(data.medication.replaceAll('_',' '));
+        $("#sMedTotalCohort").text(medSelectedSum.toLocaleString("en-US"));
+        $("#sAllTotalCohort").text(medCohortSum.toLocaleString("en-US") + ' (' + medSelectedToCohortPercent + '%)');
+        $("#sMedCovidPos").text(covidPositive.toLocaleString("en-US") + ' (' + ((covidPositive/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sAllCovidPos").text(covidPositiveCohort.toLocaleString("en-US") + ' (' + ((covidPositiveCohort/medCohortSum) * 100).toFixed(1) + '%)');
 
+        $("#sMedOutpatients").text(medSelected.mild.toLocaleString("en-US") + ' (' + ((medSelected.mild/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sMedOutpatientsToCPos").text(((medSelected.mild/covidPositive) * 100).toFixed(1) + ' % of C+');
+        $("#sAllOutpatients").text(medCohort.mild.toLocaleString("en-US") + ' (' + ((medCohort.mild/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#sMedEdVisit").text(medSelected.mild_ed.toLocaleString("en-US") + ' (' + ((medSelected.mild_ed/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sMedEdVisitToCPos").text(((medSelected.mild_ed/covidPositive) * 100).toFixed(1) + ' % of C+');
+        $("#sAllEdVisit").text(medCohort.mild_ed.toLocaleString("en-US") + ' (' + ((medCohort.mild_ed/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#sMedHostpitalized").text(medSelected.moderate.toLocaleString("en-US") + ' (' + ((medSelected.moderate/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sMedHostpitalizedToCPos").text(((medSelected.moderate/covidPositive) * 100).toFixed(1) + ' % of C+');
+        $("#sAllHostpitalized").text(medCohort.moderate.toLocaleString("en-US") + ' (' + ((medCohort.moderate/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#sMedICU").text(medSelected.severe.toLocaleString("en-US") + ' (' + ((medSelected.severe/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sMedICUToCPos").text(((medSelected.severe/covidPositive) * 100).toFixed(1) + ' % of C+');
+        $("#sAllICU").text(medCohort.severe.toLocaleString("en-US") + ' (' + ((medCohort.severe/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#sMedDeceased").text(medSelected.dead_w_covid.toLocaleString("en-US") + ' (' + ((medSelected.dead_w_covid/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sMedDeceasedToCPos").text(((medSelected.dead_w_covid/covidPositive) * 100).toFixed(1) + ' % of C+');
+        $("#sAllDeceased").text(medCohort.dead_w_covid.toLocaleString("en-US") + ' (' + ((medCohort.dead_w_covid/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#sMedCovidNeg").text(medSelected.unaffected.toLocaleString("en-US") + ' (' + ((medSelected.unaffected/medSelectedSum) * 100).toFixed(1) + '%)');
+        $("#sAllCovidNeg").text(medCohort.unaffected.toLocaleString("en-US") + ' (' + ((medCohort.unaffected/medCohortSum) * 100).toFixed(1) + '%)');
+
+        $("#medSumTable").removeClass("hidden");
     }
 
     function renderMedicationChart(data) {
@@ -256,7 +286,7 @@
     let  medicationSelection = [];
     $.getJSON("feeds/medications.jsp", (data) => {
         let json = $.parseJSON(JSON.stringify(data));
-
+        medicationSelection.push({'id':'default','text':'Please select a medication'});
         json.map((entry) => {
             let selectData = {};
             for (const [key, value] of Object.entries(entry)) {

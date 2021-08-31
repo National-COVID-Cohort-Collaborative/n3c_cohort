@@ -4,20 +4,15 @@
 <sql:query var="meds" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
         	FROM (
-                SELECT phenotypeid, value,
-                CASE WHEN phenotypeid = 1 THEN 'All_Patients' ELSE variable END As variable,
-                SUM(dead_w_covid) AS dead_w_covid,
-                SUM(mild) AS mild,
-                SUM(mild_ed) AS mild_ed,
-                SUM(moderate) AS moderate,
-                SUM(severe) AS severe,
-                SUM(unaffected) AS unaffected
+                SELECT *
                 FROM enclave_data.clamped_med_usage_by_severity
                 WHERE variable = ?
-                GROUP BY phenotypeid, value, variable
+                AND phenotypeid = 1
+                ORDER BY value
             ) AS foo;
     <sql:param value="${param.name}"/>
 </sql:query>
+
 {
    "headers": [
            {"value":"mild", "label":"Mild"},
