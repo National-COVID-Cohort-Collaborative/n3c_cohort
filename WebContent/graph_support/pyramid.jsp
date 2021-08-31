@@ -135,7 +135,7 @@ d3.json("${param.data_page}", function(data) {
 		
 		var xAxisLeft = d3.axisBottom()
 			// REVERSE THE X-AXIS SCALE ON THE LEFT SIDE BY REVERSING THE RANGE
-			.scale(xScale.copy().range([pointA-4, 0]))
+			.scale(xScale.copy().range([pointA, 0]))
 			.ticks(3, ",s");
 
 
