@@ -1,15 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
-<sql:query var="projects" dataSource="jdbc/N3CCohort">
+<sql:query var="phenotypes" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-    	FROM (SELECT phenotypeid AS id, phenotypename AS text FROM enclave_data.phenotype_final WHERE phenotypename ILIKE ?
- ) AS foo;
- <sql:param>${param.q}%</sql:param>
+        	FROM (SELECT * FROM enclave_data.phenotype_final ORDER BY phenotypeid)
+         AS foo;
 </sql:query>
 {
-    "rows" :
-<c:forEach items="${projects.rows}" var="row" varStatus="rowCounter">
-	${row.jsonb_pretty}
-</c:forEach>
+    "phenotypes" :
+    <c:forEach items="${phenotypes.rows}" var="row" varStatus="rowCounter">
+        ${row.jsonb_pretty}
+    </c:forEach>
 }
