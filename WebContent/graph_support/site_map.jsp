@@ -86,36 +86,36 @@
 					.style("stroke", "#fff")
 					.style("stroke-width", "1")
 					.style("fill", "#bce4d8");
-			});
 
-			d3.json("${param.site_page}", function(graph) {
-				var locationBySite = [],
-					positions = [];
-
-				var sites = graph.sites.filter(function(site) {
-					var location = [site.longitude, site.latitude];
-					locationBySite[site.id] = projection(location);
-					positions.push(projection(location));
-					return true;
+				d3.json("${param.site_page}", function(graph) {
+					var locationBySite = [],
+						positions = [];
+	
+					var sites = graph.sites.filter(function(site) {
+						var location = [site.longitude, site.latitude];
+						locationBySite[site.id] = projection(location);
+						positions.push(projection(location));
+						return true;
+					});
+	
+					var tool_tip = d3.tip()
+						.attr("class", "d3-tip")
+						.offset([-8, 0])
+						.html(function(d) { return d.site; });
+					svg.call(tool_tip);
+	
+					svg.selectAll("circle")
+						.data(sites)
+						.enter().append("svg:circle")
+						.style("stroke", "#fff")
+						.style("fill", function(d) { return color(d.id % 10); })
+						//.on("click", function(d) { window.open(d.url, "_self"); })
+						.attr("cx", function(d, i) { return positions[i][0]; })
+						.attr("cy", function(d, i) { return positions[i][1]; })
+						.attr("r", function(d, i) { return 4; })
+						.on("mouseover", tool_tip.show)
+						.on("mouseout", tool_tip.hide);
 				});
-
-				var tool_tip = d3.tip()
-					.attr("class", "d3-tip")
-					.offset([-8, 0])
-					.html(function(d) { return d.site; });
-				svg.call(tool_tip);
-
-				svg.selectAll("circle")
-					.data(sites)
-					.enter().append("svg:circle")
-					.style("stroke", "#fff")
-					.style("fill", function(d) { return color(d.id % 10); })
-					//.on("click", function(d) { window.open(d.url, "_self"); })
-					.attr("cx", function(d, i) { return positions[i][0]; })
-					.attr("cy", function(d, i) { return positions[i][1]; })
-					.attr("r", function(d, i) { return 4; })
-					.on("mouseover", tool_tip.show)
-					.on("mouseout", tool_tip.hide);
 			});
 		};
 	});
