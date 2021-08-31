@@ -99,7 +99,7 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
         	{ data: 'randomforest_feature_rank', visible: true, orderable: true},
         	{ data: 'xgboost_feature_rank', visible: true, orderable: true},
         	{ data: 'logisticregression_none_feature_rank', visible: true, orderable: true},
-        	{ data: 'logisticregression_l2_feature_rank', visible: true, orderable: true},
+        	{ data: 'logisticregression_l1_feature_rank', visible: true, orderable: true},
         	{ data: 'logisticregression_l2_feature_rank', visible: true, orderable: true},
         	{ data: 'logisticregression_elasticnet_feature_rank', visible: true, orderable: true},
         	{ data: 'ridgeclassifier_feature_rank', visible: true, orderable: true},
