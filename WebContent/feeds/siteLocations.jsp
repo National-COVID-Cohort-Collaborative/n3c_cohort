@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <sql:query var="sites" dataSource="jdbc/N3CCohort">
-	select institutionid as id, institutionname as site, 'x' as url, org_latitude as latitude, org_longitude as longitude, ogo_group_role as description, released from enclave_cohort.site_coordinates order by 1;
+	select map_label as site,ror_id as id,data_in_enclave as released,ctr_ctsa_community as description,org_latitude as latitude,org_longitude as longitude from enclave_cohort.dashboard_map  where data_in_enclave !~'DTA';
 </sql:query>
 
 {

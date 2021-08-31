@@ -140,7 +140,7 @@ and (max-width: 1076px){
 	</div>
 </div>
 
-<div class="row geo" style="max-width: 1300px; margin: auto;">
+<div class="row geo">
 	<div class="col-xs-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">N3C Contributing Sites</div>
@@ -204,6 +204,7 @@ and (max-width: 1076px){
 			<div class="panel-heading">Lab-confirmed Negative</div>
 			<div class="panel-body">
 				<div id="race-negative"></div>
+				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
 			</div>
 		</div>
 	</div>
@@ -212,6 +213,7 @@ and (max-width: 1076px){
 			<div class="panel-heading">Lab-confirmed Positive</div>
 			<div class="panel-body">
 				<div id="race-positive"></div>
+				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
 			</div>
 		</div>
 	</div>
@@ -220,6 +222,7 @@ and (max-width: 1076px){
 			<div class="panel-heading">No COVID Test</div>
 			<div class="panel-body">
 				<div id="race-none"></div>
+				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
 			</div>
 		</div>
 	</div>
@@ -228,6 +231,7 @@ and (max-width: 1076px){
 			<div class="panel-heading">Suspected COVID</div>
 			<div class="panel-body">
 				<div id="race-suspected"></div>
+				<span style="font-size: 12px;">(NHPI - Native Hawaiian or Other Pacific Islander)</span>
 			</div>
 		</div>
 	</div>

@@ -39,9 +39,9 @@ $.getJSON("feeds/siteRoster.jsp", function(data){
     	lengthMenu: [ 10, 25, 50, 75, 100 ],
     	order: [[0, 'asc']],
      	columns: [
-        	{ data: 'organization', visible: true, orderable: true },
-        	{ data: 'type', visible: true, orderable: true },
-        	{ data: 'available', visible: true, orderable: true }
+        	{ data: 'site', visible: true, orderable: true },
+        	{ data: 'description', visible: true, orderable: true },
+        	{ data: 'released', visible: true, orderable: true }
     	]
 	} );
 

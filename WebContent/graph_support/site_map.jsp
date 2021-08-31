@@ -24,6 +24,11 @@
 		draw();
 
 		function draw() {
+			var legendText = ["Data Available", "Data transfer signed, pending availability"];
+			var legendStatus = ["Yes", "No"];
+			var legendLocation = [];
+			var legendPosition = [];
+			
 			// D3 Projection
 			var projection = d3.geoAlbersUsa()
 				.translate([width / 2, height / 2]) // translate to center of screen
@@ -33,6 +38,8 @@
 			var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
 				.projection(projection); // tell path generator to use albersUsa projection
 
+			legendPosition.push(projection([-125.0, 20.0]));
+			legendPosition.push(projection([-125.0, 25.0]));
 
 			var svg = d3.select("${param.dom_element}")
 				.append("svg")
@@ -41,8 +48,12 @@
 
 			// Color Scale For Legend and Map 
 			var color = d3.scaleOrdinal() 
-				.domain(["Y", "N"])
-				.range(["#6b486b", "#ff8c00"]);
+				.domain(["Yes", "No"])
+				.range(["#6b486b", "#bce4d8"]);
+
+			var stroke = d3.scaleOrdinal() 
+			.domain(["Yes", "No"])
+			.range(["#fff", "#6b486b"]);
 
 			var dataArray = [];
 
@@ -81,7 +92,7 @@
 					.style("stroke", "#fff")
 					.style("stroke-width", "1")
 					.style("fill", "#bce4d8");
-
+				
 				d3.json("${param.site_page}", function(graph) {
 					var locationBySite = [],
 						positions = [];
@@ -102,7 +113,8 @@
 					svg.selectAll("circle")
 						.data(sites)
 						.enter().append("svg:circle")
-						.style("stroke", "#fff")
+						.style("stroke", function(d) { return stroke(d.status); })
+						.style("stroke-width", "1")
 						.style("fill", function(d) { return color(d.status); })
 						//.on("click", function(d) { window.open(d.url, "_self"); })
 						.attr("cx", function(d, i) { return positions[i][0]; })
@@ -111,20 +123,33 @@
 						.on("mouseover", tool_tip.show)
 						.on("mouseout", tool_tip.hide);
 				});
+
+				svg.append("circle")
+					.attr("cx", width*0.56)
+					.attr("cy",40)
+					.attr("r", 4)
+					.style("stroke", stroke("Yes"))
+					.style("fill", color("Yes"))
+				svg.append("circle")
+					.attr("cx",width*0.56)
+					.attr("cy",55)
+					.attr("r", 4)
+					.style("stroke", stroke("No"))
+					.style("fill", "#fff")
+				svg.append("text").attr("x", width*0.56 + 20).attr("y", 40).text("Data Available").style("font-size", "12px").attr("alignment-baseline","middle")
+				svg.append("text").attr("x", width*0.56 + 20).attr("y", 55).text("Data transfer signed, pending availability").style("font-size", "12px").attr("alignment-baseline","middle")
 			});
 		};
 	});
 
 	function org_label(x) {
-		if (x == "HUB")
-			return "<br>CTSA Hub";
-		return "<br>N3C Affiliate";
+		return "<br>"+x;
 	}
 
 	function status_label(x) {
-		if (x == "Y")
+		if (x == "Yes")
 			return "<br>Data visible in Enclave";
-		return "<br>Data submitted to Enclave";
+		return "<br>Data not yet in Enclave";
 	}
 
 </script>
