@@ -11,6 +11,9 @@
 .settings/org.eclipse.wst.validation.prefs -text
 WebContent/META-INF/MANIFEST.MF -text
 WebContent/WEB-INF/web.xml -text
+WebContent/clinical-details.jsp -text
+WebContent/cohort.jsp -text
+WebContent/collaborative.jsp -text
 WebContent/feeds/blood.jsp -text
 WebContent/feeds/characteristics.jsp -text
 WebContent/feeds/characteristics_misc.jsp -text
@@ -98,7 +101,10 @@ WebContent/images/n3c_logo.png -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
 WebContent/index_prod.jsp -text
+WebContent/machine-learning.jsp -text
 WebContent/navbar.jsp -text
+WebContent/phenotype-explorer.jsp -text
+WebContent/publications.jsp -text
 WebContent/resources/MT.BootstrapLazyloader.js -text
 WebContent/resources/autocomplete.css -text
 WebContent/resources/autocomplete.js -text

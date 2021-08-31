@@ -1,8 +1,9 @@
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
+
+
+
+
 <script>
+
 $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 		
 	var json = $.parseJSON(JSON.stringify(data));
@@ -149,15 +150,18 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
              }
     	]	
 	} );
-
-	$("#table1 td").hottie({
-	    colorArray : [ 
-	        "#bce4d8",
-	        "#2d5985"
-	        // add as many colors as you like...
-	    ]
-	});
 	
+	
+	
+	$( document ).ready(function() {
+		$("#table1 td").hottie({
+	    	colorArray : [ 
+	        	"#bce4d8",
+	        	"#2d5985"
+	        // add as many colors as you like...
+	   	]
+		});
+	});
 });
 
 function addCommas(str) {
