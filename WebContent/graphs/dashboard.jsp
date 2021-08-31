@@ -202,11 +202,11 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Comorbidity Distribution of COVID+ in N3C Cohort</div>
 			<div class="panel-body">
-				<jsp:include page="../tables/datatableC.html"/>
+				<div id="charlson-dashboard"></div>
+				<jsp:include page="../tables/charlson_dashboard.jsp"/>
 				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
-				<script>init();</script>
 			</div>
 		</div>
 	</div>
