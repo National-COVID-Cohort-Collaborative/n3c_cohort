@@ -107,7 +107,7 @@
 					var tool_tip = d3.tip()
 						.attr("class", "d3-tip")
 						.offset([-8, 0])
-						.html(function(d) { return d.site + org_label(d.data_model) + status_label(d.status); });
+						.html(function(d) { return d.site + status_label(d.status); });
 					svg.call(tool_tip);
 	
 					svg.selectAll("path")
@@ -133,7 +133,7 @@
 					var tool_tip = d3.tip()
 						.attr("class", "d3-tip")
 						.offset([-8, 0])
-						.html(function(d) { return d.site + org_label(d.data_model) + status_label(d.status); });
+						.html(function(d) { return d.site + status_label(d.status); });
 					svg.call(tool_tip);
 	
 					svg.selectAll("circle")
