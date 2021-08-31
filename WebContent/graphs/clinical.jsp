@@ -62,7 +62,7 @@
 </style>
 
 <div class="row vaccine">
-    <div class="col-xs-12">
+    <div class="col-xs-6 mx-auto">
         <div class="panel-primary">
             <div class="panel-heading">Vaccine Data</div>
             <div class="panel-body">
