@@ -114,8 +114,8 @@ $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 	
 	$("#table1 td").hottie({
 	    colorArray : [ 
-	        "#fffcf7",
-	        "#f69035"
+	        "#bce4d8",
+	        "#2d5985"
 	        // add as many colors as you like...
 	    ]
 	});
