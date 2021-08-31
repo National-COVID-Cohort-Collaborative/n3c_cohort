@@ -15,6 +15,17 @@
 <div class="row comor">
 	<div class="col-xs-12">
 		<div class="panel panel-primary">
+			<div class="panel-heading">Journal Articles (online ahead of print)</div>
+			<div class="panel-body">
+				<div id="online-div"></div>
+				<jsp:include page="../tables/online.jsp"/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row comor">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
 			<div class="panel-heading">bioRxiv/medRxiv Preprints</div>
 			<div class="panel-body">
 				<div id="preprints-div"></div>
