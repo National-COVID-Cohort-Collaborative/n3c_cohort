@@ -33,6 +33,7 @@ WebContent/feeds/meds_by_class.jsp -text
 WebContent/feeds/models.jsp -text
 WebContent/feeds/ochinLocations.jsp -text
 WebContent/feeds/online.jsp -text
+WebContent/feeds/online_count.jsp -text
 WebContent/feeds/papers.jsp -text
 WebContent/feeds/peak.jsp -text
 WebContent/feeds/preprints.jsp -text
