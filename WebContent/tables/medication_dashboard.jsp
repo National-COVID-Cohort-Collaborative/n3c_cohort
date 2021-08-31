@@ -1,4 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 <style>
@@ -55,9 +54,7 @@ $.getJSON("feeds/priority_drug_counts.jsp", (data) => {
 
         var col = [];
 
-        for (i in json['headers']){
-            col.push(json['headers'][i]['label']);
-        }
+        var col = json['headers'].map(item => item.label)
 
         var table = document.createElement("table");
         table.className = 'table table-hover';
