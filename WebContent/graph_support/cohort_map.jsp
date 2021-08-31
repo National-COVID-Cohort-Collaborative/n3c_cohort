@@ -49,14 +49,14 @@
 			
 			var states = data.states;
 			
-			var color = d3.scaleLinear()
-			  .domain([0, d3.max(states, function(d) { return d.count; })])
-			  .range(["#bce4d8", "#2d5985"]);
-			  
 			for (var d = 0; d < states.length; d++) {
 				dataArray.push(parseFloat(states[d].count))
 			}
 		
+			var color = d3.scaleLinear()
+			  .domain([d3.min(dataArray, function(d) { return d; }), d3.max(dataArray, function(d) { return d; })])
+			  .range(["#bce4d8", "#2d5985"]);
+			  
 			
 			// Load GeoJSON data and merge with cohort data
 			d3.json("${param.state_page}", function(json) {
@@ -86,7 +86,7 @@
 		      		.attr("d", path)
 		      		.style("stroke", "#fff")
 		      		.style("stroke-width", "1")
-		      		.style("fill", function(d) { return color(states[d].count) })
+		      		.style("fill", function(d) { return color(d.properties.value) })
 		      		.on("mouseover",function(d,i){
 		      			reg = d.properties.color;
 		      			svg.selectAll("path")

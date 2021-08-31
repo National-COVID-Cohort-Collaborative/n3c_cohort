@@ -31,13 +31,17 @@
 				  .attr("height", height);
 				
 			// Color Scale For Legend and Map 
-			var color = d3.scaleOrdinal() 
-				.domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
-				.range(["#bce4d8", "#b6e1d8", "#a8d9d4", "#a4d8d3", "#9ed4d2", "#80c3cb", "#65b4c3", "#3791b0", "#2d5985"]);
+			//var color = d3.scaleOrdinal() 
+			//	.domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
+			//	.range(["#bce4d8", "#b6e1d8", "#a8d9d4", "#a4d8d3", "#9ed4d2", "#80c3cb", "#65b4c3", "#3791b0", "#2d5985"]);
 			
 			// Legend ******************************************************** 
 			var regions = data.regions;
 			var formatComma = d3.format(",");
+			
+			var color = d3.scaleLinear()
+			  .domain([d3.min(regions, function(d) { return d.cumulative; }), d3.max(regions, function(d) { return d.cumulative; })])
+			  .range(["#bce4d8", "#2d5985"]);
 			
 			var legend = svg.append("g")
 				.attr("font-size", 14)
@@ -51,7 +55,7 @@
 				.attr("x", 0)
 				.attr("width", 75)
 				.attr("height", 25)
-				.attr("fill", function(d) { return color(d.id); })
+				.attr("fill", function(d) { return color(d.cumulative); })
 				.on("mouseover",function(d,i){
 		      		reg = d.id;
       				d3.selectAll("path")
@@ -74,7 +78,13 @@
 		      			.style("opacity", 1); 
 				});
 				
-				
+			svg.append("text")
+			.attr("x", 0)
+			.attr("y", 0)
+			.attr("dy", "0.8em")
+			.attr("fill", "black")
+			.text("Total Patients in Region");
+
 			legend.append("text")
 				.attr("x", 5)
 				.attr("y", 13.5)
