@@ -36,9 +36,11 @@
     
     path.duas{
     	stroke: #2d5985;
+    	stroke-width:2.8px;
     }
     path.dtas{
     	stroke:#6b496b;
+    	stroke-width:2.8px;
     }
     
     

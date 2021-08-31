@@ -35,6 +35,7 @@
     
     path.registration{
     	stroke: #376076;
+    	stroke-width:2.8px;
     }
 
     
