@@ -11,13 +11,13 @@
 		logisticregression_l2_feature_rank, 
 		logisticregression_elasticnet_feature_rank,
 		ridgeclassifier_feature_rank,
-		round(((randomforest_feature_rank::numeric+
-		xgboost_feature_rank::numeric+
-		logisticregression_none_feature_rank::numeric+
-		logisticregression_l1_feature_rank::numeric+
-		logisticregression_l2_feature_rank::numeric+
-		logisticregression_elasticnet_feature_rank::numeric+
-		ridgeclassifier_feature_rank::float)/7)::numeric, 2) as mean
+		round(((randomforest_feature_rank+
+		xgboost_feature_rank+
+		logisticregression_none_feature_rank+
+		logisticregression_l1_feature_rank+
+		logisticregression_l2_feature_rank+
+		logisticregression_elasticnet_feature_rank+
+		ridgeclassifier_feature_rank)/7)::numeric, 2) as mean
 	from enclave_cohort_paper.generate_models_and_summary_info
 	where 
 		randomforest_feature_rank is not null and
