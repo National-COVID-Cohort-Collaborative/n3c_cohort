@@ -55,7 +55,8 @@ table.dataTable thead .sorting_asc {
 			<li><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
 			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
 			<li><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
-			<li><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
+			<li><a data-toggle="tab" href="#pubs">Publications</a></li>
+            <li><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -71,7 +72,10 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade" id="collaborative">
 				<jsp:include page="graphs/collaborative.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade" id="pe">
+            <div class="tab-pane fade" id="pubs">
+				<jsp:include page="graphs/publications.jsp" flush="true" />
+			</div>
+            <div class="tab-pane fade" id="pe">
                <jsp:include page="graphs/pe.jsp" flush="true" />
             </div>
 		</div>

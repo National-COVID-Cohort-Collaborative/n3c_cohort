@@ -1,7 +1,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="jquery.hottie.js"></script>
+<script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 <script>
 $.getJSON("feeds/charlson_dashboard.jsp", function(data){
 		
