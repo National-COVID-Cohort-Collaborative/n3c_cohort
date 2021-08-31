@@ -115,7 +115,7 @@ var projection = d3.geo.azimuthal()
 
 d3.select(window).on('resize', function() { });
 	
-d3.json("${param.data_page}", function(graph) {	 
+d3.json("${param.data_page}", function(graph) {
      var sites = graph.sites.filter(function(site) {
            var location = [site.longitude, site.latitude];
            locationBySite[site.id] = projection(location);
@@ -125,18 +125,18 @@ d3.json("${param.data_page}", function(graph) {
 
      var coauthors = graph.coauthors;
     
-     var linearScale = d3.scale.linear()
+     var linearScale = d3.scaleLinear()
  						.domain([0,10000])
  						.range(["#fff","#000"])
  						.clamp(true);
 
-     var logScale = d3.scale.log()
+     var logScale = d3.scaleLog()
  						.domain([0,10000])
  						.range(["#fff","#000"])
  						.clamp(true);
      
-     var eScale = d3.scale.linear()
-				 	.domain([0, d3.max(coauthors, function(d) { return d.count; })])
+     var eScale = d3.scaleLinear()
+				 	.domain([0, 1])
 				 	.range([1, 2]) 
      				.clamp(true);
      
@@ -150,21 +150,8 @@ d3.json("${param.data_page}", function(graph) {
         .attr("cy", function(d, i) { return positions[i][1]; })
         .attr("r", function(d, i) { return 5; })
      	.on("mouseover", function(n) {
-	     	links.selectAll("link")
-	         	.data(coauthors)
-	     		.enter().append("svg:line")
-	     		.style("stroke", function(d) { if (n.id == d.site || n.id == d.cosite) return "red"; else return linearScale(d.count); })
-	     		.style("opacity", function(d) { if (n.id == d.site || n.id == d.cosite) return 1; else return 0; })
-	  			.style("stroke-width", function(d) {return eScale(d.count); })
-	 	   		.attr("site", function(d) { return d.site; })
-	     		.attr("cosite", function(d) { return d.site; })
-	         	.attr("x1", function(d) { return locationBySite[d.site][0]; })
-	         	.attr("y1", function(d) { return locationBySite[d.site][1]; })
-	         	.attr("x2", function(d) { return locationBySite[d.cosite][0]; })
-	         	.attr("y2", function(d) { return locationBySite[d.cosite][1]; });
 	         })
          .on("mouseout", function() {
-     		d3.selectAll("line").remove();
 	         })
  		.append("svg:title")
  			.text(function(d) {return d.description.replace('&amp;', '&');  });

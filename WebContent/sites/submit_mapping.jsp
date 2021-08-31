@@ -5,6 +5,6 @@
 <sql:update dataSource="jdbc/N3CCohort">
 	insert into enclave_cohort.map_site values(?, ?);
 	<sql:param>${param.org}</sql:param>
-	<sql:param>${param.state}</sql:param>
+	<sql:param>${param.id}</sql:param>
 </sql:update>
 <c:redirect url="mapping.jsp" />

@@ -48,6 +48,7 @@
 							<sql:query var="orgs" dataSource="jdbc/N3CCohort">
 					select distinct institutionid,institutionname from enclave_cohort.feedout
 					where institutionname ~ ?
+					  and institutionid not in (select institutionid from enclave_cohort.map_site)
 					order by institutionname
 					<sql:param>${param.org}</sql:param>
 							</sql:query>
@@ -61,14 +62,15 @@
 						<div class="container-fluid" style="float: left; width: 70%">
 							<h3>${param.name}</h3>
 							<sql:query var="orgs" dataSource="jdbc/N3CCohort">
-					select id,org_name from enclave_cohort.ken_master
+					select id,org_name,org_state,ogo_group_role from enclave_cohort.ken_master
 					where org_name ~ ?
+					  and id not in (select id from enclave_cohort.map_site)
 					order by org_name
 					<sql:param>${param.org}</sql:param>
 							</sql:query>
 							<ul>
 								<c:forEach items="${orgs.rows}" var="row" varStatus="rowCounter">
-									<input id="id" name=id type="radio" value="${row.id}">${row.org_name}<br>
+									<input id="id" name=id type="radio" value="${row.id}">${row.org_name} - ${row.org_state} - ${row.ogo_group_role} - <br>
 								</c:forEach>
 							</ul>
 						</div>

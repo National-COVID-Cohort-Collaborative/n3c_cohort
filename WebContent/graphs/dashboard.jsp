@@ -220,7 +220,7 @@ and (max-width: 1076px){
 			<jsp:include page="../graph_support/labelledMap.jsp" flush="true">
 				<jsp:param name="ld" value="300" />
 				<jsp:param name="map_type" value="${param.map_type}" />
-				<jsp:param name="data_page" value="ctsaInstitutionMapData.jsp?mode=usa" />
+				<jsp:param name="data_page" value="feeds/siteLocations.jsp" />
 			</jsp:include>
 <jsp:include page="../graph_support/cohort_map.jsp">
 	<jsp:param name="data_page" value="feeds/map_data.jsp" />

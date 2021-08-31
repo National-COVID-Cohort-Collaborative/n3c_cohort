@@ -28,6 +28,7 @@ WebContent/feeds/peak.jsp -text
 WebContent/feeds/severity.jsp -text
 WebContent/feeds/severity_detail.jsp -text
 WebContent/feeds/severity_temp.jsp -text
+WebContent/feeds/siteLocations.jsp -text
 WebContent/feeds/total_by_source_count_weekly_int.jsp -text
 WebContent/footer.jsp -text
 WebContent/graph_support/cohort_map.jsp -text
