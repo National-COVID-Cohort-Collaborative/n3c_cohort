@@ -1,26 +1,21 @@
-<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
-<script>
+<script type="text/javascript">
 var comorbidityTable;
-var phenotypeTrue;
-
-/**
- *  Load additional details for the given Phenotype
- */
-function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
-    comorbidityTable = [];
+function comorbidityForPhenotype(phenotypeId) {
+   comorbidityTable = [];
 
     $.getJSON("feeds/phenotypes_comorbidity.jsp?pid=" + phenotypeId, (data) => {
         let json = $.parseJSON(JSON.stringify(data))
+        let headers = json['headers'].map(item => item.value)
 
         let comorbidityAll = new Map();
-        comorbidityAll = buildPhenotypeData(json);
+        comorbidityAll = buildPhenotypeData(json['rows'], headers);
 
+        // TODO: revisit why HIV -> Severe number is off
         // build the data for the comorbidity table
         comorbidityAll.forEach(buildComorbidityTable);
 
         // Build the Comorbidity DataTable
-        var peComorbidityTable;
+        let peComorbidityTable;
         if ($.fn.dataTable.isDataTable('#pe_comorbidity_table')) {
             peComorbidityTable = $('#pe_comorbidity_table').DataTable();
             peComorbidityTable.clear().draw();
@@ -63,73 +58,11 @@ function loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId) {
 function buildComorbidityTable(comorbidity, variable) {
     let comorbidityRow = {};
 
-    comorbidityRow['variable'] = variable.replace('_', ' ');
     for (const [key, value] of Object.entries(comorbidity)) {
         comorbidityRow[key] = value + '%';
     }
+    comorbidityRow['variable'] = variable.replaceAll('_', ' ');
+
     comorbidityTable.push(comorbidityRow);
-}
-
-function buildPhenotypeData(json) {
-    let phenotypeData = new Map();
-    phenotypeTrue = new Map();
-
-    let headers = json['headers'].map(item => item.value)
-
-    json['rows'].forEach((row, i) => {
-        let currKey = {}
-
-        headers.forEach(header => {
-            currKey[header] = row[header];
-        });
-
-        if (! phenotypeData.has(row['variable'])) {
-            phenotypeData.set(row['variable'], currKey);
-
-            if (row['value']) { // if value is true, push to stack
-                phenotypeTrue.set(row['variable'], currKey);
-            }
-        } else {
-            let tmpValues = Object.entries(phenotypeData.get(row['variable']));
-
-            for (const [key, value] of tmpValues) {
-                currKey[key] += value;
-            }
-
-            phenotypeData.set(row['variable'], currKey);
-
-            // compute all "value = true"
-            if (row['value']) {
-                let currTruKey = {};
-
-                headers.forEach(header => {
-                    currTruKey[header] = row[header];
-                });
-
-                if (! phenotypeTrue.has(row['variable'])) {
-                    phenotypeTrue.set(row['variable'], currTruKey);
-                } else {
-                    let tmpTruValues = Object.entries(phenotypeTrue.get(row['variable']));
-
-                    for (const [key, value] of tmpTruValues) {
-                        currTruKey[key] += value;
-                    }
-                }
-
-                phenotypeTrue.set(row['variable'], currTruKey);
-            }
-        }
-    });
-
-    for (const [key, entries] of phenotypeData.entries()) {
-        let trueValue = phenotypeTrue.get(key);
-        for (const [category, value] of Object.entries(entries)) {
-            let percentage = ((trueValue[category] / value) * 100).toFixed(3);
-            entries[category] = percentage;
-        }
-        phenotypeData.set(key, entries);
-    }
-
-    return phenotypeData;
 }
 </script>
