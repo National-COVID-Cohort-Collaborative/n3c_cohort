@@ -16,7 +16,7 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
 	var table = document.createElement("table");
 	table.className = 'table table-hover';
 	table.style.width = '100%';
-	table.id="table2";
+	table.id="ml_table";
 
 	var header= table.createTHead();
 	var header_row_top = header.insertRow(0); 
@@ -32,13 +32,13 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
 	
 	var th = document.createElement("th");
 		th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;"> Logistic Regression </span>';
-		th.setAttribute("colspan", "3");
+		th.setAttribute("colspan", "4");
 		th.style.textAlign = "center";
 		header_row_top.appendChild(th);
 		
 	var th = document.createElement("th");
 		th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;"> </span>';
-		th.setAttribute("colspan", "1");
+		th.setAttribute("colspan", "2");
 		th.style.border = "0px";
 		th.style.textAlign = "center";
 		header_row_top.appendChild(th);
@@ -57,26 +57,26 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
 
 
 		
-	$('#table2').DataTable( {
-		dom: 't',
+	$('#ml_table').DataTable( {
     	data: json['rows'],
        	paging: false,
-	 	bInfo: false,
-	 	order: [[6, 'asc']],
-	 	searching: false,
+	 	order: [[8, 'asc']],
+	 	searchable: true,
      	columns: [
-        	{ data: 'variable', visible: true, orderable: true },
+        	{ data: 'variable', visible: true, orderable: true},
         	{ data: 'randomforest_feature_rank', visible: true, orderable: true },
         	{ data: 'xgboost_feature_rank', visible: true, orderable: true },
         	{ data: 'logisticregression_none_feature_rank', visible: true, orderable: true },
         	{ data: 'logisticregression_l2_feature_rank', visible: true, orderable: true },
         	{ data: 'logisticregression_l2_feature_rank', visible: true, orderable: true },
+        	{ data: 'logisticregression_elasticnet_feature_rank', visible: true, orderable: true },
+        	{ data: 'ridgeclassifier_feature_rank', visible: true, orderable: true },
         	{ data: 'mean', visible: true, orderable: true }
     	]	
 	} );
 
 	
-	$("#table2 td").hottie({
+	$("#ml_table td").hottie({
 	    colorArray : [ 
 	    	"#2d5985",
 	        "#bce4d8"

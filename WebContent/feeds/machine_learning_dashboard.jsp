@@ -9,14 +9,24 @@
 		logisticregression_none_feature_rank, 
 		logisticregression_l1_feature_rank, 
 		logisticregression_l2_feature_rank, 
-		((randomforest_feature_rank::float+xgboost_feature_rank::float+logisticregression_none_feature_rank::float+logisticregression_l1_feature_rank::float+logisticregression_l2_feature_rank::float)/5) as mean
+		logisticregression_elasticnet_feature_rank,
+		ridgeclassifier_feature_rank,
+		round(((randomforest_feature_rank::numeric+
+		xgboost_feature_rank::numeric+
+		logisticregression_none_feature_rank::numeric+
+		logisticregression_l1_feature_rank::numeric+
+		logisticregression_l2_feature_rank::numeric+
+		logisticregression_elasticnet_feature_rank::numeric+
+		ridgeclassifier_feature_rank::float)/7)::numeric, 2) as mean
 	from enclave_cohort_paper.generate_models_and_summary_info
 	where 
 		randomforest_feature_rank is not null and
 		xgboost_feature_rank  is not null and
 		logisticregression_none_feature_rank is not null and
 		logisticregression_l1_feature_rank is not null and
-		logisticregression_l2_feature_rank is not null
+		logisticregression_l2_feature_rank is not null and
+		logisticregression_elasticnet_feature_rank is not null and
+		ridgeclassifier_feature_rank is not null
 	order by mean asc) as foo;
 </sql:query>
 {
@@ -27,6 +37,8 @@
         {"value":"logisticregression_none_feature_rank", "label":"None"},
         {"value":"logisticregression_l1_feature_rank", "label":"L1"},
         {"value":"logisticregression_l2_feature_rank", "label":"L2"},
+        {"value":"logisticregression_elasticnet_feature_rank", "label":"Elastic Net"},
+        {"value":"ridgeclassifier_feature_rank", "label":"Ridge Classifier"},
         {"value":"mean", "label":"Mean"}
     ],
     "rows" : 
