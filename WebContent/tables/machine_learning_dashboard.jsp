@@ -45,7 +45,6 @@ $.getJSON("feeds/machine_learning_dashboard.jsp", function(data){
 		
 	// Auto generate 2nd level headers that don't span 2 rows
 	for (i in col) {
-		// x__all spans two rows so it is hard coded above and shouldn't be displayed
 			var th = document.createElement("th");
 			th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + col[i].toString() + '</span>';
 			header_row_bottom.appendChild(th);
