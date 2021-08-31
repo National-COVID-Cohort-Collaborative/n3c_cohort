@@ -197,9 +197,9 @@ rect.disabled {
 
 /* -------------- Site Map ---------------------  */
 
-.site_wrapper {
+.compact {
     font-family: tahoma;
-    font-size: 10px;
+    font-size: 12px;
     position: relative;
     clear: both;
     *zoom: 1;
