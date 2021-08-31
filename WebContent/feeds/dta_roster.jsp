@@ -4,7 +4,7 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 <sql:query var="dua" dataSource="jdbc/N3CCohort">
-    select institutionid, institutionname as name, dtacontactfirstname, dtacontactsurname, dtaexecuted
+    select institutionid, institutionname as name, dtaexecuted
     from n3c_admin.dta_master
     where dtaexecuted is not null
     order by name;
@@ -13,14 +13,12 @@
 {
     "headers": [
         {"value":"site_name", "label":"Institution"},
-        {"value":"contact", "label":"Local Contact"},
         {"value":"date_executed", "label":"Date Executed"}
     ],
     "rows" : [
     <c:forEach items="${dua.rows}" var="row" varStatus="rowCounter">
 	    {
 	    	"site_name":"${row.name}",
-	        "contact":"${row.dtacontactfirstname} ${row.dtacontactsurname}",
 	        "date_executed":"${row.dtaexecuted}"
 	    }<c:if test="${!rowCounter.last}">,</c:if>
 </c:forEach>

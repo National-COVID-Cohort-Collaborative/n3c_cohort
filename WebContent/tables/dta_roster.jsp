@@ -38,10 +38,9 @@ $.getJSON("feeds/dta_roster.jsp", function(data){
        	paging: true,
     	pageLength: 5,
     	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-    	order: [[2, 'desc']],
+    	order: [[1, 'desc']],
      	columns: [
         	{ data: 'site_name', orderable: true },
-        	{ data: 'contact', visible: true, orderable: true},
         	{ data: 'date_executed', visible: true, orderable: true}
     	]
 	} );
