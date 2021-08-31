@@ -3,7 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-	FROM (select title,correspondingauthor,pub_date from n3c_pubs.conference_cache) as foo;
+	FROM (select title,correspondingauthor,pub_date,(pub_date > now()) as future from n3c_pubs.conference_cache) as foo;
 </sql:query>
 {
     "headers": [
