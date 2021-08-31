@@ -41,15 +41,18 @@
 				  .attr("height", height);
 				
 			// Color Scale For Legend and Map 
-			var color = d3.scaleOrdinal() 
-				.domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
-				.range(["#bce4d8", "#b6e1d8", "#a8d9d4", "#a4d8d3", "#9ed4d2", "#80c3cb", "#65b4c3", "#3791b0", "#2d5985"]);
+			//var color = d3.scaleOrdinal() 
+			//	.domain([1, 2, 3, 4, 5, 6, 7, 8, 9])
+			//	.range(["#bce4d8", "#b6e1d8", "#a8d9d4", "#a4d8d3", "#9ed4d2", "#80c3cb", "#65b4c3", "#3791b0", "#2d5985"]);
 			
-			  
 			var dataArray = [];
 			
 			var states = data.states;
 			
+			var color = d3.scaleLinear()
+			  .domain([0, d3.max(states, function(d) { return d.count; })])
+			  .range(["#bce4d8", "#2d5985"]);
+			  
 			for (var d = 0; d < states.length; d++) {
 				dataArray.push(parseFloat(states[d].count))
 			}
@@ -83,7 +86,7 @@
 		      		.attr("d", path)
 		      		.style("stroke", "#fff")
 		      		.style("stroke-width", "1")
-		      		.style("fill", function(d) { return color(d.properties.color) })
+		      		.style("fill", function(d) { return color(states[d].count) })
 		      		.on("mouseover",function(d,i){
 		      			reg = d.properties.color;
 		      			svg.selectAll("path")
