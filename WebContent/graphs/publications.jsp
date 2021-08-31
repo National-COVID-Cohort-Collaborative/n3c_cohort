@@ -23,6 +23,17 @@
 		</div>
 	</div>
 </div>
+<div class="row comor">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Other Public Venues (Podium Presentations, Posters, etc.)</div>
+			<div class="panel-body">
+				<div id="conferences-div"></div>
+				<jsp:include page="../tables/conferences.jsp"/>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 

@@ -17,6 +17,7 @@ WebContent/feeds/characteristics_misc.jsp -text
 WebContent/feeds/charlson.jsp -text
 WebContent/feeds/charlson_dashboard.jsp -text
 WebContent/feeds/charlson_scatter.jsp -text
+WebContent/feeds/conferences.jsp -text
 WebContent/feeds/count_by_age.jsp -text
 WebContent/feeds/count_by_race.jsp -text
 WebContent/feeds/domain_team_roster.jsp -text
@@ -111,6 +112,7 @@ WebContent/tables/blood.jsp -text
 WebContent/tables/characteristics.jsp -text
 WebContent/tables/charlson.jsp -text
 WebContent/tables/charlson_dashboard.jsp -text
+WebContent/tables/conferences.jsp -text
 WebContent/tables/datatableC.html -text
 WebContent/tables/domain_team_roster.jsp -text
 WebContent/tables/dta_roster.jsp -text
