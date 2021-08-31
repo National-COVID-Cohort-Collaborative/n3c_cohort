@@ -39,9 +39,13 @@ $.getJSON("feeds/siteRoster.jsp", function(data){
     	lengthMenu: [ 10, 25, 50, 75, 100 ],
     	order: [[0, 'asc']],
      	columns: [
-        	{ data: 'site', visible: true, orderable: true },
-        	{ data: 'description', visible: true, orderable: true },
-        	{ data: 'released', visible: true, orderable: true }
+        	{ data: 'site', visible: true, orderable: true,
+        		render: function ( data, type, row ) {
+        			return '<a href="'+ row.url + '"><span style="color:#376076";>' + row.site + '<\/span></a>';
+             		}
+        		},
+        	{ data: 'type', visible: true, orderable: true },
+        	{ data: 'status', visible: true, orderable: true }
     	]
 	} );
 

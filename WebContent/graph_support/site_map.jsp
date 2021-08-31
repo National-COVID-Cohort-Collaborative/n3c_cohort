@@ -48,12 +48,12 @@
 
 			// Color Scale For Legend and Map 
 			var color = d3.scaleOrdinal() 
-				.domain(["Yes", "No"])
-				.range(["#6b486b", "#bce4d8"]);
+				.domain(["available", "submitted", "pending"])
+				.range(["#6b486b", "#bce4d8", "#bce4d8"]);
 
 			var stroke = d3.scaleOrdinal() 
-				.domain(["Yes", "No"])
-				.range(["#fff", "#6b486b"]);
+				.domain(["available", "submitted", "pending"])
+				.range(["#fff", "#6b486b", "#6b486b"]);
 
 			var dataArray = [];
 
@@ -107,7 +107,7 @@
 					var tool_tip = d3.tip()
 						.attr("class", "d3-tip")
 						.offset([-8, 0])
-						.html(function(d) { return d.site + org_label(d.description) + status_label(d.status); });
+						.html(function(d) { return d.site + org_label(d.data_model) + status_label(d.status); });
 					svg.call(tool_tip);
 	
 					svg.selectAll("circle")
@@ -147,9 +147,7 @@
 	}
 
 	function status_label(x) {
-		if (x == "Yes")
-			return "<br>Data visible in Enclave";
-		return "<br>Data not yet in Enclave";
+		return "<br>"+x;
 	}
 
 </script>

@@ -5,18 +5,19 @@
 	select jsonb_pretty(jsonb_agg(foo))
 	from (
 		select
-			map_label as site,
-			ror_id as id,
-			case when data_in_enclave = 'Yes' then 'Available' else 'Pending' end as released,
-			ctr_ctsa_community as description
-		from enclave_cohort.dashboard_map  where data_in_enclave !~'DTA'
+			site,
+			id,
+			url,
+			type,
+			status
+		from enclave_cohort.map_sites
 		) as foo;
 </sql:query>
 {
     "headers": [
         {"value":"site", "label":"Site"},
-        {"value":"description", "label":"Type"},
-        {"value":"released", "label":"Data Status"}
+        {"value":"type", "label":"Type"},
+        {"value":"status", "label":"Data Status"}
     ],
     "rows" : 
 <c:forEach items="${projects.rows}" var="row" varStatus="rowCounter">
