@@ -2,8 +2,6 @@ function buildPhenotypeData(json, headers) {
     let phenotypeData = new Map();
     let phenotypeTrue = new Map();
 
-    //let headers = json['headers'].map(item => item.value)
-
     json.forEach((row, i) => {
         let currKey = {}
 

@@ -1,5 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="resources/phenotype.js" type="text/javascript"></script>
 <style>
 div.phenotype-details {
     margin-top: 20px;
@@ -80,10 +81,9 @@ div.phenotype-description {
 			<p class="panel-heading">Phenotype Explorer</p>
             <div class="row">
                 <div class="col-xs-3"><h4>Select Phenotype</h4></div>
-                <div class="col-xs-3 pe-filter"><input type="radio" name="pe_filter" id="diagnosis" value="diagnosis"> <label for="diagnosis">Diagnosis</label></div>
             </div>
             <div class="phenotype-body">
-                <select class="phenotype-selector" style="width: 100%"></select>
+                <select id="phenotype-selector" style="width: 100%"></select>
                 <h4 class="page-header">Phenotype Summary</h4>
                 <div class="card-flex-container stat-cards">
                     <div class="card total-card">
@@ -94,6 +94,56 @@ div.phenotype-description {
                             </div>
                             <div class="title" id="phenotypename">
                                 <span></span> cohort size
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card other-cards other-card0">
+                        <div class="inner-card">
+                            <div class="top-row">
+                                <span class="icon fa fa-user-plus"></span>
+                                    <div class="value-large" id="covidStat">
+                                        <span></span>
+                                    </div>
+                            </div>
+                            <div class="title">
+                                COVID positive
+                                <!--<div class="subtitle">
+                                    18.5% of phenotype vs <br> 23.2% all patients
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card other-cards other-card0">
+                        <div class="inner-card">
+                            <div class="top-row">
+                                <span class="icon fa fa-heart-rate">
+                                </span>
+                                <div class="value-large" id="hospitalizedStat">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="title">
+                                Hospitalized
+                                <!--<div class="subtitle">
+                                    9.2% of phenotype vs <br> 3.2% all patients
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card other-cards other-card0">
+                        <div class="inner-card">
+                            <div class="top-row">
+                                <span class="icon fa fa-exclamation-triangle">
+                                </span>
+                                <div class="value-large" id="deathStat">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="title">
+                                Severe outcome
+                                <!--<div class="subtitle">
+                                    2.6% of phenotype vs <br> 0.5% all patients
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -145,7 +195,14 @@ div.phenotype-description {
                         <jsp:include page="/tables/phenotype_explorer_comorbidity.jsp" flush="true" />
                     </div>
                     <div class="tab-pane fade" id="pe-medications">
-                        This is PE medications
+                        <h4 class="page-header"><strong>Medications</strong></h4>
+                        <select id="pe-med-selector" style="width: 100%"></select>
+                        <div id="pe-med-chart"></div>
+                        <jsp:include page="/graphs/phenotype_explorer_medication.jsp">
+                            <jsp:param name="pe_selector" value="#phenotype-selector" />
+                            <jsp:param name="med_selector" value="#pe-med-selector" />
+                            <jsp:param name="med_chart_container" value="#pe-med-chart" />
+                        </jsp:include>
                     </div>
                 </div>
             </div>
@@ -166,19 +223,16 @@ $.getJSON("feeds/phenotypes.jsp", (data) => {
         peFilter.push({id: row.phenotypeid, text: row.phenotypename});
     });
 
-    $('.phenotype-selector').select2({data: peFilter});
+    $('#phenotype-selector').select2({data: peFilter});
 
-    // show the default phenotype
-    phenotypeDetails(1);
-
-    // Default to Diagnosis
-    $(".pe-filter input:radio").first().attr('checked', 'checked');
+    loadDefaultDetailsForPhenotype(1);
 });
 
 // onSelect -> search thru main collection and retrieve data
-$('.phenotype-selector').on('select2:select', (e) => {
+$('#phenotype-selector').on('select2:select', (e) => {
     var data = e.params.data;
-    phenotypeDetails(data.id);
+
+    loadDefaultDetailsForPhenotype(data.id);
 });
 
 // Phenotype details
@@ -201,6 +255,29 @@ function phenotypeDetails(phenotypeId) {
         }
     });
 
-    loadAdditionalPhenotypeDetailsForPhenotype(phenotypeId)
+    let statFeedUrl = "feeds/phenotype_explorer_stat.jsp";
+    let statCategories = ["covid","hospitalized","death"]
+
+    statCategories.map(statCategory => {
+        $.getJSON(statFeedUrl + "?category=" + statCategory + "&pid=" + phenotypeId, (data) => {
+            let json = $.parseJSON(JSON.stringify(data))
+            stats = Object.entries(json);
+            for (const [category, count] of stats) {
+                $("#"+category + "Stat span").text(count.toLocaleString())
+            }
+        });
+    });
+}
+
+function loadDefaultDetailsForPhenotype(phenotypeId) {
+    console.log("loading default for phenotype: " + phenotypeId)
+    // show the default phenotype in the dropdown
+    phenotypeDetails(phenotypeId);
+
+    // load comorbidity table
+    comorbidityForPhenotype(phenotypeId);
+
+    // load medication chart
+    medicationsForPhenotype(phenotypeId);
 }
 </script>
