@@ -213,13 +213,13 @@
 </div>
 
 <jsp:include page="../graph_support/cohort_map.jsp">
-	<jsp:param name="data_page" value="graph_support/map_data.jsp" />
+	<jsp:param name="data_page" value="feeds/map_data.jsp" />
 	<jsp:param name="state_page" value="graph_support/us_states.jsp" />
 	<jsp:param name="dom_element" value="#geographic" />
 </jsp:include>
 
 <jsp:include page="../graph_support/cohort_map_legend.jsp">
-	<jsp:param name="data_page" value="graph_support/map_data.jsp" />
+	<jsp:param name="data_page" value="feeds/map_data.jsp" />
 	<jsp:param name="state_page" value="graph_support/us_states.jsp" />
 	<jsp:param name="dom_element" value="#geographic_legend" />
 </jsp:include>

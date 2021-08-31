@@ -21,6 +21,7 @@ WebContent/feeds/count_by_age.jsp -text
 WebContent/feeds/count_by_race.jsp -text
 WebContent/feeds/fact_sheet.jsp -text
 WebContent/feeds/filled.jsp -text
+WebContent/feeds/map_data.jsp -text
 WebContent/feeds/meds.jsp -text
 WebContent/feeds/models.jsp -text
 WebContent/feeds/peak.jsp -text
