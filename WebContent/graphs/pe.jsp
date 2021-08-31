@@ -134,9 +134,20 @@ div.phenotype-description {
                     </div>
                 </div>
             </div>
-            <div id="phenotype-explorer-comorbidity">
-                <h4 class="page-header">Comorbidity distribution within cohort</h4>
-                <jsp:include page="/tables/phenotype_explorer_comorbidity.jsp" flush="true" />
+            <div id="pe-stats">
+                <ul class="nav nav-tabs" style="font-size: 16px;">
+                    <li class="active"><a data-toggle="tab" href="#pe-comorbidity">Comorbidity Distribution</a></li>
+                    <li><a data-toggle="tab" href="#pe-medications">Medications</a></li>
+               </ul>
+               <div class="tab-content">
+                    <div class="tab-pane fade in active" id="pe-comorbidity">
+                        <h4 class="page-header"><strong>Comorbidity distribution within cohort</strong></h4>
+                        <jsp:include page="/tables/phenotype_explorer_comorbidity.jsp" flush="true" />
+                    </div>
+                    <div class="tab-pane fade" id="pe-medications">
+                        This is PE medications
+                    </div>
+                </div>
             </div>
 	</div>
 </div>
