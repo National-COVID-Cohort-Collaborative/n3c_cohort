@@ -116,9 +116,7 @@
     				.attr("d", function(d) {return d3.symbol().type(d3.symbolDiamond).size("20")()})
 					.attr("transform", function(d, i) {return "translate("+positions[i][0]+", "+positions[i][1]+")";})
       				.attr("stroke", stroke("No"))
-      				.attr("fill",color("No"))
-						.on("mouseover", tool_tip.show)
-						.on("mouseout", tool_tip.hide);
+      				.attr("fill",color("No"));
 				});
 
 				d3.json("${param.site_page}", function(graph) {
