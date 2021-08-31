@@ -41,10 +41,12 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
         header_row_top = header.insertRow(index);
         headers.forEach(function(header, i) {
             th = document.createElement("th");
-                th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + header.label + '</span>';
+                th.innerHTML = '<span style="color:#FFF; font-weight:600; font-size:16px;">' + header.label + '</span>';
                 th.setAttribute("colspan", header.colspan);
                 if (header.label == "")
                     th.style.border = "0px";
+                else
+                    th.style.backgroundColor = "#666";
                 th.style.textAlign = "center";
                 header_row_top.appendChild(th);
          })
@@ -63,7 +65,8 @@ $.getJSON("feeds/meds_by_class.jsp", function(data){
 	        label += "<br/>(N = " + $('#persons').text() + ")";
 
         var th = document.createElement("th");
-        th.innerHTML = '<span style="color:#333; font-weight:600; font-size:16px;">' + label + '</span>';
+        th.innerHTML = '<span style="color:#FFF; font-weight:600; font-size:16px;">' + label + '</span>';
+        th.style.backgroundColor = "#666";
         header_row_bottom.appendChild(th);
 	}
 
