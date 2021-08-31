@@ -39,13 +39,12 @@ table.dataTable thead .sorting_asc {
 		<h2 class="header-text">
 			<img src="images/n3c_logo.png" class="n3c_logo_header" alt="N3C Logo">N3C Cohort Exploration
 		</h2>
-		<div style="text-align: center;">
-		<h4>Ready to dive into the data?</h4>
+		<div style="margin:auto; text-align: left; width:40%">
+		<h4 style="text-align: center">Ready to dive into the data?</h4>
 		<p>View and analyze data in our secure N3C Data Enclave. The data include harmonized de-identified information from electronic health records.
 		The Data Enclave is open to academic researchers, clinicians, and citizen scientists. To register for an account, go to https://covid.cd2h.org/enclave.</p>
 		
-		<p>This is an initial configuration of an exploration tool for the N3C
-			cohort data.<br> You are encouraged to submit suggestions for
+		<p>You are encouraged to submit suggestions for
 			enhancements/additions to <a href="https://n3c-help.atlassian.net/jira/software/c/projects/N3CINTA/issues/N3CINTA-4">this
 				tracking issue.</a></p>
 		</div>
