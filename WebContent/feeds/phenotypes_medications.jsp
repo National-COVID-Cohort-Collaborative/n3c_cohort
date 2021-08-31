@@ -2,7 +2,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <sql:query var="meds" dataSource="jdbc/N3CCohort">
-	SELECT jsonb_pretty(jsonb_agg(foo))
+	SELECT jsonb_pretty(jsonb_agg(foo order by name))
         	FROM (
         	    SELECT mild, value, severe, mild_ed, moderate, variable AS name, dead_w_covid,
         	     phenotypename AS phenotype, md5(variable) AS variable, md5(phenotypename) AS hashid
@@ -16,7 +16,7 @@
                 WHERE meds.phenotypeid=1
             	</c:otherwise>
             </c:choose>
-            order by variable) AS foo;
+            ) AS foo;
 </sql:query>
 {
    "headers": [

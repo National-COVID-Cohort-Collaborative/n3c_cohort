@@ -70,6 +70,11 @@ div.phenotype-description {
     text-transform: uppercase;
     margin-left: 30px;
 }
+.stat-cards .title .subtitle{
+    font-weight: 500;
+    color: #10161a;
+    text-transform: none
+}
 .stat-cards .icon {
     color: #91ACE5;
     font-size: 20px;
@@ -101,32 +106,36 @@ div.phenotype-description {
                         <div class="inner-card">
                             <div class="top-row">
                                 <span class="icon fa fa-user-plus"></span>
-                                    <div class="value-large" id="covidStat">
+                                    <div class="value-large" id="covidSummary">
                                         <span></span>
                                     </div>
                             </div>
                             <div class="title">
                                 COVID positive
-                                <!--<div class="subtitle">
-                                    18.5% of phenotype vs <br> 23.2% all patients
-                                </div>-->
+                                <div class="subtitle" id="covidStat">
+                                    <span id="covidSubStat"></span>% of phenotype vs
+                                     <br>
+                                    <span id="covidAllStat"></span>% all patients
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="card other-cards other-card0">
                         <div class="inner-card">
                             <div class="top-row">
-                                <span class="icon fa fa-heart-rate">
+                                <span class="icon fa fa-procedures">
                                 </span>
-                                <div class="value-large" id="hospitalizedStat">
+                                <div class="value-large" id="hospitalizedSummary">
                                     <span></span>
                                 </div>
                             </div>
                             <div class="title">
                                 Hospitalized
-                                <!--<div class="subtitle">
-                                    9.2% of phenotype vs <br> 3.2% all patients
-                                </div>-->
+                                <div class="subtitle" id="hospitalizedStat">
+                                    <span id="hospitalizedSubStat"></span>% of phenotype vs
+                                     <br>
+                                    <span id="hospitalizedAllStat"></span>% all patients
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,15 +144,17 @@ div.phenotype-description {
                             <div class="top-row">
                                 <span class="icon fa fa-exclamation-triangle">
                                 </span>
-                                <div class="value-large" id="deathStat">
+                                <div class="value-large" id="deathSummary">
                                     <span></span>
                                 </div>
                             </div>
                             <div class="title">
                                 Severe outcome
-                                <!--<div class="subtitle">
-                                    2.6% of phenotype vs <br> 0.5% all patients
-                                </div>-->
+                                <div class="subtitle" id="deathStat">
+                                    <span id="deathSubStat"></span>% of phenotype vs
+                                     <br>
+                                    <span id="deathAllStat"></span>% all patients
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,7 +170,9 @@ div.phenotype-description {
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h5 style="margin:0px; font-size:15px;">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#pe_accordion" href="#pe_collapseOne">Show / Hide Details <i class="fas fa-info-circle"></i></a>
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#pe_accordion"
+                                     href="#pe_collapseOne">Show / Hide Details <i class="fas fa-info-circle"></i>
+                                     </a>
                                 </h5>
                             </div>
                             <div id="pe_collapseOne" class="panel-collapse collapse">
@@ -242,6 +255,9 @@ function phenotypeDetails(phenotypeId) {
     if (jQuery.isEmptyObject(phenotype))
         return;
 
+    let allCohortCount = phenotypes['pe_1'].count;
+    let phenotypeCount = phenotypes['pe_' + phenotypeId].count;
+
     $.each(phenotype, (field, value) => {
         selector = '#' + field;
 
@@ -259,18 +275,27 @@ function phenotypeDetails(phenotypeId) {
     let statCategories = ["covid","hospitalized","death"]
 
     statCategories.map(statCategory => {
+        let allCount = 0;
+        let subCount = 0;
+
         $.getJSON(statFeedUrl + "?category=" + statCategory + "&pid=" + phenotypeId, (data) => {
             let json = $.parseJSON(JSON.stringify(data))
-            stats = Object.entries(json);
-            for (const [category, count] of stats) {
-                $("#"+category + "Stat span").text(count.toLocaleString())
-            }
+
+            allCount = json[statCategory].all;
+            subCount = json[statCategory].sub || allCount;
+
+            let allStat = ((allCount/allCohortCount) * 100).toFixed(1);
+            let subStat = ((subCount/phenotypeCount) * 100).toFixed(1);
+
+            let selector = "#" + statCategory;
+            $(selector + "Summary span").text(subCount.toLocaleString());
+            $(selector + "SubStat").text(subStat)
+            $(selector + "AllStat").text(allStat)
         });
     });
 }
 
 function loadDefaultDetailsForPhenotype(phenotypeId) {
-    console.log("loading default for phenotype: " + phenotypeId)
     // show the default phenotype in the dropdown
     phenotypeDetails(phenotypeId);
 

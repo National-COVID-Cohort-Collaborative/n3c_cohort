@@ -16,9 +16,9 @@
 }
 </style>
 <script>
+var phenotypeMedications;
 var medicationSelector = [];
 var phenotypeCategories = [];
-var phenotypeMedications = new Map();
 var cohortMedications = new Map();
 
 function medicationsForPhenotype(phenotypeId) {
@@ -26,6 +26,8 @@ function medicationsForPhenotype(phenotypeId) {
 }
 
 function buildPhenotypeMedicationData(phenotypeId) {
+    phenotypeMedications = new Map();
+
     let medicationsFeedUrl = "feeds/phenotypes_medications.jsp";
     if (phenotypeId != 1) {
         medicationsFeedUrl += "?pid=" + phenotypeId;
@@ -102,8 +104,8 @@ function renderMedicationChart(data) {
     width = 900 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
-    var x0 = d3.scaleBand().rangeRound([0, width]).padding(0.1);
-    var x1 = d3.scaleBand().padding(0.1);
+    var x0 = d3.scaleBand().rangeRound([0, width]).padding(0.3);
+    var x1 = d3.scaleBand().padding(0.3);
     var y = d3.scaleLinear().range([height, 0]);
     var xAxis = d3.axisBottom(x0).scale(x0).tickSize(0);
     var yAxis = d3.axisLeft(y).tickFormat((d) => { return d + "%" })
@@ -189,7 +191,10 @@ function renderMedicationChart(data) {
          .attr("height", (d) => { return height - y(d.value); });
 
     //Legend
-    var legend = svg.selectAll(".legend")
+    var legendContainer = svg.append('g')
+        .attr('transform', "translate(" + (margin.left - 100) + ", -50)")
+
+    var legend = legendContainer.selectAll(".legend")
          .data(data[0].values.map((d) => { return d.phenotype; }))
          .enter().append("g")
          .attr("class", "legend")
