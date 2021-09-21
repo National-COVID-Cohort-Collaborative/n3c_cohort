@@ -36,6 +36,33 @@ table.dataTable thead .sorting_asc {
 
 	<jsp:include page="navbar.jsp" flush="true" />
 
+	<c:set var="active_tab" value="dashboard"/>
+	<%  /* valueless parameters are not visible at the JSTL/EL level, so we do some scriptlet magic */
+		java.util.Enumeration names = request.getParameterNames();
+		while (names.hasMoreElements()) {
+			switch((String)names.nextElement()) {
+			case "publications":
+				pageContext.setAttribute("active_tab", "pubs");
+				break;
+			case "collaborative":
+				pageContext.setAttribute("active_tab", "collaborative");
+				break;
+			case "clinical":
+				pageContext.setAttribute("active_tab", "clinical");
+				break;
+			case "ml":
+				pageContext.setAttribute("active_tab", "ml");
+				break;
+			case "phenotype":
+				pageContext.setAttribute("active_tab", "pe");
+				break;
+			case "cohort":
+			default:
+				pageContext.setAttribute("active_tab", "dashboard");
+			}
+		}
+	%>
+
 	<div class="container-fluid">
 		<h2 class="header-text">
 			<img src="images/n3c_logo.png" class="n3c_logo_header" alt="N3C Logo">N3C Cohort Exploration
@@ -51,27 +78,27 @@ table.dataTable thead .sorting_asc {
 		</div>
 		<p>&nbsp;</p>
 		<ul class="nav nav-tabs" style="font-size: 16px;">
-			<li class="active"><a data-toggle="tab" href="#dashboard">The Cohort</a></li>
-			<li><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
-			<li><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
-			<li><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
-			<li><a data-toggle="tab" href="#pubs">Publications</a></li>
+			<li <c:if test="${active_tab =='dashboard'}">class="active"</c:if>><a data-toggle="tab" href="#dashboard">The Cohort</a></li>
+			<li <c:if test="${active_tab =='collaborative'}">class="active"</c:if>><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
+			<li <c:if test="${active_tab =='clinical'}">class="active"</c:if>><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
+			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
+			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>><a data-toggle="tab" href="#pubs">Publications</a></li>
 		</ul>
 
 		<div class="tab-content">
-			<div class="tab-pane fade in active" id="dashboard">
+			<div class="tab-pane fade <c:if test="${active_tab =='dashboard'}">in active</c:if>" id="dashboard">
 				<jsp:include page="graphs/dashboard.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade" id="clinical">
+			<div class="tab-pane fade <c:if test="${active_tab =='clinical'}">in active</c:if>" id="clinical">
 				<jsp:include page="graphs/clinical.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade" id="ml">
+			<div class="tab-pane fade <c:if test="${active_tab =='ml'}">in active</c:if>" id="ml">
 				<jsp:include page="graphs/ml.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade" id="collaborative">
+			<div class="tab-pane fade <c:if test="${active_tab =='collaborative'}">in active</c:if>" id="collaborative">
 				<jsp:include page="graphs/collaborative.jsp" flush="true" />
 			</div>
-            <div class="tab-pane fade" id="pubs">
+			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs">
 				<jsp:include page="graphs/publications.jsp" flush="true" />
 			</div>
 		</div>
