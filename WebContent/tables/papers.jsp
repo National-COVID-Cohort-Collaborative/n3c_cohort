@@ -36,9 +36,9 @@ $.getJSON("feeds/papers.jsp", function(data){
 	$('#litcovid_publications').DataTable( {
     	data: data,
        	paging: true,
-    	pageLength: 5,
-    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-    	order: [[0, 'asc']],
+    	pageLength: 10,
+    	lengthMenu: [ 10, 25, 50, 75, 100 ],
+    	order: [[6, 'desc']],
      	columns: [
 	       	{ data: 'pmid', visible: true, orderable: true,
         		render: function ( data, type, row ) {
