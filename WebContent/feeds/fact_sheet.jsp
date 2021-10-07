@@ -5,7 +5,7 @@
 
 <sql:query var="facts" dataSource="jdbc/N3CCohort">
 	select jsonb_pretty(jsonb_agg(foo)) from (
- 	          	select 'Date of Latest Release' as title,to_char(substring(value from '[a-zA-Z]*-v[0-9]*-(.*)')::date, 'MonthFMDD, YYYY') as value from n3c_admin.enclave_stats where title='release_name'
+ 	          	select 'Date of Latest Release' as title,to_char(substring(value from '[a-zA-Z]*-v[0-9]*-(.*)')::date, 'Month FMDD, YYYY') as value from n3c_admin.enclave_stats where title='release_name'
            	union
             	select 'Latest Release' as title,value from n3c_admin.enclave_stats where title='release_name'
            	union
