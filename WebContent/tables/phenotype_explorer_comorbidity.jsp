@@ -1,3 +1,4 @@
+<div class="well well-sm">The patient size here indicates all N3C Patients</div>
 <div class="row"><h3>Select Phenotype</h3></div>
 <select id="phenotype-selector" style="width: 100%"></select>
 <h4 class="page-header">Phenotype Summary</h4>
