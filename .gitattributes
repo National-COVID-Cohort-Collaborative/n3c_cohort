@@ -140,4 +140,5 @@ WebContent/tables/project_roster.jsp -text
 WebContent/tables/project_roster_styled.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
+WebContent/testing.html -text
 /pom.xml -text
