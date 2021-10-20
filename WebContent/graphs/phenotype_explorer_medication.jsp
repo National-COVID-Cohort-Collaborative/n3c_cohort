@@ -31,45 +31,60 @@
 <script>
     function chartForMedication(medication) {
         let medicationsChartData = [];
+        let medAllGroupedData = [];
         let medicationsFeedUrl = "feeds/phenotypes_medications.jsp?name=" + medication;
+        let medicationsAllPatientsUrl = "feeds/phenotypes_medications.jsp?name=Azithromycin";
 
-        $.getJSON(medicationsFeedUrl, (data) => {
-            let json = $.parseJSON(JSON.stringify(data))
-            let headers = json['headers'].map(item => item.value);
 
-            let medAllGrouped = dataGrouped(json['rows']);
-            let medTrueData = json['rows'].filter(row => row.value);
-            let medTrueGrouped = dataGrouped(medTrueData);
-            let medPercentage = dataPercentage(medAllGrouped, medTrueGrouped, headers);
+        $.getJSON(medicationsAllPatientsUrl, (data) => {
+                    let jsonall = $.parseJSON(JSON.stringify(data));
+                    let medAllGrouped = dataGrouped(jsonall['rows']);
+                    medAllGrouped.variable = medication;
+                    medAllGrouped[0].variable = medication;
+                    medAllGroupedData.push(medAllGrouped);
 
-            json['headers'].map(category => {
-                let currObj = {}
+                    $.getJSON(medicationsFeedUrl, medAllGroupedData, (data) => {
 
-                currObj["category"] = category.label
-                currObj["values"] = [];
 
-                medPercentage.forEach(med => {
-                    let currKey = {}
 
-                    currKey["phenotype"] = med.variable.replaceAll('_',' ');
-                    currKey["value"] = parseFloat(med[category.value]).toFixed(3);
-                    currObj["values"].push(currKey); // each category properties
+                                let json = $.parseJSON(JSON.stringify(data))
+                                let headers = json['headers'].map(item => item.value);
+
+                                let medAllGrouped = medAllGroupedData[0];
+                                let medTrueData = json['rows'].filter(row => row.value);
+                                let medTrueGrouped = dataGrouped(medTrueData);
+                                let medPercentage = dataPercentage(medAllGrouped, medTrueGrouped, headers);
+
+                                json['headers'].map(category => {
+                                    let currObj = {}
+
+                                    currObj["category"] = category.label
+                                    currObj["values"] = [];
+
+                                    medPercentage.forEach(med => {
+                                        let currKey = {}
+
+                                        currKey["phenotype"] = med.variable.replaceAll('_',' ');
+                                        currKey["value"] = parseFloat(med[category.value]).toFixed(3);
+                                        currObj["values"].push(currKey); // each category properties
+                                    });
+
+                                    medicationsChartData.push(currObj); // each category
+                                });
+
+                                // renderMedicationChart(medicationsChartData);
+
+                                const summaryData = {
+                                    'medication': medication,
+                                    'medData': medAllGrouped,
+                                    'medTrueData': medTrueGrouped,
+                                    'medPercentage': medPercentage,
+                                    'headers': headers
+                                }
+                                renderMedicationSummary(summaryData);
+                            });
                 });
 
-                medicationsChartData.push(currObj); // each category
-            });
-
-            // renderMedicationChart(medicationsChartData);
-
-            const summaryData = {
-                'medication': medication,
-                'medData': medAllGrouped,
-                'medTrueData': medTrueGrouped,
-                'medPercentage': medPercentage,
-                'headers': headers
-            }
-            renderMedicationSummary(summaryData);
-        });
     }
 
     function renderMedicationSummary(data)
