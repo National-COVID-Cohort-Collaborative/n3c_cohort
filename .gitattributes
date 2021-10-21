@@ -87,6 +87,8 @@ WebContent/graphs/medications_by_medication.jsp -text
 WebContent/graphs/medications_by_severity.jsp -text
 WebContent/graphs/ml.jsp -text
 WebContent/graphs/publications.jsp -text
+WebContent/graphs/qlik.jsp -text
+WebContent/graphs/questions.jsp -text
 WebContent/graphs/rowFreqData.jsp -text
 WebContent/graphs/scatter.jsp -text
 WebContent/graphs/severity.jsp -text
@@ -138,6 +140,7 @@ WebContent/tables/peak.jsp -text
 WebContent/tables/preprints.jsp -text
 WebContent/tables/project_roster.jsp -text
 WebContent/tables/project_roster_styled.jsp -text
+WebContent/tables/questions_styled.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
 WebContent/testing.html -text

@@ -56,8 +56,8 @@ table.dataTable thead .sorting_asc {
 			case "phenotype":
 				pageContext.setAttribute("active_tab", "pe");
 				break;
-			case "qlik":
-				pageContext.setAttribute("active_tab", "qlik");
+			case "questions":
+				pageContext.setAttribute("active_tab", "questions");
 				break;
 			case "cohort":
 			default:
@@ -98,7 +98,7 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
 			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>><a data-toggle="tab" href="#pubs">Publications</a></li>
 			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
-			<li <c:if test="${active_tab =='qlik'}">class="active"</c:if>><a data-toggle="tab" href="#qlik">QlikCloud IFrame</a></li>
+			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>><a data-toggle="tab" href="#questions">Emerging Questions</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -120,8 +120,8 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe">
 				<jsp:include page="graphs/pe.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="qlik">
-				<jsp:include page="graphs/qlik.jsp" flush="true" />
+			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="questions">
+				<jsp:include page="graphs/questions.jsp" flush="true" />
 			</div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
