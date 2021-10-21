@@ -17,17 +17,37 @@
     <div class="card other-cards other-card0">
         <div class="inner-card">
             <div class="top-row">
-                <span class="icon fa fa-user-plus"></span>
-                <div class="value-large" id="covidSummary">
+                    <span class="icon fa fa-capsules">
+                    </span>
+                <div class="value-large" id="outpatientsSummary">
                     <span></span>
                 </div>
             </div>
             <div class="title">
-                COVID positive
-                <div class="subtitle" id="covidStat">
-                    <span id="covidSubStat"></span>% of phenotype vs
+                Outpatients
+                <div class="subtitle" id="outpatientsStat">
+                    <span id="outpatientsSubStat"></span>% of phenotype vs
                     <br>
-                    <span id="covidAllStat"></span>% all patients
+                    <span id="outpatientsAllStat"></span>% all patients
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card other-cards other-card0">
+        <div class="inner-card">
+            <div class="top-row">
+                    <span class="icon fa fa-diagnoses">
+                    </span>
+                <div class="value-large" id="edvisitSummary">
+                    <span></span>
+                </div>
+            </div>
+            <div class="title">
+                ED visit
+                <div class="subtitle" id="edvisitStat">
+                    <span id="edvisitSubStat"></span>% of phenotype vs
+                    <br>
+                    <span id="edvisitAllStat"></span>% all patients
                 </div>
             </div>
         </div>
@@ -54,6 +74,25 @@
     <div class="card other-cards other-card0">
         <div class="inner-card">
             <div class="top-row">
+                    <span class="icon fa fa-ambulance">
+                    </span>
+                <div class="value-large" id="icuSummary">
+                    <span></span>
+                </div>
+            </div>
+            <div class="title">
+                ICU
+                <div class="subtitle" id="icuStat">
+                    <span id="icuSubStat"></span>% of phenotype vs
+                    <br>
+                    <span id="icuAllStat"></span>% all patients
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card other-cards other-card0">
+        <div class="inner-card">
+            <div class="top-row">
                     <span class="icon fa fa-exclamation-triangle">
                     </span>
                 <div class="value-large" id="deathSummary">
@@ -61,7 +100,7 @@
                 </div>
             </div>
             <div class="title">
-                Severe outcome
+                Deceased
                 <div class="subtitle" id="deathStat">
                     <span id="deathSubStat"></span>% of phenotype vs
                     <br>
@@ -69,6 +108,24 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="card other-cards other-card0">
+            <div class="inner-card">
+                <div class="top-row">
+                    <span class="icon fa fa-user-plus"></span>
+                    <div class="value-large" id="covidSummary">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="title">
+                    COVID positive
+                    <div class="subtitle" id="covidStat">
+                        <span id="covidSubStat"></span>% of phenotype vs
+                        <br>
+                        <span id="covidAllStat"></span>% all patients
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <div class="phenotype-description">
@@ -163,7 +220,7 @@ function phenotypeDetails(phenotypeId) {
     });
 
     let statFeedUrl = "feeds/phenotype_explorer_stat.jsp";
-    let statCategories = ["covid","hospitalized","death"]
+    let statCategories = ["covid","outpatients","edvisit","hospitalized","icu","death"]
 
     statCategories.map(statCategory => {
         let allCount = 0;
@@ -232,11 +289,11 @@ function comorbidityForPhenotype(phenotypeId) {
                 columns: [
                     { data: "variable" },
                     { data: "unaffected", title: "Unaffected" },
-                    { data: "mild", title: "Mild" },
-                    { data: "mild_ed", title: "Mild ED" },
-                    { data: "moderate", title: "Moderate" },
-                    { data: "severe", title: "Severe" },
-                    { data: "dead_w_covid", title: "Death" }
+                    { data: "mild", title: "Outpatients" },
+                    { data: "mild_ed", title: "ED Visit" },
+                    { data: "moderate", title: "Hospitalized" },
+                    { data: "severe", title: "ICU" },
+                    { data: "dead_w_covid", title: "Deceased" }
                 ]
             });
         }

@@ -10,16 +10,28 @@
                  WHERE phenotypeid IN (1,${param.pid})
                  GROUP BY phenotypeid
         </c:when>
+        <c:when test="${param.category == 'outpatients'}">
+                    SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Mild' THEN count ELSE 0 END) AS total
+                     FROM enclave_data.phenotype_overall_severity WHERE phenotypeid IN (1,${param.pid})
+                     GROUP BY phenotypeid
+        </c:when>
+        <c:when test="${param.category == 'edvisit'}">
+                    SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Mild_ED' THEN count ELSE 0 END) AS total
+                     FROM enclave_data.phenotype_overall_severity WHERE phenotypeid IN (1,${param.pid})
+                     GROUP BY phenotypeid
+        </c:when>
         <c:when test="${param.category == 'hospitalized'}">
-            SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Moderate' THEN count ELSE 0 END)
-            + SUM(CASE WHEN severity_type = 'Severe' THEN count ELSE 0 END)
-            + SUM(CASE WHEN severity_type = 'Dead_w_COVID' THEN count ELSE 0 END) AS total
+                    SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Moderate' THEN count ELSE 0 END) AS total
+                     FROM enclave_data.phenotype_overall_severity WHERE phenotypeid IN (1,${param.pid})
+                     GROUP BY phenotypeid
+        </c:when>
+        <c:when test="${param.category == 'icu'}">
+            SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Severe' THEN count ELSE 0 END) AS total
              FROM enclave_data.phenotype_overall_severity WHERE phenotypeid IN (1,${param.pid})
              GROUP BY phenotypeid
         </c:when>
         <c:when test="${param.category == 'death'}">
-            SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Severe' THEN count ELSE 0 END)
-            + SUM(CASE WHEN severity_type = 'Dead_w_COVID' THEN count ELSE 0 END) AS total
+            SELECT phenotypeid, SUM(CASE WHEN severity_type = 'Dead_w_COVID' THEN count ELSE 0 END) AS total
              FROM enclave_data.phenotype_overall_severity WHERE phenotypeid IN (1,${param.pid})
              GROUP BY phenotypeid
         </c:when>
