@@ -77,8 +77,7 @@
           <tr>
             <th scope="col" rowspan="2" class="align-middle">Comparison</th>
             <th scope="col" rowspan="2" class="align-middle">Total Cohort (C+ & C-)</th>
-            <th scope="col" rowspan="2" class="align-middle">All Covid Positive (C+)</th>
-            <th scope="col" colspan="5" class="text-center">COVID (C+)</th>
+            <th scope="col" colspan="6" class="text-center">COVID (C+)</th>
             <th scope="col" rowspan="2" class="align-middle">COVID (C-) Patients</th>
           </tr>
           <tr>
@@ -87,13 +86,13 @@
               <th scope="col" class="bg-light">Hospitalized</th>
               <th scope="col" class="bg-light">ICU</th>
               <th scope="col" class="bg-light">Deceased</th>
+              <th scope="col" class="bg-light">Total</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row" id="tabMedName"><span id="sMedName"></span> CT/ (%)</th>
             <th scope="row"><span id="sMedTotalCohort"></span> (100%)</th>
-            <th scope="row"><span id="sMedCovidPos"></span></th>
             <th scope="row" class="bg-light">
                 <div><span id="sMedOutpatients"></span></div>
                 <div><span id="sMedOutpatientsToCPos"></span></div>
@@ -113,17 +112,20 @@
                 <div><span id="sMedDeceased"></span></div>
                 <div><span id="sMedDeceasedToCPos"></span></div>
             </th>
+            <th scope="row" class="bg-light">
+                            <span id="sMedCovidPos"></span>
+            </th>
             <th scope="row"><span id="sMedCovidNeg"></span></th>
           </tr>
           <tr>
             <th scope="row">All Patients CT/ (%)</th>
             <th scope="row"><span id="sAllTotalCohort"></span></th>
-            <th scope="row"><span id="sAllCovidPos"></span></th>
             <th scope="row" class="bg-light"><span id="sAllOutpatients"></span></th>
             <th scope="row" class="bg-light"><span id="sAllEdVisit"></span></th>
             <th scope="row" class="bg-light"><span id="sAllHostpitalized"></span></th>
             <th scope="row" class="bg-light"><span id="sAllICU"></span></th>
             <th scope="row" class="bg-light"><span id="sAllDeceased"></span></th>
+            <th scope="row" class="bg-light"><span id="sAllCovidPos"></span></th>
             <th scope="row"><span id="sAllCovidNeg"></span></th> 
           </tr>
         </tbody>
