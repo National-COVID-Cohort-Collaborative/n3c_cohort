@@ -83,6 +83,7 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='clinical'}">class="active"</c:if>><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
 			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
 			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>><a data-toggle="tab" href="#pubs">Publications</a></li>
+			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -100,6 +101,9 @@ table.dataTable thead .sorting_asc {
 			</div>
 			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs">
 				<jsp:include page="graphs/publications.jsp" flush="true" />
+			</div>
+			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe">
+				<jsp:include page="graphs/pe.jsp" flush="true" />
 			</div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
