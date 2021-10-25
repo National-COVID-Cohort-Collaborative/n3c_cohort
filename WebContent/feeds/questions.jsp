@@ -3,7 +3,7 @@
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
 	SELECT jsonb_pretty(jsonb_agg(foo))
-	FROM (select * from n3c_questions.roster) as foo;
+	FROM (select question,asked,description,limitations,iframe_info from n3c_questions.roster where visible) as foo;
 </sql:query>
 {
     "headers": [

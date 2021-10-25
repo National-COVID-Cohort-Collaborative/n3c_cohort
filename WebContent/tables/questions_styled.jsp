@@ -49,6 +49,7 @@ $.getJSON("feeds/questions.jsp", function(data){
         			var desc = row.description;
         			var limitations = row.limitations;
         			var iframe = row.iframe_info;
+        			var iframe_content = '<iframe src="https://bpvjpykbczgl7xl.us.qlikcloud.com/single/?appid=196803b0-33c2-4492-ac3b-77f6318bce47&sheet=472c0c49-20ff-4fec-9de0-d5b3cf970839&opt=ctxmenu,currsel" style="border:none;width:100%;height:100%;"></iframe>';
         			var combo = 
         				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion">'
         					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
@@ -59,7 +60,7 @@ $.getJSON("feeds/questions.jsp", function(data){
         							+ asked + '<br>' + desc
                					+'</div>'
         						+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_description" class="panel-body panel-collapse collapse">'
-        							+ '<strong>IFrame:</strong> ' + iframe+ '<br><br><strong>Limitations:</strong> ' + limitations 
+        							+ iframe_content + '<br><br><strong>Limitations:</strong> ' + limitations 
         						+'</div>'
        						+'</div>'
         				+'</div>';
