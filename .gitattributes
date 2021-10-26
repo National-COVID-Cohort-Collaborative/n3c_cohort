@@ -114,6 +114,7 @@ WebContent/navbar.jsp -text
 WebContent/phenotype-explorer.jsp -text
 WebContent/publications.jsp -text
 WebContent/resources/MT.BootstrapLazyloader.js -text
+WebContent/resources/app.js -text
 WebContent/resources/autocomplete.css -text
 WebContent/resources/autocomplete.js -text
 WebContent/resources/d3-tip.js -text
