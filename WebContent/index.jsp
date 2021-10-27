@@ -120,7 +120,7 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe">
 				<jsp:include page="graphs/pe.jsp" flush="true" />
 			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="questions">
+			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions">
 				<jsp:include page="graphs/questions.jsp" flush="true" />
 			</div>
 		</div>
