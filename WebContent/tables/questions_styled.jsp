@@ -56,11 +56,12 @@ $.getJSON("feeds/questions.jsp", function(data){
         						+'<div class="panel-heading" style="background:none; text-align:left;">'
         							+'<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion" href="#'	+ iframe.replace(/\s+/g, '').toLowerCase() + '_description">' + question + '</a>'
            						+'</div>'
-        						+'<div class="panel-body" style="border:none;">'
+        						+'<div class="panel-body">'
         							+ asked + '<br>' + desc
                					+'</div>'
         						+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_description" class="panel-body panel-collapse collapse">'
-        							+ iframe_content + '<br><br><strong>Limitations:</strong> ' + limitations 
+        							+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_target"></div>'
+    								+'<div><strong>Limitations:</strong> ' + limitations + '</div>'
         						+'</div>'
        						+'</div>'
         				+'</div>';

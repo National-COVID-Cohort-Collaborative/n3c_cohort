@@ -20,8 +20,6 @@ const auth = async () => {
       mode: "cors"
     }).then(resp => resp.json().then(data => data.body))); 
 
-  alert("step 1");
-  alert(token);
     // 2.1) login, in order to save some credentials in browser storage
     //    we are going to need these for next api calls like getting CSRF token
     const login = await (await fetch(
@@ -40,8 +38,6 @@ const auth = async () => {
     ));
   }
   
-  alert("step 2");
-  
   // 3) get CSRF token
   const csrfTokenInfo = await await fetch(
     `https://${tenantDomain}/api/v1/csrf-token?qlik-web-integration-id=${qlikWebIntegrationId}`,
@@ -55,7 +51,6 @@ const auth = async () => {
     
   // 8) if we reached in this step with out any error, try to remove the helper box
   // shouldLoginBox.style.display = 'none'
-   alert(csrfTokenInfo.headers.get("qlik-csrf-token"));
  
   return { config, csrfTokenInfo }
 }
@@ -75,7 +70,7 @@ const auth = async () => {
   let iframe = document.createElement("iframe");
   iframe.src = iframeSrc;
   iframe.classList.add("iframeStyle");
-  document.querySelector("#iframe").appendChild(iframe);
+  document.querySelector("#hlh_target").appendChild(iframe);
   
   
 })();
