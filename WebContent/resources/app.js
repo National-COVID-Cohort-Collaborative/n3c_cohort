@@ -55,23 +55,3 @@ const auth = async () => {
   return { config, csrfTokenInfo }
 }
 
-(async () => {
-
-  const { config, csrfTokenInfo } =  await auth()
-    
-  //embed chart using single API iframe
-  let iframeSrc = `https://${config.tenantDomain}/sense/app/${config.appId}/sheet/472c0c49-20ff-4fec-9de0-d5b3cf970839/state/analysis
-  &qlik-web-integration-id=${config.qlikWebIntegrationId}
-  &qlik-csrf-token=${csrfTokenInfo.headers.get("qlik-csrf-token")}`;
-  // let iframeSrc ='https://bpvjpykbczgl7xl.us.qlikcloud.com/sense/app/3193ec08-150c-405c-8a95-31a471c4f354/sheet/01492c6d-55cd-4ff5-9ea9-96c48f19dbd9/state/analysis';
-  //I directly inserted our dashboard link here as Jeff suggested... but I am not sure if this is the correct method 
-
-
-  let iframe = document.createElement("iframe");
-  iframe.src = iframeSrc;
-  iframe.classList.add("iframeStyle");
-  document.querySelector("#hlh_target").appendChild(iframe);
-  
-  
-})();
-

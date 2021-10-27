@@ -10,8 +10,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	for (i in json['headers']){
 		col.push(json['headers'][i]['label']);
 	}
-
-
+	
 	var table = document.createElement("table");
 	table.className = 'table table-hover';
 	table.style.width = '100%';
@@ -33,48 +32,60 @@ $.getJSON("feeds/questions.jsp", function(data){
 
 	var data = json['rows'];
 
-	$('#question-table').DataTable( {
-    	data: data,
-       	paging: true,
-    	pageLength: 5,
-    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-    	order: [[0, 'asc']],
-    	columns: [
-        	{ 
-        		data: 'qeustion',
-        		orderable: false,
-        		render: function ( data, type, row ) {
-        			var question = row.question;
-        			var asked = row.asked;
-        			var desc = row.description;
-        			var limitations = row.limitations;
-        			var iframe = row.iframe_info;
-        			var iframe_content = row.iframe_content;
-        			var combo = 
-        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion">'
-        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-        						+'<div class="panel-heading" style="background:none; text-align:left;">'
-        							+'<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion" href="#'	+ iframe.replace(/\s+/g, '').toLowerCase() + '_description">' + question + '</a>'
-           						+'</div>'
-        						+'<div class="panel-body">'
-        							+ asked + '<br>' + desc
-               					+'</div>'
-        						+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_description" class="panel-body panel-collapse collapse">'
-        							+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_target"></div>'
-    								+'<div><strong>Limitations:</strong> ' + limitations + '</div>'
-        						+'</div>'
-       						+'</div>'
-        				+'</div>';
-             		return combo; }
-             },
-        	{ data: 'description', visible: false },
-        	{ data: 'asked', visible: false },
-        	{ data: 'limitations', visible: false},
-        	{ data: 'iframe_info', visible: false},
-        	{ data: 'iframe_content', visible: false}
-    	]
-	} );
+	(async () => {
 
+		const { config, csrfTokenInfo } =  await auth()
+		    
+		$('#question-table').DataTable( {
+	    	data: data,
+	       	paging: true,
+	    	pageLength: 5,
+	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
+	    	order: [[0, 'asc']],
+	    	columns: [
+	        	{ 
+	        		data: 'qeustion',
+	        		orderable: false,
+	        		render: function ( data, type, row ) {
+	        			var question = row.question;
+	        			var asked = row.asked;
+	        			var desc = row.description;
+	        			var limitations = row.limitations;
+	        			var iframe = row.iframe_info;
+	        			var iframe_content = row.iframe_content;
+	        			var iframe_style = row.iframe_style;
+	        			var combo = 
+	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion">'
+	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
+	        						+'<div class="panel-heading" style="background:none; text-align:left;">'
+	        							+'<a class="accordion-toggle" data-toggle="collapse" data-parent="#' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion" href="#'	+ iframe.replace(/\s+/g, '').toLowerCase() + '_description">' + question + '</a>'
+	           						+'</div>'
+	        						+'<div class="panel-body">'
+	        							+ asked + '<br>' + desc
+	               					+'</div>'
+	        						+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_description" class="panel-body panel-collapse collapse">'
+	        							+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_target">'
+	        								+'<iframe src="https://'+config.tenantDomain+'/single/?appid='+config.appId+'&sheet='+iframe_content
+	        								  +'&qlik-web-integration-id='+config.qlikWebIntegrationId
+	        								  +'&qlik-csrf-token='+csrfTokenInfo.headers.get("qlik-csrf-token")+'" style="'+iframe_style+'" ></iframe>'
+	        							+'</div>'
+	    								+'<div><strong>Limitations:</strong> ' + limitations + '</div>'
+	        						+'</div>'
+	       						+'</div>'
+	        				+'</div>';
+	             		return combo; }
+	             },
+	        	{ data: 'description', visible: false },
+	        	{ data: 'asked', visible: false },
+	        	{ data: 'limitations', visible: false},
+	        	{ data: 'iframe_info', visible: false},
+	        	{ data: 'iframe_content', visible: false},
+	        	{ data: 'iframe_style', visible: false}
+	    	]
+		} );
+
+	  
+	})();
 	
 });
 </script>
