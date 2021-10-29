@@ -59,6 +59,9 @@ table.dataTable thead .sorting_asc {
 			case "questions":
 				pageContext.setAttribute("active_tab", "questions");
 				break;
+			case "questions2":
+				pageContext.setAttribute("active_tab", "questions2");
+				break;
 			case "cohort":
 			default:
 				pageContext.setAttribute("active_tab", "dashboard");
@@ -98,7 +101,8 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
 			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>><a data-toggle="tab" href="#pubs">Publications</a></li>
 			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
-			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>><a data-toggle="tab" href="#questions">Emerging Questions</a></li>
+			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>><a data-toggle="tab" href="#questions">Public Health</a></li>
+			<li <c:if test="${active_tab =='questions2'}">class="active"</c:if>><a data-toggle="tab" href="#questions2">Public Health (Tiles)</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -122,6 +126,9 @@ table.dataTable thead .sorting_asc {
 			</div>
 			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions">
 				<jsp:include page="graphs/questions.jsp" flush="true" />
+			</div>
+			<div class="tab-pane fade <c:if test="${active_tab =='questions2'}">in active</c:if>" id="questions2">
+				<jsp:include page="graphs/questions2.jsp" flush="true" />
 			</div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
