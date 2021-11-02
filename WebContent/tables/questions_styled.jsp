@@ -41,7 +41,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	       	paging: true,
 	    	pageLength: 5,
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-	    	order: [[0, 'asc']],
+	    	order: [[2, 'desc']],
 	    	columns: [
 	        	{ 
 	        		data: 'qeustion',

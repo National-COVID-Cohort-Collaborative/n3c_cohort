@@ -41,7 +41,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	       	paging: true,
 	    	pageLength: 5,
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-	    	order: [[0, 'asc']],
+	    	order: [[2, 'desc']],
 	    	columns: [
 	        	{ 
 	        		data: 'qeustion',
@@ -63,14 +63,6 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        						+'<div class="panel-body">'
 	        							+ asked + '<br>' + desc
 	               					+'</div>'
-	        						+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_description" class="panel-body panel-collapse collapse">'
-	        							+'<div id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_target">'
-	        								+'<iframe src="https://'+config.tenantDomain+'/single/?appid='+config.appId+'&sheet='+iframe_content
-	        								  +'&qlik-web-integration-id='+config.qlikWebIntegrationId
-	        								  +'&qlik-csrf-token='+csrfTokenInfo.headers.get("qlik-csrf-token")+'" style="'+iframe_style+'" ></iframe>'
-	        							+'</div>'
-	    								+'<div><strong>Limitations:</strong> ' + limitations + '</div>'
-	        						+'</div>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -98,7 +90,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 	  +'<iframe src="https://'+tenant+'/single/?appid='+appID+'&sheet='+content
 	  +'&qlik-web-integration-id='+integrationID
 	  +'&qlik-csrf-token='+token+'" style="'+style+'" ></iframe>'
-	  +'<p>' + limitations + '</p>'
+	  +'<p><strong>Limitations:</strong> ' + limitations + '</p>'
 ;
 }
 </script>
