@@ -57,10 +57,8 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_accordion">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        						+'<div class="panel-heading" style="background:none; text-align:left;">'
-	        							+'<a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/'/g, "\\'")+'\');">' + question + '</a>'
-	           						+'</div>'
 	        						+'<div class="panel-body">'
+	        							+'<h4 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/'/g, "\\'")+'\');">' + question + '</a></h4>'
 	        							+ asked + '<br>' + desc
 	               					+'</div>'
 	       						+'</div>'
