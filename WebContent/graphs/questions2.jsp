@@ -28,3 +28,4 @@
 		</div>
 	</div>
 </div>
+<script src="resources/app.js"></script>
