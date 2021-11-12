@@ -114,7 +114,6 @@ WebContent/machine-learning.jsp -text
 WebContent/navbar.jsp -text
 WebContent/phenotype-explorer.jsp -text
 WebContent/publications.jsp -text
-WebContent/resources/MT.BootstrapLazyloader.js -text
 WebContent/resources/app.js -text
 WebContent/resources/autocomplete.css -text
 WebContent/resources/autocomplete.js -text
@@ -126,6 +125,8 @@ WebContent/resources/main_style.css -text
 WebContent/resources/n3c_login_style.css -text
 WebContent/sites/mapping.jsp -text
 WebContent/sites/submit_mapping.jsp -text
+WebContent/tab_test.jsp -text
+WebContent/tab_test2.jsp -text
 WebContent/tables/blood.jsp -text
 WebContent/tables/characteristics.jsp -text
 WebContent/tables/charlson.jsp -text

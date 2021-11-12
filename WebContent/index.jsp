@@ -14,7 +14,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script src="resources/MT.BootstrapLazyloader.js"></script>
 	<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
 	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
@@ -92,39 +91,74 @@ table.dataTable thead .sorting_asc {
 		</div>
 		<p>&nbsp;</p>
 		<ul class="nav nav-tabs" style="font-size: 16px;">
-			<li <c:if test="${active_tab =='dashboard'}">class="active"</c:if>><a data-toggle="tab" href="#dashboard">The Cohort</a></li>
-			<li <c:if test="${active_tab =='collaborative'}">class="active"</c:if>><a data-toggle="tab" href="#collaborative">The Collaborative</a></li>
-			<li <c:if test="${active_tab =='clinical'}">class="active"</c:if>><a data-toggle="tab" href="#clinical">Clinical Details</a></li>
-			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>><a data-toggle="tab" href="#ml">Machine Learning Details</a></li>
-			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>><a data-toggle="tab" href="#pubs">Publications</a></li>
-			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>><a data-toggle="tab" href="#pe">Phenotype Explorer</a></li>
-			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>><a data-toggle="tab" href="#questions">Public Health</a></li>
+			<li <c:if test="${active_tab =='dashboard'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/dashboard.jsp" href="#dashboard">The Cohort</a>
+			</li>
+			<li <c:if test="${active_tab =='collaborative'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/collaborative.jsp" href="#collaborative">The Collaborative</a>
+			</li>
+			<li <c:if test="${active_tab =='clinical'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/clinical.jsp" href="#clinical">Clinical Details</a>
+			</li>
+			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/ml.jsp" href="#ml">Machine Learning Details</a>
+			</li>
+			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/publications.jsp" href="#pubs">Publications</a>
+			</li>
+			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/pe.jsp" href="#pe">Phenotype Explorer</a>
+			</li>
+			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/questions2.jsp" href="#questions">Public Health</a>
+			</li>
 		</ul>
 
 		<div class="tab-content">
-			<div class="tab-pane fade <c:if test="${active_tab =='dashboard'}">in active</c:if>" id="dashboard">
-				<jsp:include page="graphs/dashboard.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='clinical'}">in active</c:if>" id="clinical">
-				<jsp:include page="graphs/clinical.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='ml'}">in active</c:if>" id="ml">
-				<jsp:include page="graphs/ml.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='collaborative'}">in active</c:if>" id="collaborative">
-				<jsp:include page="graphs/collaborative.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs">
-				<jsp:include page="graphs/publications.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe">
-				<jsp:include page="graphs/pe.jsp" flush="true" />
-			</div>
-			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions">
-				<jsp:include page="graphs/questions2.jsp" flush="true" />
-			</div>
+			<div class="tab-pane fade <c:if test="${active_tab =='dashboard'}">in active</c:if>" id="dashboard"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='clinical'}">in active</c:if>" id="clinical"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='ml'}">in active</c:if>" id="ml"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='collaborative'}">in active</c:if>" id="collaborative"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions"></div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
 	</div>
+	<script>
+		var crumbs = '#dashboard';
+
+		$(function() {
+
+			$('.nav-tabs a').each(function(index, el) {
+
+				var $this = $(this);
+				var pane = $this.attr('href');
+				var which = $this.data('src');
+
+				if (pane == '#dashboard')
+					$(pane).load(which);
+
+			});
+
+		});
+
+		$('.nav-tabs').on('click', 'a', function(e) {
+			e.preventDefault();
+
+			var $this = $(this);
+			var pane = $this.attr('href');
+			var which = $this.data('src');
+
+			if (!crumbs.includes(pane)) {
+				$(pane).load(which);
+				crumbs = crumbs + pane;
+				console.log({
+					pane : pane,
+					which : which
+				});
+			}
+		});
+	</script>
 </body>
 </html>
