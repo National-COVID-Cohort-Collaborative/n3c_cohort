@@ -12,9 +12,6 @@
 			<div class="panel-body">
 				<div id="question-roster"></div>
 				<jsp:include page="../tables/questions_styled.jsp"/>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
-				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 			</div>
 		</div>
 	</div>

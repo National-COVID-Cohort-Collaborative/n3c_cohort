@@ -1,6 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script>
 $.getJSON("feeds/filled.jsp", function(data){
 		

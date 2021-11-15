@@ -24,7 +24,8 @@
 
 	<p style="margin-top:40px;">For more information about the release set, please visit the <a href="https://github.com/National-COVID-Cohort-Collaborative/Data-Ingestion-and-Harmonization/wiki" target="_blank">N3C Data Ingestion &amp; Harmonization GitHub Repository</a>.</p>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>
+
+<script>
 	$.getJSON("https://labs.cd2h.org/n3c_dashboard/embedded_fact_sheet.jsp", function(json){
 		var data = $.parseJSON(JSON.stringify(json));
 

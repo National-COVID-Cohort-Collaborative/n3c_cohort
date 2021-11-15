@@ -5,20 +5,6 @@
 <html>
 <jsp:include page="head.jsp" flush="true" />
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-	<link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
-	<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-
-<script src="resources/d3.v4.min.js"></script>
-<script src="resources/d3-tip.js"></script>
 
 <style type="text/css" media="all">
 @import "resources/n3c_login_style.css";
@@ -90,7 +76,7 @@ table.dataTable thead .sorting_asc {
 			</p>
 		</div>
 		<p>&nbsp;</p>
-		<ul class="nav nav-tabs" style="font-size: 16px;">
+		<ul class="nav nav-tabs" id="maintabs" style="font-size: 16px;">
 			<li <c:if test="${active_tab =='dashboard'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/dashboard.jsp" href="#dashboard">The Cohort</a>
 			</li>
@@ -114,7 +100,7 @@ table.dataTable thead .sorting_asc {
 			</li>
 		</ul>
 
-		<div class="tab-content">
+		<div class="tab-content" id="maintabscontent">
 			<div class="tab-pane fade <c:if test="${active_tab =='dashboard'}">in active</c:if>" id="dashboard"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='clinical'}">in active</c:if>" id="clinical"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='ml'}">in active</c:if>" id="ml"></div>
@@ -161,4 +147,9 @@ table.dataTable thead .sorting_asc {
 		});
 	</script>
 </body>
+
+
+
 </html>
+
+

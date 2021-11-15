@@ -1,6 +1,9 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
+
 <div class="row ml">
 	<div class="col-xs-12">
 		<div class="panel panel-primary top_panel">
@@ -63,9 +66,6 @@
 			<div class="panel-body">
 				<div class="table_container" id="machine-learning-dashboard"></div>
 				<jsp:include page="/tables/machine_learning_dashboard.jsp"/>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
-				 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-				 <script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 			</div>
 		</div>
 	</div>

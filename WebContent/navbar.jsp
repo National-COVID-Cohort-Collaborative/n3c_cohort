@@ -4,7 +4,7 @@
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav" style="display: flex; width: 100%;">
 			<li class="nav-item">
-				<a class="nav-link" href="Https://covid.cd2h.org">N3C</a>
+				<a class="nav-link" href="Https://covid.cd2h.org">N3C Cohort Explorer</a>
 			</li>
 			<c:if test="${not empty admin}">
 				<li class="nav-item">
