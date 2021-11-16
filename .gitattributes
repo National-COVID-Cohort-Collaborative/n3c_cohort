@@ -46,6 +46,7 @@ WebContent/feeds/question_feed_csv.jsp -text
 WebContent/feeds/questions.jsp -text
 WebContent/feeds/questions_csv.jsp -text
 WebContent/feeds/questions_hlh_csv.jsp -text
+WebContent/feeds/questions_prod.jsp -text
 WebContent/feeds/questions_test_csv.jsp -text
 WebContent/feeds/severity.jsp -text
 WebContent/feeds/severity_detail.jsp -text

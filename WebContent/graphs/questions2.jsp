@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="panel-primary shadow-border">
 			<div class="panel-heading">N3C Public Health Questions</div>
-            <p>Deep and thought-provoking questions brought to you by the N3C! (And maybe even answers...)</p>
+            <p>A snapshot of high value health data for policy makers, investigators, and entrepreneurs to facilitate further research questions for better health outcomes.</p>
         </div>
     </div>
 </div>
