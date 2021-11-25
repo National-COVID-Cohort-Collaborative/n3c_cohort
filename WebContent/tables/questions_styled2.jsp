@@ -58,7 +58,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
 	        						+'<div class="panel-body">'
-	        							+'<h4 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/'/g, "\\'")+'\');">' + question + '</a></h4>'
+	        							+'<h4 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h4>'
 	        							+ asked + '<br>' + desc
 	               					+'</div>'
 	       						+'</div>'
@@ -88,7 +88,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 	  +'<iframe src="https://'+tenant+'/single/?appid='+appID+'&sheet='+content
 	  +'&qlik-web-integration-id='+integrationID
 	  +'&qlik-csrf-token='+token+'" style="'+style+'" ></iframe>'
-		+'<a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details">Details</a>'
+		+'<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details">Details</a>'
 		+'<div id="iframe_accordian">'
 			+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
 	  			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
