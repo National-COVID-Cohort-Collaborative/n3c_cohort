@@ -44,6 +44,9 @@ table.dataTable thead .sorting_asc {
 			case "questions":
 				pageContext.setAttribute("active_tab", "questions");
 				break;
+			case "demo1":
+				pageContext.setAttribute("active_tab", "demo1");
+				break;
 			case "cohort":
 			default:
 				pageContext.setAttribute("active_tab", "dashboard");
@@ -98,6 +101,9 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/questions2.jsp" href="#questions">Public Health</a>
 			</li>
+			<li <c:if test="${active_tab =='demo1'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="demo1/dashboard.jsp" href="#demo1">Demo 1</a>
+			</li>
 		</ul>
 
 		<div class="tab-content" id="maintabscontent">
@@ -108,6 +114,7 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='demo1'}">in active</c:if>" id="demo1"></div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />
 	</div>
