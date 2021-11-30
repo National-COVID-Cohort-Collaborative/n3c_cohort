@@ -5,6 +5,9 @@
 <div class="row stats">
 	<div class="col-xs-2 ">
 		<a onclick="uncheckAll();">Reset</a>
+		<div id="mode" class="panel-heading">
+			<i id="mode-pie" class="fas fa-chart-pie fa-lg"></i> <i id="mode-bar" class="fas fa-chart-bar fa-lg text-success"></i>
+		</div>
 		<div class=" panel-primary">
 			<div class="panel-body">
 				<h4 id="age"><i class="fas fa-chevron-right"></i> Age</h4>
@@ -72,31 +75,31 @@
 	<div class="col-xs-10">
 		<div class="row stats">
 			<div class="col-xs-2 ">
-				<h5>Age Histogram</h5>
-				<div class="panel-body">
+				<h5>Age</h5>
+				<div class="panel-heading">
 					<div id="age_histogram"></div>
 				</div>
 			</div>
 			<div class="col-xs-3 ">
-				<h5>Race Histogram</h5>
+				<h5>Race</h5>
 				<div class="panel-body">
 					<div id="race_histogram"></div>
 				</div>
 			</div>
 			<div class="col-xs-2 ">
-				<h5>Ethnicity Histogram</h5>
-				<div class="panel-body">
+				<h5>Ethnicity</h5>
+				<div class="panel-heading">
 					<div id="ethnicity_histogram"></div>
 				</div>
 			</div>
 			<div class="col-xs-2 ">
-				<h5>Gender Histogram</h5>
+				<h5>Gender</h5>
 				<div class="panel-body">
 					<div id="gender_histogram"></div>
 				</div>
 			</div>
 			<div class="col-xs-3 ">
-				<h5>Severity Histogram</h5>
+				<h5>Severity</h5>
 				<div class="panel-body">
 					<div id="severity_histogram"></div>
 				</div>
@@ -111,6 +114,7 @@
 	</div>
 </div>
 <jsp:include page="../graph_support/verticalBarChart_local.jsp"/>
+<jsp:include page="../graph_support/pieChart_local.jsp"/>
 <script>
 var aggregated_datatable = null;
 var ageArray = new Array();
@@ -282,16 +286,39 @@ function refreshHistograms() {
     refreshGenderArray(data);
     refreshSeverityArray(data);
     
+    var doBar = false;
+    if (document.getElementById("mode-bar").classList.contains("text-success")) {
+    	doBar = true;
+    }
     d3.select("#age_histogram").select("svg").remove();
-    localBarChart(ageArray,"#age_histogram",50);
+    if (doBar)
+    	localBarChart(ageArray,"#age_histogram",50);
+    else
+    	localPieChart(ageArray,"#age_histogram");
+
     d3.select("#race_histogram").select("svg").remove();
-    localBarChart(raceArray,"#race_histogram",52);
+    if (doBar)
+	    localBarChart(raceArray,"#race_histogram",52);
+    else
+    	localPieChart(raceArray,"#race_histogram");
+
     d3.select("#ethnicity_histogram").select("svg").remove();
-    localBarChart(ethnicityArray,"#ethnicity_histogram",85);
+    if (doBar)
+	    localBarChart(ethnicityArray,"#ethnicity_histogram",85);
+    else
+    	localPieChart(ethnicityArray,"#ethnicity_histogram");
+
     d3.select("#gender_histogram").select("svg").remove();
-    localBarChart(genderArray,"#gender_histogram",65);
+    if (doBar)
+	    localBarChart(genderArray,"#gender_histogram",65);
+    else
+    	localPieChart(genderArray,"#gender_histogram");
+
     d3.select("#severity_histogram").select("svg").remove();
-    localBarChart(severityArray,"#severity_histogram",50);
+    if (doBar)
+	    localBarChart(severityArray,"#severity_histogram",50);
+    else
+    	localPieChart(severityArray,"#severity_histogram");
 }
 
 function refreshAgeArray(data) {
@@ -506,10 +533,21 @@ function refreshSeverityArray(data) {
 }
 
 function uncheckAll(){
-	   $('input[type="checkbox"]:checked').prop('checked',false);
-	    aggregated_datatable.draw();
-	    refreshHistograms();
+	$('input[type="checkbox"]:checked').prop('checked',false);
+	aggregated_datatable.draw();
+	refreshHistograms();
+}
+
+$('#mode').on('click', function() {
+	if (document.getElementById("mode-bar").classList.contains("text-success")) {
+		document.getElementById("mode-pie").classList.add("text-success");
+		document.getElementById("mode-bar").classList.remove("text-success");
+	} else {
+		document.getElementById("mode-pie").classList.remove("text-success");
+		document.getElementById("mode-bar").classList.add("text-success");		
 	}
+	refreshHistograms();
+});
 
 $('#age').on('click', function() {
 	var panel = document.getElementById("age_panel");
