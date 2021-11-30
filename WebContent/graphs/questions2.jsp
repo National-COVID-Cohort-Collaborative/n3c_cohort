@@ -25,4 +25,4 @@
 		</div>
 	</div>
 </div>
-<script src="resources/app.js"></script>
+<script src="resources/auth.js"></script>

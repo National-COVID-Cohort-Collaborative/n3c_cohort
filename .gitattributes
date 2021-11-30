@@ -166,6 +166,7 @@ WebContent/resources/DataTables/js/dataTables.semanticui.min.js -text
 WebContent/resources/DataTables/js/jquery.dataTables.js -text
 WebContent/resources/DataTables/js/jquery.dataTables.min.js -text
 WebContent/resources/app.js -text
+WebContent/resources/auth.js -text
 WebContent/resources/autocomplete.css -text
 WebContent/resources/autocomplete.js -text
 WebContent/resources/d3-tip.js -text
