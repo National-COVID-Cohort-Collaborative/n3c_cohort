@@ -112,7 +112,7 @@ table.dataTable thead .sorting_asc {
 		<jsp:include page="footer.jsp" flush="true" />
 	</div>
 	<script>
-		var crumbs = '#dashboard';
+		var crumbs = '#${active_tab}';
 
 		$(function() {
 
@@ -122,7 +122,7 @@ table.dataTable thead .sorting_asc {
 				var pane = $this.attr('href');
 				var which = $this.data('src');
 
-				if (pane == '#dashboard')
+				if (pane == '#${active_tab}')
 					$(pane).load(which);
 
 			});
