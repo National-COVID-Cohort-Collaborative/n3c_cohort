@@ -10,7 +10,8 @@
 			id,
 			url,
 			type,
-			status
+			status,
+			data_model
 		from n3c_maps.sites
 		) as foo;
 </sql:query>
@@ -18,6 +19,7 @@
     "headers": [
         {"value":"site", "label":"Site"},
         {"value":"type", "label":"Type"},
+        {"value":"data_model", "label":"Data Model"},
         {"value":"status", "label":"Data Status"}
     ],
     "rows" : 

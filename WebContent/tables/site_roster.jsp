@@ -42,6 +42,7 @@ $.getJSON("feeds/siteRoster.jsp", function(data){
              		}
         		},
         	{ data: 'type', visible: true, orderable: true },
+        	{ data: 'data_model', visible: true, orderable: true },
         	{ data: 'status', visible: true, orderable: true }
     	]
 	} );
