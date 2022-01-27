@@ -12,6 +12,9 @@
 	#question-table2_filter label{
 		text-align:center;
 	}
+	.row_selected{
+		background: lightgray;
+	}
 	
 	
 </style>
@@ -77,7 +80,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        							+'<h5 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
+	        							+'<h5 style="color: #376076;"><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -94,7 +97,21 @@ $.getJSON("feeds/questions.jsp", function(data){
 	  
 	})();
 	
-});
+})
+;
+
+// function theclick(){
+// 	console.log('reached2');
+//      $("#question-table2 tbody a").removeClass('row_selected');        
+//      $(this).addClass('row_selected');
+// };
+
+var theclick = function()
+{
+	console.log('reached3');
+	$("#question-table2 tbody td").removeClass('row_selected');        
+    $(this).closest( "td" ).addClass('row_selected');
+};
 
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
