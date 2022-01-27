@@ -102,6 +102,9 @@ WebContent/graphs/medications_by_medication.jsp -text
 WebContent/graphs/medications_by_severity.jsp -text
 WebContent/graphs/ml.jsp -text
 WebContent/graphs/pediatrics.jsp -text
+WebContent/graphs/pediatrics_age.jsp -text
+WebContent/graphs/pediatrics_coinfection.jsp -text
+WebContent/graphs/pediatrics_severity.jsp -text
 WebContent/graphs/public_health.jsp -text
 WebContent/graphs/publications.jsp -text
 WebContent/graphs/qlik.jsp -text
@@ -122,6 +125,12 @@ WebContent/images/n3c_logo.png -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
 WebContent/index_prod.jsp -text
+WebContent/long_covid_downloads/fig1.svg -text
+WebContent/long_covid_downloads/fig2.svg -text
+WebContent/long_covid_downloads/fig3.svg -text
+WebContent/long_covid_downloads/fig4.svg -text
+WebContent/long_covid_downloads/fig5.svg -text
+WebContent/long_covid_downloads/figS1.svg -text
 WebContent/machine-learning.jsp -text
 WebContent/navbar.jsp -text
 WebContent/phenotype-explorer.jsp -text
