@@ -96,10 +96,13 @@ WebContent/graphs/home.jsp -text
 WebContent/graphs/labs.jsp -text
 WebContent/graphs/line_data_dua.jsp -text
 WebContent/graphs/line_registrations.jsp -text
+WebContent/graphs/long_covid.jsp -text
 WebContent/graphs/medications.jsp -text
 WebContent/graphs/medications_by_medication.jsp -text
 WebContent/graphs/medications_by_severity.jsp -text
 WebContent/graphs/ml.jsp -text
+WebContent/graphs/pediatrics.jsp -text
+WebContent/graphs/public_health.jsp -text
 WebContent/graphs/publications.jsp -text
 WebContent/graphs/qlik.jsp -text
 WebContent/graphs/questions.jsp -text

@@ -37,9 +37,11 @@ $.getJSON("feeds/questions.jsp", function(data){
 		const { config, csrfTokenInfo } =  await auth2()
 		    
 		$('#question-table2').DataTable( {
-	    	data: data,
+			"dom": '<lf<t>ip>',
+			data: data,
+	       	select: true,
 	       	paging: true,
-	    	pageLength: 5,
+	    	pageLength: 10,
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[2, 'desc']],
 	    	columns: [
@@ -57,10 +59,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        						+'<div class="panel-body">'
-	        							+'<h4 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h4>'
-	        							+ asked + '<br>' + desc
-	               					+'</div>'
+	        							+'<h5 style="color: #376076;"><a onclick="iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -83,7 +82,6 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 	var divContainer = document.getElementById("question-tile");
 	divContainer.innerHTML = 
 		'<h2>' + question + '</h2>'
-	  +'<p>' + asked + '</p>'
 	  +'<p>' + description + '</p>'
 	  +'<iframe src="https://'+tenant+'/single/?appid='+appID+'&sheet='+content
 	  +'&qlik-web-integration-id='+integrationID

@@ -1,6 +1,6 @@
 <div class="row stats">
     <div class="col-xs-12">
-        <div class="panel-primary shadow-border">
+        <div class="panel-primary ">
 			<div class="panel-heading">N3C Public Health Questions</div>
             <p>A snapshot of high value health data for policy makers, investigators, and entrepreneurs to facilitate further research questions for better health outcomes.</p>
         </div>

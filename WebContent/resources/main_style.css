@@ -8,6 +8,17 @@
 	margin-top:20px;
 }
 
+/* Nav tabs ////////////// */
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    background-color: #337ab7;
+    color: #fff;
+}
+.nav-tabs>li>a {
+    border-radius: 8px 8px 0 0;
+}
+
 /* Tables ///////////// */
 .table_container{
 	overflow:scroll;
