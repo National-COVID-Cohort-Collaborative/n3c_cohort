@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<style>
+	#question-table2_filter{
+		float:none;
+		text-align:center;
+	}
+	#question-table2_filter input{
+		width:100%
+	}
+	#question-table2_filter label{
+		text-align:center;
+	}
+	
+	
+</style>
+
+
 <script>
 $.getJSON("feeds/questions.jsp", function(data){
 		
@@ -15,6 +32,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	table.className = 'table table-hover';
 	table.style.width = '100%';
 	table.style.textAlign = "left";
+	table.style.tableLayout = 'fixed';
 	table.id="question-table2";
 
 	var header= table.createTHead();
