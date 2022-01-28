@@ -7,6 +7,9 @@
 		.large-ques-nav{
 			display:none;
 		}
+		.viz-col{
+			padding:0px;
+		}
 	}
 	
 	@media (min-width:991px){
@@ -36,15 +39,7 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-3 col-xl-2 large-ques-nav">
-		<div class="panel panel-primary top_panel">
-			<div class="panel-body">
-				<div id="question-roster2"></div>
-				<jsp:include page="../tables/questions_styled2.jsp" />
-			</div>
-		</div>
-	</div>
-	
+
 	<div class="col-md-12 small-ques-nav">
 		<div id="question-panel" class="panel panel-primary top_panel" style="margin-top:0px;">
 			<div class="panel-body">
@@ -63,7 +58,17 @@
 		</div>
 	</div>
 	
-	<div class="col-md-12 col-lg-9 col-xl-10">
+	<div class="col-lg-3 col-xl-2 large-ques-nav">
+		<div class="panel panel-primary top_panel">
+			<div class="panel-body">
+				<div id="question-roster2"></div>
+				<jsp:include page="../tables/questions_styled2.jsp" />
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="col-md-12 col-lg-9 col-xl-10 viz-col">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<div id="question-tile">

@@ -1,6 +1,15 @@
+<style>
+
+	@media (max-width:991px){
+		.pubhealth-panel{
+			padding: 0px;
+		}
+	}
+</style>
+
 <div class="row">
     <div class="col-xs-12">
-        <div class="panel panel-primary top_panel shadow-border">
+        <div class="pubhealth-panel panel panel-primary top_panel shadow-border">
              <ul class="nav nav-tabs" style="font-size: 16px;">
                 <li class="active"><a data-toggle="tab" href="#ph-summary">Summary Data</a></li>
                 <li><a data-toggle="tab" href="#ph-pediatrics">Pediatrics</a></li>

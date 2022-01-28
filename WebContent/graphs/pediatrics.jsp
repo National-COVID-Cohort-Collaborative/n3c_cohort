@@ -19,6 +19,7 @@
 	.section_spacing{
 		margin-top:50px;
 	}
+
 </style>
 
 <div class="row">
@@ -42,7 +43,7 @@
 		</div>
 	</div>
 	
-	<div class="col-xs-12 col-lg-10">
+	<div class="col-xs-12 col-lg-10 viz-col">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<div id="pediatrics-severity-tile">
