@@ -15,7 +15,10 @@
 		<a href="https://covid.cd2h.org/pediatrics-dashboard/downloads/adult_all_pcrag.svg"><img alt="test image" src="https://covid.cd2h.org/pediatrics-dashboard/downloads/adult_all_pcrag.svg" width="100%"></a>
 	</div>
 	<div class="col-xs-12">&nbsp;</div>
-		<c:import url="https://covid.cd2h.org/pediatrics-dashboard/caption.jsp?tag=age_all"/>
+		<div class="col-xs-3">&nbsp;</div>
+		<div class="col-xs-6">
+			<c:import url="https://covid.cd2h.org/pediatrics-dashboard/caption.jsp?tag=age_all"/>
+		</div>
 </div>
 	
 <div class="row section_spacing">
@@ -33,7 +36,10 @@
 		<a href="https://covid.cd2h.org/pediatrics-dashboard/downloads/adult_hosp_pcrag.svg"><img alt="test image" src="https://covid.cd2h.org/pediatrics-dashboard/downloads/adult_hosp_pcrag.svg" width="100%"></a>
 	</div>
 	<div class="col-xs-12">
-		<c:import url="https://covid.cd2h.org/pediatrics-dashboard/caption.jsp?tag=age_hospitalized"/>
+		<div class="col-xs-3">&nbsp;</div>
+		<div class="col-xs-6">
+			<c:import url="https://covid.cd2h.org/pediatrics-dashboard/caption.jsp?tag=age_hospitalized"/>
+		</div>
 	</div>
 </div>
 
