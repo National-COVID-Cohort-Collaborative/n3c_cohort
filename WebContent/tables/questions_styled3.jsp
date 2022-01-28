@@ -2,26 +2,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-	#question-table2_filter{
-		float:none;
-		text-align:center;
-	}
-	#question-table2_filter input{
-		width:100%
-	}
-	#question-table2_filter label{
-		text-align:center;
-	}
-	.row_selected{
-		background: lightgray;
-	}
-	#question-table2 a {
+	#question-table3 a {
     	cursor: pointer;
 	}
 	
+	#question-roster3 thead{
+		display:none;
+	}
+	#question-roster3 .dataTables_filter{
+		float:none;
+		text-align:center;
+	}
+	#question-button{
+		display:flex;
+	}
+	#question-panel{
+		border: none;
+    	box-shadow: none;
+    	-webkit-box-shadow: none;
+	}
+	#question-button .dropdown-menu{
+        height:300px;
+        overflow-y:auto;
+        width:100%;
+    }
+    
+    .btn-secondary,
+	.btn-secondary:visited{
+    	background-color: white;
+		color: #337ab7;
+		border-color: #337ab7;
+	}
+	
+	.btn-secondary:hover,
+	.btn-secondary:active,
+	.btn-secondary:focus{
+		background-color: #337ab7;
+    	border-color: #337ab7;
+    	color:white;
+	}
+	
 </style>
-
-
 <script>
 $.getJSON("feeds/questions.jsp", function(data){
 		
@@ -37,8 +58,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	table.className = 'table table-hover';
 	table.style.width = '100%';
 	table.style.textAlign = "left";
-	table.style.tableLayout = 'fixed';
-	table.id="question-table2";
+	table.id="question-table3";
 
 	var header= table.createTHead();
 	var header_row = header.insertRow(0); 
@@ -49,7 +69,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 		header_row.appendChild(th);
 	}
 
-	var divContainer = document.getElementById("question-roster2");
+	var divContainer = document.getElementById("question-roster3");
 	divContainer.innerHTML = "";
 	divContainer.appendChild(table);
 
@@ -59,15 +79,14 @@ $.getJSON("feeds/questions.jsp", function(data){
 
 		const { config, csrfTokenInfo } =  await auth2()
 		    
-		$('#question-table2').DataTable( {
+		$('#question-table3').DataTable( {
 			"dom": '<lf<t>ip>',
 			data: data,
 	       	select: true,
-	       	paging: true,
+	       	paging: false,
+	       	searching: false,
+	       	bInfo : false,
 	    	pageLength: 10,
-	    	initComplete: function () {
-	    		first = $('#question-table2 tr:first-child td:first-child');
-	    		$(first).addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[2, 'desc']],
 	    	columns: [
@@ -85,7 +104,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        							+'<h5 style="color: #376076;"><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
+	        							+'<a onclick="changeclick.call(); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');"><h5 style="color: #376076;">' + question + '</h5></a>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -104,10 +123,8 @@ $.getJSON("feeds/questions.jsp", function(data){
 	
 });
 
-
-var theclick = function(){
+var changeclick = function(){
 	$("#question-table2 tbody td").removeClass('row_selected');        
-    $(this).closest( "td" ).addClass('row_selected');
 };
 
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
