@@ -57,7 +57,7 @@
 					<h4 class="centered">Figure 3</h4>
 					<a href="long_covid_downloads/fig3.svg"><img alt="test image" src="long_covid_downloads/fig3.svg" width="100%"></a>
 				</div>
-				<div id="long-covid-4-tile">
+				<div id="long-covid-4-tile" style="display:none;">
 					<h4 class="centered">Figure 4</h4>
 					<a href="long_covid_downloads/fig4.svg"><img alt="test image" src="long_covid_downloads/fig4.svg" width="100%"></a>
 				</div>
