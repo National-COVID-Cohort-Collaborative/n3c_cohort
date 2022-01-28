@@ -4,9 +4,9 @@
 
 <div class="row stats">
 	<div class="col-xs-2 ">
-		<a onclick="uncheckAll();">Reset</a>
+		<a onclick="uncheckAll();">Reset Filters</a>
 		<div id="mode" class="panel-heading">
-			<i id="mode-pie" class="fas fa-chart-pie fa-lg"></i> <i id="mode-bar" class="fas fa-chart-bar fa-lg text-success"></i>
+			Display: <i id="mode-pie" class="fas fa-chart-pie fa-lg"></i> <i id="mode-bar" class="fas fa-chart-bar fa-lg text-success"></i> <i id="mode-table" class="fas fa-table fa-lg"></i>
 		</div>
 		<div class=" panel-primary">
 			<div class="panel-body">
@@ -73,39 +73,45 @@
 	</div>
 
 	<div class="col-xs-10">
+		<div id="display-d3">
 		<div class="row stats">
-			<div class="col-xs-2 ">
+			<div class="col-xs-6 ">
 				<h5>Age</h5>
 				<div class="panel-heading">
 					<div id="age_histogram"></div>
 				</div>
 			</div>
-			<div class="col-xs-3 ">
-				<h5>Race</h5>
-				<div class="panel-body">
-					<div id="race_histogram"></div>
-				</div>
-			</div>
-			<div class="col-xs-2 ">
-				<h5>Ethnicity</h5>
-				<div class="panel-heading">
-					<div id="ethnicity_histogram"></div>
-				</div>
-			</div>
-			<div class="col-xs-2 ">
+			<div class="col-xs-6 ">
 				<h5>Gender</h5>
 				<div class="panel-body">
 					<div id="gender_histogram"></div>
 				</div>
 			</div>
-			<div class="col-xs-3 ">
+		</div>
+		<div class="row stats">
+			<div class="col-xs-6 ">
+				<h5>Race</h5>
+				<div class="panel-body">
+					<div id="race_histogram"></div>
+				</div>
+			</div>
+			<div class="col-xs-6 ">
+				<h5>Ethnicity</h5>
+				<div class="panel-heading">
+					<div id="ethnicity_histogram"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row stats">
+			<div class="col-xs-6 ">
 				<h5>Severity</h5>
 				<div class="panel-body">
 					<div id="severity_histogram"></div>
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-primary">
+		</div>
+		<div id="display-table" style="display:none" class="panel panel-primary">
 			<div class="panel-heading">Aggregated Data</div>
 			<div class="panel-body">
 				<div id="aggregated"></div>
@@ -292,31 +298,31 @@ function refreshHistograms() {
     }
     d3.select("#age_histogram").select("svg").remove();
     if (doBar)
-    	localBarChart(ageArray,"#age_histogram",50);
+    	localBarChart(ageArray,"#age_histogram",120);
     else
     	localPieChart(ageArray,"#age_histogram");
 
     d3.select("#race_histogram").select("svg").remove();
     if (doBar)
-	    localBarChart(raceArray,"#race_histogram",52);
+	    localBarChart(raceArray,"#race_histogram",120);
     else
     	localPieChart(raceArray,"#race_histogram");
 
     d3.select("#ethnicity_histogram").select("svg").remove();
     if (doBar)
-	    localBarChart(ethnicityArray,"#ethnicity_histogram",85);
+	    localBarChart(ethnicityArray,"#ethnicity_histogram",120);
     else
     	localPieChart(ethnicityArray,"#ethnicity_histogram");
 
     d3.select("#gender_histogram").select("svg").remove();
     if (doBar)
-	    localBarChart(genderArray,"#gender_histogram",65);
+	    localBarChart(genderArray,"#gender_histogram",120);
     else
     	localPieChart(genderArray,"#gender_histogram");
 
     d3.select("#severity_histogram").select("svg").remove();
     if (doBar)
-	    localBarChart(severityArray,"#severity_histogram",50);
+	    localBarChart(severityArray,"#severity_histogram",120);
     else
     	localPieChart(severityArray,"#severity_histogram");
 }
@@ -538,15 +544,34 @@ function uncheckAll(){
 	refreshHistograms();
 }
 
-$('#mode').on('click', function() {
-	if (document.getElementById("mode-bar").classList.contains("text-success")) {
-		document.getElementById("mode-pie").classList.add("text-success");
-		document.getElementById("mode-bar").classList.remove("text-success");
-	} else {
-		document.getElementById("mode-pie").classList.remove("text-success");
-		document.getElementById("mode-bar").classList.add("text-success");		
+$('#mode-bar').on('click', function(element) {
+	if (!document.getElementById("mode-bar").classList.contains("text-success")) {
+		document.getElementById("mode-bar").classList.add("text-success");
 	}
+	document.getElementById("mode-pie").classList.remove("text-success");
+	document.getElementById("mode-table").classList.remove("text-success");
+	document.getElementById("display-table").style.display = "none";
+	document.getElementById("display-d3").style.display = "block";
 	refreshHistograms();
+});
+$('#mode-pie').on('click', function(element) {
+	if (!document.getElementById("mode-pie").classList.contains("text-success")) {
+		document.getElementById("mode-pie").classList.add("text-success");
+	}
+	document.getElementById("mode-bar").classList.remove("text-success");
+	document.getElementById("mode-table").classList.remove("text-success");
+	document.getElementById("display-table").style.display = "none";
+	document.getElementById("display-d3").style.display = "block";
+	refreshHistograms();
+});
+$('#mode-table').on('click', function(element) {
+	if (!document.getElementById("mode-table").classList.contains("text-success")) {
+		document.getElementById("mode-table").classList.add("text-success");
+	}
+	document.getElementById("mode-bar").classList.remove("text-success");
+	document.getElementById("mode-pie").classList.remove("text-success");
+	document.getElementById("display-table").style.display = "block";
+	document.getElementById("display-d3").style.display = "none";
 });
 
 $('#age').on('click', function() {

@@ -75,7 +75,6 @@ WebContent/graph_support/us-states.json -text
 WebContent/graph_support/us_states.jsp -text
 WebContent/graph_support/verticalBarChart.jsp -text
 WebContent/graph_support/verticalBarChart_local.jsp -text
-WebContent/graph_support/verticalBarChart_local2.js -text
 WebContent/graph_support/verticalBarChart_v4.jsp -text
 WebContent/graphs/blood.jsp -text
 WebContent/graphs/blood_by_severity.jsp -text
