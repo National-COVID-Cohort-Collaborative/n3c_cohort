@@ -65,6 +65,9 @@ $.getJSON("feeds/questions.jsp", function(data){
 	       	select: true,
 	       	paging: true,
 	    	pageLength: 10,
+	    	initComplete: function () {
+	    		first = $('#question-table2 tr:first-child td:first-child');
+	    		$(first).addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[2, 'desc']],
 	    	columns: [
@@ -100,6 +103,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	})();
 	
 });
+
 
 var theclick = function(){
 	$("#question-table2 tbody td").removeClass('row_selected');        
