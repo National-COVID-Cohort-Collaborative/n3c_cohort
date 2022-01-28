@@ -1,20 +1,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<style>
+	.peds_nav a {
+    	cursor: pointer;
+	}
+	.row_selected{
+		background: lightgray;
+	}
+	.peds_nav_item{
+		border-top:1px solid lightgray;
+		padding-top: 10px;
+    	padding-bottom: 10px;
+    	padding-left: 10px;
+	}
+</style>
+
 <div class="row comor">
 	<div class="col-xs-2">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<h4>Visualizations</h4>
-				<hr>
-				<div id="pediatrics-menu1">
-					<h5><a onclick="pediatrics_render('pediatrics-severity-tile')">Severity Distributions over Time</a></h5>
-				</div>
-				<hr>
-				<div id="pediatrics-menu2">
-					<h5><a onclick="pediatrics_render('pediatrics-age-tile')">Age Distributions over Time</a></h5>
-				</div>
-				<hr>
-				<div id="pediatrics-menu3">
-					<h5><a onclick="pediatrics_render('pediatrics-coinfection-tile')">Viral Coinfection</a></h5>
+				<div class="peds_nav">
+					<div class="peds_nav_item row_selected" id="pediatrics-menu1">
+						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-severity-tile')">Severity Distributions over Time</a></h5>
+					</div>
+
+					<div class="peds_nav_item" id="pediatrics-menu2">
+						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-age-tile')">Age Distributions over Time</a></h5>
+					</div>
+					<div class="peds_nav_item" id="pediatrics-menu3">
+						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-coinfection-tile')">Viral Coinfection</a></h5>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,6 +52,11 @@
 	</div>
 </div>
 <script>
+var thepedsclick = function(){
+	$(".peds_nav .peds_nav_item").removeClass('row_selected');        
+    $(this).closest( ".peds_nav_item" ).addClass('row_selected');
+};
+
 function pediatrics_render(facet) {
 	if (facet == "pediatrics-severity-tile") {
 		document.getElementById("pediatrics-severity-tile").style.display = "block";

@@ -15,7 +15,9 @@
 	.row_selected{
 		background: lightgray;
 	}
-	
+	#question-table2 a {
+    cursor: pointer;
+	}
 	
 </style>
 
@@ -97,18 +99,9 @@ $.getJSON("feeds/questions.jsp", function(data){
 	  
 	})();
 	
-})
-;
+});
 
-// function theclick(){
-// 	console.log('reached2');
-//      $("#question-table2 tbody a").removeClass('row_selected');        
-//      $(this).addClass('row_selected');
-// };
-
-var theclick = function()
-{
-	console.log('reached3');
+var theclick = function(){
 	$("#question-table2 tbody td").removeClass('row_selected');        
     $(this).closest( "td" ).addClass('row_selected');
 };
