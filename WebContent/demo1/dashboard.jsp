@@ -250,6 +250,7 @@ $(document).ready( function () {
 		var data = json['rows'];
 	
 		aggregated_datatable = $('#aggregated-table').DataTable( {
+			"dom": '<l<t>ip>',
 	    	data: data,
 	       	paging: true,
 	    	pageLength: 10,
