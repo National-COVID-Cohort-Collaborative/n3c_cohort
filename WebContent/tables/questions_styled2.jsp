@@ -19,6 +19,36 @@
     	cursor: pointer;
 	}
 	
+.cards tbody tr {
+	float: left;
+	width: 100%;
+	margin: 0.5rem;
+	border: 0.0625rem solid rgba(0, 0, 0, .125);
+	border-radius: .25rem;
+	box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.cards tbody td {
+	display: block;
+}
+
+.cards thead {
+	display: none;
+}
+
+.cards td:before {
+	content: attr(data-label);
+	display: inline;
+	position: relative;
+	font-size: 85%;
+	top: -0.5rem;
+	float: left;
+	color: #808080;
+	min-width: 4rem;
+	margin-left: 0;
+	margin-right: 1rem;
+	text-align: left;
+}
 </style>
 
 
@@ -58,7 +88,8 @@ $.getJSON("feeds/questions.jsp", function(data){
 	(async () => {
 
 		const { config, csrfTokenInfo } =  await auth2()
-		    
+		
+		$('#question-table2').addClass("cards");
 		$('#question-table2').DataTable( {
 			"dom": '<lf<t>ip>',
 			data: data,

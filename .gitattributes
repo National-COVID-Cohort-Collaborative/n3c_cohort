@@ -103,6 +103,7 @@ WebContent/graphs/ml.jsp -text
 WebContent/graphs/pediatrics.jsp -text
 WebContent/graphs/pediatrics_age.jsp -text
 WebContent/graphs/pediatrics_coinfection.jsp -text
+WebContent/graphs/pediatrics_geographic.jsp -text
 WebContent/graphs/pediatrics_severity.jsp -text
 WebContent/graphs/public_health.jsp -text
 WebContent/graphs/publications.jsp -text

@@ -11,6 +11,7 @@
 		padding-top: 10px;
     	padding-bottom: 10px;
     	padding-left: 10px;
+    	color: #376076;
 	}
 </style>
 
@@ -20,22 +21,22 @@
 			<div class="panel-body">
 				<h4>Visualizations</h4>
 				<div class="long_nav">
-					<div class="long_nav_item row_selected" id="long-covid-menu1">
+					<div class="long_nav_item row_selected cards2" id="long-covid-menu1">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-1-tile')">Figure 1</a></h5>
 					</div>
-					<div class="long_nav_item" id="long-covid-menu2">
+					<div class="long_nav_item cards2" id="long-covid-menu2">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-2-tile')">Figure 2</a></h5>
 					</div>
-					<div class="long_nav_item" id="long-covid-menu3">
+					<div class="long_nav_item cards2" id="long-covid-menu3">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-3-tile')">Figure 3</a></h5>
 					</div>
-					<div class="long_nav_item" id="long-covid-menu4">
+					<div class="long_nav_item cards2" id="long-covid-menu4">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-4-tile')">Figure 4</a></h5>
 					</div>
-					<div class="long_nav_item" id="long-covid-menu5">
+					<div class="long_nav_item cards2" id="long-covid-menu5">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-5-tile')">Figure 5</a></h5>
 					</div>	
-					<div class="long_nav_item" id="long-covid-menus1">
+					<div class="long_nav_item cards2" id="long-covid-menus1">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-s1-tile')">Figure S1</a></h5>
 					</div>
 				</div>
