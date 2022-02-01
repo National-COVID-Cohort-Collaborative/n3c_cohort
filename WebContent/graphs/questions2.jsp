@@ -20,11 +20,11 @@
 </style>
 
 
-<div class="row stats">
+<div class="row large-ques-nav">
 	<div class="col-xs-12">
 		<div class="panel-primary shadow-border ">
 			<div class="panel-heading">N3C Public Health Browser</div>
-			<div class="large-ques-nav">
+			<div>
 				<p>The data dashboards provide interactive views of <i>N3C</i> Research Program participant data. The N3C public health browser provides high value health data for policy makers, and investigators a
 					snapshot of the clinical status of COVID as well as signal for further investigation within the N3C open science enclave.</p>
 				<p>The data shown in the N3C public health browser comes from the N3C enclave, which is the largest collection of real-world data in the USA. The N3C Enclave comes from 69 health care
@@ -34,22 +34,19 @@
 				<p>In order to protect participant privacy, the data are de-identified, limited to aggregate counts and summary demographic information, with cell counts &lt;20 not being displayed. For more
 					information, please visit our <a href="https://covid.cd2h.org/faq">FAQ</a> page.</p>
 			</div>
-			<div class="small-ques-nav">
-				<div class="row">
-					<div class="col-xs-12 col-sm-8" style="margin:auto;">
-            			<p style="font-size:18px; font-weight:400; text-align:left; margin-top:30px;">N3C Public Health Questions provide high value snapshots of health data for policy makers, investigators, and entrepreneurs to facilitate further research questions for better health outcomes.</p>
-        			</div>
-        		</div>
-        	</div>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-
 	<div class="col-md-12 small-ques-nav">
 		<div id="question-panel" class="panel panel-primary top_panel" style="margin-top:0px;">
 			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-8" style="margin:auto;">
+            			<p style="font-size:18px; font-weight:400; text-align:left; margin-top:30px;">N3C Public Health Questions provide high value snapshots of health data for policy makers, investigators, and entrepreneurs to facilitate further research questions for better health outcomes.</p>
+        			</div>
+        		</div>
 				<div id="question-select">
 					<div id="question-button" class="btn-group">
   						<button type="button" class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,7 +54,7 @@
   						</button>
 						<div class="dropdown-menu">
 							<div id="question-roster3"></div>
-							<jsp:include page="../tables/questions_styled3.jsp"/>
+							<jsp:include page="../tables/questions_styled4.jsp"/>
 						</div>
 					</div>
 				</div>
@@ -69,7 +66,6 @@
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<div id="question-roster2"></div>
-				<jsp:include page="../tables/questions_styled2.jsp" />
 			</div>
 		</div>
 	</div>

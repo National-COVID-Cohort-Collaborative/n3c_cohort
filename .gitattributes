@@ -216,6 +216,7 @@ WebContent/tables/project_roster_styled.jsp -text
 WebContent/tables/questions_styled.jsp -text
 WebContent/tables/questions_styled2.jsp -text
 WebContent/tables/questions_styled3.jsp -text
+WebContent/tables/questions_styled4.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
 WebContent/testing.html -text
