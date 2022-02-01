@@ -22,7 +22,7 @@
 
 <div class="row stats">
 	<div class="col-xs-12">
-		<div class="panel-primary ">
+		<div class="panel-primary shadow-border ">
 			<div class="panel-heading">N3C Public Health Browser</div>
 			<div class="large-ques-nav">
 				<p>The data dashboards provide interactive views of <i>N3C</i> Research Program participant data. The N3C public health browser provides high value health data for policy makers, and investigators a

@@ -4,9 +4,11 @@
 	.peds_nav a {
     	cursor: pointer;
 	}
-	.row_selected{
-		background: lightgray;
+	.peds_nav_row_selected{
+	    background: #337ab7;
+    	color: #fff;
 	}
+	.peds_nav_row_selected > a { color:#fff;};
 	.peds_nav_item{
 		border-top:1px solid lightgray;
 		padding-top: 10px;
@@ -37,7 +39,7 @@
 			<div class="panel-body">
 				<h4>Visualizations</h4>
 				<div class="peds_nav">
-					<div class="peds_nav_item row_selected cards2" id="pediatrics-menu1">
+					<div class="peds_nav_item peds_nav_row_selected cards2" id="pediatrics-menu1">
 						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-severity-tile')">Severity Distributions over Time</a></h5>
 					</div>
 
@@ -76,8 +78,8 @@
 </div>
 <script>
 var thepedsclick = function(){
-	$(".peds_nav .peds_nav_item").removeClass('row_selected');        
-    $(this).closest( ".peds_nav_item" ).addClass('row_selected');
+	$(".peds_nav .peds_nav_item").removeClass('peds_nav_row_selected');        
+    $(this).closest( ".peds_nav_item" ).addClass('peds_nav_row_selected');
 };
 
 function pediatrics_render(facet) {
