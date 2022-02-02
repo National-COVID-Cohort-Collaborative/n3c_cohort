@@ -145,10 +145,10 @@ function question_detail_toggle() {
 	var divContainer = document.getElementById("question-detail-toggle");
 	var panel = document.getElementById("iframe_details");
 	if (panel.style.display === "block") {
-		divContainer.innerHTML = "<i class='fas fa-chevron-right'></i> Details";
+		divContainer.innerHTML = "<i class='fas fa-chevron-right'></i> Limitations";
 		panel.style.display = "none";
 	} else {
-		divContainer.innerHTML = "<i class='fas fa-chevron-down'></i> Details";
+		divContainer.innerHTML = "<i class='fas fa-chevron-down'></i> Limitations";
 		panel.style.display = "block";
 	}
 	
@@ -162,7 +162,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 	  +'<iframe src="https://'+tenant+'/single/?appid='+appID+'&sheet='+content
 	  +'&qlik-web-integration-id='+integrationID
 	  +'&qlik-csrf-token='+token+'" style="'+style+'" ></iframe>'
-		+'<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Details</span></a>'
+		+'<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Limitations</span></a>'
 		+'<div id="iframe_accordian">'
 			+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
 	  			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
