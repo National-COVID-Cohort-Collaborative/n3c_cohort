@@ -2,7 +2,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <sql:query var="projects" dataSource="jdbc/N3CCohort">
-	SELECT jsonb_pretty(jsonb_agg(foo))
+	SELECT jsonb_pretty(jsonb_agg(foo order by asked desc))
 	FROM (select question,asked,description,limitations,iframe_info,iframe_content,iframe_style from n3c_questions.roster) as foo;
 </sql:query>
 {

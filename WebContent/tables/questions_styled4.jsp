@@ -150,8 +150,12 @@ $.getJSON("feeds/questions.jsp", function(data){
 	var data = json['rows'];
 
 	(async() => {
+		$("body").css("cursor", "wait");
+		
 		const { config, csrfTokenInfo } = await auth2()
-		    
+		
+		$("body").css("cursor", "default");
+				    
 		$('#question-table2').addClass("cards");
 		$('#question-table2').DataTable( {
 			"dom": '<lf<t>ip>',
@@ -231,6 +235,19 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        	{ data: 'iframe_style', visible: false}
 	    	]
 		});
+		
+		iframe_render(
+						config.tenantDomain,
+						config.appId,
+						data[0].iframe_content,
+						config.qlikWebIntegrationId,
+						csrfTokenInfo.headers.get("qlik-csrf-token"),
+						data[0].iframe_style,
+						data[0].question.replace(/'/g, "\\'"),
+						data[0].description.replace(/'/g, "\\'"),
+						data[0].asked,
+						data[0].limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")
+					);
 	})();
 });
 
@@ -244,6 +261,19 @@ var changeclick = function(){
 	$("#question-table2 tbody td").removeClass('row_selected');        
 };
 
+function question_detail_toggle() {
+	var divContainer = document.getElementById("question-detail-toggle");
+	var panel = document.getElementById("iframe_details");
+	if (panel.style.display === "block") {
+		divContainer.innerHTML = "<i class='fas fa-chevron-right'></i> Limitations";
+		panel.style.display = "none";
+	} else {
+		divContainer.innerHTML = "<i class='fas fa-chevron-down'></i> Limitations";
+		panel.style.display = "block";
+	}
+	
+}
+
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
 	divContainer.innerHTML = 
@@ -252,7 +282,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 	  +'<iframe src="https://'+tenant+'/single/?appid='+appID+'&sheet='+content
 	  +'&qlik-web-integration-id='+integrationID
 	  +'&qlik-csrf-token='+token+'" style="'+style+'" ></iframe>'
-		+'<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details">Details</a>'
+		+'<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Limitations</span></a>'
 		+'<div id="iframe_accordian">'
 			+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
 	  			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'

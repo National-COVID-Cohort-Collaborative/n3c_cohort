@@ -3,9 +3,14 @@
 	.long_nav a {
     	cursor: pointer;
 	}
-	.row_selected{
-		background: lightgray;
+	.long_nav_row_selected{
+	    background: #337ab7;
+		padding-top: 10px;
+    	padding-bottom: 10px;
+    	padding-left: 10px;
+    	color: #fff;
 	}
+	.long_nav_row_selected > a { color:#fff;};
 	.long_nav_item{
 		border-top:1px solid lightgray;
 		padding-top: 10px;
@@ -21,7 +26,7 @@
 			<div class="panel-body">
 				<h4>Visualizations</h4>
 				<div class="long_nav">
-					<div class="long_nav_item row_selected cards2" id="long-covid-menu1">
+					<div class="long_nav_item long_nav_row_selected cards2" id="long-covid-menu1">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-1-tile')">Figure 1</a></h5>
 					</div>
 					<div class="long_nav_item cards2" id="long-covid-menu2">
@@ -76,8 +81,8 @@
 </div>
 <script>
 var thelongclick = function(){
-	$(".long_nav .long_nav_item").removeClass('row_selected');        
-    $(this).closest( ".long_nav_item" ).addClass('row_selected');
+	$(".long_nav .long_nav_item").removeClass('long_nav_row_selected');        
+    $(this).closest( ".long_nav_item" ).addClass('long_nav_row_selected');
 };
 
 function long_covid_render(facet) {

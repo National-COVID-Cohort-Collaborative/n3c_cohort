@@ -75,20 +75,7 @@
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<div id="question-tile">
-					<sql:query var="roster" dataSource="jdbc/N3CCohort">
-						select question,asked,description,limitations,iframe_info,iframe_content,iframe_style from n3c_questions.roster order by asked desc limit 1
-					</sql:query>
-					<c:forEach items="${roster.rows}" var="row" varStatus="rowCounter">
-						<h2>${row.question}</h2>
-						<p>${row.description}</p>
-						<iframe src="https://bpvjpykbczgl7xl.us.qlikcloud.com/single/?appid=196803b0-33c2-4492-ac3b-77f6318bce47&sheet=${row.iframe_content}&qlik-web-integration-id='+integrationID&qlik-csrf-token='+token+'" style="${row.iframe_style}" ></iframe>
-						<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Details</span></a>
-						<div id="iframe_accordian">
-							<div id="iframe_details" class="panel-body panel-collapse collapse">
-								<p><strong>Limitations:</strong> ${row.limitations}</p>
-							</div>
-						</div>
-					</c:forEach>
+				<p><i>Loading...</i></p>
 				</div>
 			</div>
 		</div>

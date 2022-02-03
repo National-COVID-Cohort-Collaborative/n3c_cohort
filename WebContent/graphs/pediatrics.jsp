@@ -6,6 +6,9 @@
 	}
 	.peds_nav_row_selected{
 	    background: #337ab7;
+		padding-top: 10px;
+    	padding-bottom: 10px;
+    	padding-left: 10px;
     	color: #fff;
 	}
 	.peds_nav_row_selected > a { color:#fff;};
@@ -30,6 +33,9 @@
 	border: 0.0625rem solid rgba(0, 0, 0, .125);
 	border-radius: .25rem;
 	box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+		padding-top: 10px;
+    	padding-bottom: 10px;
+    	padding-left: 10px;
 }
 </style>
 
