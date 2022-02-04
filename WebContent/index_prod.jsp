@@ -96,7 +96,7 @@ table.dataTable thead .sorting_asc {
 				<a data-toggle="tab" data-src="graphs/pe.jsp" href="#pe">Phenotype Explorer</a>
 			</li>
 			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/questions2.jsp" href="#questions">Public Health</a>
+				<a data-toggle="tab" data-src="graphs/public_health.jsp" href="#questions">Public Health</a>
 			</li>
 		</ul>
 

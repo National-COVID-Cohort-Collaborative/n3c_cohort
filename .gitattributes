@@ -106,6 +106,7 @@ WebContent/graphs/pediatrics_coinfection.jsp -text
 WebContent/graphs/pediatrics_geographic.jsp -text
 WebContent/graphs/pediatrics_severity.jsp -text
 WebContent/graphs/public_health.jsp -text
+WebContent/graphs/public_health_prod.jsp -text
 WebContent/graphs/publications.jsp -text
 WebContent/graphs/qlik.jsp -text
 WebContent/graphs/questions.jsp -text

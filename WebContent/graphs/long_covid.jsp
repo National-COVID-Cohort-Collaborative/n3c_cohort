@@ -3,6 +3,11 @@
 	.long_nav a {
     	cursor: pointer;
 	}
+
+	.long_nav .long_nav_item:not(.long_nav_row_selected):hover{
+		background-color: #f5f5f5;
+	}
+	
 	.long_nav_row_selected{
 	    background: #337ab7;
 		padding-top: 10px;
