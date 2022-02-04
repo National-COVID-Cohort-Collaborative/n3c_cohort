@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
+<script src="resources/auth.js"></script>
+
 <style>
 
 	@media (max-width:991px){
@@ -81,4 +83,4 @@
 		</div>
 	</div>
 </div>
-<script src="resources/auth.js"></script>
+

@@ -4,6 +4,11 @@
 	.peds_nav a {
     	cursor: pointer;
 	}
+	
+	.peds_nav .peds_nav_item:not(.peds_nav_row_selected):hover{
+		background-color: #f5f5f5;
+	}
+	
 	.peds_nav_row_selected{
 	    background: #337ab7;
 		padding-top: 10px;

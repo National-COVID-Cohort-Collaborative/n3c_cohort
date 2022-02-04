@@ -12,11 +12,26 @@
 	#question-table2_filter label{
 		text-align:center;
 	}
-	.row_selected{
-		background: lightgray;
+	#question-table2 .row_selected{
+		border-color: #337ab7;
 	}
+	
+	#question-table2 .row_selected td{
+		background: #337ab7;
+    	border-color: #337ab7;
+    	border-radius: 2px;
+	}
+	
+	#question-table2 .row_selected a{
+		color: white;
+	}
+	
 	#question-table2 a {
     	cursor: pointer;
+	}
+	
+	#question-table2 tbody tr:hover td{
+  		border: none !important;
 	}
 	
 	.cards tbody tr {
@@ -152,7 +167,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	(async() => {
 		$("body").css("cursor", "wait");
 		
-		const { config, csrfTokenInfo } = await auth2()
+		const { config, csrfTokenInfo } = await auth2();
 		
 		$("body").css("cursor", "default");
 				    
@@ -164,7 +179,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	       	paging: true,
 	    	pageLength: 10,
 	    	initComplete: function () {
-	    		first = $('#question-table2 tr:first-child td:first-child');
+	    		first = $('#question-table2 tr:first-child');
 	    		$(first).addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[2, 'desc']],
@@ -183,7 +198,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        							+'<h5 style="color: #376076;"><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
+	        							+'<h5><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -253,12 +268,12 @@ $.getJSON("feeds/questions.jsp", function(data){
 
 
 var theclick = function(){
-	$("#question-table2 tbody td").removeClass('row_selected');        
-    $(this).closest( "td" ).addClass('row_selected');
+	$("#question-table2 tbody tr").removeClass('row_selected');        
+    $(this).closest( "tr" ).addClass('row_selected');
 };
 
 var changeclick = function(){
-	$("#question-table2 tbody td").removeClass('row_selected');        
+	$("#question-table2 tbody tr").removeClass('row_selected');        
 };
 
 function question_detail_toggle() {
