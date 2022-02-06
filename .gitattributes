@@ -126,7 +126,9 @@ WebContent/graphs/severity_race.jsp -text
 WebContent/graphs/severity_smoking.jsp -text
 WebContent/graphs/tables.jsp -text
 WebContent/head.jsp -text
+WebContent/images/cd2h_invent.png -text
 WebContent/images/n3c_logo.png -text
+WebContent/images/person_icon.png -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
 WebContent/index_prod.jsp -text
