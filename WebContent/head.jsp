@@ -33,6 +33,7 @@
 	
     
 	<script src="resources/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 	<script src="resources/d3-tip.js"></script>
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     
