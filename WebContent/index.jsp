@@ -89,6 +89,9 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='demo1'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="demo1/dashboard.jsp" href="#demo1">Demo 1</a>
 			</li>
+			<li <c:if test="${active_tab =='demo2'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="demo1/demo2.jsp" href="#demo2">Demo 2</a>
+			</li>
 			<li <c:if test="${active_tab =='collaboration'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/collaboration.jsp" href="#collaboration">Enclave Collaboration</a>
 			</li>
@@ -100,6 +103,7 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='demo1'}">in active</c:if>" id="demo1"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='demo2'}">in active</c:if>" id="demo2"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='collaboration'}">in active</c:if>" id="collaboration"></div>
 		</div>
 		<jsp:include page="footer.jsp" flush="true" />

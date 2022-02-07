@@ -16,6 +16,7 @@ WebContent/cohort.jsp -text
 WebContent/collaborative.jsp -text
 WebContent/demo1/aggregated_table.jsp -text
 WebContent/demo1/dashboard.jsp -text
+WebContent/demo1/demo2.jsp -text
 WebContent/feeds/age_histogram.jsp -text
 WebContent/feeds/aggregated.jsp -text
 WebContent/feeds/blood.jsp -text
@@ -43,6 +44,7 @@ WebContent/feeds/online.jsp -text
 WebContent/feeds/online_count.jsp -text
 WebContent/feeds/papers.jsp -text
 WebContent/feeds/peak.jsp -text
+WebContent/feeds/positive_cases_by_date.jsp -text
 WebContent/feeds/preprints.jsp -text
 WebContent/feeds/priority_drug_counts_csv.jsp -text
 WebContent/feeds/project_challenge_graph.jsp -text
@@ -100,6 +102,7 @@ WebContent/graphs/dashboard.jsp -text
 WebContent/graphs/home.jsp -text
 WebContent/graphs/labs.jsp -text
 WebContent/graphs/line_data_dua.jsp -text
+WebContent/graphs/line_data_positive_count.jsp -text
 WebContent/graphs/line_registrations.jsp -text
 WebContent/graphs/long_covid.jsp -text
 WebContent/graphs/medications.jsp -text
