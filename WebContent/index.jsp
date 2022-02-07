@@ -32,15 +32,6 @@ table.dataTable thead .sorting_asc {
 			case "collaborative":
 				pageContext.setAttribute("active_tab", "collaborative");
 				break;
-			case "clinical":
-				pageContext.setAttribute("active_tab", "clinical");
-				break;
-			case "ml":
-				pageContext.setAttribute("active_tab", "ml");
-				break;
-			case "phenotype":
-				pageContext.setAttribute("active_tab", "pe");
-				break;
 			case "questions":
 				pageContext.setAttribute("active_tab", "questions");
 				break;
@@ -89,17 +80,8 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='collaborative'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/collaborative.jsp" href="#collaborative">The Collaborative</a>
 			</li>
-			<li <c:if test="${active_tab =='clinical'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/clinical.jsp" href="#clinical">Clinical Details</a>
-			</li>
-			<li <c:if test="${active_tab =='ml'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/ml.jsp" href="#ml">Machine Learning Details</a>
-			</li>
 			<li <c:if test="${active_tab =='pubs'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/publications.jsp" href="#pubs">Publications</a>
-			</li>
-			<li <c:if test="${active_tab =='pe'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/pe.jsp" href="#pe">Phenotype Explorer</a>
 			</li>
 			<li <c:if test="${active_tab =='questions'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="graphs/public_health.jsp" href="#questions">Public Health</a>
@@ -114,11 +96,8 @@ table.dataTable thead .sorting_asc {
 
 		<div class="tab-content" id="maintabscontent">
 			<div class="tab-pane fade <c:if test="${active_tab =='dashboard'}">in active</c:if>" id="dashboard"></div>
-			<div class="tab-pane fade <c:if test="${active_tab =='clinical'}">in active</c:if>" id="clinical"></div>
-			<div class="tab-pane fade <c:if test="${active_tab =='ml'}">in active</c:if>" id="ml"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='collaborative'}">in active</c:if>" id="collaborative"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='pubs'}">in active</c:if>" id="pubs"></div>
-			<div class="tab-pane fade <c:if test="${active_tab =='pe'}">in active</c:if>" id="pe"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='questions'}">in active</c:if>" id="questions"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='demo1'}">in active</c:if>" id="demo1"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='collaboration'}">in active</c:if>" id="collaboration"></div>
