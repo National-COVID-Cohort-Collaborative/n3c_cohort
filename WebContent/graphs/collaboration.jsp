@@ -5,7 +5,7 @@
 <div class="row stats">
 	<div class="col-xs-12 ">
 		<div class=" panel-primary shadow-border top_panel">
-			<jsp:include page="collaboration_graph.jsp"/>
+			<jsp:include page="collaboration_graph.jsp" />
 		</div>
 	</div>
 </div>

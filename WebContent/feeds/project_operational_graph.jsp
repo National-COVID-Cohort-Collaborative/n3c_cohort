@@ -9,7 +9,7 @@
     <sql:query var="projects" dataSource="jdbc/N3CCohort" >
         select distinct uid,title,research_statement
         from n3c_admin.enclave_project
-        where title !~'^\[' and uid != 'RP-148569';
+        where title~'^\[';
     </sql:query>
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
@@ -18,9 +18,9 @@
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
-        select distinct orcid_id,first_name||' '||last_name as name
+        select orcid_id,first_name||' '||last_name as name
         from palantir.n3c_user
-        where orcid_id in (select orcid_id from n3c_admin.enclave_project_members where project_uid != 'RP-148569');
+        where orcid_id in (select distinct orcid_id from n3c_admin.enclave_project_members,n3c_admin.enclave_project where uid=project_uid and title~'^\[');
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
         <graph:node uri="${row.orcid_id}" label="${row.name}" group="0" score="5" auxString="../images/person_icon.png"/>

@@ -45,7 +45,9 @@ WebContent/feeds/papers.jsp -text
 WebContent/feeds/peak.jsp -text
 WebContent/feeds/preprints.jsp -text
 WebContent/feeds/priority_drug_counts_csv.jsp -text
+WebContent/feeds/project_challenge_graph.jsp -text
 WebContent/feeds/project_graph.jsp -text
+WebContent/feeds/project_operational_graph.jsp -text
 WebContent/feeds/project_roster.jsp -text
 WebContent/feeds/question_feed_csv.jsp -text
 WebContent/feeds/questions.jsp -text

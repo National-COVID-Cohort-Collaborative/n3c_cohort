@@ -35,7 +35,7 @@ div.tooltip {
     var width,height
     var chartWidth, chartHeight
     var margin
-    var svg = d3.select("#collaboration_graph").append("svg")
+    var svg = d3.select("#${param.target}").append("svg")
     var chartLayer = svg.append("g").classed("chartLayer", true)
     var simulation
     var forceCenter
@@ -68,7 +68,7 @@ div.tooltip {
 
     	setSize(900)
         
-        d3.json("feeds/project_graph.jsp", function(error, theGraph) {
+        d3.json("${param.data_page}", function(error, theGraph) {
         	graph = theGraph;
             drawChart(graph)    
         });
@@ -149,7 +149,7 @@ div.tooltip {
       			tooltip.transition()
         			.duration(300)
         			.style("opacity", .8);
-      			tooltip.html(d.name)
+      			tooltip.html((d.group == 1 ? d.url+" - " : "") + d.name)
         			.style("left", (d3.event.pageX) + "px")
         			.style("top", (d3.event.pageY + 10) + "px");
     			})
