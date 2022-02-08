@@ -289,10 +289,12 @@ function question_detail_toggle() {
 	
 }
 
+
+
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
-		divContainer.innerHTML = '<object type="text/html" data="' + content + '" style="width:100%; height:1200px;"></object>';
+		divContainer.innerHTML = '<object type="text/html" data="' + content + '"style="width:100%; visibility:hidden;" onload="setHeight.call(this)"></object>';
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
@@ -309,4 +311,15 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 		;
 	}
 }
+
+var setHeight = function(){
+		var test = this;
+		console.log('reached');
+		setTimeout(() => {
+			var height = test.contentDocument.body.offsetHeight;
+	   		test.style.height = (height+20) + "px";
+	   		test.style.visibility = "unset";
+		}, 300);
+}
+
 </script>
