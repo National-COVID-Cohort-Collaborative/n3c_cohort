@@ -292,7 +292,7 @@ function question_detail_toggle() {
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
-		divContainer.innerHTML = '<object type="text/html" data="' + content + '" style="width:100%; height:1000px;"></object>';
+		divContainer.innerHTML = '<object type="text/html" data="' + content + '" style="width:100%; height:1200px;"></object>';
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
