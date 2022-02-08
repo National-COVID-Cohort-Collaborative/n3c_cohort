@@ -64,6 +64,13 @@
         font-weight: bold;
     }
 
+.axisBlue text{
+  fill: #2d5985;
+}
+
+.axisRed text{
+  fill: #6b496b;
+}
 </style>
 <body>
 	
@@ -71,7 +78,7 @@
 <script>
 
 // set the dimensions and margins of the graph
-	var margin = {top: 30, right: 100, bottom: 60, left: 50},
+	var margin = {top: 30, right: 150, bottom: 60, left: 80},
 	    width = 960 - margin.left - margin.right,
 	    height = 600 - margin.top - margin.bottom;
 	
@@ -98,8 +105,9 @@
 	
 			// set the ranges
 			var x = d3.scaleTime().range([0, width]);
-			var y = d3.scaleLinear().range([height, 0]);
-			var line = d3.line().x(d => x(d.date)).y(d => y(d.cumsum_positivecases));
+			var yc = d3.scaleLinear().range([height, 0]);
+			var y7 = d3.scaleLinear().range([height, 0]);
+			var line = d3.line().x(d => x(d.first_diagnosis_date)).y(d => y(d.cumsum_positivecases));
 		
 			// append the svg obgect to the body of the page
 			// appends a 'group' element to 'svg'
@@ -113,20 +121,21 @@
 			
 				// Dates
 			 	data.forEach(function(d) {
-					d.date = new Date(d.date);
+					d.first_diagnosis_date = new Date(d.first_diagnosis_date);
 				});
 			
 				// Scales
-				x.domain(d3.extent(data, function(d) { return d.date; }));
-				y.domain([0, d3.max(data, function(d) { return d.cumsum_positivecases; })]);
+				x.domain(d3.extent(data, function(d) { return d.first_diagnosis_date; }));
+				yc.domain([0, d3.max(data, function(d) { return d.cumsum_positivecases; })]);
+				y7.domain([0, d3.max(data, function(d) { return d.seven_day_rolling_avg; })]);
 			  
 				// X & Y 
 				var valueline = d3.line()
-					.x(function(d) { return x(d.date); })
-					.y(function(d) { return y(d.cumsum_positivecases); });
+					.x(function(d) { return x(d.first_diagnosis_date); })
+					.y(function(d) { return yc(d.cumsum_positivecases); });
 				var valueline2 = d3.line()
-					.x(function(d) { return x(d.date); })
-					.y(function(d) { return y(d.seven_day_rolling_avg); });
+					.x(function(d) { return x(d.first_diagnosis_date); })
+					.y(function(d) { return y7(d.seven_day_rolling_avg); });
 			
 				// Lines
 				dua_dta_svg.append("path")
@@ -141,17 +150,17 @@
 			
 				// Labels & Current Totals
 				dua_dta_svg.append("text")
-			    	.attr("transform", "translate("+(width+3)+","+y(data[data.length-1].cumsum_positivecases)+")")
+			    	.attr("transform", "translate("+(width+3)+","+yc(data[data.length-1].cumsum_positivecases)+")")
 			    	.attr("dy", ".35em")
 			    	.attr("text-anchor", "start")
 			    	.attr("class", "duas")
-			    	.text("DUAs (" + String(data[data.length-1].cumsum_positivecases)+ ")");
+			    	.text("Cumulative");
 				dua_dta_svg.append("text")
-			    	.attr("transform", "translate("+(width+3)+","+y(data[data.length-1].dtas)+")")
+			    	.attr("transform", "translate("+(width+3)+","+y7(data[data.length-1].seven_day_rolling_avg)+")")
 			    	.attr("dy", ".35em")
 			    	.attr("text-anchor", "start")
 			    	.attr("class", "dtas")
-			    	.text("DTAs (" + String(data[data.length-1].dtas)+ ")");
+			    	.text("7-Day Average");
 			
 				//.tickFormat(d3.time.format("%H")))
 			  	// Axis
@@ -169,10 +178,43 @@
     					.attr("dx", "-.8em")
     					.attr("dy", ".15em")
     					.attr("transform", "rotate(-65)");
-				dua_dta_svg.append("g")
-					.call(d3.axisLeft(y).ticks(5));
+
+				// text label for the x axis
+				  dua_dta_svg.append("text")             
+				      .attr("transform",
+				            "translate(" + (width/2) + " ," + 
+				                           (height + margin.top + 20) + ")")
+				      .style("text-anchor", "middle")
+				      .text("Date");
+
+				  dua_dta_svg.append("g")
+			      .attr("class", "axisBlue")
+			      .call(d3.axisLeft(yc));
+
+				  // text label for the y axis
+				  dua_dta_svg.append("text")
+				      .attr("transform", "rotate(-90)")
+				      .attr("y", 0 - margin.left)
+				      .attr("x",0 - (height / 2))
+				      .attr("dy", "1em")
+				      .style("text-anchor", "middle")
+				      .text("Cumulative COVID+ Patient Count");      
+				  
+				  dua_dta_svg.append("g")
+			      .attr("class", "axisRed")
+			      .attr("transform", "translate( " + width + ", 0 )")
+			      .call(d3.axisRight(y7));
 				
-				//tooltip line
+				  // text label for the y axis
+				  dua_dta_svg.append("text")
+				      .attr("transform", "rotate(-90)")
+				      .attr("y", width + 50)
+				      .attr("x",0 - (height / 2))
+				      .attr("dy", "1em")
+				      .style("text-anchor", "middle")
+				      .text("Rolling 7-Day Average Patient Count");      
+
+				  //tooltip line
 				var tooltipLine = dua_dta_svg.append('line');
 				
 				// tooltips
@@ -196,21 +238,21 @@
 				dua_dta_focus.append("text")
 			    	.attr("x", 18)
 			    	.attr("y", 18)
-			    	.text("DUAs:");
+			    	.text("Cumulative:");
 				
 				dua_dta_focus.append("text")
 		    		.attr("x", 18)
 		    		.attr("y", 30)
-		    		.text("DTAs:");
+		    		.text("7-Day Ave:");
 			
 				dua_dta_focus.append("text")
 			    	.attr("class", "tooltip-duas")
-			    	.attr("x", 60)
+			    	.attr("x", 90)
 			    	.attr("y", 18);
 				
 				dua_dta_focus.append("text")
 					.attr("class", "tooltip-dtas")
-					.attr("x", 60)
+					.attr("x", 80)
 					.attr("y", 30);
 				
 			
@@ -223,7 +265,7 @@
 			    	.on("mousemove", dua_dta_mousemove);
 			    
 				var parseDate = d3.timeFormat("%m/%e/%Y").parse,
-				bisectDate_dua_dta = d3.bisector(function(d) { return d.date; }).left,
+				bisectDate_dua_dta = d3.bisector(function(d) { return d.first_diagnosis_date; }).left,
 				formatValue = d3.format(","),
 				dateFormatter = d3.timeFormat("%m/%d/%y");
 			
@@ -232,15 +274,15 @@
 				        i = bisectDate_dua_dta(data, x0, 1),
 				        d0 = data[i - 1],
 				        d1 = data[i],
-				        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-				    //dua_focus.attr("transform", "translate(" + x(d.date) + "," + y(d.cumsum_positivecases) + ")");
-				    dua_dta_focus.attr("transform", "translate(" + x(d.date) + "," + d3.mouse(this)[1] + ")");
-				    dua_dta_focus.select(".tooltip-date_dta_dua").text(dateFormatter(d.date));
+				        d = x0 - d0.first_diagnosis_date > d1.first_diagnosis_date - x0 ? d1 : d0;
+				    //dua_focus.attr("transform", "translate(" + x(d.first_diagnosis_date) + "," + y(d.cumsum_positivecases) + ")");
+				    dua_dta_focus.attr("transform", "translate(" + x(d.first_diagnosis_date) + "," + d3.mouse(this)[1] + ")");
+				    dua_dta_focus.select(".tooltip-date_dta_dua").text(dateFormatter(d.first_diagnosis_date));
 				    dua_dta_focus.select(".tooltip-duas").text(formatValue(d.cumsum_positivecases));
-				    dua_dta_focus.select(".tooltip-dtas").text(formatValue(d.dtas));
+				    dua_dta_focus.select(".tooltip-dtas").text(formatValue(d.seven_day_rolling_avg));
 				    
 				    tooltipLine.attr('stroke', 'black')
-				    	.attr("transform", "translate(" + x(d.date) + "," + 0 + ")")
+				    	.attr("transform", "translate(" + x(d.first_diagnosis_date) + "," + 0 + ")")
 				    	.attr('y1', 0)
 				    	.attr('y2', height);
 				}
