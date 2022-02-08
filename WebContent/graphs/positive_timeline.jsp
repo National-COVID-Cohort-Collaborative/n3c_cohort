@@ -1,13 +1,15 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <div class="row stats">
 	<div class="col-xs-12 col-lg-10">
 	<h3>COVID+ Patients: Cumulative and 7-Day Rolling Average Counts</h3>
 		<div id="pos_cumulative">
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="../feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_cumulative" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="cumsum_positivecases" />
@@ -23,7 +25,7 @@
 	<h3>COVID+ Patients: Daily Patient Counts and 7-Day Rolling Averages</h3>
 		<div id="pos_rolling">
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="../feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_rolling" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="positive_cases" />

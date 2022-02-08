@@ -77,6 +77,7 @@ WebContent/graph_support/pyramid.jsp -text
 WebContent/graph_support/scatterplot.jsp -text
 WebContent/graph_support/site_map.jsp -text
 WebContent/graph_support/test.html -text
+WebContent/graph_support/time_line_2_column.jsp -text
 WebContent/graph_support/us-states.json -text
 WebContent/graph_support/us_states.jsp -text
 WebContent/graph_support/verticalBarChart.jsp -text
@@ -114,6 +115,7 @@ WebContent/graphs/pediatrics_age.jsp -text
 WebContent/graphs/pediatrics_coinfection.jsp -text
 WebContent/graphs/pediatrics_geographic.jsp -text
 WebContent/graphs/pediatrics_severity.jsp -text
+WebContent/graphs/positive_timeline.jsp -text
 WebContent/graphs/public_health.jsp -text
 WebContent/graphs/public_health_prod.jsp -text
 WebContent/graphs/publications.jsp -text
