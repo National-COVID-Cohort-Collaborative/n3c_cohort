@@ -103,7 +103,6 @@ WebContent/graphs/dashboard.jsp -text
 WebContent/graphs/home.jsp -text
 WebContent/graphs/labs.jsp -text
 WebContent/graphs/line_data_dua.jsp -text
-WebContent/graphs/line_data_positive_count.jsp -text
 WebContent/graphs/line_registrations.jsp -text
 WebContent/graphs/long_covid.jsp -text
 WebContent/graphs/medications.jsp -text
