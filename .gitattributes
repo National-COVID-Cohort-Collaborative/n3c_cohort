@@ -74,6 +74,7 @@ WebContent/graph_support/n3c_fact_sheet.jsp -text
 WebContent/graph_support/pieChart.jsp -text
 WebContent/graph_support/pieChart_local.jsp -text
 WebContent/graph_support/pyramid.jsp -text
+WebContent/graph_support/scatterZoom.jsp -text
 WebContent/graph_support/scatterplot.jsp -text
 WebContent/graph_support/site_map.jsp -text
 WebContent/graph_support/test.html -text
