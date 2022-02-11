@@ -240,7 +240,7 @@
 				      .text("${param.column2_label}");      
 
 		        // Add the Legend
-			    var legend_keys = {"nodes":[{"text": "${param.column1_tip}", "tag": "duas"}, {"text": "${param.column2_tip}", "tag": "dtas"}]};
+			    var legend_keys = {"nodes":[{"text": "${param.column1_tip}", "tag": "duas", "opacity":"${param.column1_opacity}"}, {"text": "${param.column2_tip}", "tag": "dtas", "opacity":"${param.column2_opacity}"}]};
 
 			    var lineLegend = svg.selectAll(".lineLegend").data(legend_keys.nodes)
 			    	.enter().append("g")
@@ -255,6 +255,7 @@
 				lineLegend.append("rect")
 				    .attr("width", 22)
 				    .attr("class", function(d){return d.tag;})
+				    .attr("opacity", function(d){return d.opacity;})
 				    .attr('height', 2);
 
 			     //tooltip line
