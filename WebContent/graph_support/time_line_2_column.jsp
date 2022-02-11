@@ -35,19 +35,17 @@
     	width:90px;
     }
     
-    path.duas{
+    path.duas,rect.duas{
     	stroke: #2d5985;
     	stroke-width:2.8px;
     }
-    path.dtas{
+    path.dtas,rect.dtas{
     	stroke:#6b496b;
     	stroke-width:2.8px;
     }
     
-    
-    .tooltip-dtas, 
-    text.dtas{
-    	fill:#6b496b;
+    .tooltip-dtas, text.dtas{
+    		fill:#6b496b;
     }
     
     .dua_dta_focus text{
@@ -242,21 +240,21 @@
 				      .text("${param.column2_label}");      
 
 		        // Add the Legend
-			    var legend_keys = ["${param.column1_tip}", "${param.column2_tip}"]
-		        var legend_colors = ["#2d5985", "#6b496b"]
-			    var lineLegend = svg.selectAll(".lineLegend").data(legend_keys)
-			    .enter().append("g")
-			    .attr("class","lineLegend")
-			    .attr("transform", function (d,i) {
+			    var legend_keys = {"nodes":[{"text": "${param.column1_tip}", "tag": "duas"}, {"text": "${param.column2_tip}", "tag": "dtas"}]};
+
+			    var lineLegend = svg.selectAll(".lineLegend").data(legend_keys.nodes)
+			    	.enter().append("g")
+			    	.attr("class","lineLegend")
+			    	.attr("transform", function (d, i) {
 			            return "translate(" + (margin.left - 10) + "," + (i*20)+")";
 			        });
 
-				lineLegend.append("text").text(function (d) {return d;})
+				lineLegend.append("text").text(function (d) {return d.text;})
 				    .attr("transform", "translate(25, 6)"); //align texts with boxes
 	
 				lineLegend.append("rect")
-				    .attr("fill", function(d) {return legend_colors[d];})
 				    .attr("width", 22)
+				    .attr("class", function(d){return d.tag;})
 				    .attr('height', 2);
 
 			     //tooltip line
