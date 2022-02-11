@@ -64,19 +64,20 @@
 	</div>
 		
 	<div id="d3-question-detail-toggle">
-		<h4 id="d3_detail"><i class='fas fa-chevron-right'></i> Limitations</h4>
+		<a href="#d3-question-detail-toggle" onclick="toggleLimitations()"><h5 id="d3_detail"><span style="color: #337ab7;"><i class='fas fa-chevron-right'></i> Limitations</span></h5></a>
 		<div id="d3_iframe_details" style="display:none;">${limitations}</div>
 	</div>
 </div>
 <script>
-$('#d3_detail').on('click', function() {
+function toggleLimitations() {
+	var toggle = document.getElementById("d3_detail");
 	var panel = document.getElementById("d3_iframe_details");
 	if (panel.style.display === "none") {
-		this.innerHTML = "<i class='fas fa-chevron-down'></i> Limitations";
+		toggle.innerHTML = '<span style="color: #337ab7;"><i class="fas fa-chevron-down"></i> Limitations</span>';
 		panel.style.display = "block";
 	} else {
-		this.innerHTML = "<i class='fas fa-chevron-right'></i> Limitations";
+		toggle.innerHTML = '<span style="color: #337ab7;"><i class="fas fa-chevron-right"></i> Limitations</span>';
 		panel.style.display = "none";
 	}
-});
+}
 </script>
