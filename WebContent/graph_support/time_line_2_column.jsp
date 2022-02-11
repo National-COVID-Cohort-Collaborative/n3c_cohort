@@ -79,7 +79,7 @@
 <script>
 
 // set the dimensions and margins of the graph
-	var margin = {top: 30, right: 150, bottom: 60, left: 80},
+	var margin = {top: 30, right: 150, bottom: 80, left: 80},
 	    width = 960 - margin.left - margin.right,
 	    height = 600 - margin.top - margin.bottom;
 	
@@ -103,16 +103,16 @@
 					d3.select("${param.dom_element}").select("svg").remove();
 					width = newWidth - margin.left - margin.right;
 					height = width/2 - margin.top - margin.bottom;
-					draw_dta_dua();
+					draw();
 				}
 			});
 		});
 		
 		myObserver.observe(d3.select("${param.dom_element}").node());
 		
-		draw_dta_dua();
+		draw();
 		
-		function draw_dta_dua() {
+		function draw() {
 	
 			// set the ranges
 			var x = d3.scaleTime().range([0, width]);
@@ -123,7 +123,7 @@
 			// append the svg obgect to the body of the page
 			// appends a 'group' element to 'svg'
 			// moves the 'group' element to the top left margin
-			var dua_dta_svg = d3.select("${param.dom_element}").append("svg")
+			var svg = d3.select("${param.dom_element}").append("svg")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
 				.append("g")
@@ -161,12 +161,12 @@
 					.y(function(d) { return y2(d.${param.column2}); });
 			
 				// Lines
-				dua_dta_svg.append("path")
+				svg.append("path")
 					.data([data])
 					.attr("opacity", column1_opacity)
 					.attr("class", "line duas")
 					.attr("d", valueline);
-				dua_dta_svg.append("path")
+				svg.append("path")
 					.data([data])
 					.attr("opacity", column2_opacity)
 					.attr("class", "line dtas")
@@ -174,22 +174,24 @@
 				
 			
 				// Labels & Current Totals
-				dua_dta_svg.append("text")
-			    	.attr("transform", "translate("+(width+3)+","+y1(data[data.length-1].${param.column1})+")")
-			    	.attr("dy", ".35em")
-			    	.attr("text-anchor", "start")
-			    	.attr("class", "duas")
-			    	.text("${param.column1_tip}");
-				dua_dta_svg.append("text")
-			    	.attr("transform", "translate("+(width+3)+","+y2(data[data.length-1].${param.column2})+")")
-			    	.attr("dy", ".35em")
-			    	.attr("text-anchor", "start")
-			    	.attr("class", "dtas")
-			    	.text("${param.column2_tip}");
-			
+				<c:if test="not empty param.lineLabels">
+					svg.append("text")
+				    	.attr("transform", "translate("+(width+3)+","+y1(data[data.length-1].${param.column1})+")")
+				    	.attr("dy", ".35em")
+				    	.attr("text-anchor", "start")
+				    	.attr("class", "duas")
+				    	.text("${param.column1_tip}");
+					svg.append("text")
+				    	.attr("transform", "translate("+(width+3)+","+y2(data[data.length-1].${param.column2})+")")
+				    	.attr("dy", ".35em")
+				    	.attr("text-anchor", "start")
+				    	.attr("class", "dtas")
+				    	.text("${param.column2_tip}");
+				</c:if>
+				
 				//.tickFormat(d3.time.format("%H")))
 			  	// Axis
-				dua_dta_svg.append("g")
+				svg.append("g")
 					.attr("transform", "translate(0," + height + ")")
 					.call(d3.axisBottom(x).tickFormat(function(date){
 					       if (d3.timeYear(date) < date) {
@@ -205,19 +207,19 @@
     					.attr("transform", "rotate(-65)");
 
 				// text label for the x axis
-				  dua_dta_svg.append("text")             
+				  svg.append("text")             
 				      .attr("transform",
 				            "translate(" + (width/2) + " ," + 
 				                           (height + margin.top + 20) + ")")
 				      .style("text-anchor", "middle")
 				      .text("Date");
 
-				  dua_dta_svg.append("g")
+				  svg.append("g")
 			      .attr("class", "axis1")
 			      .call(d3.axisLeft(y1));
 
 				  // text label for the y axis
-				  dua_dta_svg.append("text")
+				  svg.append("text")
 				      .attr("transform", "rotate(-90)")
 				      .attr("y", 0 - margin.left)
 				      .attr("x",0 - (height / 2))
@@ -225,13 +227,13 @@
 				      .style("text-anchor", "middle")
 				      .text("${param.column1_label}");      
 				  
-				  dua_dta_svg.append("g")
+				  svg.append("g")
 			      .attr("class", "axis2")
 			      .attr("transform", "translate( " + width + ", 0 )")
 			      .call(d3.axisRight(y2));
 				
 				  // text label for the y axis
-				  dua_dta_svg.append("text")
+				  svg.append("text")
 				      .attr("transform", "rotate(-90)")
 				      .attr("y", width + 50)
 				      .attr("x",0 - (height / 2))
@@ -239,11 +241,29 @@
 				      .style("text-anchor", "middle")
 				      .text("${param.column2_label}");      
 
-				  //tooltip line
-				var tooltipLine = dua_dta_svg.append('line');
+		        // Add the Legend
+			    var legend_keys = ["${param.column1_tip}", "${param.column2_tip}"]
+		        var legend_colors = ["#2d5985", "#6b496b"]
+			    var lineLegend = svg.selectAll(".lineLegend").data(legend_keys)
+			    .enter().append("g")
+			    .attr("class","lineLegend")
+			    .attr("transform", function (d,i) {
+			            return "translate(" + (margin.left - 10) + "," + (i*20)+")";
+			        });
+
+				lineLegend.append("text").text(function (d) {return d;})
+				    .attr("transform", "translate(25, 6)"); //align texts with boxes
+	
+				lineLegend.append("rect")
+				    .attr("fill", function(d) {return legend_colors[d];})
+				    .attr("width", 22)
+				    .attr('height', 2);
+
+			     //tooltip line
+				var tooltipLine = svg.append('line');
 				
 				// tooltips
-				var dua_dta_focus = dua_dta_svg.append("g")
+				var dua_dta_focus = svg.append("g")
 			    	.attr("class", "dua_dta_focus")
 			    	.style("display", "none");
 			
@@ -281,7 +301,7 @@
 					.attr("y", 30);
 				
 			
-				var tipBox = dua_dta_svg.append("rect")
+				var tipBox = svg.append("rect")
 			    	.attr("class", "overlay")
 			    	.attr("width", width)
 			    	.attr("height", height)
