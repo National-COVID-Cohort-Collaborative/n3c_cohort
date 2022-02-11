@@ -3,13 +3,12 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <style>
 .d3_question_header{
-	text-align:center; 
-	color:#fff; 
-	background: #454F82;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size:28px; 
-	padding: 3px; 
-	margin-top:20px;
+	text-align: center;
+    color: #57585c;
+    font-size: 28px;
+    padding: 3px;
+    margin-top: 20px;
+    font-weight: 300;
 }
 </style>
 <sql:query var="questions" dataSource="jdbc/N3CCohort">
