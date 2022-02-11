@@ -30,6 +30,7 @@
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
 				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_rolling" />
+				<jsp:param name="namespace" value="pos_rolling" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="positive_cases" />
 				<jsp:param name="column1_label" value="COVID+ Patient Count" />
@@ -50,6 +51,7 @@
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
 				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_cumulative" />
+				<jsp:param name="namespace" value="pos_cumulative" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="cumsum_positivecases" />
 				<jsp:param name="column1_label" value="Cumulative COVID+ Patient Count" />
