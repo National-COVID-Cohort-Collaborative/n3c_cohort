@@ -1,8 +1,6 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
-	<script src="https://d3js.org/d3.v4.min.js"></script>
-	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <style>
 .d3_question_header{
 	text-align:center; 
@@ -14,14 +12,23 @@
 	margin-top:20px;
 }
 </style>
+<sql:query var="questions" dataSource="jdbc/N3CCohort">
+	select question,description,limitations from n3c_questions.roster where iframe_info = ?;
+	<sql:param>${param.question}</sql:param>
+</sql:query>
+<c:forEach items="${questions.rows}" var="row" varStatus="rowCounter">
+	<h2>${row.question}</h2>
+	<p>${row.description}</p>
+	<c:set var="limitations">${row.limitations}</c:set>
+</c:forEach>
 <div class="row stats">
-	<div class="col-xs-12 col-lg-10">
+	<div class="col-xs-12 col-lg-12">
 	<div class="d3_question_header">
 	COVID+ Patients: Daily Patient Counts and 7-Day Rolling Averages
 	</div>
 		<div id="pos_rolling">
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="../feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_rolling" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="positive_cases" />
@@ -41,7 +48,7 @@
 	</div>
 		<div id="pos_cumulative">
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="../feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
 				<jsp:param name="dom_element" value="#pos_cumulative" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
 				<jsp:param name="column1" value="cumsum_positivecases" />
@@ -55,4 +62,21 @@
 			</jsp:include>
 		</div>
 	</div>
+		
+	<div id="d3-question-detail-toggle">
+		<h4 id="d3_detail"><i class='fas fa-chevron-right'></i> Limitations</h4>
+		<div id="d3_iframe_details" style="display:none;">${limitations}</div>
+	</div>
 </div>
+<script>
+$('#d3_detail').on('click', function() {
+	var panel = document.getElementById("d3_iframe_details");
+	if (panel.style.display === "none") {
+		this.innerHTML = "<i class='fas fa-chevron-down'></i> Limitations";
+		panel.style.display = "block";
+	} else {
+		this.innerHTML = "<i class='fas fa-chevron-right'></i> Limitations";
+		panel.style.display = "none";
+	}
+});
+</script>
