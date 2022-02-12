@@ -3,14 +3,16 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <style>
 .d3_question_header{
-	text-align: center;
-    color: #57585c;
-    font-size: 28px;
-    padding: 3px;
-    margin-top: 20px;
-    font-weight: 300;
+	text-align:center; 
+	color:#fff; 
+	background: #454F82;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:18px; 
+	padding: 3px; 
+	margin-top:20px;
 }
 </style>
+
 <sql:query var="questions" dataSource="jdbc/N3CCohort">
 	select question,description,limitations from n3c_questions.roster where iframe_info = ?;
 	<sql:param>${param.question}</sql:param>
@@ -43,6 +45,7 @@
 				<jsp:param name="column1_opacity" value="0.25" />
 			</jsp:include>
 		</div>
+			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 	<div class="d3_question_header">
 	COVID+ Patients: Cumulative and 7-Day Rolling Average Counts
 	</div>
@@ -62,23 +65,7 @@
 				<jsp:param name="column2_tip_offset" value="80" />
 			</jsp:include>
 		</div>
+			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 	</div>
 		
-	<div id="d3-question-detail-toggle">
-		<a href="#d3-question-detail-toggle" onclick="toggleLimitations()"><h5 id="d3_detail"><span style="color: #337ab7;"><i class='fas fa-chevron-right'></i> Limitations</span></h5></a>
-		<div id="d3_iframe_details" style="display:none;">${limitations}</div>
-	</div>
 </div>
-<script>
-function toggleLimitations() {
-	var toggle = document.getElementById("d3_detail");
-	var panel = document.getElementById("d3_iframe_details");
-	if (panel.style.display === "none") {
-		toggle.innerHTML = '<span style="color: #337ab7;"><i class="fas fa-chevron-down"></i> Limitations</span>';
-		panel.style.display = "block";
-	} else {
-		toggle.innerHTML = '<span style="color: #337ab7;"><i class="fas fa-chevron-right"></i> Limitations</span>';
-		panel.style.display = "none";
-	}
-}
-</script>

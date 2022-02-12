@@ -305,9 +305,8 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 		+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
   			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
   		+'</div>'
-  	+'</div>';
-  	console.log('reached');
-	$("#d3viz").load("./positive_timeline.jsp");
+	  	+'</div>';
+		$("#d3viz").load("./positive_timeline.jsp");
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
