@@ -4,13 +4,7 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 
-
-<jsp:include page="./head.jsp" flush="true" />
-
-<style type="text/css" media="all">
-@import "./resources/n3c_login_style.css";
-@import "./resources/main_style.css";
-
+<style>
 .d3_question_header{
 	text-align: center;
     color: #57585c;
