@@ -294,7 +294,20 @@ function question_detail_toggle() {
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
-		divContainer.innerHTML = '<object type="text/html" data="' + content + '"style="width:100%; height:1200px;"></object>';
+		divContainer.innerHTML = '<h2>' 
+		+ question 
+		+ '</h2> <p>' 
+		+ description
+		+ '</p>'
+		+'<div id="d3viz"></div>'
+		+ '<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Limitations</span></a>'
+		+'<div id="iframe_accordian">'
+		+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
+  			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
+  		+'</div>'
+  	+'</div>';
+  	console.log('reached');
+	$("#d3viz").load("./positive_timeline.jsp");
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
@@ -310,16 +323,6 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 		  	+'</div>'
 		;
 	}
-}
-
-var setHeight = function(){
-		var test = this;
-		console.log('reached');
-		setTimeout(() => {
-			var height = test.contentDocument.body.offsetHeight;
-	   		test.style.height = (height+20) + "px";
-	   		test.style.visibility = "unset";
-		}, 300);
 }
 
 </script>

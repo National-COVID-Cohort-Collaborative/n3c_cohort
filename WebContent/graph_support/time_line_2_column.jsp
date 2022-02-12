@@ -30,6 +30,11 @@
     
     .dua_dta_focus{
     	fill: black;
+    	pointer-events:none;
+    }
+    
+    .tool_line{
+    	pointer-events:none;
     }
     .dua_dta_focus .tooltip{
     	opacity: 0.7;
@@ -105,7 +110,11 @@
 				if (newWidth > 0) {
 					d3.select("${param.dom_element}").select("svg").remove();
 					width = newWidth - margin.left - margin.right;
-					height = width/2 - margin.top - margin.bottom;
+					if ((width/2 - margin.top - margin.bottom) > 200){
+						height = width/2 - margin.top - margin.bottom;
+					} else { 
+						height = 200;
+					}
 					draw();
 				}
 			});
@@ -298,7 +307,8 @@
 				    .attr('height', 2);
 				    
 				//tooltip line
-				var tooltipLine = graph.append('line');
+				var tooltipLine = graph.append('line')
+					.attr("class", "tool_line");
 				
 				// tooltips
 				var dua_dta_focus = test_tip.append("g")
