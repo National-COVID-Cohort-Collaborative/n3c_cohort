@@ -182,7 +182,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	    		first = $('#question-table2 tr:first-child');
 	    		$(first).addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-	    	order: [[2, 'desc']],
+	    	order: [[7, 'asc']],
 	    	columns: [
 	        	{ 
 	        		data: 'qeustion',
@@ -208,7 +208,8 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        	{ data: 'limitations', visible: false},
 	        	{ data: 'iframe_info', visible: false},
 	        	{ data: 'iframe_content', visible: false},
-	        	{ data: 'iframe_style', visible: false}
+	        	{ data: 'iframe_style', visible: false},
+	        	{ data: 'seqnum', visible: false}
 	    	]
 		} );
 		
@@ -221,7 +222,7 @@ $.getJSON("feeds/questions.jsp", function(data){
 	       	bInfo : false,
 	    	pageLength: 10,
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
-	    	order: [[2, 'desc']],
+	    	order: [[7, 'asc']],
 	    	columns: [
 	        	{ 
 	        		data: 'qeustion',
@@ -247,7 +248,8 @@ $.getJSON("feeds/questions.jsp", function(data){
 	        	{ data: 'limitations', visible: false},
 	        	{ data: 'iframe_info', visible: false},
 	        	{ data: 'iframe_content', visible: false},
-	        	{ data: 'iframe_style', visible: false}
+	        	{ data: 'iframe_style', visible: false},
+	        	{ data: 'seqnum', visible: false}
 	    	]
 		});
 		
