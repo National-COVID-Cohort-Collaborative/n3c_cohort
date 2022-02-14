@@ -78,6 +78,7 @@
 .axis2 text{
   fill: #6b496b;
 }
+
 </style>
 <body>
 	
@@ -450,5 +451,8 @@
 			};
 		});
 
-</script>
+	d3.select("#pos_rolling_btn")
+	  .on("click", function() {alert(d3.select("${param.dom_element}").select("svg"))
+		  d3.select("${param.dom_element}").select("svg").dispatch("dblclick");
+	  });</script>
 </body>
