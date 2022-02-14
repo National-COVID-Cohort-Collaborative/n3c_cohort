@@ -57,6 +57,7 @@ WebContent/feeds/questions_csv.jsp -text
 WebContent/feeds/questions_hlh_csv.jsp -text
 WebContent/feeds/questions_prod.jsp -text
 WebContent/feeds/questions_test_csv.jsp -text
+WebContent/feeds/reinfections_by_date.jsp -text
 WebContent/feeds/severity.jsp -text
 WebContent/feeds/severity_detail.jsp -text
 WebContent/feeds/severity_temp.jsp -text
@@ -77,6 +78,7 @@ WebContent/graph_support/pyramid.jsp -text
 WebContent/graph_support/scatterZoom.jsp -text
 WebContent/graph_support/scatterplot.jsp -text
 WebContent/graph_support/site_map.jsp -text
+WebContent/graph_support/stacked_bar_zoomable.jsp -text
 WebContent/graph_support/test.html -text
 WebContent/graph_support/time_line_2_column.jsp -text
 WebContent/graph_support/us-states.json -text
@@ -122,6 +124,7 @@ WebContent/graphs/publications.jsp -text
 WebContent/graphs/qlik.jsp -text
 WebContent/graphs/questions.jsp -text
 WebContent/graphs/questions2.jsp -text
+WebContent/graphs/reinfection_timeline.jsp -text
 WebContent/graphs/rowFreqData.jsp -text
 WebContent/graphs/scatter.jsp -text
 WebContent/graphs/severity.jsp -text
@@ -150,6 +153,7 @@ WebContent/navbar.jsp -text
 WebContent/phenotype-explorer.jsp -text
 WebContent/positive_timeline.jsp -text
 WebContent/publications.jsp -text
+WebContent/reinfection_timeline.jsp -text
 WebContent/resources/DataTables/css/dataTables.bootstrap.css -text
 WebContent/resources/DataTables/css/dataTables.bootstrap.min.css -text
 WebContent/resources/DataTables/css/dataTables.bootstrap4.css -text

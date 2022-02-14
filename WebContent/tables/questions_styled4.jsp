@@ -296,19 +296,14 @@ function question_detail_toggle() {
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
-		divContainer.innerHTML = '<h2>' 
-		+ question 
-		+ '</h2> <p>' 
-		+ description
-		+ '</p>'
-		+'<div id="d3viz"></div>'
+		divContainer.innerHTML = '<div id="d3viz"></div>'
 		+ '<br><a class="accordion-toggle" data-toggle="collapse" data-parent="#iframe_accordion" href="#iframe_details" onclick="question_detail_toggle()"><span id="question-detail-toggle"><i class="fas fa-chevron-right"></i> Limitations</span></a>'
 		+'<div id="iframe_accordian">'
 		+'<div id="iframe_details" class="panel-body panel-collapse collapse">'
   			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
   		+'</div>'
 	  	+'</div>';
-		$("#d3viz").load("./positive_timeline.jsp");
+		$("#d3viz").load(content);
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
