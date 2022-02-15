@@ -12,6 +12,10 @@
     .x.axis path {
         display: none;
     }
+    
+    .xaxis text{
+    	fill: #000;
+    }
 
     .line {
         fill: none;
@@ -85,8 +89,10 @@
 
 <script>
 
+
+
 // set the dimensions and margins of the graph
-	var margin = {top: 30, right: 150, bottom: 80, left: 80},
+	var margin = {top: 100, right: 150, bottom: 80, left: 80},
 	    width = 960 - margin.left - margin.right,
 	    height = 600 - margin.top - margin.bottom;
 	
@@ -139,6 +145,7 @@
 			// appends a 'group' element to 'svg'
 			// moves the 'group' element to the top left margin
 			var svg = d3.select("${param.dom_element}").append("svg")
+				.attr("class", "clear_target")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
 				.append("g")
@@ -295,7 +302,7 @@
 			    	.enter().append("g")
 			    	.attr("class","lineLegend")
 			    	.attr("transform", function (d, i) {
-			            return "translate(" + (margin.left - 10) + "," + (i*20)+")";
+			            return "translate(" + (20) + "," + ((i*20)-50)+")";
 			        });
 
 				lineLegend.append("text").text(function (d) {return d.text;})
@@ -432,8 +439,8 @@
 	
 				}
 				
-			    svg.on("dblclick",function(){
-			    	x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
+				function time_line_clear(){
+					x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
 			        xaxis.transition().call(d3.axisBottom(x));
 			        graph
 			          .select('path.duas')
@@ -447,12 +454,25 @@
 			          .attr("d", d3.line()
 			          	.x(function(d) { return x(d.${param.date_column}); })
 					    .y(function(d) { return y2(d.${param.column2}); }));
-			    });
+					
+				}
+				
+				d3.select(".clear_target")
+					.on("dblclick", time_line_clear);
+				
+				
+				$("#pos_rolling_btn").click(function() {
+					d3.select('#pos_rolling .clear_target').dispatch('dblclick');
+				});
+				
+				
 			};
 		});
 
-	d3.select("#pos_rolling_btn")
-	  .on("click", function() {alert(d3.select("${param.dom_element}").select("svg"))
-		  d3.select("${param.dom_element}").select("svg").dispatch("dblclick");
-	  });</script>
+	
+	
+
+	
+	
+</script>
 </body>
