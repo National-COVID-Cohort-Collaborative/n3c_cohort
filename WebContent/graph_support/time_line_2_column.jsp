@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<meta charset="utf-8">
+
 <style>
     .axis path,
     .axis line {
@@ -84,7 +83,7 @@
 }
 
 </style>
-<body>
+
 	
 
 <script>
@@ -144,7 +143,7 @@
 			// append the svg obgect to the body of the page
 			// appends a 'group' element to 'svg'
 			// moves the 'group' element to the top left margin
-			var svg = d3.select("${param.dom_element}").append("svg")
+			var svg = d3.select("${param.dom_element}_graph").append("svg")
 				.attr("class", "clear_target")
 				.attr("width", width + margin.left + margin.right)
 				.attr("height", height + margin.top + margin.bottom)
@@ -373,9 +372,9 @@
 				    
 				    if (width/2 > d3.mouse(this)[0]){
 				    	dua_dta_focus.attr("transform", "translate(" + x(d.${param.date_column}) + "," + d3.mouse(this)[1] + ")");
-				    } else {
+				    }else{
 				    	dua_dta_focus.attr("transform", "translate(" + ((x(d.${param.date_column}))-150) + "," + d3.mouse(this)[1] + ")");
-				    }
+				    };
 				   
 				    dua_dta_focus.select(".tooltip-date_dta_dua").text(dateFormatter(d.${param.date_column}));
 				    dua_dta_focus.select(".tooltip-duas").text(formatValue(d.${param.column1}));
@@ -385,13 +384,13 @@
 				    	.attr("transform", "translate(" + x(d.${param.date_column}) + "," + 0 + ")")
 				    	.attr('y1', 0)
 				    	.attr('y2', height);
-				}
+				};
 
 
 				
 				// A function that set idleTimeOut to null
-				  var idleTimeout
-				  function idled() { idleTimeout = null; }
+				  var idleTimeout;
+				  function idled() { idleTimeout = null; };
 				
 				// A function that update the chart for given boundaries
 				   function ${param.namespace}updateChart() {
@@ -437,7 +436,7 @@
 				            .x(function(d) { return x(d.${param.date_column}); })
 				            .y(function(d) { return y2(d.${param.column2}); }));
 	
-				}
+				};
 				
 				function time_line_clear(){
 					x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
@@ -455,23 +454,17 @@
 			          	.x(function(d) { return x(d.${param.date_column}); })
 					    .y(function(d) { return y2(d.${param.column2}); }));
 					
-				}
+				};
 				
-				d3.select(".clear_target")
+				d3.select("${param.dom_element} .clear_target")
 					.on("dblclick", time_line_clear);
-				
-				$("${param.dom_element}_btn").off().on('click', function() {alert("${param.dom_element}_btn"); alert(d3.select('${param.dom_element}').attr('id'))
-					d3.select('${param.dom_element} .clear_target').dispatch('dblclick');
-				});
-				
-				
 			};
 		});
 
+	$("${param.dom_element}_btn").off().on('click', function(){
+		d3.select('${param.dom_element} ${param.dom_element}_graph .clear_target').dispatch('dblclick');
+	});
 	
 	
 
-	
-	
 </script>
-</body>
