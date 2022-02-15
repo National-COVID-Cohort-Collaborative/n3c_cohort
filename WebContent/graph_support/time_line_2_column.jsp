@@ -461,7 +461,8 @@
 					.on("dblclick", time_line_clear);
 				
 				
-				$("#pos_rolling_btn").click(function() {
+				$("#pos_rolling_btn").off().on('click', function() {
+					console.log('reached');
 					d3.select('#pos_rolling .clear_target').dispatch('dblclick');
 				});
 				
