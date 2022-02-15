@@ -460,7 +460,7 @@
 				d3.select(".clear_target")
 					.on("dblclick", time_line_clear);
 				
-				$("${param.dom_element}_btn").off().on('click', function() {
+				$("${param.dom_element}_btn").off().on('click', function() {alert("${param.dom_element}_btn"); alert(d3.select('${param.dom_element}').attr('id'))
 					d3.select('${param.dom_element} .clear_target').dispatch('dblclick');
 				});
 				

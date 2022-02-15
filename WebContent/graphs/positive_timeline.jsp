@@ -70,6 +70,7 @@
 				<jsp:param name="column2_tip_offset" value="80" />
 			</jsp:include>
 		</div>
+		<button id="pos_cumulative_btn" class="button">Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 	</div>
 		
