@@ -32,6 +32,7 @@
 	Patient Counts: First Diagnosis Versis Reinfected Patients Per COVID+ Cohort
 	</div>
 		<div id="reinfection1">
+			<div id="reinfection1_graph"></div>
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
 				<jsp:param name="data_page" value="feeds/reinfections_by_date.jsp" />
 				<jsp:param name="dom_element" value="#reinfection1" />
@@ -48,11 +49,13 @@
 				<jsp:param name="column1_opacity" value="0.25" />
 			</jsp:include>
 		</div>
+			<button id="reinfection1_btn" class="button">Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 	<div class="d3_question_header">
 	Patient Counts: First Diagnosis Versus Number of Reinfections Per Day
 	</div>
 		<div id="reinfection2">
+			<div id="reinfection2_graph"></div>
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
 				<jsp:param name="data_page" value="feeds/reinfections_by_date.jsp" />
 				<jsp:param name="dom_element" value="#reinfection2" />
@@ -69,6 +72,7 @@
 				<jsp:param name="column1_opacity" value="0.25" />
 			</jsp:include>
 		</div>
+			<button id="reinfection2_btn" class="button">Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 	</div>
 		
