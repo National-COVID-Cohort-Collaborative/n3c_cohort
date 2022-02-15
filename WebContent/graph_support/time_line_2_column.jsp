@@ -460,10 +460,8 @@
 				d3.select(".clear_target")
 					.on("dblclick", time_line_clear);
 				
-				
-				$("#pos_rolling_btn").off().on('click', function() {
-					console.log('reached');
-					d3.select('#pos_rolling .clear_target').dispatch('dblclick');
+				$("${param.dom_element}_btn").off().on('click', function() {
+					d3.select('${param.dom_element} .clear_target').dispatch('dblclick');
 				});
 				
 				
