@@ -133,7 +133,7 @@
 		function draw() {
 		    
 			// set the ranges
-			var x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.date; })).range([0, width]);
+			var ${param.namespace}x = d3.scaleTime().domain(d3.extent(data, function(d) { return d.date; })).range([0, width]);
 			var y1 = d3.scaleLinear().range([height, 0]);
 			var y2 = d3.scaleLinear().range([height, 0]);
 			var line = d3.line().x(d => x(d.${param.date_column})).y(d => y(d.${param.column1}));
@@ -179,7 +179,7 @@
 				});
 			
 				// Scales
-				x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
+				${param.namespace}x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
 				<c:choose>
 					<c:when test="${not empty param.useColumn1Scaling}">
 						y1.domain([0, d3.max(data, function(d) { return d.${param.column1}; })]);
@@ -197,10 +197,10 @@
 			  
 				// X & Y 
 				var valueline = d3.line()
-					.x(function(d) { return x(d.${param.date_column}); })
+					.x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 					.y(function(d) { return y1(d.${param.column1}); });
 				var valueline2 = d3.line()
-					.x(function(d) { return x(d.${param.date_column}); })
+					.x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 					.y(function(d) { return y2(d.${param.column2}); });
 			
 				// Lines
@@ -243,10 +243,10 @@
 
 			    
 			  	// Axis
-				var xaxis = svg.append("g")
+				var ${param.namespace}xaxis = svg.append("g")
 					.attr("transform", "translate(0," + height + ")")
 					.attr("class", "xaxis")
-					.call(d3.axisBottom(x).tickFormat(function(date){
+					.call(d3.axisBottom(${param.namespace}x).tickFormat(function(date){
 						if (d3.timeYear(date) < date) {
 					           return d3.timeFormat('%b')(date);
 					         } else {
@@ -363,7 +363,7 @@
 				
 			
 				function dua_dta_mousemove() {
-				    var x0 = x.invert(d3.mouse(this)[0]),
+				    var x0 = ${param.namespace}x.invert(d3.mouse(this)[0]),
 				        i = bisectDate_dua_dta(data, x0, 1),
 				        d0 = data[i - 1],
 				        d1 = data[i],
@@ -371,9 +371,9 @@
 				    
 				    
 				    if (width/2 > d3.mouse(this)[0]){
-				    	dua_dta_focus.attr("transform", "translate(" + x(d.${param.date_column}) + "," + d3.mouse(this)[1] + ")");
+				    	dua_dta_focus.attr("transform", "translate(" + ${param.namespace}x(d.${param.date_column}) + "," + d3.mouse(this)[1] + ")");
 				    }else{
-				    	dua_dta_focus.attr("transform", "translate(" + ((x(d.${param.date_column}))-150) + "," + d3.mouse(this)[1] + ")");
+				    	dua_dta_focus.attr("transform", "translate(" + ((${param.namespace}x(d.${param.date_column}))-150) + "," + d3.mouse(this)[1] + ")");
 				    };
 				   
 				    dua_dta_focus.select(".tooltip-date_dta_dua").text(dateFormatter(d.${param.date_column}));
@@ -381,7 +381,7 @@
 				    dua_dta_focus.select(".tooltip-dtas").text(formatValue(d.${param.column2}));
 				    
 				    tooltipLine.attr('stroke', 'black')
-				    	.attr("transform", "translate(" + x(d.${param.date_column}) + "," + 0 + ")")
+				    	.attr("transform", "translate(" + ${param.namespace}x(d.${param.date_column}) + "," + 0 + ")")
 				    	.attr('y1', 0)
 				    	.attr('y2', height);
 				};
@@ -401,9 +401,9 @@
 				      	// If no selection, back to initial coordinate. Otherwise, update X axis domain
 				     	if(!extent){
 				        	if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-				        	x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
+				        	${param.namespace}x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
 				      	}else{
-				        	x.domain([ x.invert(extent[0]), x.invert(extent[1]) ]);
+				      		${param.namespace}x.domain([ ${param.namespace}x.invert(extent[0]), ${param.namespace}x.invert(extent[1]) ]);
 				        	graph.select(".brush").call(brush.move, null); // This remove the grey brush area as soon as the selection has been done
 				      	}
 				      		
@@ -413,7 +413,7 @@
 				      	svg.append("g")
 						.attr("transform", "translate(0," + height + ")")
 						.attr("class", "xaxis")
-						.call(d3.axisBottom(x))
+						.call(d3.axisBottom(${param.namespace}x))
 						 .selectAll("text")  
 		    				.style("text-anchor", "end")
 		    				.attr("dx", "-.8em")
@@ -426,44 +426,66 @@
 				          .transition()
 				          .duration(1000)
 				          .attr("d", d3.line()
-				            .x(function(d) { return x(d.${param.date_column}); })
+				            .x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 				            .y(function(d) { return y1(d.${param.column1}); }));
 				      	graph
 				          .select('path.dtas')
 				          .transition()
 				          .duration(1000)
 				          .attr("d", d3.line()
-				            .x(function(d) { return x(d.${param.date_column}); })
+				            .x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 				            .y(function(d) { return y2(d.${param.column2}); }));
 	
 				};
 				
-				function time_line_clear(){
-					x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
-			        xaxis.transition().call(d3.axisBottom(x));
+				function ${param.namespace}time_line_clear(){
+					
+					${param.namespace}x.domain(d3.extent(data, function(d) {return d.${param.date_column}; }));
+					
+					
+					d3.select("${param.dom_element} ${param.dom_element}_graph .xaxis")
+			        	.transition()
+			        	.call(d3.axisBottom(${param.namespace}x)
+			        	.tickFormat(function(date){
+							if (d3.timeYear(date) < date) {
+					           return d3.timeFormat('%b')(date);
+					         } else {
+					           return d3.timeFormat('%Y')(date);
+					         }
+					      	}))
+						.selectAll("text")  
+    						.style("text-anchor", "end")
+    						.attr("dx", "-.8em")
+    						.attr("dy", ".15em")
+    						.attr("transform", "rotate(-65)");
+			        
 			        graph
 			          .select('path.duas')
 			          .transition()
 			          .attr("d", d3.line()
-			          	.x(function(d) { return x(d.${param.date_column}); })
+			          	.x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 					    .y(function(d) { return y1(d.${param.column1}); }));
+			        
 			        graph
 			          .select('path.dtas')
 			          .transition()
 			          .attr("d", d3.line()
-			          	.x(function(d) { return x(d.${param.date_column}); })
+			          	.x(function(d) { return ${param.namespace}x(d.${param.date_column}); })
 					    .y(function(d) { return y2(d.${param.column2}); }));
 					
 				};
 				
-				d3.select("${param.dom_element} .clear_target")
-					.on("dblclick", time_line_clear);
+				d3.select("${param.dom_element} ${param.dom_element}_graph .clear_target")
+					.on("dblclick", ${param.namespace}time_line_clear);
+				
+				$("${param.dom_element}_btn").off().on("click", function(){
+					d3.select("${param.dom_element} ${param.dom_element}_graph .clear_target").dispatch("dblclick");
+				});
+				
 			};
 		});
 
-	$("${param.dom_element}_btn").off().on('click', function(){
-		d3.select('${param.dom_element} ${param.dom_element}_graph .clear_target').dispatch('dblclick');
-	});
+	
 	
 	
 

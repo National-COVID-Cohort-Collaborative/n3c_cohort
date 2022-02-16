@@ -11,10 +11,14 @@
 	padding: 3px; 
 	margin-top:20px;
 }
-    .button {
-        fill: #2052FF;
-        stroke: #000;
-    }
+
+button {
+	border-radius: 5px;
+    background: #2363ff;
+    color: white;
+    border: 2px solid #b0afae;
+    padding: 7px;
+}
 </style>
 
 <sql:query var="questions" dataSource="jdbc/N3CCohort">
@@ -50,7 +54,7 @@
 				<jsp:param name="column1_opacity" value="0.25" />
 			</jsp:include>
 		
-			<button id="pos_rolling_btn" class="button">Clear all selections</button>
+			<button id="pos_rolling_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 		</div>
 			
@@ -75,7 +79,7 @@
 				<jsp:param name="column2_tip_offset" value="80" />
 			</jsp:include>
 
-			<button id="pos_cumulative_btn" class="button">Clear all selections</button>
+			<button id="pos_cumulative_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 
 		</div>
