@@ -17,6 +17,7 @@ WebContent/collaborative.jsp -text
 WebContent/demo1/aggregated_table.jsp -text
 WebContent/demo1/dashboard.jsp -text
 WebContent/demo1/demo2.jsp -text
+WebContent/diabetes.jsp -text
 WebContent/feeds/age_histogram.jsp -text
 WebContent/feeds/aggregated.jsp -text
 WebContent/feeds/blood.jsp -text
@@ -28,6 +29,8 @@ WebContent/feeds/charlson_scatter.jsp -text
 WebContent/feeds/conferences.jsp -text
 WebContent/feeds/count_by_age.jsp -text
 WebContent/feeds/count_by_race.jsp -text
+WebContent/feeds/diabetes_t1_detail.jsp -text
+WebContent/feeds/diabetes_t2_detail.jsp -text
 WebContent/feeds/domain_team_roster.jsp -text
 WebContent/feeds/dta_roster.jsp -text
 WebContent/feeds/dua_roster.jsp -text
@@ -69,6 +72,7 @@ WebContent/graph_support/cohort_map.jsp -text
 WebContent/graph_support/cohort_map_legend.jsp -text
 WebContent/graph_support/forcePhoto.jsp -text
 WebContent/graph_support/grouped_bar.jsp -text
+WebContent/graph_support/grouped_stacked_bar_vertical.jsp -text
 WebContent/graph_support/labelledMap.jsp -text
 WebContent/graph_support/map_data.jsp -text
 WebContent/graph_support/n3c_fact_sheet.jsp -text
@@ -103,6 +107,7 @@ WebContent/graphs/collaboration_graph.jsp -text
 WebContent/graphs/collaborative.jsp -text
 WebContent/graphs/columnFreqData.jsp -text
 WebContent/graphs/dashboard.jsp -text
+WebContent/graphs/diabetes.jsp -text
 WebContent/graphs/home.jsp -text
 WebContent/graphs/labs.jsp -text
 WebContent/graphs/line_data_dua.jsp -text
