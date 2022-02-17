@@ -1,10 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-
 .axis .domain {
-  display: none;
+	display: none;
 }
-
 </style>
 <script>
 //Year - gender_concept_name
@@ -13,7 +11,7 @@
 //Value - count
 
 var margin = {top: 40, right: 100, bottom: 60, left: 60},
-	width = 500 - margin.left - margin.right,
+	width = 1200 - margin.left - margin.right,
 	height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("${param.dom_element}").append("svg")
@@ -36,9 +34,9 @@ var y1 = d3.scaleBand()
 var z = d3.scaleOrdinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
-var stack = d3.stack()
+/* var stack = d3.stack()
     .offset(d3.stackOffsetExpand);
-  
+ */  
 d3.json("${param.data_page}", function(error, data) {
   if (error) throw error;
   
@@ -54,16 +52,20 @@ d3.json("${param.data_page}", function(error, data) {
   	.padding(0.2);
   
   z.domain(data.map(function(d) { return d.age_bracket; }))
-  var keys = z.domain()
+  var keys = z.domain().sort();
+  var stringToFilter = '<18';
+  keys.unshift(keys.splice(keys.findIndex(item => item.id === stringToFilter), 1)[0])
+
   console.log("keys", keys)
   
   var groupData = d3.nest()
     .key(function(d) { return d.gender_concept_name + d.observation; })
   	.rollup(function(d, i){
       
-      var d2 = {gender_concept_name: d[0].gender_concept_name, observation: d[0].observation}
+      var d2 = {gender_concept_name: d[0].gender_concept_name, observation: d[0].observation, total: 0}
       d.forEach(function(d){
         d2[d.age_bracket] = d.count
+        d2.total += d.count
       })
       console.log("rollup d", d, d2);
     	return d2;
@@ -73,14 +75,14 @@ d3.json("${param.data_page}", function(error, data) {
   
   console.log("groupData", groupData)
   
-  var stackData = stack
+  var stackData = d3.stack()
   	.keys(keys)(groupData)
   
   console.log("stackData", stackData)
   
-  //y.domain([0, d3.max(data, function(d) { return d.count; })]).nice();
+ y.domain([0, d3.max(groupData, function(d) { return d.total; })]).nice();
 
-  console.log("keys", keys)
+  console.log("y", d3.max(groupData, function(d) { return d.total; }))
   
   var serie = g.selectAll(".serie")
     .data(stackData)
