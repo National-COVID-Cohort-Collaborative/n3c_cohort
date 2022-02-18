@@ -40,14 +40,14 @@ d3.json("${param.data_page}", function(error, data) {
 		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		var y0 = d3.scaleBand()
-			.rangeRound([width, 0])
+			.rangeRound([height, 0])
 			.paddingInner(0.1);
 
 		var y1 = d3.scaleBand()
 			.padding(0.05);
 
 		var x = d3.scaleLinear()
-			.rangeRound([0, height]);
+			.rangeRound([0, width]);
 
 		var x1 = d3.scaleBand()
 
@@ -144,8 +144,7 @@ d3.json("${param.data_page}", function(error, data) {
 
 	    g.append("g")
 			.attr("class", "axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(y0));
+			.call(d3.axisLeft(y0));
 
 		g.append("g")
 			.attr("class", "axis")
