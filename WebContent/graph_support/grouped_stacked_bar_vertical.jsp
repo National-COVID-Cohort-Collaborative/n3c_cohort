@@ -140,7 +140,7 @@ d3.json("${param.data_page}", function(error, data) {
 			.attr("fill", "#000")
 			.attr("font-weight", "bold")
 			.attr("text-anchor", "start")
-			.text("Population");
+			.text("Patient Count");
   
 		var legend = serie.append("g")
 			.attr("class", "legend")

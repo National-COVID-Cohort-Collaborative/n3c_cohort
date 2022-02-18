@@ -9,7 +9,7 @@
 d3.json("${param.data_page}", function(error, data) {
 	if (error) throw error;
   
-	var margin = {top: 40, right: 100, bottom: 60, left: 60},
+	var margin = {top: 40, right: 200, bottom: 60, left: 200},
 		width = 1200 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
@@ -19,8 +19,8 @@ d3.json("${param.data_page}", function(error, data) {
 			if (newWidth > 0) {
 				d3.select("${param.dom_element}").select("svg").remove();
 				width = newWidth - margin.left - margin.right;
-				if ((width - margin.top - margin.bottom) > 200){
-					height = width - margin.top - margin.bottom;
+				if ((width*1.5 - margin.left - margin.right) > 200){
+					height = width*1.5 - margin.left - margin.right;
 				} else { 
 					height = 200;
 				}
@@ -40,14 +40,14 @@ d3.json("${param.data_page}", function(error, data) {
 		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		var y0 = d3.scaleBand()
-			.rangeRound([0, width])
+			.rangeRound([width, 0])
 			.paddingInner(0.1);
 
 		var y1 = d3.scaleBand()
 			.padding(0.05);
 
 		var x = d3.scaleLinear()
-			.rangeRound([height, 0]);
+			.rangeRound([0, height]);
 
 		var x1 = d3.scaleBand()
 
@@ -97,66 +97,6 @@ d3.json("${param.data_page}", function(error, data) {
 		x.domain([0, d3.max(groupData, function(d) { return d.total; })]).nice();
 
 		console.log("y", d3.max(groupData, function(d) { return d.total; }))
-  
-		var serie = g.selectAll(".serie")
-			.data(stackData)
-			.enter().append("g")
-			.attr("class", "serie")
-			.attr("fill", function(d) { return z(d.key); });
-  
-		serie.selectAll("rect")
-			.data(function(d) { return d; })
-			.enter().append("rect")
-			.attr("class", "serie-rect")
-			.attr("transform", function(d) { return "translate(0," + y0(d.data.${param.primary_group}) + ")"; })
-			.attr("y", function(d) { return y1(d.data.${param.secondary_group}); })
-			.attr("x", function(d) { return x(d[1]); })
-			.attr("width", function(d) { return x(d[0]) - x(d[1]); })
-			.attr("height", y1.bandwidth())
-			.on("click", function(d, i){ console.log("serie-rect click d", i, d); })
-			.on("mouseover", function() { tooltip.style("display", null); })
-			.on("mouseout", function() { tooltip.style("display", "none"); })
-			.on("mousemove", function(d) {
-				console.log(d);
-				var xPosition = d3.mouse(this)[0] - 5;
-				var yPosition = d3.mouse(this)[1] - 5;
-				tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-				tooltip.select("text").text('x');
-			})
-			;
-
-		g.append("g")
-			.attr("class", "axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(y0));
-
-		g.append("g")
-			.attr("class", "axis")
-			.call(d3.axisLeft(y).ticks(null, "s"))
-			.append("text")
-			.attr("y", 2)
-			.attr("x", x(y.ticks().pop()) + 0.5)
-			.attr("dy", "0.32em")
-			.attr("fill", "#000")
-			.attr("font-weight", "bold")
-			.attr("text-anchor", "start")
-			.text("Population");
-  
-		var legend = serie.append("g")
-			.attr("class", "legend")
-			.attr("transform", function(d) { var d = d[d.length - 1]; return "translate(" + (y0(d.data.${param.primary_group}) + y1(d.data.gender_concept_name) + y1.bandwidth()) + "," + ((y(d[0]) + y(d[1])) / 2) + ")"; });
-
-		legend.append("line")
-			.attr("x1", -6)
-			.attr("x2", 6)
-			.attr("stroke", "#000");
-
-		legend.append("text")
-			.attr("y", 9)
-			.attr("dy", "0.35em")
-			.attr("fill", "#000")
-			.style("font", "10px sans-serif")
-			.text(function(d) { return d.key; });
 		 
 		var tooltip = svg.append("g")
 		    .attr("class", "tooltip")
@@ -174,6 +114,67 @@ d3.json("${param.data_page}", function(error, data) {
 		    .style("text-anchor", "middle")
 		    .attr("font-size", "12px")
 		    .attr("font-weight", "bold");
+  
+		var serie = g.selectAll(".serie")
+			.data(stackData)
+			.enter().append("g")
+			.attr("class", "serie")
+			.attr("fill", function(d) { return z(d.key); });
+  
+		serie.selectAll("rect")
+			.data(function(d) { return d; })
+			.enter().append("rect")
+			.attr("class", "serie-rect")
+			.attr("transform", function(d) { return "translate(0," + y0(d.data.${param.primary_group}) + ")"; })
+			.attr("y", function(d) { return y1(d.data.${param.secondary_group}); })
+			.attr("x", function(d) { return x(d[0]); })
+			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+			.attr("height", y1.bandwidth())
+			.on("click", function(d, i){ console.log("serie-rect click d", i, d); })
+			.on("mouseover", function() { tooltip.style("display", null); })
+			.on("mouseout", function() { tooltip.style("display", "none"); })
+			.on("mousemove", function(d) {
+				console.log(d);
+				var xPosition = d3.mouse(this)[0] - 5;
+				var yPosition = d3.mouse(this)[1] - 5;
+				tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+				tooltip.select("text").text('x');
+			})
+			;
+
+	    g.append("g")
+			.attr("class", "axis")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(y0));
+
+		g.append("g")
+			.attr("class", "axis")
+			.call(d3.axisTop(x).ticks(null, "s"))
+			.append("text")
+			.attr("y", 2)
+			.attr("x", x(x.ticks().pop()) + 0.5)
+			.attr("dx", "0.32em")
+			.attr("fill", "#000")
+			.attr("font-weight", "bold")
+			.attr("text-anchor", "start")
+			.text("Patient Count");
+  
+		var legend = serie.append("g")
+			.attr("class", "legend")
+			.attr("transform", function(d) { var d = d[d.length - 1]; return "translate(" + ((x(d[0]) + x(d[1])) / 2) + "," + (y0(d.data.${param.primary_group}) + y1(d.data.gender_concept_name) + y1.bandwidth()) + ")"; });
+
+		legend.append("line")
+			.attr("y1", -6)
+			.attr("y2", 6)
+			.attr("stroke", "#000");
+
+		legend.append("text")
+			.attr("x", 0)
+			.attr("dy", "1.5em")
+			.attr("fill", "#000")
+			.style("font", "10px sans-serif")
+		    .style("text-anchor", "middle")
+			.text(function(d) { return d.key; });
 		}
 	});
 
