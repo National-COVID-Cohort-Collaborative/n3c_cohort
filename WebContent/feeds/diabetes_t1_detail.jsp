@@ -3,7 +3,16 @@
 
 <sql:query var="cases" dataSource="jdbc/N3CCohort">
 	select json_agg(json order by 5,4,2,1)
-	from (select * from n3c_questions.diabetes_t1_full_censored where gender_concept_name != 'OTHER'  and age_bracket is not null) as json;
+	from (select
+			age_bracket,
+			gender_concept_name,
+			case
+				when (count = '<20' or count is null) then 0
+				else count::int
+			end as count,
+			observation,
+			n_observation
+		  from n3c_questions.diabetes_t1_full_censored where gender_concept_name != 'OTHER'  and age_bracket is not null) as json;
 </sql:query>
 
 <c:forEach items="${cases.rows}" var="row" varStatus="rowCounter">

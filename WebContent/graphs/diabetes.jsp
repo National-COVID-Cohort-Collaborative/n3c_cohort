@@ -39,10 +39,34 @@ button {
 			<jsp:include page="../graph_support/grouped_stacked_bar_vertical.jsp">
 				<jsp:param name="data_page" value="feeds/diabetes_t2_detail.jsp" />
 				<jsp:param name="dom_element" value="#diabetes_type2_detail" />
+				<jsp:param name="primary_group" value="observation" />
+				<jsp:param name="secondary_group" value="gender_concept_name" />
+				<jsp:param name="stack_group" value="age_bracket" />
+				<jsp:param name="count" value="count" />
+			</jsp:include>
+		</div>
+		<div id="diabetes_type2_detail_2">
+			<jsp:include page="../graph_support/grouped_stacked_bar_horizontal.jsp">
+				<jsp:param name="data_page" value="feeds/diabetes_t2_detail.jsp" />
+				<jsp:param name="dom_element" value="#diabetes_type2_detail_2" />
+				<jsp:param name="primary_group" value="observation" />
+				<jsp:param name="secondary_group" value="gender_concept_name" />
+				<jsp:param name="stack_group" value="age_bracket" />
+				<jsp:param name="count" value="count" />
 			</jsp:include>
 		</div>
 		<div class="d3_question_header">
 			Diabetes Mellitus Type 1
+		</div>
+		<div id="diabetes_type1_detail">
+			<jsp:include page="../graph_support/grouped_stacked_bar_vertical.jsp">
+				<jsp:param name="data_page" value="feeds/diabetes_t1_detail.jsp" />
+				<jsp:param name="dom_element" value="#diabetes_type1_detail" />
+				<jsp:param name="primary_group" value="observation" />
+				<jsp:param name="secondary_group" value="gender_concept_name" />
+				<jsp:param name="stack_group" value="age_bracket" />
+				<jsp:param name="count" value="count" />
+			</jsp:include>
 		</div>
 		<div id="pos_rolling">
 		</div>

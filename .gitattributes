@@ -72,6 +72,7 @@ WebContent/graph_support/cohort_map.jsp -text
 WebContent/graph_support/cohort_map_legend.jsp -text
 WebContent/graph_support/forcePhoto.jsp -text
 WebContent/graph_support/grouped_bar.jsp -text
+WebContent/graph_support/grouped_stacked_bar_horizontal.jsp -text
 WebContent/graph_support/grouped_stacked_bar_vertical.jsp -text
 WebContent/graph_support/labelledMap.jsp -text
 WebContent/graph_support/map_data.jsp -text
