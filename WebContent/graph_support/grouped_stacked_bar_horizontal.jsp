@@ -9,7 +9,7 @@
 d3.json("${param.data_page}", function(error, data) {
 	if (error) throw error;
   
-	var margin = {top: 40, right: 200, bottom: 60, left: 200},
+	var margin = {top: 40, right: 100, bottom: 60, left: 250},
 		width = 1200 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
@@ -128,7 +128,7 @@ d3.json("${param.data_page}", function(error, data) {
 			.attr("transform", function(d) { return "translate(0," + y0(d.data.${param.primary_group}) + ")"; })
 			.attr("y", function(d) { return y1(d.data.${param.secondary_group}); })
 			.attr("x", function(d) { return x(d[0]); })
-			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+			.attr("width", function(d) { return Math.max(1,x(d[1]) - x(d[0])); })
 			.attr("height", y1.bandwidth())
 			.on("click", function(d, i){ console.log("serie-rect click d", i, d); })
 			.on("mouseover", function() { tooltip.style("display", null); })
