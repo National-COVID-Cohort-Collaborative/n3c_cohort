@@ -1,5 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test = "${not empty param.column1_color}">
+	<c:set var = "column1_color" value = "${param.column1_color}"/>
+</c:if>
+<c:if test = "${empty param.column1_color}">
+	<c:set var = "column1_color" value = "#2d5985"/>
+</c:if>
+<c:if test = "${not empty param.column2_color}">
+	<c:set var = "column2_color" value = "${param.column2_color}"/>
+</c:if>
+<c:if test = "${empty param.column2_color}">
+	<c:set var = "column2_color" value = "#6b496b"/>
+</c:if>
+<c:if test = "${not empty param.namespace}">
+	<c:set var = "namespace" value = "${param.namespace}"/>
+</c:if>
+<c:if test = "${empty param.column2_color}">
+	<c:set var = "namespace" value = "namespace"/>
+</c:if>
+
+
+
+
 <style>
     .axis path,
     .axis line {
@@ -26,9 +48,9 @@
         pointer-events: bounding-box;
     }
 	
-	.tooltip-duas,
-	text.duas{
-        fill: #2d5985;
+	.tooltip-duas.${namespace},
+	text.duas.${namespace}{
+        fill: ${column1_color} ;
     }
     
     .dua_dta_focus{
@@ -45,18 +67,19 @@
     	width:130px;
     }
     
-    path.duas,
-    rect.duas{
-    	stroke: #2d5985;
+    path.duas.${namespace},
+    rect.duas.${namespace}{
+    	stroke: ${column1_color} ;
     	stroke-width:2.8px;
     }
-    path.dtas,rect.dtas{
-    	stroke:#6b496b;
+    path.dtas.${namespace},
+    rect.dtas.${namespace}{
+    	stroke: ${column2_color} ;
     	stroke-width:2.8px;
     }
     
-    .tooltip-dtas, text.dtas{
-    		fill:#6b496b;
+    .tooltip-dtas.${namespace}, text.dtas.${namespace}{
+    		fill: ${column2_color} ;
     }
     
     .dua_dta_focus text{
@@ -74,22 +97,18 @@
         font-weight: bold;
     }
 
-.axis1 text{
-  fill: #2d5985;
+.axis1.${namespace} text{
+  fill: ${column1_color} ;
 }
 
-.axis2 text{
-  fill: #6b496b;
+.axis2.${namespace} text{
+  fill: ${column2_color} ;
 }
-
 </style>
 
 	
 
 <script>
-
-
-
 // set the dimensions and margins of the graph
 	var margin = {top: 100, right: 150, bottom: 80, left: 80},
 	    width = 960 - margin.left - margin.right,
@@ -208,12 +227,12 @@
 				graph.append("path")
 					.data([data])
 					.attr("opacity", column1_opacity)
-					.attr("class", "line duas")
+					.attr("class", "line duas ${namespace}")
 					.attr("d", valueline);
 				graph.append("path")
 					.data([data])
 					.attr("opacity", column2_opacity)
-					.attr("class", "line dtas")
+					.attr("class", "line dtas ${namespace}")
 					.attr("d", valueline2);
 				
 				// Add the brushing
@@ -231,13 +250,13 @@
 				    	.attr("transform", "translate("+(width+3)+","+y1(data[data.length-1].${param.column1})+")")
 				    	.attr("dy", ".35em")
 				    	.attr("text-anchor", "start")
-				    	.attr("class", "duas")
+				    	.attr("class", "duas ${namespace}")
 				    	.text("${param.column1_tip}");
 					graph.append("text")
 				    	.attr("transform", "translate("+(width+3)+","+y2(data[data.length-1].${param.column2})+")")
 				    	.attr("dy", ".35em")
 				    	.attr("text-anchor", "start")
-				    	.attr("class", "dtas")
+				    	.attr("class", "dtas ${namespace}")
 				    	.text("${param.column2_tip}");
 				</c:if>
 				
@@ -269,7 +288,7 @@
 				      .text("Date");
 
 				  svg.append("g")
-			      .attr("class", "axis1")
+			      .attr("class", "axis1 ${namespace}")
 			      .call(d3.axisLeft(y1));
 
 				  // text label for the y axis
@@ -282,7 +301,7 @@
 				      .text("${param.column1_label}");      
 				  
 				  svg.append("g")
-			      .attr("class", "axis2")
+			      .attr("class", "axis2 ${namespace}")
 			      .attr("transform", "translate( " + width + ", 0 )")
 			      .call(d3.axisRight(y2));
 				
@@ -310,7 +329,7 @@
 	
 				lineLegend.append("rect")
 				    .attr("width", 22)
-				    .attr("class", function(d){return d.tag;})
+				    .attr("class", function(d){return d.tag + " ${namespace}";})
 				    .attr("opacity", function(d){return d.opacity;})
 				    .attr('height', 2);
 				    
@@ -347,12 +366,12 @@
 		    		.text("${param.column2_tip}:");
 			
 				dua_dta_focus.append("text")
-			    	.attr("class", "tooltip-duas")
+			    	.attr("class", "tooltip-duas ${namespace}")
 			    	.attr("x", ${param.column1_tip_offset})
 			    	.attr("y", 18);
 				
 				dua_dta_focus.append("text")
-					.attr("class", "tooltip-dtas")
+					.attr("class", "tooltip-dtas ${namespace}")
 					.attr("x", ${param.column2_tip_offset})
 					.attr("y", 30);
 				
@@ -368,7 +387,7 @@
 				        i = bisectDate_dua_dta(data, x0, 1),
 				        d0 = data[i - 1],
 				        d1 = data[i],
-				        d = x0 - d0.first_diagnosis_date > d1.first_diagnosis_date - x0 ? d1 : d0;
+				        d = x0 - d0.${param.date_column} > d1.${param.date_column} - x0 ? d1 : d0;
 				    
 				    
 				    if (width/2 > d3.mouse(this)[0]){
@@ -485,9 +504,4 @@
 				
 			};
 		});
-
-	
-	
-	
-
 </script>
