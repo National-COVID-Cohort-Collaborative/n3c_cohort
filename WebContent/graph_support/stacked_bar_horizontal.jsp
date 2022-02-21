@@ -54,6 +54,8 @@ d3.json("${param.data_page}", function(error, data) {
 		var z = d3.scaleOrdinal()
 			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
+		var z2 = d3.scaleOrdinal()
+
 		data.forEach(function(d){
     		d.${param.count} = +d.${param.count};
 		})
@@ -65,12 +67,24 @@ d3.json("${param.data_page}", function(error, data) {
 			.rangeRound([0, y0.bandwidth()])
 			.padding(0.2);
   
-		z.domain(data.map(function(d) { return d.${param.secondary_group}+'|'+d.${param.stack_group}; }))
+		function keyMap(key) {
+			if (key == '<18')
+				return 1;
+			if (key == '18-64')
+				return 2;
+			return 3;
+		}
+		z.domain(data.map(function(d,i) { return d.${param.secondary_group}+'-'+keyMap(d.${param.stack_group}); }))
 		var keys = z.domain().sort();
-		var stringToFilter = '<18';
-		keys.unshift(keys.splice(keys.findIndex(item => item.id === stringToFilter), 1)[0])
+		//var stringToFilter = '<18';
+		//keys.unshift(keys.splice(keys.findIndex(item => item.id === stringToFilter), 1)[0])
 
 		console.log("keys", keys)
+  
+		z2.domain(data.map(function(d,i) { return d.${param.primary_group}; }));
+		var keys2 = z2.domain().sort();
+
+		console.log("keys2", keys2)
   
 		var groupData = d3.nest()
 			.key(function(d) { return d.${param.secondary_group} + d.${param.primary_group}; })
@@ -99,9 +113,9 @@ d3.json("${param.data_page}", function(error, data) {
       			var d2 = {${param.primary_group}: d[0].${param.primary_group}, overall_total: 0, block: d}
 				d.forEach(function(d){
 					d2.overall_total += d.total
-					d2[d.${param.secondary_group}+'|<18'] = d['<18'];
-					d2[d.${param.secondary_group}+'|18-64'] = d['18-64'];
-					d2[d.${param.secondary_group}+'|65+'] = d['65+'];
+					d2[d.${param.secondary_group}+'-1'] = d['<18'];
+					d2[d.${param.secondary_group}+'-2'] = d['18-64'];
+					d2[d.${param.secondary_group}+'-3'] = d['65+'];
 				})
 				console.log("rollup d", d, d2);
 				return d2;
@@ -146,27 +160,23 @@ d3.json("${param.data_page}", function(error, data) {
 		serie.selectAll("rect")
 			.data(function(d) { return d; })
 			.enter().append("rect")
-			.attr("class", function(d){ console.log(d); return "serie-rect " + d.key })
+			.attr("class", function(d){ return "${param.namespace}-rect "; })
 			.attr("transform", function(d) { return "translate(0," + y0(d.data.${param.primary_group}) + ")"; })
 			.attr("y", function(d) { return y1(d.data.${param.secondary_group}); })
 			.attr("x", function(d) { return x(d[0]); })
 			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
 			.attr("height", y0.bandwidth())
-			.on("click", function(d, i){ console.log("serie-rect click d", i, d); })
+			.on("click", function(d, i){ console.log("${param.namespace}-rect click d", i, d); })
 			.on("mouseover", function() { 
-				// what subgroup are we hovering?
-				console.log(d3.select(this.parentNode).datum().key)
-			    var subgroupName = d3.select(this.parentNode).datum().key; // This was the tricky part
-			    var subgroupValue = data[subgroupName];
 			    // Reduce opacity of all rect to 0.2
-			    d3.selectAll(".serie-rect").style("opacity", 0.2)
-			    // Highlight all rects of this subgroup with opacity 0.8. It is possible to select them since they have a specific class = their name.
-			    d3.selectAll("."+subgroupName)
+			    d3.selectAll(".${param.namespace}-rect").style("opacity", 0.2)
+			    // Highlight all rects of this subgroup with opacity 1.
+ 				d3.select(this.parentNode).selectAll(".${param.namespace}-rect")
 			      .style("opacity", 1)
 			})
 			.on("mouseout", function() {
-			    // Back to normal opacity: 0.8
-			    d3.selectAll(".serie-rect")
+			    // Back to normal opacity: 1
+			    d3.selectAll(".${param.namespace}-rect")
 			      .style("opacity",1)
 			})
 			.on("mousemove", function(d) {
