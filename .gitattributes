@@ -68,6 +68,7 @@ WebContent/feeds/siteLocations.jsp -text
 WebContent/feeds/siteRoster.jsp -text
 WebContent/feeds/total_by_source_count_weekly_int.jsp -text
 WebContent/footer.jsp -text
+WebContent/graph_support/bar_horizontal.jsp -text
 WebContent/graph_support/cohort_map.jsp -text
 WebContent/graph_support/cohort_map_legend.jsp -text
 WebContent/graph_support/forcePhoto.jsp -text
@@ -141,6 +142,8 @@ WebContent/graphs/severity_misc.jsp -text
 WebContent/graphs/severity_payer.jsp -text
 WebContent/graphs/severity_race.jsp -text
 WebContent/graphs/severity_smoking.jsp -text
+WebContent/graphs/summary.jsp -text
+WebContent/graphs/summary/vax_comorbid.jsp -text
 WebContent/graphs/tables.jsp -text
 WebContent/head.jsp -text
 WebContent/images/cd2h_invent.png -text
@@ -216,6 +219,7 @@ WebContent/resources/main_style.css -text
 WebContent/resources/n3c_login_style.css -text
 WebContent/sites/mapping.jsp -text
 WebContent/sites/submit_mapping.jsp -text
+WebContent/summary.jsp -text
 WebContent/tab_test.jsp -text
 WebContent/tab_test2.jsp -text
 WebContent/tables/blood.jsp -text
