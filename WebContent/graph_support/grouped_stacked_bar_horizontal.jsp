@@ -130,7 +130,7 @@ d3.json("${param.data_page}", function(error, data) {
 			
 		// Legend ////////////////////	
 		var legend_text = g.append("g")
-			.attr("transform", "translate(" + (margin.left/2) + " ," + (-20 - (margin.top/2)) + " )")
+			.attr("transform", "translate(" + (margin.right/2) + " ," + (-20 - (margin.top/2)) + " )")
 			.attr("font-family", "sans-serif")
 			.attr("font-size", 11)
 			.attr("font-weight", "bold")
@@ -142,7 +142,7 @@ d3.json("${param.data_page}", function(error, data) {
 			.text("${param.legend_label}");
 			
 		var legend = g.append("g")
-			.attr("transform", "translate(" + (margin.left/2) + " ," + (0 - (margin.top/2)) + " )")
+			.attr("transform", "translate(" + (margin.right/2) + " ," + (0 - (margin.top/2)) + " )")
 			.attr("font-family", "sans-serif")
 			.attr("font-size", 10)
 			.attr("text-anchor", "end")
@@ -190,11 +190,8 @@ d3.json("${param.data_page}", function(error, data) {
 		    .on("mousemove", function(d) {
 		     	var xPosition = d3.mouse(this)[0];
 		     	var yPosition = d3.mouse(this)[1];
-		     	console.log(xPosition);
-		     	console.log(yPosition);
 		     	tooltip.attr("transform", "translate(" + xPosition + "," + ((y0(d.data.${param.primary_group})) + (y1(d.data.${param.secondary_group}))) + ")");
 		     	tooltip.select("text").text(d[1]-d[0]);
-		     	console.log(d);
 		    });
 		
 		// Sub-Category Axis ///////////////

@@ -12,7 +12,10 @@
 			end as count,
 			observation,
 			n_observation
-		  from n3c_questions.diabetes_t2_full_censored where gender_concept_name != 'OTHER'  and age_bracket is not null) as json;
+		  from n3c_questions.diabetes_t2_full_censored where gender_concept_name != 'OTHER'  and age_bracket is not null
+		  order by gender_concept_name,
+		  (CASE WHEN (age_bracket = '<18') THEN 1 WHEN (age_bracket = '18-64') THEN 0 ELSE -99 END) asc
+		  ) as json;
 </sql:query>
 
 <c:forEach items="${cases.rows}" var="row" varStatus="rowCounter">

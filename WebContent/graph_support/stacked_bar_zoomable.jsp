@@ -3,7 +3,9 @@
 <meta charset="utf-8">
 
 <style>
-
+rect{
+	cursor: auto;
+}
 
 .dua_dta_focus{
 	fill: black;

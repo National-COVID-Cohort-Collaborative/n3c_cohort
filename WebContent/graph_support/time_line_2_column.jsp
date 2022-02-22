@@ -23,6 +23,10 @@
 
 
 <style>
+	rect{
+		cursor: auto;
+	}
+
     .axis path,
     .axis line {
         fill: none;
