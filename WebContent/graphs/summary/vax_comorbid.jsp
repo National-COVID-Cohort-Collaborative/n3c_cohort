@@ -6,7 +6,7 @@
 	<div class="col-xs-2 ">
 		<a onclick="uncheckAll();">Reset Filters</a>
 		<div id="mode" class="panel-heading">
-			Display: <i id="mode-pie" class="fas fa-chart-pie fa-lg"></i> <i id="mode-bar" class="fas fa-chart-bar fa-lg text-success"></i> <i id="mode-table" class="fas fa-table fa-lg"></i>
+			Display: <i id="mode-pie" class="fas fa-chart-pie fa-lg"></i> <i id="mode-bar" class="fas fa-chart-bar fa-lg text-success"></i>
 		</div>
 		<div class=" panel-primary">
 			<div class="panel-body">
@@ -73,45 +73,47 @@
 	</div>
 
 	<div class="col-xs-10">
-		<div id="display-d3">
-		<div class="row stats">
-			<div class="col-xs-6 ">
+         <div class="pubhealth-panel panel panel-primary top_panel shadow-border">
+             <ul class="nav nav-tabs" style="font-size: 16px;">
+                <li class="active"><a data-toggle="tab" href="#vax_comorbid_severity">Severity</a></li>
+                <li><a data-toggle="tab" href="#vax_comorbid_age">Age</a></li>
+                <li><a data-toggle="tab" href="#vax_comorbid_gender">Gender</a></li>
+                <li><a data-toggle="tab" href="#vax_comorbid_race">Race</a></li>
+                <li><a data-toggle="tab" href="#vax_comorbid_ethnicity">Ethnicity</a></li>
+            </ul>
+		<div id="tab-content">
+			<div class="tab-pane fade in active" id="vax_comorbid_severity">
+				<h5>Severity</h5>
+				<div class="panel-body">
+					<div id="severity_histogram"></div>
+				</div>
+			</div>
+6			<div class="tab-pane fade" id="vax_comorbid_age">
 				<h5>Age</h5>
 				<div class="panel-heading">
 					<div id="age_histogram"></div>
 				</div>
 			</div>
-			<div class="col-xs-6 ">
+			<div class="tab-pane fade" id="vax_comorbid_gender">
 				<h5>Gender</h5>
 				<div class="panel-body">
 					<div id="gender_histogram"></div>
 				</div>
 			</div>
-		</div>
-		<div class="row stats">
-			<div class="col-xs-6 ">
+			<div class="tab-pane fade" id="vax_comorbid_race">
 				<h5>Race</h5>
 				<div class="panel-body">
 					<div id="race_histogram"></div>
 				</div>
 			</div>
-			<div class="col-xs-6 ">
+			<div class="tab-pane fade" id="vax_comorbid_ethnicity">
 				<h5>Ethnicity</h5>
 				<div class="panel-heading">
 					<div id="ethnicity_histogram"></div>
 				</div>
 			</div>
 		</div>
-		<div class="row stats">
-			<div class="col-xs-6 ">
-				<h5>Severity</h5>
-				<div class="panel-body">
-					<div id="severity_histogram"></div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div id="display-table" style="display:none" class="panel panel-primary">
+		<div id="display-table" style="display:block" class="panel panel-primary">
 			<div class="panel-heading">Aggregated Data</div>
 			<div class="panel-body">
 				<div id="aggregated"></div>
@@ -551,7 +553,6 @@ $('#mode-bar').on('click', function(element) {
 	}
 	document.getElementById("mode-pie").classList.remove("text-success");
 	document.getElementById("mode-table").classList.remove("text-success");
-	document.getElementById("display-table").style.display = "none";
 	document.getElementById("display-d3").style.display = "block";
 	refreshHistograms();
 });
@@ -561,18 +562,8 @@ $('#mode-pie').on('click', function(element) {
 	}
 	document.getElementById("mode-bar").classList.remove("text-success");
 	document.getElementById("mode-table").classList.remove("text-success");
-	document.getElementById("display-table").style.display = "none";
 	document.getElementById("display-d3").style.display = "block";
 	refreshHistograms();
-});
-$('#mode-table').on('click', function(element) {
-	if (!document.getElementById("mode-table").classList.contains("text-success")) {
-		document.getElementById("mode-table").classList.add("text-success");
-	}
-	document.getElementById("mode-bar").classList.remove("text-success");
-	document.getElementById("mode-pie").classList.remove("text-success");
-	document.getElementById("display-table").style.display = "block";
-	document.getElementById("display-d3").style.display = "none";
 });
 
 $('#age').on('click', function() {
