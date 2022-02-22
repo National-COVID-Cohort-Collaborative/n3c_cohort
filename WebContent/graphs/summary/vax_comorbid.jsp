@@ -88,7 +88,7 @@
 					<div id="severity_histogram"></div>
 				</div>
 			</div>
-6			<div class="tab-pane fade" id="vax_comorbid_age">
+			<div class="tab-pane fade" id="vax_comorbid_age">
 				<h5>Age</h5>
 				<div class="panel-heading">
 					<div id="age_histogram"></div>
