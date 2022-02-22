@@ -114,12 +114,12 @@
 			</div>
 		</div>
 		<div id="display-table" style="display:block" class="panel panel-primary">
-			<div class="panel-heading">Aggregated Data</div>
 			<div class="panel-body">
-				<div id="aggregated"></div>
+				<div id="summary-vax-comorbid"></div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <jsp:include page="../../graph_support/verticalBarChart_local.jsp"/>
 <jsp:include page="../../graph_support/pieChart_local.jsp"/>
@@ -235,7 +235,7 @@ $(document).ready( function () {
 		var table = document.createElement("table");
 		table.className = 'table table-hover compact site-wrapper';
 		table.style.width = '100%';
-		table.id="aggregated-table";
+		table.id="summary-vax-comorbid-table";
 	
 		var header= table.createTHead();
 		var header_row = header.insertRow(0); 
@@ -246,12 +246,12 @@ $(document).ready( function () {
 			header_row.appendChild(th);
 		}
 	
-		var divContainer = document.getElementById("aggregated");
+		var divContainer = document.getElementById("summary-vax-comorbid");
 		divContainer.appendChild(table);
 	
 		var data = json['rows'];
 	
-		aggregated_datatable = $('#aggregated-table').DataTable( {
+		aggregated_datatable = $('#summary-vax-comorbid-table').DataTable( {
 			"dom": '<l<t>ip>',
 	    	data: data,
 	       	paging: true,
