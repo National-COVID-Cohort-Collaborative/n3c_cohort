@@ -37,6 +37,7 @@ WebContent/feeds/dua_roster.jsp -text
 WebContent/feeds/fact_sheet.jsp -text
 WebContent/feeds/filled.jsp -text
 WebContent/feeds/line_dta_dua_regs.jsp -text
+WebContent/feeds/long_covid_summary.jsp -text
 WebContent/feeds/machine_learning_dashboard.jsp -text
 WebContent/feeds/map_data.jsp -text
 WebContent/feeds/meds.jsp -text
