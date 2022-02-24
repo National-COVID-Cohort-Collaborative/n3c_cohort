@@ -57,7 +57,6 @@ button {
 			<button id="pos_rolling_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 		</div>
-			
 	
 		<div class="d3_question_header">
 			COVID+ Patients: Cumulative and 7-Day Rolling Average Counts
@@ -82,6 +81,15 @@ button {
 			<button id="pos_cumulative_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 
+		</div>
+
+		<div class="d3_question_header">
+		</div>
+		<div id="pos_table">
+			<p>&nbsp;</p>
+			<div class="col-xs-2">&nbsp;</div>
+			<div class="col-xs-8" id="positives-by-date"></div>
+			<jsp:include page="../tables/positive_cases_by_date.jsp"/>
 		</div>
 	</div>
 		

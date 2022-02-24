@@ -242,6 +242,7 @@ WebContent/tables/online.jsp -text
 WebContent/tables/overall_stats.jsp -text
 WebContent/tables/papers.jsp -text
 WebContent/tables/peak.jsp -text
+WebContent/tables/positive_cases_by_date.jsp -text
 WebContent/tables/preprints.jsp -text
 WebContent/tables/project_roster.jsp -text
 WebContent/tables/project_roster_styled.jsp -text
