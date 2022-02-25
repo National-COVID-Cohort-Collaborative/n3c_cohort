@@ -160,6 +160,8 @@ WebContent/long_covid_downloads/fig3.svg -text
 WebContent/long_covid_downloads/fig4.svg -text
 WebContent/long_covid_downloads/fig5.svg -text
 WebContent/long_covid_downloads/figS1.svg -text
+WebContent/long_covid_downloads/table1.html -text
+WebContent/long_covid_downloads/table2.html -text
 WebContent/machine-learning.jsp -text
 WebContent/navbar.jsp -text
 WebContent/phenotype-explorer.jsp -text
@@ -250,6 +252,7 @@ WebContent/tables/questions_styled.jsp -text
 WebContent/tables/questions_styled2.jsp -text
 WebContent/tables/questions_styled3.jsp -text
 WebContent/tables/questions_styled4.jsp -text
+WebContent/tables/reinfections_by_date.jsp -text
 WebContent/tables/severity.jsp -text
 WebContent/tables/site_roster.jsp -text
 WebContent/testing.html -text

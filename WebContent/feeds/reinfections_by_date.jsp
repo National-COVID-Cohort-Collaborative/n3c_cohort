@@ -21,7 +21,19 @@
 
 </sql:query>
 
+<c:if test="${not empty param.headers}">
+{
+    "headers": [
+        {"value":"c_date", "label":"Date"},
+        {"value":"first_diagnosis", "label":"First Diagnosis Case Count"},
+        {"value":"reinfected", "label":"Reinfection Case Count"},
+        {"value":"subsequent_test", "label":"Subsequent Positive Test Case Count"}
+    ],
+    "rows" : 
+</c:if>
 <c:forEach items="${cases.rows}" var="row" varStatus="rowCounter">
 	${row.json_agg}
 </c:forEach>
-
+<c:if test="${not empty param.headers}">
+}
+</c:if>

@@ -40,6 +40,12 @@
 					<div class="long_nav_item cards2" id="long-covid-menus1">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-s1-tile')">Figures 1 and S1</a></h5>
 					</div>
+					<div class="long_nav_item cards2" id="long-covid-menus5">
+						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t1-tile')">Table 1</a></h5>
+					</div>
+					<div class="long_nav_item cards2" id="long-covid-menus6">
+						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t2-tile')">Table 2</a></h5>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -63,6 +69,14 @@
 					<h4 class="centered">Figure S1</h4>
 					<a href="long_covid_downloads/figS1.svg"><img alt="test image" src="long_covid_downloads/figS1.svg" width="100%"></a>
 				</div>
+				<div id="long-covid-t1-tile" style="display:none;">
+					<h4 class="centered">Table 1</h4>
+					<c:import url="https://labs.cd2h.org/n3c-cohort/long_covid_downloads/table1.html"/>
+				</div>
+				<div id="long-covid-t2-tile" style="display:none;">
+					<h4 class="centered">Table 2</h4>
+					<c:import url="https://labs.cd2h.org/n3c-cohort/long_covid_downloads/table2.html"/>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -78,31 +92,57 @@ function long_covid_render(facet) {
 		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-2-tile") {
 		document.getElementById("long-covid-2-tile").style.display = "block";
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-3-tile") {
 		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-4-tile") {
 		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "block";
 		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-5-tile") {
 		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-s1-tile") {
 		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-s1-tile").style.display = "block";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
+	}
+	if (facet == "long-covid-t1-tile") {
+		document.getElementById("long-covid-2-tile").style.display = "none";
+		document.getElementById("long-covid-4-tile").style.display = "none";
+		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "block";
+		document.getElementById("long-covid-t2-tile").style.display = "none";
+	}
+	if (facet == "long-covid-t2-tile") {
+		document.getElementById("long-covid-2-tile").style.display = "none";
+		document.getElementById("long-covid-4-tile").style.display = "none";
+		document.getElementById("long-covid-s1-tile").style.display = "none";
+		document.getElementById("long-covid-t1-tile").style.display = "none";
+		document.getElementById("long-covid-t2-tile").style.display = "block";
 	}
 }
 </script>

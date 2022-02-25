@@ -50,7 +50,7 @@ button {
 				<jsp:param name="column1_tip" value="First Diagnosis" />
 				<jsp:param name="column1_tip_offset" value="110" />
 				<jsp:param name="column1_color" value="#376076" />
-				<jsp:param name="column1_opacity" value="1" />
+				<jsp:param name="column1_opacity" value="0.25" />
 				<jsp:param name="column2" value="reinfected" />
 				<jsp:param name="column2_label" value="Reinfected Count" />
 				<jsp:param name="column2_tip" value="Reinfected" />
@@ -76,7 +76,7 @@ button {
 				<jsp:param name="column1_tip" value="First Diagnosis" />
 				<jsp:param name="column1_tip_offset" value="110" />
 				<jsp:param name="column1_color" value="#376076" />
-				<jsp:param name="column1_opacity" value="1" />
+				<jsp:param name="column1_opacity" value="0.25" />
 				<jsp:param name="column2" value="subsequent_test" />
 				<jsp:param name="column2_label" value="Subsequent Test Count" />
 				<jsp:param name="column2_tip" value="Subsequent Test" />
@@ -118,6 +118,14 @@ button {
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
 		</div>
 		
+		<div class="d3_question_header">
+		</div>
+		<div id="reinfection_table">
+			<p>&nbsp;</p>
+			<div class="col-xs-2">&nbsp;</div>
+			<div class="col-xs-8" id="reinfections-by-date"></div>
+			<jsp:include page="../tables/reinfections_by_date.jsp"/>
+		</div>
 	</div>
 		
 </div>
