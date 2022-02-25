@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
-<jsp:include page="head.jsp" flush="true" />
-
 <style type="text/css" media="all">
 @import "resources/n3c_login_style.css";
 @import "resources/main_style.css";

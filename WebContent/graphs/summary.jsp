@@ -35,9 +35,10 @@ button {
 		<div class="d3_question_header">
 			Demographics: Vaccinated and Comorbidities
 		</div>
-		<div id="summary_vax_comorbid">
-			<jsp:include page="summary/vax_comorbid.jsp"/>
-		</div>
+		<jsp:include page="summary/vax_comorbid.jsp">
+			<jsp:param value="summary_vax_comorbid" name="namespace"/>
+			<jsp:param value="summary_vax_comorbid" name="dom_element"/>
+		</jsp:include>
 	</div>
 		
 </div>
