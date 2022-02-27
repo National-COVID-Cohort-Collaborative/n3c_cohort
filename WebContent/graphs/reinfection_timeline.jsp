@@ -56,6 +56,7 @@ button {
 				<jsp:param name="column2_tip" value="Reinfected" />
 				<jsp:param name="column2_tip_offset" value="85" />
 				<jsp:param name="column2_color" value="#7a6788" />
+				<jsp:param name="constraintPropagator" value="constraint" />
 			</jsp:include>
 			<button id="reinfection1_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 			<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>

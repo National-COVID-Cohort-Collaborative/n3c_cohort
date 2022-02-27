@@ -383,7 +383,8 @@
 				var parseDate = d3.timeFormat("%m/%e/%Y").parse,
 					bisectDate_dua_dta = d3.bisector(function(d) { return d.${param.date_column}; }).left,
 					formatValue = d3.format(","),
-					dateFormatter = d3.timeFormat("%m/%d/%y");
+					dateFormatter = d3.timeFormat("%m/%d/%y"),
+					dateFormatter2 = d3.timeFormat("%Y-%m-%d");
 				
 			
 				function dua_dta_mousemove() {
@@ -427,6 +428,9 @@
 				        	if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
 				        	${param.namespace}x.domain(d3.extent(data, function(d) { return d.${param.date_column}; }));
 				      	}else{
+				        	<c:if test="${not empty param.constraintPropagator}">
+				        		${param.constraintPropagator}(dateFormatter2(${param.namespace}x.invert(extent[0])),dateFormatter2(${param.namespace}x.invert(extent[1])))
+				        	</c:if>
 				      		${param.namespace}x.domain([ ${param.namespace}x.invert(extent[0]), ${param.namespace}x.invert(extent[1]) ]);
 				        	graph.select(".brush").call(brush.move, null); // This remove the grey brush area as soon as the selection has been done
 				      	}
@@ -463,6 +467,7 @@
 				};
 				
 				function ${param.namespace}time_line_clear(){
+					${param.constraintPropagator}(null, null)
 					
 					${param.namespace}x.domain(d3.extent(data, function(d) {return d.${param.date_column}; }));
 					

@@ -52,6 +52,7 @@ button {
 				<jsp:param name="column2_tip_offset" value="80" />
 				<jsp:param name="useColumn1Scaling" value="true" />
 				<jsp:param name="column1_opacity" value="0.25" />
+				<jsp:param name="constraintPropagator" value="constraint" />
 			</jsp:include>
 		
 			<button id="pos_rolling_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
