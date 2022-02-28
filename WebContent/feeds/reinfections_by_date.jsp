@@ -16,7 +16,10 @@
 			case
 				when (subsequent_test_count = '<20' or subsequent_test_count is null) then 0
 				else subsequent_test_count::int
-			end as subsequent_test
+			end as subsequent_test,
+			first_diagnosis_count as first_diagnosis_display,
+			original_infection_date_for_reinfected_count as reinfected_display,
+			subsequent_test_count as subsequent_test_display
 		from n3c_questions.covid_lds_with_reinfection_date_counts_censored where c_date>'2020-00-00' and c_date::date < now()) as json;
 
 </sql:query>
@@ -27,7 +30,10 @@
         {"value":"c_date", "label":"Date"},
         {"value":"first_diagnosis", "label":"First Diagnosis Case Count"},
         {"value":"reinfected", "label":"Reinfection Case Count"},
-        {"value":"subsequent_test", "label":"Subsequent Positive Test Case Count"}
+        {"value":"subsequent_test", "label":"Subsequent Positive Test Case Count"},
+        {"value":"first_diagnosis_display", "label":"First Diagnosis Case Count"},
+        {"value":"reinfected_display", "label":"Reinfection Case Count"},
+        {"value":"subsequent_test_display", "label":"Subsequent Positive Test Case Count"}
     ],
     "rows" : 
 </c:if>
