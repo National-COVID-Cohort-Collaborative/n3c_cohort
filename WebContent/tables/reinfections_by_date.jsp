@@ -61,9 +61,12 @@ $(document).ready( function () {
 	    	order: [[0, 'asc']],
 	     	columns: [
 	        	{ data: 'c_date', visible: true, orderable: true, className: 'text-center' },
-	        	{ data: 'first_diagnosis', visible: true, orderable: true, className: 'text-right' },
-	        	{ data: 'reinfected', visible: true, orderable: true, className: 'text-right' },
-	        	{ data: 'subsequent_test', visible: true, orderable: true, className: 'text-right' }
+	        	{ data: 'first_diagnosis_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'reinfected_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'subsequent_test_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'first_diagnosis', visible: false, orderable: true, className: 'text-right' },
+	        	{ data: 'reinfected', visible: false, orderable: true, className: 'text-right' },
+	        	{ data: 'subsequent_test', visible: false, orderable: true, className: 'text-right' }
 	    	],
 	    	columnDefs: [
 	    		{ targets: 1, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
