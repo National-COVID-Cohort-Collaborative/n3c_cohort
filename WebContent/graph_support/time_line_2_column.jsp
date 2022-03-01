@@ -467,7 +467,9 @@
 				};
 				
 				function ${param.namespace}time_line_clear(){
-					${param.constraintPropagator}(null, null)
+		        	<c:if test="${not empty param.constraintPropagator}">
+						${param.constraintPropagator}(null, null)
+		        	</c:if>
 					
 					${param.namespace}x.domain(d3.extent(data, function(d) {return d.${param.date_column}; }));
 					
