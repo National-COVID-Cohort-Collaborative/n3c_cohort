@@ -69,6 +69,7 @@ $(document).ready( function () {
 	        	{ data: 'subsequent_test', visible: false, orderable: true, className: 'text-right' }
 	    	],
 	    	columnDefs: [
+	    		{ targets: 0, "width": "30%"},
 	    		{ targets: 1, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 2, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 3, render: $.fn.dataTable.render.number(',', '.', 0, '') },   		

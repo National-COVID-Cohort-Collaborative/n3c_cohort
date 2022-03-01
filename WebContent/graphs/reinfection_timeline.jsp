@@ -35,7 +35,14 @@ button {
 			     	select to_char(value::int/1000000.0, '999.99')||'M' as count from n3c_admin.enclave_stats where title='covid_positive_patients';
 			     </sql:query>
 			     <c:forEach items="${totals.rows}" var="row" varStatus="rowCounter">
-			     	COVID+ Patients ${row.count}
+					<div class=" panel-primary">
+						<div class="panel-body">
+							<table><tr><td><i class="fas fa-user-plus"></i></td><td>&nbsp;</td><td>COVID+ Patients</td></tr></table>
+						</div>
+						<div class="panel-heading">
+			     			${row.count}
+			     		</div>
+			     	</div>
 			     </c:forEach>
 			     <sql:query var="totals" dataSource="jdbc/N3CCohort">
 			     	select to_char(sum(first_diagnosis)/1000000.0, '999.99')||'M' as first_diagnosis, to_char(sum(reinfected)/1000.0, '999.99')||'k' as reinfected
@@ -51,9 +58,22 @@ button {
 							from n3c_questions.covid_lds_with_reinfection_date_counts_censored) as foo
 			     </sql:query>
 			     <c:forEach items="${totals.rows}" var="row" varStatus="rowCounter">
-			     	First Diagnosis Count ${row.first_diagnosis}
-			     	Reinfection Count ${row.reinfected}
+						<div class="panel-body">
+							<table><tr><td><i class="fas fa-users"></i></td><td>&nbsp;</td><td>First Diagnosis Count *</td></tr></table>
+						</div>
+						<div class="panel-heading">
+			     			${row.first_diagnosis}
+			     		</div>
+						<div class="panel-body">
+							<table><tr><td><i class="fas fa-users"></i></td><td>&nbsp;</td><td>Reinfection Count *</td></tr></table>
+						</div>
+						<div class="panel-heading">
+			     			${row.reinfected}
+			     		</div>
 			     </c:forEach>
+				<div class="panel-body">
+					* (see limitations below)
+				</div>
 			</div>
 			<div id="reinfection1" class="col-xs-10" >
 				<div id="reinfection1_graph"></div>
@@ -66,13 +86,13 @@ button {
 					<jsp:param name="column1_label" value="First Diagnosis Countt" />
 					<jsp:param name="column1_tip" value="First Diagnosis" />
 					<jsp:param name="column1_tip_offset" value="110" />
-					<jsp:param name="column1_color" value="#376076" />
+					<jsp:param name="column1_color" value="#163F59" />
 					<jsp:param name="column1_opacity" value="0.25" />
 					<jsp:param name="column2" value="reinfected" />
-					<jsp:param name="column2_label" value="Reinfected Count" />
-					<jsp:param name="column2_tip" value="Reinfected" />
+					<jsp:param name="column2_label" value="Reinfection Count" />
+					<jsp:param name="column2_tip" value="Reinfection" />
 					<jsp:param name="column2_tip_offset" value="85" />
-					<jsp:param name="column2_color" value="#7a6788" />
+					<jsp:param name="column2_color" value="#454F82" />
 					<jsp:param name="constraintPropagator" value="constraint" />
 				</jsp:include>
 				<button id="reinfection1_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
@@ -100,13 +120,13 @@ button {
 				<jsp:param name="column1_label" value="First Diagnosis Count" />
 				<jsp:param name="column1_tip" value="First Diagnosis" />
 				<jsp:param name="column1_tip_offset" value="110" />
-				<jsp:param name="column1_color" value="#376076" />
+				<jsp:param name="column1_color" value="#163F59" />
 				<jsp:param name="column1_opacity" value="0.25" />
 				<jsp:param name="column2" value="subsequent_test" />
 				<jsp:param name="column2_label" value="Reinfection Count" />
 				<jsp:param name="column2_tip" value="Reinfection" />
 				<jsp:param name="column2_tip_offset" value="120" />
-				<jsp:param name="column2_color" value="#7a6788" />
+				<jsp:param name="column2_color" value="#454F82" />
 			</jsp:include>
 			<button id="reinfection2_btn" class="button"><i class="fa fa-filter" aria-hidden="true"></i> Clear all selections</button>
 				<p style="text-align:center;">Hover over the graph to show the counts for that day. Click and drag to focus on a specific time range. Double click to revert to the default time range.</p>
@@ -121,8 +141,8 @@ button {
 		</div>
 		<div id="reinfection_table">
 			<p>&nbsp;</p>
-			<div class="col-xs-2">&nbsp;</div>
-			<div class="col-xs-8" id="reinfections-by-date"></div>
+			<div class="col-xs-3">&nbsp;</div>
+			<div class="col-xs-7" id="reinfections-by-date"></div>
 			<jsp:include page="../tables/reinfections_by_date.jsp"/>
 		</div>
 	</div>
