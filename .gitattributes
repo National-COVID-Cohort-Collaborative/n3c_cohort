@@ -154,6 +154,9 @@ WebContent/images/person_icon.png -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
 WebContent/index_prod.jsp -text
+WebContent/kpis/covid_first_diagnosis.jsp -text
+WebContent/kpis/covid_positive.jsp -text
+WebContent/kpis/covid_reinfections.jsp -text
 WebContent/long_covid_downloads/fig1.svg -text
 WebContent/long_covid_downloads/fig2.svg -text
 WebContent/long_covid_downloads/fig3.svg -text

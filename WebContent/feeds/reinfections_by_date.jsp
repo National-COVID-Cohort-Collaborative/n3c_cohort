@@ -20,7 +20,9 @@
 			first_diagnosis_count as first_diagnosis_display,
 			original_infection_date_for_reinfected_count as reinfected_display,
 			subsequent_test_count as subsequent_test_display
-		from n3c_questions.covid_lds_with_reinfection_date_counts_censored where c_date>'2020-00-00' and c_date::date < now()) as json;
+		from n3c_questions.covid_lds_with_reinfection_date_counts_censored where c_date>'2020-00-00' and c_date::date < now()
+		<c:if test="${not empty param.headers}"> or c_date is null</c:if>
+		) as json;
 
 </sql:query>
 
