@@ -9,7 +9,26 @@ function constraint(begin, end) {
 	constraint_end = end;
 	var table = $('#reinfections-by-date-table').DataTable();
 	table.draw();
-	console.log(table.rows({search:'applied'}).data().pluck('first_diagnosis').sum())
+	updateKPI(table, 'first_diagnosis')
+	updateKPI(table, 'reinfected')
+}
+
+function updateKPI(table, column) {
+	var sum_string = '';
+	var sum = table.rows({search:'applied'}).data().pluck(column).sum();
+	console.log(sum, table.rows({search:'applied'}).data().pluck(column))
+	if (sum < 1000) {
+		sumString = sum+'';
+	} else if (sum < 1000000) {
+		sum = sum / 1000.0;
+		sumString = sum.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "k"
+	} else {
+		sum = sum / 1000000.0;
+		sumString = sum.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "M"
+		
+	}
+	console.log(column, sumString)
+	document.getElementById(column+'_kpi').innerHTML = sumString
 }
 
 jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {

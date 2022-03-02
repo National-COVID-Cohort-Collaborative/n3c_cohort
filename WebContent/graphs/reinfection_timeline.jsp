@@ -61,13 +61,13 @@ button {
 						<div class="panel-body">
 							<table><tr><td><i class="fas fa-users"></i></td><td>&nbsp;</td><td>First Diagnosis Count *</td></tr></table>
 						</div>
-						<div class="panel-heading">
+						<div id="first_diagnosis_kpi" class="panel-heading">
 			     			${row.first_diagnosis}
 			     		</div>
 						<div class="panel-body">
 							<table><tr><td><i class="fas fa-users"></i></td><td>&nbsp;</td><td>Reinfection Count *</td></tr></table>
 						</div>
-						<div class="panel-heading">
+						<div id="reinfected_kpi" class="panel-heading">
 			     			${row.reinfected}
 			     		</div>
 			     </c:forEach>
