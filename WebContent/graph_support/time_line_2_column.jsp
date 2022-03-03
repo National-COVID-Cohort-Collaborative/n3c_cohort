@@ -114,7 +114,7 @@
 
 <script>
 // set the dimensions and margins of the graph
-	var margin = {top: 100, right: 80, bottom: 80, left: 80},
+	var margin = {top: 20, right: 80, bottom: 140, left: 80},
 	    width = 960 - margin.left - margin.right,
 	    height = 600 - margin.top - margin.bottom;
 	
@@ -122,6 +122,8 @@
 	
 	d3.json("${param.data_page}", function(error, data) {	
 		if (error) throw error;
+		
+		console.log(data);
 		
 		var column1_opacity = 1;
 		var column2_opacity = 1;
@@ -199,7 +201,7 @@
 			  
 				// Dates
 			 	data.forEach(function(d) {
-					d.${param.date_column} = new Date(d.${param.date_column});
+					d.${param.date_column} = new Date(d.${param.date_column} + "CST");
 				});
 			
 				// Scales
@@ -286,8 +288,7 @@
 				// text label for the x axis
 				  svg.append("text")             
 				      .attr("transform",
-				            "translate(" + (width/2) + " ," + 
-				                           (height + margin.top + 20) + ")")
+				            "translate(" + (width/2) + " ," + (height + 60) + ")")
 				      .style("text-anchor", "middle")
 				      .text("Date");
 
@@ -325,7 +326,7 @@
 			    	.enter().append("g")
 			    	.attr("class","lineLegend")
 			    	.attr("transform", function (d, i) {
-			            return "translate(" + (20) + "," + ((i*20)-50)+")";
+			            return "translate(" + (0) + "," + ( (height+(i*15)) + (margin.bottom/2))+")";
 			        });
 
 				lineLegend.append("text").text(function (d) {return d.text;})
@@ -441,12 +442,23 @@
 				      	svg.append("g")
 						.attr("transform", "translate(0," + height + ")")
 						.attr("class", "xaxis")
-						.call(d3.axisBottom(${param.namespace}x))
-						 .selectAll("text")  
-		    				.style("text-anchor", "end")
-		    				.attr("dx", "-.8em")
-		    				.attr("dy", ".15em")
-		    				.attr("transform", "rotate(-65)");
+						.call(d3.axisBottom(${param.namespace}x)
+			        	.tickFormat(function(date){
+							if (d3.timeYear(date) < date) {
+								if (d3.timeMonth(date) < date) {
+									return d3.timeFormat('%b %d')(date);
+								}else{
+									return d3.timeFormat('%b')(date);
+								} 
+					         } else {
+					           return d3.timeFormat('%Y')(date);
+					         }
+					      	}))
+						.selectAll("text")  
+    						.style("text-anchor", "end")
+    						.attr("dx", "-.8em")
+    						.attr("dy", ".15em")
+    						.attr("transform", "rotate(-65)");
 
 				      	// Update line position
 				      	graph
