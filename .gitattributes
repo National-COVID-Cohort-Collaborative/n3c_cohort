@@ -157,12 +157,16 @@ WebContent/index_prod.jsp -text
 WebContent/kpis/covid_first_diagnosis.jsp -text
 WebContent/kpis/covid_positive.jsp -text
 WebContent/kpis/covid_reinfections.jsp -text
+WebContent/long_covid_downloads/data.json -text
 WebContent/long_covid_downloads/fig1.svg -text
 WebContent/long_covid_downloads/fig2.svg -text
 WebContent/long_covid_downloads/fig3.svg -text
+WebContent/long_covid_downloads/fig4.jsp -text
 WebContent/long_covid_downloads/fig4.svg -text
 WebContent/long_covid_downloads/fig5.svg -text
 WebContent/long_covid_downloads/figS1.svg -text
+WebContent/long_covid_downloads/index.html -text
+WebContent/long_covid_downloads/popper.js -text
 WebContent/long_covid_downloads/table1.html -text
 WebContent/long_covid_downloads/table2.html -text
 WebContent/machine-learning.jsp -text

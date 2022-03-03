@@ -57,7 +57,7 @@
 				</div>
 				<div id="long-covid-4-tile" style="display:block;">
 					<h4 class="centered">Figure 4</h4>
-					<a href="long_covid_downloads/fig4.svg"><img alt="test image" src="long_covid_downloads/fig4.svg" width="100%"></a>
+					<a href="long_covid_downloads/fig4.svg"><img alt="test image" src="long_covid_downloads/fig4.jsp" width="100%"></a>
 				</div>
 				<div id="long-covid-2-tile" style="display:none;">
 					<h4 class="centered">Figure 2</h4>
@@ -71,11 +71,11 @@
 				</div>
 				<div id="long-covid-t1-tile" style="display:none;">
 					<h4 class="centered">Table 1</h4>
-					<c:import url="https://labs.cd2h.org/n3c-cohort/long_covid_downloads/table1.html"/>
+					<c:import url="../long_covid_downloads/table1.html"/>
 				</div>
 				<div id="long-covid-t2-tile" style="display:none;">
 					<h4 class="centered">Table 2</h4>
-					<c:import url="https://labs.cd2h.org/n3c-cohort/long_covid_downloads/table2.html"/>
+					<c:import url="../long_covid_downloads/table2.html"/>
 				</div>
 			</div>
 		</div>
