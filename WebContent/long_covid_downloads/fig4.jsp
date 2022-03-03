@@ -1,8 +1,3 @@
-    <link href="https://unpkg.com/tabulator-tables@5.1.2/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.1.2/dist/js/tabulator.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <style>
         .text-hosp div.tabulator-col-title{
             color: #003f5c !important;
@@ -75,7 +70,6 @@
         </div>
         <div id="fig4"></div>
     </div>
-    <script src="popper.js"></script>
     <script type="text/javascript">
 
         var d3_hor_bar = function(cell, formatterParams, onRendered){
@@ -323,8 +317,8 @@
             ],
         });
         }
-        // axios.get('https://labs.cd2h.org/n3c-cohort/feeds/long_covid_summary.jsp').then(res=>{
-        axios.get('data.json').then(res=>{
+       // axios.get('https://labs.cd2h.org/n3c-cohort/feeds/long_covid_summary.jsp').then(res=>{
+       	axios.get('long_covid_downloads/data.json').then(res=>{console.log("in axios")
             //get box figure boundaries
             let boxConfig ={};
             //collect all numbers of 
@@ -444,10 +438,13 @@
         });
 
         //give enough time to render before initializing tooltips
-        setTimeout(function(){
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+         setTimeout(function(){
+        	 $(function () {console.log($('[data-bs-toggle="tooltip"]'))
+        		  $('[data-bs-toggle="tooltip"]').tooltip()
+        		})
+          //  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+          //  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          //      return new bootstrap.Tooltip(tooltipTriggerEl)
+          //  })
         }, 1000)        
     </script>

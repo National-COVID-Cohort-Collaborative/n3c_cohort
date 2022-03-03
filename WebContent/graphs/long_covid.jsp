@@ -57,7 +57,7 @@
 				</div>
 				<div id="long-covid-4-tile" style="display:block;">
 					<h4 class="centered">Figure 4</h4>
-					<a href="long_covid_downloads/fig4.svg"><img alt="test image" src="long_covid_downloads/fig4.jsp" width="100%"></a>
+					<jsp:include page="../long_covid_downloads/fig4.jsp"/>
 				</div>
 				<div id="long-covid-2-tile" style="display:none;">
 					<h4 class="centered">Figure 2</h4>
