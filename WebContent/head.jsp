@@ -25,6 +25,9 @@
 	
 	<link rel="stylesheet" type="text/css" href="resources/DataTables/css/jquery.dataTables.min.css"/>
 	<script type="text/javascript" charset="utf8" src="resources/DataTables/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/datetime-moment.js"></script>
 	
 	<script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-nnzkI2u2Dy6HMnzMIkh7CPd1KX445z38XIu4jG1jGw7x5tSL3VBjE44dY4ihMU1ijAQV930SPM12cCFrB18sVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
