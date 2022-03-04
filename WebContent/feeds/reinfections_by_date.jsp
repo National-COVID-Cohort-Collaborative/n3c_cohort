@@ -4,7 +4,7 @@
 <sql:query var="cases" dataSource="jdbc/N3CCohort">
 	select json_agg(json order by c_date)
 	from (select
-			c_date,
+			TO_TIMESTAMP(c_date, 'YYYY/MM/DD HH24:MI:SS') AT TIME ZONE 'UTC' as c_date,
 			case
 				when (first_diagnosis_count = '<20' or first_diagnosis_count is null) then 0
 				else first_diagnosis_count::int

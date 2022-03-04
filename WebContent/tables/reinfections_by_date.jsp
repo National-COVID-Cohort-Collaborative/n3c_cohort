@@ -85,6 +85,9 @@ $(document).ready( function () {
 		divContainer.appendChild(table);
 	
 		var data = json['rows'];
+		
+		
+		$.fn.dataTable.moment('MM/DD/YYYY');
 	
 		$('#reinfections-by-date-table').DataTable( {
 	    	data: data,
@@ -102,7 +105,13 @@ $(document).ready( function () {
 	        	{ data: 'subsequent_test', visible: false, orderable: true, className: 'text-right' }
 	    	],
 	    	columnDefs: [
-	    		{ targets: 0, "width": "30%"},
+	    		{ targets: 0, 
+		    		render: function (value) {
+	                    if (value === null) return "";
+	                    var date = new Date(value);
+	                    return moment(date).format('MM/DD/YYYY');
+	                    },
+		    		"width": "30%"},
 	    		{ targets: 1, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 2, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 3, render: $.fn.dataTable.render.number(',', '.', 0, '') },   		
@@ -112,5 +121,6 @@ $(document).ready( function () {
 		
 	});
 });
+
 
 </script>

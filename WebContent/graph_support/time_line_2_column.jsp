@@ -122,9 +122,7 @@
 	
 	d3.json("${param.data_page}", function(error, data) {	
 		if (error) throw error;
-		
-		console.log(data);
-		
+				
 		var column1_opacity = 1;
 		var column2_opacity = 1;
 		
@@ -201,7 +199,7 @@
 			  
 				// Dates
 			 	data.forEach(function(d) {
-					d.${param.date_column} = new Date(d.${param.date_column} + "CST");
+					d.${param.date_column} = new Date(d.${param.date_column});
 				});
 			
 				// Scales
