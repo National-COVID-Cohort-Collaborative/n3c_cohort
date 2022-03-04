@@ -385,6 +385,11 @@
 					dateFormatter = d3.timeFormat("%m/%d/%y"),
 					dateFormatter2 = d3.timeFormat("%Y-%m-%d");
 				
+				function valueFormatter(value) {
+					if (value == '<20')
+						return value;
+					return formatValue(value);
+				}
 			
 				function dua_dta_mousemove() {
 				    var x0 = ${param.namespace}x.invert(d3.mouse(this)[0]),
@@ -401,8 +406,8 @@
 				    };
 				   
 				    dua_dta_focus.select(".tooltip-date_dta_dua").text(dateFormatter(d.${param.date_column}));
-				    dua_dta_focus.select(".tooltip-duas").text(formatValue(d.${param.column1}));
-				    dua_dta_focus.select(".tooltip-dtas").text(formatValue(d.${param.column2}));
+				    dua_dta_focus.select(".tooltip-duas").text(valueFormatter(d.${param.column1.concat('_display')}));
+				    dua_dta_focus.select(".tooltip-dtas").text(valueFormatter(d.${param.column2.concat('_display')}));
 				    
 				    tooltipLine.attr('stroke', 'black')
 				    	.attr("transform", "translate(" + ${param.namespace}x(d.${param.date_column}) + "," + 0 + ")")

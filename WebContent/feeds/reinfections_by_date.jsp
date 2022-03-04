@@ -2,7 +2,7 @@
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <sql:query var="cases" dataSource="jdbc/N3CCohort">
-	select json_agg(json order by c_date)
+	select json_agg(json order by c_date_display)
 	from (select
 			TO_TIMESTAMP(c_date, 'YYYY/MM/DD HH24:MI:SS') AT TIME ZONE 'UTC' as c_date,
 			case
@@ -17,6 +17,7 @@
 				when (subsequent_test_count = '<20' or subsequent_test_count is null) then 0
 				else subsequent_test_count::int
 			end as subsequent_test,
+			c_date as c_date_display,
 			first_diagnosis_count as first_diagnosis_display,
 			original_infection_date_for_reinfected_count as reinfected_display,
 			subsequent_test_count as subsequent_test_display
@@ -33,6 +34,7 @@
         {"value":"first_diagnosis", "label":"First Diagnosis Case Count"},
         {"value":"reinfected", "label":"Reinfection Case Count"},
         {"value":"subsequent_test", "label":"Subsequent Positive Test Case Count"},
+        {"value":"c_date_display", "label":"Date"},
         {"value":"first_diagnosis_display", "label":"First Diagnosis Case Count"},
         {"value":"reinfected_display", "label":"Reinfection Case Count"},
         {"value":"subsequent_test_display", "label":"Subsequent Positive Test Case Count"}

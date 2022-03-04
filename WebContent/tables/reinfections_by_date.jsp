@@ -96,22 +96,17 @@ $(document).ready( function () {
 	    	lengthMenu: [ 10, 25, 50, 75, 100 ],
 	    	order: [[0, 'asc']],
 	     	columns: [
-	        	{ data: 'c_date', visible: true, orderable: true, className: 'text-center' },
+	        	{ data: 'c_date_display', visible: true, orderable: true, className: 'text-center' },
 	        	{ data: 'first_diagnosis_display', visible: true, orderable: true, className: 'text-right' },
 	        	{ data: 'reinfected_display', visible: true, orderable: true, className: 'text-right' },
 	        	{ data: 'subsequent_test_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'c_date', visible: false, orderable: true, className: 'text-center' },
 	        	{ data: 'first_diagnosis', visible: false, orderable: true, className: 'text-right' },
 	        	{ data: 'reinfected', visible: false, orderable: true, className: 'text-right' },
 	        	{ data: 'subsequent_test', visible: false, orderable: true, className: 'text-right' }
 	    	],
 	    	columnDefs: [
-	    		{ targets: 0, 
-		    		render: function (value) {
-	                    if (value === null) return "";
-	                    var date = new Date(value);
-	                    return moment(date).format('MM/DD/YYYY');
-	                    },
-		    		"width": "30%"},
+	    		{ targets: 0, "width": "30%"},
 	    		{ targets: 1, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 2, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
 	    		{ targets: 3, render: $.fn.dataTable.render.number(',', '.', 0, '') },   		

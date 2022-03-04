@@ -19,6 +19,7 @@ WebContent/demo1/aggregated_table.jsp -text
 WebContent/demo1/dashboard.jsp -text
 WebContent/demo1/demo2.jsp -text
 WebContent/diabetes.jsp -text
+WebContent/downloads/data_information_download.xlsx -text
 WebContent/feeds/age_histogram.jsp -text
 WebContent/feeds/aggregated.jsp -text
 WebContent/feeds/blood.jsp -text

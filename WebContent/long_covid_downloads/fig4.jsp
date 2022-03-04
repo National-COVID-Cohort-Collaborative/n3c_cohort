@@ -16,9 +16,9 @@
             color: #444E86;
             text-align: center;
         }
-        path.domain{
-            stroke: transparent !important;
-        }
+//        path.domain{
+//            stroke: transparent !important;
+//        }
     </style>
 
     <h1 class="m-0 text-muted">Figure 4</h1>

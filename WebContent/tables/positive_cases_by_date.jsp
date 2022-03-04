@@ -62,9 +62,12 @@ $(document).ready( function () {
 	    	order: [[0, 'asc']],
 	     	columns: [
 	        	{ data: 'first_diagnosis_date', visible: true, orderable: true, className: 'text-center' },
-	        	{ data: 'positive_cases', visible: true, orderable: true, className: 'text-right' },
-	        	{ data: 'cumsum_positivecases', visible: true, orderable: true, className: 'text-right' },
-	        	{ data: 'seven_day_rolling_avg', visible: true, orderable: true, className: 'text-right' }
+	        	{ data: 'positive_cases_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'cumsum_positivecases_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'seven_day_rolling_avg_display', visible: true, orderable: true, className: 'text-right' },
+	        	{ data: 'positive_cases', visible: false, orderable: true, className: 'text-right' },
+	        	{ data: 'cumsum_positivecases', visible: false, orderable: true, className: 'text-right' },
+	        	{ data: 'seven_day_rolling_avg', visible: false, orderable: true, className: 'text-right' }
 	    	],
 	    	columnDefs: [
 	    		{ targets: 1, render: $.fn.dataTable.render.number(',', '.', 0, '') },    		
