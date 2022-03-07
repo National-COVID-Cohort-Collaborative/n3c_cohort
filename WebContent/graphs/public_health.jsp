@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <script src="resources/auth.js"></script>
 <style>
 
@@ -27,22 +29,47 @@
 	</div>
     <div class="col-xs-12">
         <div class="pubhealth-panel panel panel-primary top_panel shadow-border">
-             <ul class="nav nav-tabs" style="font-size: 16px;">
-                <li class="active"><a data-toggle="tab" href="#ph-summary">Summary Data</a></li>
-                <li><a data-toggle="tab" href="#ph-pediatrics">Pediatrics</a></li>
-                <li><a data-toggle="tab" href="#ph-long-covid">Long COVID</a></li>
+             <ul class="nav nav-tabs ph-tab" style="font-size: 16px;">
+                <li <c:if test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">class="active"</c:if>><a data-toggle="tab" href="#ph-summary">Summary Data</a></li>
+                <li <c:if test="${param.secondary_tab == 'pediatrics' }">class="active"</c:if>><a data-toggle="tab" href="#ph-pediatrics">Pediatrics</a></li>
+                <li <c:if test="${param.secondary_tab == 'long-covid' }">class="active"</c:if>><a data-toggle="tab" href="#ph-long-covid">Long COVID</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="ph-summary">
+                <div class="tab-pane fade <c:if test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">in active</c:if>" id="ph-summary">
+ 					<c:if test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/summary")
+						</script>
+ 					</c:if>
                     <jsp:include page="questions2.jsp" flush="true" />
-                </div>
-                <div class="tab-pane fade" id="ph-pediatrics">
-                    <jsp:include page="pediatrics.jsp" flush="true" />
-                </div>
-                <div class="tab-pane fade" id="ph-long-covid">
-                    <jsp:include page="long_covid.jsp" flush="true" />
+                 </div>
+                <div class="tab-pane fade <c:if test="${param.secondary_tab == 'pediatrics' }">in active</c:if>" id="ph-pediatrics">
+ 					<c:if test="${param.secondary_tab == 'pediatrics' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics")
+						</script>
+ 					</c:if>
+                    <jsp:include page="pediatrics.jsp?tertiary_tab=${param.tertiary_tab}" flush="true" />
+               </div>
+                <div class="tab-pane fade <c:if test="${param.secondary_tab == 'long-covid' }">in active</c:if>" id="ph-long-covid">
+  					<c:if test="${param.secondary_tab == 'long-covid' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/long-covid")
+						</script>
+ 					</c:if>
+                    <jsp:include page="long_covid.jsp?tertiary_tab=${param.tertiary_tab}" flush="true" />
                 </div>
             </div>
         </div>
     </div>
+	<script>
+		$('.ph-tab').on('click', 'a', function(e) {
+			var $this = $(this);
+			var pane = $this.attr('href');
+			var which = $this.data('src');
+
+			console.log("in click", pane)
+			history.pushState(null, '', '<util:applicationRoot/>/public-health/'+pane.substring(4))
+		});
+	</script>
 </div>

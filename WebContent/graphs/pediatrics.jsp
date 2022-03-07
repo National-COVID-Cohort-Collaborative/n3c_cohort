@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 <style>
 	.peds_nav a {
@@ -44,23 +45,23 @@
 }
 </style>
 
-<div class="row">
+<div class="row">hjjjjyygt
 	<div class="col-xs-12 col-lg-2">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
 				<h4>Visualizations</h4>
 				<div class="peds_nav">
-					<div class="peds_nav_item peds_nav_row_selected cards2" id="pediatrics-menu1">
+					<div class="peds_nav_item cards2 <c:if test="${empty param.tertiary_tab || param.tertiary_tab == 'severity' }">peds_nav_row_selected</c:if>" id="pediatrics-menu1">
 						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-severity-tile')">Severity Distributions over Time</a></h5>
 					</div>
 
-					<div class="peds_nav_item cards2" id="pediatrics-menu2">
+					<div class="peds_nav_item cards2 <c:if test="${param.tertiary_tab == 'age' }">peds_nav_row_selected</c:if>" id="pediatrics-menu2">
 						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-age-tile')">Age Distributions over Time</a></h5>
 					</div>
-					<div class="peds_nav_item cards2" id="pediatrics-menu3">
+					<div class="peds_nav_item cards2 <c:if test="${param.tertiary_tab == 'coinfection' }">peds_nav_row_selected</c:if>" id="pediatrics-menu3">
 						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-coinfection-tile')">Viral Coinfection</a></h5>
 					</div>
-					<div class="peds_nav_item cards2" id="pediatrics-menu4">
+					<div class="peds_nav_item cards2 <c:if test="${param.tertiary_tab == 'geographic' }">peds_nav_row_selected</c:if>" id="pediatrics-menu4">
 						<h5><a onclick="thepedsclick.call(this); pediatrics_render('pediatrics-geographic-tile')">Geographic Distribution</a></h5>
 					</div>
 				</div>
@@ -71,16 +72,36 @@
 	<div class="col-xs-12 col-lg-10 viz-col">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
-				<div id="pediatrics-severity-tile">
-					<jsp:include page="pediatrics_severity.jsp"/>
+				<div id="pediatrics-severity-tile" <c:if test="${not empty param.tertiary_tab && param.tertiary_tab != 'severity' }">style="display:none;"</c:if>>
+					<c:if test="${empty param.tertiary_tab || param.tertiary_tab == 'severity' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/severity")
+						</script>
+ 					</c:if>
+ 					<jsp:include page="pediatrics_severity.jsp"/>
 				</div>
-				<div id="pediatrics-age-tile" style="display:none;">
+				<div id="pediatrics-age-tile" <c:if test="${param.tertiary_tab != 'age' }">style="display:none;"</c:if>">
+					<c:if test="${param.tertiary_tab == 'age' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/age")
+						</script>
+ 					</c:if>
 					<jsp:include page="pediatrics_age.jsp"/>
 				</div>
-				<div id="pediatrics-coinfection-tile" style="display:none;">
+				<div id="pediatrics-coinfection-tile" <c:if test="${param.tertiary_tab != 'coinfection' }">style="display:none;"</c:if>>
+					<c:if test="${param.tertiary_tab == 'coinfection' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/coinfection")
+						</script>
+ 					</c:if>
 					<jsp:include page="pediatrics_coinfection.jsp"/>
 				</div>
-				<div id="pediatrics-geographic-tile" style="display:none;">
+				<div id="pediatrics-geographic-tile" <c:if test="${param.tertiary_tab != 'geographic' }">style="display:none;"</c:if>>
+					<c:if test="${param.tertiary_tab == 'geographic' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/geographic")
+						</script>
+ 					</c:if>
 					<jsp:include page="pediatrics_geographic.jsp"/>
 				</div>
 			</div>
@@ -109,24 +130,32 @@ function pediatrics_render(facet) {
 		document.getElementById("pediatrics-age-tile").style.display = "none";
 		document.getElementById("pediatrics-coinfection-tile").style.display = "none";
 		document.getElementById("pediatrics-geographic-tile").style.display = "none";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/severity")
 	}
 	if (facet == "pediatrics-age-tile") {
 		document.getElementById("pediatrics-severity-tile").style.display = "none";
 		document.getElementById("pediatrics-age-tile").style.display = "block";
 		document.getElementById("pediatrics-coinfection-tile").style.display = "none";
 		document.getElementById("pediatrics-geographic-tile").style.display = "none";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/age")
 	}
 	if (facet == "pediatrics-coinfection-tile") {
 		document.getElementById("pediatrics-severity-tile").style.display = "none";
 		document.getElementById("pediatrics-age-tile").style.display = "none";
 		document.getElementById("pediatrics-coinfection-tile").style.display = "block";
 		document.getElementById("pediatrics-geographic-tile").style.display = "none";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/coinfection")
 	}
 	if (facet == "pediatrics-geographic-tile") {
 		document.getElementById("pediatrics-severity-tile").style.display = "none";
 		document.getElementById("pediatrics-age-tile").style.display = "none";
 		document.getElementById("pediatrics-coinfection-tile").style.display = "none";
 		document.getElementById("pediatrics-geographic-tile").style.display = "block";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics/geographic")
 	}
 }
 </script>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136610069-2"></script>
@@ -23,13 +24,13 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 	
 	
-	<link rel="stylesheet" type="text/css" href="resources/DataTables/css/jquery.dataTables.min.css"/>
-	<script type="text/javascript" charset="utf8" src="resources/DataTables/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<util:applicationRoot/>/resources/DataTables/css/jquery.dataTables.min.css"/>
+	<script type="text/javascript" charset="utf8" src="<util:applicationRoot/>/resources/DataTables/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/sorting/datetime-moment.js"></script>
 	
-	<script type="text/javascript" charset="utf8" src="tables/jquery.hottie.js"></script>
+	<script type="text/javascript" charset="utf8" src="<util:applicationRoot/>/tables/jquery.hottie.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-nnzkI2u2Dy6HMnzMIkh7CPd1KX445z38XIu4jG1jGw7x5tSL3VBjE44dY4ihMU1ijAQV930SPM12cCFrB18sVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<link rel="stylesheet" id='font-awesome' href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	
@@ -38,9 +39,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     
-	<script src="resources/d3.v4.min.js"></script>
+	<script src="<util:applicationRoot/>/resources/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-	<script src="resources/d3-tip.js"></script>
+	<script src="<util:applicationRoot/>/resources/d3-tip.js"></script>
 	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     
 </head>

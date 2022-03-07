@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <nav class="navbar navbar-expand navbar-light bg-light">
-	<img src="images/n3c_logo.png" class="n3c_logo_navbar" alt="N3C Logo">
+	<img src="<util:applicationRoot/>/images/n3c_logo.png" class="n3c_logo_navbar" alt="N3C Logo">
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav" style="display: flex; width: 100%;">
 			<li class="nav-item">

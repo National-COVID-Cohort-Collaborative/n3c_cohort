@@ -1,3 +1,4 @@
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
     <style>
         .text-hosp div.tabulator-col-title{
             color: #003f5c !important;
@@ -318,7 +319,7 @@
         });
         }
        // axios.get('https://labs.cd2h.org/n3c-cohort/feeds/long_covid_summary.jsp').then(res=>{
-       	axios.get('long_covid_downloads/data.json').then(res=>{console.log("in axios")
+       	axios.get('<util:applicationRoot/>/long_covid_downloads/data.json').then(res=>{console.log("in axios")
             //get box figure boundaries
             let boxConfig ={};
             //collect all numbers of 
