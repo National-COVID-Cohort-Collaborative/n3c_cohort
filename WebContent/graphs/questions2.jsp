@@ -36,7 +36,7 @@
   						</button>
 						<div class="dropdown-menu">
 							<div id="question-roster3"></div>
-							<jsp:include page="../tables/questions_styled4.jsp"/>
+							<jsp:include page="../tables/questions_styled4.jsp?tertiary_tab=${param.tertiary_tab}"/>
 						</div>
 					</div>
 				</div>

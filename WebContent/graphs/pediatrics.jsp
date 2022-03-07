@@ -45,7 +45,7 @@
 }
 </style>
 
-<div class="row">hjjjjyygt
+<div class="row">
 	<div class="col-xs-12 col-lg-2">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">

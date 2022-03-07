@@ -180,8 +180,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	       	paging: true,
 	    	pageLength: 10,
 	    	initComplete: function () {
-	    		first = $('#question-table2 tr:first-child');
-	    		$(first).addClass('row_selected');},
+	    		$('#question-table2 tbody tr:eq(0)').addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[7, 'asc']],
 	    	columns: [
@@ -199,7 +198,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        							+'<h5><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');">' + question + '</a></h5>'
+	        							+'<h5><a onclick="theclick.call(this); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"") + '\',\'' + iframe +'\');">' + question + '</a></h5>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -239,7 +238,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	        			var combo = 
 	        				'<div class="panel-group" style="margin-bottom:0px;" id="' + iframe.replace(/\s+/g, '').toLowerCase() + '_stub">'
 	        					+'<div class="panel panel-default" style="background:none; border:none; box-shadow:none;">'
-	        					+'<a onclick="changeclick.call(); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\''+ iframe_content + '\',\''+ config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")+'\');"><h5 style="color: #376076;">' + question + '</h5></a>'
+	        					+'<a onclick="changeclick.call(); iframe_render(\''+ config.tenantDomain + '\',\''+ config.appId + '\',\'' + iframe_content + '\',\'' + config.qlikWebIntegrationId + '\',\''+ csrfTokenInfo.headers.get("qlik-csrf-token") + '\',\''+ iframe_style+ '\',\''+ question.replace(/'/g, "\\'") + '\',\''+ desc.replace(/'/g, "\\'") +'\',\''+ asked+ '\',\''+ limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"") + '\',\'' + iframe +'\');"><h5 style="color: #376076;">' + question + '</h5></a>'
 	       						+'</div>'
 	        				+'</div>';
 	             		return combo; }
@@ -254,17 +253,24 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	    	]
 		});
 		
+		var index = $("#question-table2 tbody tr td").filter(function() {
+	        return $(this).text() == '${param.tertiary_tab}';
+	    }).closest('tr').index()
+		console.log('${param.tertiary_tab}',index)
+
 		iframe_render(
+						
 						config.tenantDomain,
 						config.appId,
-						data[0].iframe_content,
+						data[index].iframe_content,
 						config.qlikWebIntegrationId,
 						csrfTokenInfo.headers.get("qlik-csrf-token"),
-						data[0].iframe_style,
-						data[0].question.replace(/'/g, "\\'"),
-						data[0].description.replace(/'/g, "\\'"),
-						data[0].asked,
-						data[0].limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,"")
+						data[index].iframe_style,
+						data[index].question.replace(/'/g, "\\'"),
+						data[index].description.replace(/'/g, "\\'"),
+						data[index].asked,
+						data[index].limitations.replace(/\"/g,"'").replace(/'/g, "\\'").replace(/\r?\n/g,""),
+						data[index].iframe_info
 					);
 	})();
 });
@@ -294,7 +300,9 @@ function question_detail_toggle() {
 
 
 
-function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations) {
+function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations, iframe) {
+	console.log("iframe", question)
+	history.pushState(null, '', '<util:applicationRoot/>/public-health/summary/'+question)
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
 		divContainer.innerHTML = '<div id="d3viz"></div>'
