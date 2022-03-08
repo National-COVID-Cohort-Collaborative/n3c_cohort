@@ -180,7 +180,13 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	       	paging: true,
 	    	pageLength: 10,
 	    	initComplete: function () {
-	    		$('#question-table2 tbody tr:eq(0)').addClass('row_selected');},
+	    		var index = 0;
+	    		<c:if test="${not empty param.tertiary_tab}">
+	    			index = $("#question-table2 tbody tr td").filter(function() {
+	    	        	return $(this).text() == '${param.tertiary_tab}';
+	    	    	}).closest('tr').index()
+	    		</c:if>
+	    		$('#question-table2 tbody tr:eq('+index+')').addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[7, 'asc']],
 	    	columns: [
