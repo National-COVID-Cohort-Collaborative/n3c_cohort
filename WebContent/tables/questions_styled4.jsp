@@ -226,8 +226,8 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	       	paging: false,
 	       	searching: false,
 	       	bInfo : false,
-	    	pageLength: 10,
-	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
+	    	pageLength: 15,
+	    	lengthMenu: [ 5, 15, 25, 50, 75, 100 ],
 	    	order: [[7, 'asc']],
 	    	columns: [
 	        	{ 
