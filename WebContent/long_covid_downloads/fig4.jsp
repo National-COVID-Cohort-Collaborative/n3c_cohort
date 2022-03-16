@@ -24,7 +24,6 @@
  //       }
     </style>
 
-   <h1 class="m-0 text-muted">Figure 4</h1>
     <div class="p-2">
         <div class="d-flex justify-content-center">
             <div class="col-md-6 text-center p-1">
