@@ -97,7 +97,7 @@ table.dataTable thead .sorting_asc {
 				<a data-toggle="tab" data-src="<util:applicationRoot/>/graphs/public_health.jsp?secondary_tab=${param.secondary}&tertiary_tab=${param.tertiary}" href="#public-health">Public Health</a>
 			</li>
 			<li <c:if test="${active_tab =='long-covid'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/long_covid.jsp" href="#long-covid">Long-COVID</a>
+				<a data-toggle="tab" data-src="graphs/long_covid.jsp?secondary_tab=${param.secondary}" href="#long-covid">Long-COVID</a>
 			</li>
 			<li <c:if test="${active_tab =='demo1'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="demo1/dashboard.jsp" href="#demo1">Demo 1</a>

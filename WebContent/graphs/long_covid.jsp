@@ -66,13 +66,13 @@
 			<div class="panel-body">
 				<h4>Visualizations</h4>
 				<div class="long_nav">
-					<div class="long_nav_item long_nav_row_selected cards3" id="long-covid-menu4">
+					<div class="long_nav_item cards3 <c:if test="${empty param.secondary_tab || param.secondary_tab == 'model' }">long_nav_row_selected</c:if>" id="long-covid-menu4">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-4-tile')">Model Features</a></h5>
 					</div>
-					<div class="long_nav_item cards3" id="long-covid-menus5">
+					<div class="long_nav_item cards3 <c:if test="${param.secondary_tab == 'training' }">long_nav_row_selected</c:if>" id="long-covid-menus5">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t1-tile')">Training Cohort Characteristics</a></h5>
 					</div>
-					<div class="long_nav_item cards3" id="long-covid-menus6">
+					<div class="long_nav_item cards3 <c:if test="${param.secondary_tab == 'demographics' }">long_nav_row_selected</c:if>" id="long-covid-menus6">
 						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t2-tile')">Demographics</a></h5>
 					</div>
 				</div>
@@ -84,15 +84,30 @@
 			<div class="panel-body">
 				<div id="long-covid-1-tile">
 				</div>
-				<div id="long-covid-4-tile" style="display:block;">
+				<div id="long-covid-4-tile" <c:if test="${not empty param.secondary_tab && param.secondary_tab != 'model' }">style="display:none;"</c:if>>
+					<c:if test="${empty param.secondary_tab || param.secondary_tab == 'model' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/long-covid/model")
+						</script>
+ 					</c:if>
 					<h4 class="centered">Most important model features for predicting visit to a Long-COVID clinic.</h4>
 					<jsp:include page="../long_covid_downloads/fig4.jsp"/>
 				</div>
-				<div id="long-covid-t1-tile" style="display:none;">
+				<div id="long-covid-t1-tile" <c:if test="${param.secondary_tab != 'training' }">style="display:none;"</c:if>>
+					<c:if test="${param.secondary_tab == 'training' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/long-covid/training")
+						</script>
+ 					</c:if>
 					<h4 class="centered">Characteristics of the three-site cohort used for model training and testing.</h4>
 					<c:import url="../long_covid_downloads/table1.html"/>
 				</div>
-				<div id="long-covid-t2-tile" style="display:none;">
+				<div id="long-covid-t2-tile" <c:if test="${param.secondary_tab != 'demographics' }">style="display:none;"</c:if>>
+					<c:if test="${param.secondary_tab == 'demographics' }">
+ 						<script>
+							history.pushState(null, '', "<util:applicationRoot/>/long-covid/demographics")
+						</script>
+ 					</c:if>
 					<h4 class="centered">Demographic breakdown of potential Long-COVID patients in the N3C cohort.</h4>
 					<c:import url="../long_covid_downloads/table2.html"/>
 				</div>
@@ -112,16 +127,22 @@ function long_covid_render(facet) {
 		document.getElementById("long-covid-4-tile").style.display = "block";
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/long-covid/model")
 	}
 	if (facet == "long-covid-t1-tile") {
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "block";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/long-covid/training")
 	}
 	if (facet == "long-covid-t2-tile") {
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "block";
+		
+		history.pushState(null, '', "<util:applicationRoot/>/long-covid/demographics")
 	}
 }
 </script>
