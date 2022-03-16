@@ -81,7 +81,7 @@
                 </svg>
             </div>
         </div>
-        <div id="fig4"></div>
+        <div id="fig4" style="max-width:100%;"></div>
     </div>
     
     <script type="text/javascript">
