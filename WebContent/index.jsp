@@ -40,6 +40,12 @@ table.dataTable thead .sorting_asc {
 				history.pushState(null, '', "<util:applicationRoot/>/public-health")
 			</script>
 		</c:when>
+		<c:when test="${param.main == 'long-covid' }">
+			<c:set var="active_tab" value="long-covid" />
+			<script>
+				history.pushState(null, '', "<util:applicationRoot/>/long-covid")
+			</script>
+		</c:when>
 		<c:when test="${param.main == 'demo1' }">
 			<c:set var="active_tab" value="demo1" />
 			<script>
@@ -90,6 +96,9 @@ table.dataTable thead .sorting_asc {
 			<li <c:if test="${active_tab =='public-health'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="<util:applicationRoot/>/graphs/public_health.jsp?secondary_tab=${param.secondary}&tertiary_tab=${param.tertiary}" href="#public-health">Public Health</a>
 			</li>
+			<li <c:if test="${active_tab =='long-covid'}">class="active"</c:if>>
+				<a data-toggle="tab" data-src="graphs/long_covid.jsp" href="#long-covid">Long COVID</a>
+			</li>
 			<li <c:if test="${active_tab =='demo1'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="demo1/dashboard.jsp" href="#demo1">Demo 1</a>
 			</li>
@@ -103,6 +112,7 @@ table.dataTable thead .sorting_asc {
 			<div class="tab-pane fade <c:if test="${active_tab =='collaborative'}">in active</c:if>" id="collaborative"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='publications'}">in active</c:if>" id="publications"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='public-health'}">in active</c:if>" id="public-health"></div>
+			<div class="tab-pane fade <c:if test="${active_tab =='long-covid'}">in active</c:if>" id="long-covid"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='demo1'}">in active</c:if>" id="demo1"></div>
 			<div class="tab-pane fade <c:if test="${active_tab =='collaboration'}">in active</c:if>" id="collaboration"></div>
 		</div>
