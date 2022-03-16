@@ -48,11 +48,11 @@
 	<div class="col-xs-12">
 	<div class="">
 		<div class="panel-primary shadow-border ">
-			<div class="panel-heading">N3C Long COVID Browser</div>
+			<div class="panel-heading">N3C Long-COVID Dashboard</div>
 			<div>
-				<p>The data dashboards provide interactive views of <i>N3C</i> Research Program participant data. The N3C Long COVID browser provides high value health data for policy makers, and investigators a
+				<p>The data dashboards provide interactive views of <i>N3C</i> Research Program participant data. The N3C Long-COVID dashboard provides high value health data for policy makers, and investigators a
 					snapshot of the clinical status of Long COVID as well as signal for further investigation within the N3C open science enclave.</p>
-				<p>The data shown in the N3C Long COVID browser comes from the N3C enclave, which is the largest collection of real-world data in the USA. The N3C Enclave comes from 69 health care
+				<p>The data shown in the N3C Long-COVID dashboard comes from the N3C enclave, which is the largest collection of real-world data in the USA. The N3C Enclave comes from 69 health care
 					institutions, from 49/50 states across the USA, and as of January 2022 consists of over 12 billion rows of clinical information. In addition to the RWD, the N3C enclave has a library of over 30
 					external data sets from that vary from mortality, pollution index that can be linked to the clinical data. A full list of available external data sets can be found at
 					<a href="https://discovery.biothings.io/dataset?guide=/guide/n3c/dataset">https://discovery.biothings.io/dataset?guide=/guide/n3c/dataset</a>.</p>
@@ -67,19 +67,13 @@
 				<h4>Visualizations</h4>
 				<div class="long_nav">
 					<div class="long_nav_item long_nav_row_selected cards3" id="long-covid-menu4">
-						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-4-tile')">Figure 4</a></h5>
-					</div>
-					<div class="long_nav_item cards3" id="long-covid-menu2">
-						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-2-tile')">Figure 2</a></h5>
-					</div>
-					<div class="long_nav_item cards3" id="long-covid-menus1">
-						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-s1-tile')">Figures 1 and S1</a></h5>
+						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-4-tile')">Model Features</a></h5>
 					</div>
 					<div class="long_nav_item cards3" id="long-covid-menus5">
-						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t1-tile')">Table 1</a></h5>
+						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t1-tile')">Training Cohort Characteristics</a></h5>
 					</div>
 					<div class="long_nav_item cards3" id="long-covid-menus6">
-						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t2-tile')">Table 2</a></h5>
+						<h5><a onclick="thelongclick.call(this); long_covid_render('long-covid-t2-tile')">Demographics</a></h5>
 					</div>
 				</div>
 			</div>
@@ -91,25 +85,15 @@
 				<div id="long-covid-1-tile">
 				</div>
 				<div id="long-covid-4-tile" style="display:block;">
-					<h4 class="centered">Figure 4</h4>
+					<h4 class="centered">Most important model features for predicting visit to a Long-COVID clinic.</h4>
 					<jsp:include page="../long_covid_downloads/fig4.jsp"/>
 				</div>
-				<div id="long-covid-2-tile" style="display:none;">
-					<h4 class="centered">Figure 2</h4>
-					<a href="long_covid_downloads/fig2.svg"><img alt="test image" src="long_covid_downloads/fig2.svg" width="100%"></a>
-				</div>
-				<div id="long-covid-s1-tile" style="display:none;">
-					<h4 class="centered">Figure 1</h4>
-					<a href="long_covid_downloads/fig1.svg"><img alt="test image" src="long_covid_downloads/fig1.svg" width="100%"></a>
-					<h4 class="centered">Figure S1</h4>
-					<a href="long_covid_downloads/figS1.svg"><img alt="test image" src="long_covid_downloads/figS1.svg" width="100%"></a>
-				</div>
 				<div id="long-covid-t1-tile" style="display:none;">
-					<h4 class="centered">Table 1</h4>
+					<h4 class="centered">Characteristics of the three-site cohort used for model training and testing.</h4>
 					<c:import url="../long_covid_downloads/table1.html"/>
 				</div>
 				<div id="long-covid-t2-tile" style="display:none;">
-					<h4 class="centered">Table 2</h4>
+					<h4 class="centered">Demographic breakdown of potential Long-COVID patients in the N3C cohort.</h4>
 					<c:import url="../long_covid_downloads/table2.html"/>
 				</div>
 			</div>
@@ -124,59 +108,18 @@ var thelongclick = function(){
 };
 
 function long_covid_render(facet) {
-	if (facet == "long-covid-1-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
-		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
-		document.getElementById("long-covid-t1-tile").style.display = "none";
-		document.getElementById("long-covid-t2-tile").style.display = "none";
-	}
-	if (facet == "long-covid-2-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "block";
-		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
-		document.getElementById("long-covid-t1-tile").style.display = "none";
-		document.getElementById("long-covid-t2-tile").style.display = "none";
-	}
-	if (facet == "long-covid-3-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
-		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
-		document.getElementById("long-covid-t1-tile").style.display = "none";
-		document.getElementById("long-covid-t2-tile").style.display = "none";
-	}
 	if (facet == "long-covid-4-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "block";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
-		document.getElementById("long-covid-t1-tile").style.display = "none";
-		document.getElementById("long-covid-t2-tile").style.display = "none";
-	}
-	if (facet == "long-covid-5-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
-		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
-		document.getElementById("long-covid-t1-tile").style.display = "none";
-		document.getElementById("long-covid-t2-tile").style.display = "none";
-	}
-	if (facet == "long-covid-s1-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
-		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "block";
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-t1-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "block";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
 	}
 	if (facet == "long-covid-t2-tile") {
-		document.getElementById("long-covid-2-tile").style.display = "none";
 		document.getElementById("long-covid-4-tile").style.display = "none";
-		document.getElementById("long-covid-s1-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "block";
 	}
