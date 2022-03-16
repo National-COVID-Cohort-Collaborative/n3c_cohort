@@ -1,4 +1,6 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
+
+
     <style>
         .text-hosp div.tabulator-col-title{
             color: #003f5c !important;
@@ -19,9 +21,18 @@
             color: #444E86;
             text-align: center;
         }
- //       path.domain{
- //           stroke: transparent !important;
- //       }
+ 
+ 		.tooltip-inner.override{
+ 			max-width: 200px;
+    		padding: 0px;
+    		color: inherit;
+    		text-align: center;
+    		background-color: inherit;
+    		border-radius: 0px;
+ 		}
+ 
+
+
     </style>
 
     <div class="p-2">
@@ -72,6 +83,7 @@
         </div>
         <div id="fig4"></div>
     </div>
+    
     <script type="text/javascript">
 
         var d3_hor_bar = function(cell, formatterParams, onRendered){
@@ -107,7 +119,8 @@
 
         var d3_dot = function(cell, formatterParams, onRendered){
             let v = cell.getValue()
-            // console.log(`${v} values`)
+            
+
             if (!v.includes('see discussion')) {
                 var width = 150;
                 var height = 20;
@@ -155,7 +168,7 @@
                         .attr('fill', formatterParams.color)
                         .attr('data-toggle', "tooltip")
                         .attr('data-placement',"top")
-                        .attr('title', `${v[0]} (${v[1]} - ${v[2]})`)
+                        .attr('title', `\${v[0]} (\${v[1]} - \${v[2]})`)
                     //hide domain x-axis
                     d3.selectAll("path.domain")
                         .style("stroke","transparent");
@@ -172,8 +185,8 @@
         function draw(){
             var table = new Tabulator("#fig4", {
             // height:"500px",
-            data:tableData,
-            layout:"fitDataTable",
+            data: tableData,
+            layout: "fitDataTable",
             selectable:true, //make rows selectable
             addRowPos:"top",//when adding a new row, add it to the top of the table
             movableColumns:false,
@@ -416,7 +429,8 @@
         setTimeout(function(){
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip({
-                    container: 'body'
+                    container: 'body',
+                    template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner override"></div></div>'
                 })
             })
         }, 1000)        
