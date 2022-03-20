@@ -41,8 +41,9 @@ button {
 			</div>
 			<div id="reinfection1" class="col-xs-10" >
 				<div id="reinfection1_graph"></div>
+				<c:set var="feedPath"><util:applicationRoot/>/feeds/reinfections_by_date.jsp</c:set>
 				<jsp:include page="../graph_support/time_line_2_column.jsp">
-					<jsp:param name="data_page" value="feeds/reinfections_by_date.jsp" />
+					<jsp:param name="data_page" value="${feedPath}" />
 					<jsp:param name="dom_element" value="#reinfection1" />
 					<jsp:param name="namespace" value="reinfection1" />
 					<jsp:param name="date_column" value="c_date" />
@@ -94,7 +95,7 @@ button {
 			<div id="reinfection2" class="col-xs-10" >
 			<div id="reinfection2_graph"></div>
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="feeds/reinfections_by_date.jsp" />
+				<jsp:param name="data_page" value="${feedPath}" />
 				<jsp:param name="dom_element" value="#reinfection2" />
 				<jsp:param name="namespace" value="reinfection2" />
 				<jsp:param name="date_column" value="c_date" />

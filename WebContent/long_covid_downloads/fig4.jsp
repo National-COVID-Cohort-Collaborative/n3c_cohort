@@ -25,9 +25,9 @@
  		.tooltip-inner.override{
  			max-width: 200px;
     		padding: 0px;
-    		color: inherit;
+    		color: #white;
     		text-align: center;
-    		background-color: inherit;
+    		background-color: #black;
     		border-radius: 0px;
  		}
  

@@ -35,20 +35,31 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade <c:if test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">in active</c:if>" id="ph-summary">
- 					<c:if test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">
- 						<script>
-							history.pushState(null, '', "<util:applicationRoot/>/public-health/summary")
-						</script>
- 					</c:if>
-                    <jsp:include page="questions2.jsp" flush="true" />
-                 </div>
+                	<c:choose>
+                		<c:when test="${empty param.secondary_tab || param.secondary_tab == 'summary' }">
+ 							<script>
+ 								cache_browser_history("public-health", "public-health/summary")
+							</script>
+ 		                   <jsp:include page="questions2.jsp?tertiary_tab=${param.tertiary_tab}" flush="true" />
+                		</c:when>
+                		<c:otherwise>
+ 		                   <jsp:include page="questions2.jsp" flush="true" />
+                		</c:otherwise>
+                	</c:choose>
+                  </div>
                 <div class="tab-pane fade <c:if test="${param.secondary_tab == 'pediatrics' }">in active</c:if>" id="ph-pediatrics">
- 					<c:if test="${param.secondary_tab == 'pediatrics' }">
- 						<script>
-							history.pushState(null, '', "<util:applicationRoot/>/public-health/pediatrics")
-						</script>
- 					</c:if>
-                    <jsp:include page="pediatrics.jsp?tertiary_tab=${param.tertiary_tab}" flush="true" />
+                	<c:choose>
+                		<c:when test="${param.secondary_tab == 'pediatrics' }">
+ 							<script>
+ 								console.log("in peds choose", ${param.tertiary_tab})
+								cache_browser_history("public-health", "public-health/pediatrics")
+							</script>
+							<jsp:include page="pediatrics.jsp?tertiary_tab=${param.tertiary_tab}" flush="true" />
+               			</c:when>
+                		<c:otherwise>
+		                    <jsp:include page="pediatrics.jsp" flush="true" />
+                		</c:otherwise>
+                	</c:choose>
                </div>
             </div>
         </div>
@@ -59,8 +70,8 @@
 			var pane = $this.attr('href');
 			var which = $this.data('src');
 
-			console.log("in click", pane)
-			history.pushState(null, '', '<util:applicationRoot/>/public-health/'+pane.substring(4))
+			console.log("in ph click", pane, which)
+ 			cache_browser_history("public-health", "public-health/"+pane.substring(4))
 		});
 	</script>
 </div>

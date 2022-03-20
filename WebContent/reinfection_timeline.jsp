@@ -3,8 +3,8 @@
 <%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 <style type="text/css" media="all">
-@import "resources/n3c_login_style.css";
-@import "resources/main_style.css";
+@import "<util:applicationRoot/>/resources/n3c_login_style.css";
+@import "<util:applicationRoot/>/resources/main_style.css";
 </style>
 
 <style type="text/css">

@@ -87,7 +87,7 @@
 				<div id="long-covid-4-tile" <c:if test="${not empty param.secondary_tab && param.secondary_tab != 'model' }">style="display:none;"</c:if>>
 					<c:if test="${empty param.secondary_tab || param.secondary_tab == 'model' }">
  						<script>
-							history.pushState(null, '', "<util:applicationRoot/>/long-covid/model")
+							cache_browser_history("long-covid", "long-covid/model")
 						</script>
  					</c:if>
 					<h4 class="centered">Most important model features for predicting visit to a Long-COVID clinic.</h4>
@@ -96,7 +96,7 @@
 				<div id="long-covid-t1-tile" <c:if test="${param.secondary_tab != 'training' }">style="display:none;"</c:if>>
 					<c:if test="${param.secondary_tab == 'training' }">
  						<script>
-							history.pushState(null, '', "<util:applicationRoot/>/long-covid/training")
+							cache_browser_history("long-covid", "long-covid/training")
 						</script>
  					</c:if>
 					<h4 class="centered">Characteristics of the three-site cohort used for model training and testing.</h4>
@@ -105,7 +105,7 @@
 				<div id="long-covid-t2-tile" <c:if test="${param.secondary_tab != 'demographics' }">style="display:none;"</c:if>>
 					<c:if test="${param.secondary_tab == 'demographics' }">
  						<script>
-							history.pushState(null, '', "<util:applicationRoot/>/long-covid/demographics")
+							cache_browser_history("long-covid", "long-covid/demographics")
 						</script>
  					</c:if>
 					<h4 class="centered">Demographic breakdown of potential Long-COVID patients in the N3C cohort.</h4>
@@ -128,21 +128,21 @@ function long_covid_render(facet) {
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
 		
-		history.pushState(null, '', "<util:applicationRoot/>/long-covid/model")
+		cache_browser_history("long-covid", "long-covid/model")
 	}
 	if (facet == "long-covid-t1-tile") {
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "block";
 		document.getElementById("long-covid-t2-tile").style.display = "none";
 		
-		history.pushState(null, '', "<util:applicationRoot/>/long-covid/training")
+		cache_browser_history("long-covid", "long-covid/training")
 	}
 	if (facet == "long-covid-t2-tile") {
 		document.getElementById("long-covid-4-tile").style.display = "none";
 		document.getElementById("long-covid-t1-tile").style.display = "none";
 		document.getElementById("long-covid-t2-tile").style.display = "block";
 		
-		history.pushState(null, '', "<util:applicationRoot/>/long-covid/demographics")
+		cache_browser_history("long-covid", "long-covid/demographics")
 	}
 }
 </script>

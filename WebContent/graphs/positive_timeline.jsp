@@ -37,8 +37,9 @@ button {
 		</div>
 		<div id="pos_rolling">
 			<div id="pos_rolling_graph"></div>
+			<c:set var="feedPath"><util:applicationRoot/>/feeds/positive_cases_by_date.jsp</c:set>
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="${feedPath}" />
 				<jsp:param name="dom_element" value="#pos_rolling" />
 				<jsp:param name="namespace" value="pos_rolling" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />
@@ -65,7 +66,7 @@ button {
 		<div id="pos_cumulative">
 			<div id="pos_cumulative_graph"></div>
 			<jsp:include page="../graph_support/time_line_2_column.jsp">
-				<jsp:param name="data_page" value="feeds/positive_cases_by_date.jsp" />
+				<jsp:param name="data_page" value="${feedPath}" />
 				<jsp:param name="dom_element" value="#pos_cumulative" />
 				<jsp:param name="namespace" value="pos_cumulative" />
 				<jsp:param name="date_column" value="first_diagnosis_date" />

@@ -35,9 +35,10 @@ button {
 		<div class="d3_question_header">
 			Diabetes Mellitus Type 2
 		</div>
+		<c:set var="feedPath2"><util:applicationRoot/>/feeds/diabetes_t2_detail.jsp</c:set>
 		<div id="diabetes_type2_detail">
-			<jsp:include page="../graph_support/grouped_stacked_bar_horizontal.jsp">
-				<jsp:param name="data_page" value="feeds/diabetes_t2_detail.jsp" />
+			<jsp:include page="../graph_support/diabetes_t2_detail.jsp">
+				<jsp:param name="data_page" value="${feedPath2}" />
 				<jsp:param name="dom_element" value="#diabetes_type2_detail" />
 				<jsp:param name="namespace" value="diabetes_type2_detail" />
 				<jsp:param name="primary_group" value="observation" />
@@ -50,7 +51,7 @@ button {
 		</div>
 		<div id="diabetes_type2_detail_2">
 			<jsp:include page="../graph_support/stacked_bar_horizontal.jsp">
-				<jsp:param name="data_page" value="feeds/diabetes_t2_detail.jsp" />
+				<jsp:param name="data_page" value="${feedPath2}" />
 				<jsp:param name="namespace" value="diabetes_type2_aggregate" />
 				<jsp:param name="dom_element" value="#diabetes_type2_detail_2" />
 				<jsp:param name="primary_group" value="observation" />
@@ -64,9 +65,10 @@ button {
 		<div class="d3_question_header">
 			Diabetes Mellitus Type 1
 		</div>
+		<c:set var="feedPath1"><util:applicationRoot/>/feeds/diabetes_t1_detail.jsp</c:set>
 		<div id="diabetes_type1_detail">
 			<jsp:include page="../graph_support/grouped_stacked_bar_horizontal.jsp">
-				<jsp:param name="data_page" value="feeds/diabetes_t1_detail.jsp" />
+				<jsp:param name="data_page" value="${feedPath1}" />
 				<jsp:param name="dom_element" value="#diabetes_type1_detail" />
 				<jsp:param name="namespace" value="diabetes_type1_detail" />
 				<jsp:param name="primary_group" value="observation" />
@@ -79,7 +81,7 @@ button {
 		</div>
 		<div id="diabetes_type1_detail_2">
 			<jsp:include page="../graph_support/stacked_bar_horizontal.jsp">
-				<jsp:param name="data_page" value="feeds/diabetes_t1_detail.jsp" />
+				<jsp:param name="data_page" value="${feedPath1}" />
 				<jsp:param name="namespace" value="diabetes_type1_aggregate" />
 				<jsp:param name="dom_element" value="#diabetes_type1_detail_2" />
 				<jsp:param name="primary_group" value="observation" />

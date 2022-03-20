@@ -222,7 +222,7 @@ $(document).ready( function () {
 		    }
 		  );
 	
-	$.getJSON("feeds/aggregated.jsp", function(data){
+	$.getJSON("<util:applicationRoot/>/feeds/aggregated.jsp", function(data){
 			
 		var json = $.parseJSON(JSON.stringify(data));
 		var col = [];

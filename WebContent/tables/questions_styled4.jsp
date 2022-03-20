@@ -182,10 +182,13 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	    	initComplete: function () {
 	    		var index = 0;
 	    		<c:if test="${not empty param.tertiary_tab}">
-	    			index = $("#question-table2 tbody tr td").filter(function() {
-	    	        	return $(this).text() == '${param.tertiary_tab}';
-	    	    	}).closest('tr').index()
+	    			index = data.findIndex(object => {
+	  					return object.iframe_info === '${param.tertiary_tab}';
+	  				});
 	    		</c:if>
+	    		if (index <  0)
+	    			index = 0;
+	    		console.log("initial index", index)
 	    		$('#question-table2 tbody tr:eq('+index+')').addClass('row_selected');},
 	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
 	    	order: [[7, 'asc']],
@@ -259,10 +262,13 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	    	]
 		});
 		
-		var index = $("#question-table2 tbody tr td").filter(function() {
-	        return $(this).text() == '${param.tertiary_tab}';
-	    }).closest('tr').index()
-		console.log('${param.tertiary_tab}',index)
+		var index = data.findIndex(object => {
+			  return object.iframe_info === '${param.tertiary_tab}';
+			});
+		if ($('.ph-tab .active > a').attr("href") == '#ph-summary')
+			cache_browser_history("public-health", "public-health/summary" + (index == -1 ? '' : "/${param.tertiary_tab}"))
+		if (index < 0)
+			index = 0;
 
 		iframe_render(
 						
@@ -307,8 +313,9 @@ function question_detail_toggle() {
 
 
 function iframe_render(tenant, appID, content, integrationID, token, style, question, description, asked, limitations, iframe) {
-	console.log("iframe", question)
-	history.pushState(null, '', '<util:applicationRoot/>/public-health/summary/'+question)
+	console.log("iframe", iframe)
+	if ($('.ph-tab .active > a').attr("href") == '#ph-summary')
+		cache_browser_history("public-health", "public-health/summary/"+iframe)
 	var divContainer = document.getElementById("question-tile");
 	if (style == "D3") {
 		divContainer.innerHTML = '<div id="d3viz"></div>'
@@ -318,7 +325,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
   			+'<p><strong>Limitations:</strong> ' + limitations + '</p>'
   		+'</div>'
 	  	+'</div>';
-		$("#d3viz").load(content);
+		$("#d3viz").load("<util:applicationRoot/>/"+content);
 	} else {
 		divContainer.innerHTML = 
 			'<h2>' + question + '</h2>'
@@ -335,7 +342,7 @@ function iframe_render(tenant, appID, content, integrationID, token, style, ques
 		  	+'</div>'
 		;
 		if (question == 'COVID+ Reinfection')
-			$("#d3viz").load("reinfection_timeline.jsp?question=D3+reinfection");
+			$("#d3viz").load("<util:applicationRoot/>/reinfection_timeline.jsp?question=D3+reinfection");
 	}
 }
 

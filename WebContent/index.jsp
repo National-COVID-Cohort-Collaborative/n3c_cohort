@@ -94,10 +94,10 @@ table.dataTable thead .sorting_asc {
 				<a data-toggle="tab" data-src="graphs/publications.jsp" href="#publications">Publications</a>
 			</li>
 			<li <c:if test="${active_tab =='public-health'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="<util:applicationRoot/>/graphs/public_health.jsp?secondary_tab=${param.secondary}&tertiary_tab=${param.tertiary}" href="#public-health">Public Health</a>
+				<a data-toggle="tab" data-src="<util:applicationRoot/>/graphs/public_health.jsp<c:if test="${active_tab =='public-health'}">?secondary_tab=${param.secondary}&tertiary_tab=${param.tertiary}</c:if>" href="#public-health">Public Health</a>
 			</li>
 			<li <c:if test="${active_tab =='long-covid'}">class="active"</c:if>>
-				<a data-toggle="tab" data-src="graphs/long_covid.jsp?secondary_tab=${param.secondary}" href="#long-covid">Long-COVID</a>
+				<a data-toggle="tab" data-src="graphs/long_covid.jsp<c:if test="${active_tab =='long-covid'}">?secondary_tab=${param.secondary}</c:if>" href="#long-covid">Long-COVID</a>
 			</li>
 			<li <c:if test="${active_tab =='demo1'}">class="active"</c:if>>
 				<a data-toggle="tab" data-src="demo1/dashboard.jsp" href="#demo1">Demo 1</a>
@@ -119,6 +119,73 @@ table.dataTable thead .sorting_asc {
 		<jsp:include page="footer.jsp" flush="true" />
 	</div>
 	<script>
+		// abstraction to manage a session's state across already visited tabs, subtabs, and direct access URLs
+		
+		var tab_cache = [ ];
+		var secondary_tab_cache = [ ];
+		
+		function cache_browser_history(tabname, pathname) {
+			var index = tab_cache.findIndex(entry => {
+				return entry.tabname === tabname;
+			});
+
+			if (index == -1) {
+				var new_cache_entry = {
+						tabname: tabname,
+						pathname: pathname
+				}
+				tab_cache.push(new_cache_entry);
+			} else {
+				tab_cache[index].pathname = pathname
+			}
+			var elements = pathname.split("/");
+			
+			if (elements.length == 3) {
+				var secondary_index = secondary_tab_cache.findIndex(entry => {
+					return entry.tabname === (tabname + "/" + elements[1]);
+				});
+				if (secondary_index == -1) {
+					var new_cache_entry = {
+							tabname: tabname + "/" + elements[1],
+							pathname: pathname
+					}
+					secondary_tab_cache.push(new_cache_entry);
+				} else {
+					secondary_tab_cache[secondary_index].pathname = pathname
+				}
+			}
+			
+			set_browser_history(tabname)
+		}
+		
+		function set_browser_history(tabname) {
+			console.log("tab_cache", tabname, tab_cache, secondary_tab_cache)
+			var index = tab_cache.findIndex(entry => {
+				return entry.tabname === tabname;
+			});
+		
+			if (index == -1) {
+				history.pushState(null, '', '<util:applicationRoot/>/'+tabname)
+			} else {
+				console.log("cache hit", tab_cache[index].pathname)
+				if ((tab_cache[index].pathname.match(/\//g) || []).length > 0) {
+					//need to check the secondary cache
+					var secondary_index = secondary_tab_cache.findIndex(entry => {
+						return entry.tabname === tab_cache[index].pathname;
+					});
+					console.log("secondary index", secondary_index)
+					if (secondary_index == -1) {
+						history.pushState(null, '', '<util:applicationRoot/>/'+tab_cache[index].pathname)
+					} else {
+						history.pushState(null, '', '<util:applicationRoot/>/'+secondary_tab_cache[secondary_index].pathname)
+					}
+				} else
+					history.pushState(null, '', '<util:applicationRoot/>/'+tab_cache[index].pathname)
+			}
+		}
+		
+		////////////////////////
+		
 		var crumbs = '#${active_tab}';
 
 		$(function() {
@@ -143,8 +210,8 @@ table.dataTable thead .sorting_asc {
 			var pane = $this.attr('href');
 			var which = $this.data('src');
 
-			console.log("in click", pane)
-			history.pushState(null, '', '<util:applicationRoot/>/'+pane.substring(1))
+			console.log("in main click", pane)
+			set_browser_history(pane.substring(1))
 			if (!crumbs.includes(pane)) {
 				$(pane).load(which);
 				crumbs = crumbs + pane;

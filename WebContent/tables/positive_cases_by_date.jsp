@@ -1,3 +1,4 @@
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 <script>
 
 var constraint_begin = null,
@@ -24,7 +25,7 @@ $(document).ready( function () {
 		    }
 		);
 		 
-	$.getJSON("feeds/positive_cases_by_date.jsp?headers=y", function(data){
+	$.getJSON("<util:applicationRoot/>/feeds/positive_cases_by_date.jsp?headers=y", function(data){
 			
 		var json = $.parseJSON(JSON.stringify(data));
 	

@@ -26,7 +26,7 @@
 	
 	<!-- bootstrap Latest compiled JavaScript -->
 <!-- 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script> -->
-	<script src="./resources/bootstrap/js/bootstrap.js"></script>
+	<script src="<util:applicationRoot/>/resources/bootstrap/js/bootstrap.js"></script>
 
 	
 	<link rel="stylesheet" type="text/css" href="<util:applicationRoot/>/resources/DataTables/css/jquery.dataTables.min.css"/>
