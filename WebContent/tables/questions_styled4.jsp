@@ -178,7 +178,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 			data: data,
 	       	select: true,
 	       	paging: true,
-	    	pageLength: 10,
+	    	pageLength: 15,
 	    	initComplete: function () {
 	    		var index = 0;
 	    		<c:if test="${not empty param.tertiary_tab}">
@@ -190,7 +190,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 	    			index = 0;
 	    		console.log("initial index", index)
 	    		$('#question-table2 tbody tr:eq('+index+')').addClass('row_selected');},
-	    	lengthMenu: [ 5, 10, 25, 50, 75, 100 ],
+	    	lengthMenu: [ 15, 25, 50, 75, 100 ],
 	    	order: [[7, 'asc']],
 	    	columns: [
 	        	{ 
