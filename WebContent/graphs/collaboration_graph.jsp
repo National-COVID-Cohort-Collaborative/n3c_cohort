@@ -6,8 +6,9 @@
 <div class="container-fluid">
 	<div class="col-xs-3">
 		<form>
-			<input id="collaboration_button" name=type type="radio" value="full" onclick="switch_graph();" checked> Research DURs<br>
-			<input id="operational_button" name=type type="radio" value="operational" onclick="switch_graph();"> Operational DURs<br>
+			<input id="organization_button" name=type type="radio" value="full" onclick="switch_graph();" checked> Organizations - Research DURs<br>
+			<input id="collaboration_button" name=type type="radio" value="full" onclick="switch_graph();"> Persons - Research DURs<br>
+			<input id="operational_button" name=type type="radio" value="operational" onclick="switch_graph();"> Persons - Operational DURs<br>
 			<input id="challenge_button" name=type type="radio" value="challenge" onclick="switch_graph();"> Challenge and connected DURs<br>
 		</form>
 	</div>
@@ -19,7 +20,8 @@
 		</ul>
 	</div>
 	<div id="content">
-		<div id="collaboration_graph" style="display:block;"></div>
+		<div id="organization_graph" style="display:block;"></div>
+		<div id="collaboration_graph" style="display:none;"></div>
 		<div id="operational_graph" style="display:none;"></div>
 		<div id="challenge_graph" style="display:none;"></div>
 	</div>
@@ -31,6 +33,13 @@
 		<c:param name="selectedNode" value="${param.selectedNode}" />
 		<c:param name="radius" value="${param.radius}" />
 	</c:url>
+	<jsp:include page="../graph_support/forcePhoto.jsp" flush="true">
+		<jsp:param name="charge" value="-350" />
+		<jsp:param name="ld" value="70" />
+		<jsp:param name="target" value="organization_graph" />
+		<jsp:param name="data_page" value="feeds/project_organization_graph.jsp" />
+		<jsp:param name="detectionAlg" value="sites" />
+	</jsp:include>
 	<jsp:include page="../graph_support/forcePhoto.jsp" flush="true">
 		<jsp:param name="charge" value="-350" />
 		<jsp:param name="ld" value="70" />
@@ -57,17 +66,26 @@
 <script>
 
 	function switch_graph() {
+		if (document.getElementById("organization_button").checked) {
+			document.getElementById("organization_graph").style.display = "block";
+			document.getElementById("collaboration_graph").style.display = "none";
+			document.getElementById("operational_graph").style.display = "none";
+			document.getElementById("challenge_graph").style.display = "none";
+		}
 		if (document.getElementById("collaboration_button").checked) {
+			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "block";
 			document.getElementById("operational_graph").style.display = "none";
 			document.getElementById("challenge_graph").style.display = "none";
 		}
 		if (document.getElementById("operational_button").checked) {
+			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "none";
 			document.getElementById("operational_graph").style.display = "block";
 			document.getElementById("challenge_graph").style.display = "none";
 		}
 		if (document.getElementById("challenge_button").checked) {
+			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "none";
 			document.getElementById("operational_graph").style.display = "none";
 			document.getElementById("challenge_graph").style.display = "block";
