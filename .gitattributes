@@ -154,6 +154,12 @@ WebContent/head.jsp -text
 WebContent/images/cd2h_invent.png -text
 WebContent/images/n3c_logo.png -text
 WebContent/images/person_icon.png -text
+WebContent/images/spinners/fading_wheel.gif -text
+WebContent/images/spinners/filling_circles.gif -text
+WebContent/images/spinners/gear.gif -text
+WebContent/images/spinners/infinity.gif -text
+WebContent/images/spinners/mini_balls.gif -text
+WebContent/images/spinners/settings.gif -text
 WebContent/index.jsp -text
 WebContent/index2.jsp -text
 WebContent/index_prod.jsp -text
