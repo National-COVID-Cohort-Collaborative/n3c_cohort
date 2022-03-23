@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ taglib prefix="util" uri="http://icts.uiowa.edu/tagUtil"%>
 
 <style>
 
@@ -56,7 +57,7 @@
 	<div class="col-md-12 col-lg-9 col-xl-10 viz-col">
 		<div class="panel panel-primary top_panel">
 			<div class="panel-body">
-				<div id="question-tile">
+				<div id="question-tile" style="width:100%; height:500px; background:url(<util:applicationRoot/>/images/spinners/fading_wheel.svg) no-repeat center 150px;">
 				<p><i>Loading...</i></p>
 				</div>
 			</div>

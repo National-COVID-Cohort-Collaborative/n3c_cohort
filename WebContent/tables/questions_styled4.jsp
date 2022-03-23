@@ -108,6 +108,12 @@
     	color:white;
 	}
 	
+	iframe{
+		/* SVGs generated at https://icons8.com/preloaders/en/circular# */
+		background:url(<util:applicationRoot/>/images/spinners/fading_wheel.svg) no-repeat center 100px;
+		/* to resize, use background-size: 300px 300px; */
+	}
+	​
 </style>
 
 
