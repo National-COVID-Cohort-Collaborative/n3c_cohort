@@ -7,10 +7,9 @@
 
 <graph:graph>
     <sql:query var="projects" dataSource="jdbc/N3CCohort" >
-        select uid,title,research_statement, count(*)
-        from n3c_admin.enclave_project, n3c_admin.enclave_project_members
-        where enclave_project.uid = enclave_project_members.project_uid and title !~'^\[' and uid != 'RP-148569' group by 1,2,3;
-    </sql:query>
+        select uid,title,research_statement,count
+        from n3c_collaboration.organization_project;
+     </sql:query>
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
     	<c:set var="pitch" value="${row.research_statement}"/>
@@ -18,16 +17,15 @@
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
-        select ror_id,ror_name,count(*)
-        from palantir.n3c_user
-        where orcid_id in (select orcid_id from n3c_admin.enclave_project_members where project_uid != 'RP-148569') group by 1,2;
+        select ror_id,ror_name,count
+        from n3c_collaboration.organization_organization;
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
         <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="0" score="${row.count}" auxString="../images/person_icon.png"/>
     </c:forEach>
 
     <sql:query var="edges" dataSource="jdbc/N3CCohort">
-         select distinct ror_id,project_uid,count(*) from n3c_admin.enclave_project_members natural join palantir.n3c_user where ror_id is not null group by 1,2;
+         select ror_id,project_uid,count from n3c_collaboration.organization_edge;
     </sql:query>
     <c:forEach items="${edges.rows}" var="row" varStatus="rowCounter">
         <graph:edge source="${row.ror_id}" target="${row.project_uid}"  weight="${row.count}" />
