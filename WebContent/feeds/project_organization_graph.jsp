@@ -13,15 +13,26 @@
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
     	<c:set var="pitch" value="${row.research_statement}"/>
-        <graph:node uri="${row.uid}" label="${row.title}" group="1" score="${row.count}" auxString="../images/cd2h_invent.png"/>
+        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="${row.count}" auxString="../images/cd2h_invent.png"/>
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
-        select ror_id,ror_name,count
+        select
+        	ror_id,
+        	ror_name,
+        	case
+        		when org_type = 'CTSA' then 1
+        		when org_type = 'CTR' then 2
+        		when org_type = 'GOV' then 3
+        		when org_type = 'COM' then 4
+        		when org_type = 'UNAFFILIATED' then 5
+        		when org_type = 'REGIONAL' then 6
+        	end as group,
+        	count
         from n3c_collaboration.organization_organization;
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
-        <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="0" score="${row.count}" auxString="../images/person_icon.png"/>
+        <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="${row.group}" score="${row.count}" auxString="../images/person_icon.png"/>
     </c:forEach>
 
     <sql:query var="edges" dataSource="jdbc/N3CCohort">
@@ -47,9 +58,13 @@
 	  	</graph:foreachEdge>
 	  ],
 	  "sites":[
-		<graph:foreachSiteID>
-			{"id":<graph:SiteID/>, "label":"<graph:SiteName/>"}<c:if test="${!isLastID}">,</c:if>
-		</graph:foreachSiteID>
+			{"id":0, "label":"N3C Project"},
+			{"id":1, "label":"CTSA"},
+			{"id":2, "label":"CTR"},
+			{"id":3, "label":"GOV"},
+			{"id":4, "label":"COM"},
+			{"id":5, "label":"Unaffiliated"},
+			{"id":6, "label":"Regional"}
 		]
 	}
 	

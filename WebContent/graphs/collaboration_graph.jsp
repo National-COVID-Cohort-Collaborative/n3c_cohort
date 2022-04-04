@@ -16,10 +16,11 @@
 		<h1>N3C Enclave Collaborations</h1>
 		<ul>
 			<li>Large blue icons are projects - mousing over shows the ID and title
-			<li>Small orange icons are project members - mouse over to see a name
+			<li>The remaining icons are project members (color key at the right) - mouse over to see a name
 		</ul>
 	</div>
 	<div id="content">
+		<div id="legend" style="display:block;"></div>
 		<div id="organization_graph" style="display:block;"></div>
 		<div id="collaboration_graph" style="display:none;"></div>
 		<div id="operational_graph" style="display:none;"></div>
@@ -37,6 +38,7 @@
 		<jsp:param name="charge" value="-350" />
 		<jsp:param name="ld" value="70" />
 		<jsp:param name="target" value="organization_graph" />
+		<jsp:param name="legend_div" value="legend" />
 		<jsp:param name="data_page" value="feeds/project_organization_graph.jsp" />
 		<jsp:param name="detectionAlg" value="sites" />
 	</jsp:include>

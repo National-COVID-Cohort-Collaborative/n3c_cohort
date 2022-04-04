@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 
 .link {
@@ -41,7 +42,6 @@ div.tooltip {
     var forceCenter
     var graph
     
-    var colorScale = d3.scaleOrdinal(d3.schemeCategory10)
     
 	var tooltip = d3.select("body")
 		.append("div")
@@ -70,7 +70,7 @@ div.tooltip {
         
         d3.json("${param.data_page}", function(error, theGraph) {
         	graph = theGraph;
-            drawChart(graph)    
+            drawChart(graph)
         });
     }
     
@@ -98,6 +98,7 @@ div.tooltip {
     }
     
     function drawChart(data) {
+        var colorScale = d3.scaleOrdinal(["#1f77b4", "#bcbd22", "#17becf", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"])
         forceCenter = d3.forceCenter(chartWidth / 2, chartHeight / 2)
         simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function(d) { return d.index }))
@@ -149,7 +150,7 @@ div.tooltip {
       			tooltip.transition()
         			.duration(300)
         			.style("opacity", .8);
-      			tooltip.html((d.group == 1 ? d.url+" - " : "") + d.name)
+      			tooltip.html((d.group == 0 ? d.url+" - " : d.group+" : ") + d.name)
         			.style("left", (d3.event.pageX) + "px")
         			.style("top", (d3.event.pageY + 10) + "px");
     			})
@@ -177,6 +178,10 @@ div.tooltip {
                 .attr("cy", function(d) { return d.y = Math.max(4, Math.min(height - d.score, d.y)); });
         }  
         
+        <c:if test="${not empty param.legend_div}">
+	        drawColorKey(data.sites)
+        </c:if>
+
         simulation
             .nodes(data.nodes)
             .on("tick", ticked);
@@ -225,6 +230,34 @@ div.tooltip {
           };
         }
                 
+        function drawColorKey(legendData) {
+        	var w = 120;
+        	var h = 200;
+        	var k = 0;
+        	
+        	var svg3 = d3.select("#${param.legend_div}")
+        		.append("svg")
+        		.attr("width", w)
+        		.attr("height", h);
+        	
+        	svg3.selectAll("node")
+        		.data(legendData)
+         	   .enter().append("circle")
+            	.attr("class", "node")
+        		.attr("r", 5)
+        		.attr("x", 10)
+        		.attr("y", function(d,k) { return 10+(16*k); k++;} )
+        		.attr("transform", function(d,k) { return "translate(" + 20 + "," + (16+16*k) + ")"; k++;})
+        	   	.style("fill", function (d,k) { console.log("k",k,"legendData[k]",legendData[k],"id",legendData[k].id,"color",colorScale(legendData[k].id)); return colorScale(legendData[k].id);});
+        		
+        	svg3.selectAll("text")
+        		.data(legendData)
+        		.enter()
+        		.append("text")
+        		.text (function (d) { return d.label; })
+        		.attr("x", 30)
+        		.attr("y", function(d, k) { return 23+(16*k); k++; });
+        }
     }
 }());
 </script>    
