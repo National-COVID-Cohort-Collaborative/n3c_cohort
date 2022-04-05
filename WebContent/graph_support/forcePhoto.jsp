@@ -42,7 +42,10 @@ div.tooltip {
     var forceCenter
     var graph
     
-    
+	var colorScale = d3.scaleOrdinal()
+		.domain(["N3C","CTSA","CTR","GOV","COM","UNAFFILIATED","REGIONAL","X1","X2","X3"])
+		.range(["#1f77b4", "#ff7f0e", "#d62728", "#7f7f7f", "#8c564b", "#e377c2", "#17becf", "#ff7f0e", "#bcbd22", "#2ca02c", "#9467bd"])
+
 	var tooltip = d3.select("body")
 		.append("div")
 		.attr("class", "tooltip")
@@ -60,7 +63,7 @@ div.tooltip {
         var myObserver = new ResizeObserver(entries => {
     		entries.forEach(entry => {
     			var newWidth = Math.floor(entry.contentRect.width);
-   				console.log(newWidth);
+   				//console.log(newWidth);
    				setSize(newWidth);
     		});
     	});
@@ -98,7 +101,6 @@ div.tooltip {
     }
     
     function drawChart(data) {
-        var colorScale = d3.scaleOrdinal(["#1f77b4", "#bcbd22", "#17becf", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"])
         forceCenter = d3.forceCenter(chartWidth / 2, chartHeight / 2)
         simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function(d) { return d.index }))
@@ -150,7 +152,7 @@ div.tooltip {
       			tooltip.transition()
         			.duration(300)
         			.style("opacity", .8);
-      			tooltip.html((d.group == 0 ? d.url+" - " : d.group+" : ") + d.name)
+      			tooltip.html((d.group == 'N3C' ? d.url+" - " : "") + d.name)
         			.style("left", (d3.event.pageX) + "px")
         			.style("top", (d3.event.pageY + 10) + "px");
     			})
@@ -248,7 +250,7 @@ div.tooltip {
         		.attr("x", 10)
         		.attr("y", function(d,k) { return 10+(16*k); k++;} )
         		.attr("transform", function(d,k) { return "translate(" + 20 + "," + (16+16*k) + ")"; k++;})
-        	   	.style("fill", function (d,k) { console.log("k",k,"legendData[k]",legendData[k],"id",legendData[k].id,"color",colorScale(legendData[k].id)); return colorScale(legendData[k].id);});
+        	   	.style("fill", function (d,k) { return colorScale(legendData[k].id);});
         		
         	svg3.selectAll("text")
         		.data(legendData)

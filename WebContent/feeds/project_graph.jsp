@@ -13,13 +13,14 @@
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
     	<c:set var="pitch" value="${row.research_statement}"/>
-        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="10" auxString="../images/cd2h_invent.png"/>
+        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="10" auxString="N3C"/>
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
         select
         	orcid_id,
-        	name||' '||org_type as name,
+        	name,
+        	org_type,
         	case
         		when org_type = 'CTSA' then 1
         		when org_type = 'CTR' then 2
@@ -31,7 +32,7 @@
         from n3c_collaboration.research_person;
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
-        <graph:node uri="${row.orcid_id}" label="${row.name}" group="${row.group}" score="5" auxString="../images/person_icon.png"/>
+        <graph:node uri="${row.orcid_id}" label="${row.name}" group="${row.group}" score="5" auxString="${row.org_type}"/>
     </c:forEach>
 
     <sql:query var="edges" dataSource="jdbc/N3CCohort">
@@ -45,7 +46,7 @@
 	  "nodes":[
 		<graph:foreachNode > 
 			<graph:node>
-			    {"url":"<graph:nodeUri/>","image_link":"<graph:nodeAuxString/>","name":"<graph:nodeLabel/>","group":<graph:nodeGroup/>,"score":<graph:nodeScore/>}<c:if test="${ ! isLastNode }">,</c:if>
+			    {"url":"<graph:nodeUri/>","image_link":"<graph:nodeAuxString/>","name":"<graph:nodeLabel/>","group":"<graph:nodeAuxString/>","score":<graph:nodeScore/>}<c:if test="${ ! isLastNode }">,</c:if>
 			</graph:node>
 		</graph:foreachNode>
 		],

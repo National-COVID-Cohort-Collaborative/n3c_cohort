@@ -13,13 +13,14 @@
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
     	<c:set var="pitch" value="${row.research_statement}"/>
-        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="${row.count}" auxString="../images/cd2h_invent.png"/>
+        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="${row.count}" auxString="N3C"/>
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
         select
         	ror_id,
         	ror_name,
+        	org_type,
         	case
         		when org_type = 'CTSA' then 1
         		when org_type = 'CTR' then 2
@@ -32,7 +33,7 @@
         from n3c_collaboration.organization_organization;
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
-        <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="${row.group}" score="${row.count}" auxString="../images/person_icon.png"/>
+        <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="${row.group}" score="${row.count}" auxString="${row.org_type}"/>
     </c:forEach>
 
     <sql:query var="edges" dataSource="jdbc/N3CCohort">
@@ -46,7 +47,7 @@
 	  "nodes":[
 		<graph:foreachNode > 
 			<graph:node>
-			    {"url":"<graph:nodeUri/>","image_link":"<graph:nodeAuxString/>","name":"<graph:nodeLabel/>","group":<graph:nodeGroup/>,"score":<graph:nodeScore/>}<c:if test="${ ! isLastNode }">,</c:if>
+			    {"url":"<graph:nodeUri/>","image_link":"<graph:nodeAuxString/>","name":"<graph:nodeLabel/>","group":"<graph:nodeAuxString/>","score":<graph:nodeScore/>}<c:if test="${ ! isLastNode }">,</c:if>
 			</graph:node>
 		</graph:foreachNode>
 		],
@@ -58,13 +59,13 @@
 	  	</graph:foreachEdge>
 	  ],
 	  "sites":[
-			{"id":0, "label":"N3C Project"},
-			{"id":1, "label":"CTSA"},
-			{"id":2, "label":"CTR"},
-			{"id":3, "label":"GOV"},
-			{"id":4, "label":"COM"},
-			{"id":5, "label":"Unaffiliated"},
-			{"id":6, "label":"Regional"}
+			{"id":"N3C", "label":"N3C Project"},
+			{"id":"CTSA", "label":"CTSA"},
+			{"id":"CTR", "label":"CTR"},
+			{"id":"GOV", "label":"GOV"},
+			{"id":"COM", "label":"COM"},
+			{"id":"UNAFFILIATED", "label":"Unaffiliated"},
+			{"id":"REGIONAL", "label":"Regional"}
 		]
 	}
 	
