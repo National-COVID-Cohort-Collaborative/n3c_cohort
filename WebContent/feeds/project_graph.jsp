@@ -7,13 +7,13 @@
 
 <graph:graph>
     <sql:query var="projects" dataSource="jdbc/N3CCohort" >
-        select uid,title,research_statement
+        select uid,title,research_statement,greatest(count, 5) as count
         from n3c_collaboration.research_project;
     </sql:query>
     <c:forEach items="${projects.rows}" var="row">
     	<c:set var="title" value="${row.title}"/>
     	<c:set var="pitch" value="${row.research_statement}"/>
-        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="10" auxString="N3C"/>
+        <graph:node uri="${row.uid}" label="${row.title}" group="0" score="${row.count}" auxString="N3C"/>
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >

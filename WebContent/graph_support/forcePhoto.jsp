@@ -43,8 +43,8 @@ div.tooltip {
     var graph
     
 	var colorScale = d3.scaleOrdinal()
-		.domain(["N3C","CTSA","CTR","GOV","COM","UNAFFILIATED","REGIONAL","X1","X2","X3"])
-		.range(["#1f77b4", "#ff7f0e", "#d62728", "#7f7f7f", "#8c564b", "#e377c2", "#17becf", "#ff7f0e", "#bcbd22", "#2ca02c", "#9467bd"])
+		.domain(["N3C", "CTSA", "GOV", "CTR", "COM", "UNAFFILIATED", "REGIONAL", "X1", "X2", "X3"])
+		.range(d3.schemeCategory10)
 
 	var tooltip = d3.select("body")
 		.append("div")
