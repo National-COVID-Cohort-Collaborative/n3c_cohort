@@ -9,7 +9,8 @@
 			<input id="organization_button" name=type type="radio" value="full" onclick="switch_graph();" checked> Organizations - Research DURs<br>
 			<input id="collaboration_button" name=type type="radio" value="full" onclick="switch_graph();"> Persons - Research DURs<br>
 			<input id="operational_button" name=type type="radio" value="operational" onclick="switch_graph();"> Persons - Operational DURs<br>
-			<input id="challenge_button" name=type type="radio" value="challenge" onclick="switch_graph();"> Challenge and connected DURs<br>
+			<input id="challenge_button" name=type type="radio" value="challenge" onclick="switch_graph();"> Challenge and connected DURs (individuals)<br>
+			<input id="challenge_org_button" name=type type="radio" value="challenge_org" onclick="switch_graph();"> Challenge and connected DURs (organizations)<br>
 		</form>
 	</div>
 	<div class="col-xs-6">
@@ -25,6 +26,7 @@
 		<div id="collaboration_graph" style="display:none;"></div>
 		<div id="operational_graph" style="display:none;"></div>
 		<div id="challenge_graph" style="display:none;"></div>
+		<div id="challenge_org_graph" style="display:none;"></div>
 	</div>
 	<c:url var="encodedMapURL" value="data.jsp">
 		<c:param name="detectionAlg" value="site" />
@@ -63,6 +65,13 @@
 		<jsp:param name="data_page" value="feeds/project_challenge_graph.jsp" />
 		<jsp:param name="detectionAlg" value="sites" />
 	</jsp:include>
+	<jsp:include page="../graph_support/forcePhoto.jsp" flush="true">
+		<jsp:param name="charge" value="-350" />
+		<jsp:param name="ld" value="70" />
+		<jsp:param name="target" value="challenge_org_graph" />
+		<jsp:param name="data_page" value="feeds/project_challenge_organization_graph.jsp" />
+		<jsp:param name="detectionAlg" value="sites" />
+	</jsp:include>
 </div>
 
 <script>
@@ -73,24 +82,35 @@
 			document.getElementById("collaboration_graph").style.display = "none";
 			document.getElementById("operational_graph").style.display = "none";
 			document.getElementById("challenge_graph").style.display = "none";
+			document.getElementById("challenge_org_graph").style.display = "none";
 		}
 		if (document.getElementById("collaboration_button").checked) {
 			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "block";
 			document.getElementById("operational_graph").style.display = "none";
 			document.getElementById("challenge_graph").style.display = "none";
+			document.getElementById("challenge_org_graph").style.display = "none";
 		}
 		if (document.getElementById("operational_button").checked) {
 			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "none";
 			document.getElementById("operational_graph").style.display = "block";
 			document.getElementById("challenge_graph").style.display = "none";
+			document.getElementById("challenge_org_graph").style.display = "none";
 		}
 		if (document.getElementById("challenge_button").checked) {
 			document.getElementById("organization_graph").style.display = "none";
 			document.getElementById("collaboration_graph").style.display = "none";
 			document.getElementById("operational_graph").style.display = "none";
 			document.getElementById("challenge_graph").style.display = "block";
+			document.getElementById("challenge_org_graph").style.display = "none";
+		}
+		if (document.getElementById("challenge_org_button").checked) {
+			document.getElementById("organization_graph").style.display = "none";
+			document.getElementById("collaboration_graph").style.display = "none";
+			document.getElementById("operational_graph").style.display = "none";
+			document.getElementById("challenge_graph").style.display = "none";
+			document.getElementById("challenge_org_graph").style.display = "block";
 		}
 	}
 	

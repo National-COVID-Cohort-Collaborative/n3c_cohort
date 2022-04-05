@@ -17,18 +17,30 @@
     </c:forEach>
 		
     <sql:query var="persons" dataSource="jdbc/N3CCohort" >
-        select orcid_id,name,org_type
-        from n3c_collaboration.challenge_person;
+        select
+        	ror_id,
+        	ror_name,
+        	org_type,
+        	case
+        		when org_type = 'CTSA' then 1
+        		when org_type = 'CTR' then 2
+        		when org_type = 'GOV' then 3
+        		when org_type = 'COM' then 4
+        		when org_type = 'UNAFFILIATED' then 5
+        		when org_type = 'REGIONAL' then 6
+        	end as group,
+        	greatest(count, 5) as count
+        from n3c_collaboration.challenge_organization;
     </sql:query>
     <c:forEach items="${persons.rows}" var="row">
-        <graph:node uri="${row.orcid_id}" label="${row.name}" group="0" score="5" auxString="${row.org_type}"/>
+        <graph:node uri="${row.ror_id}" label="${row.ror_name}" group="0" score="${row.count}" auxString="${row.org_type}"/>
     </c:forEach>
 
     <sql:query var="edges" dataSource="jdbc/N3CCohort">
-         select orcid_id,project_uid from n3c_collaboration.challenge_person_edge;
+         select ror_id,project_uid from n3c_collaboration.challenge_organization_edge;
     </sql:query>
     <c:forEach items="${edges.rows}" var="row" varStatus="rowCounter">
-        <graph:edge source="${row.project_uid}" target="${row.orcid_id}"  weight="0.1" />
+        <graph:edge source="${row.project_uid}" target="${row.ror_id}"  weight="0.1" />
     </c:forEach>
 
 	{
