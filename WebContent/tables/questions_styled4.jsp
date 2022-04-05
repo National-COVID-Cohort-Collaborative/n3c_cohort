@@ -276,6 +276,7 @@ $.getJSON("<util:applicationRoot/>/feeds/questions.jsp", function(data){
 		if (index < 0)
 			index = 0;
 
+		document.getElementById("question-tile").removeAttribute("style");
 		iframe_render(
 						
 						config.tenantDomain,
