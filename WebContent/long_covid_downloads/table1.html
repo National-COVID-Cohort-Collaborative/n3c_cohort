@@ -14,10 +14,6 @@
             background-color: #444E86;
             color: white;
         }
-        #longCovidTable1 .table-secondary-2{
-            background-color: #003f5c;
-            color: white;
-        }
         #longCovidTable1 tr td:first-child{
             font-weight: bold;
         }
@@ -50,176 +46,178 @@
             <th class="table-main">Not Hospitalized</th>
             <th class="table-sec">Hospitalized</th>
             <th class="table-sec">Not Hospitalized</th>
-        </>
+        </thead>
+        <thead class="text-left">
+            <th class="text-left">Age (mean (SD))</th>
+            <th class="text-center table-main">58.29 y (SD: 15.03%)</th>
+            <th class="text-center table-main">48.14 y (SD: 14.02%)</th>
+            <th class="text-center table-sec">56.50 y (SD: 18.60%)</th>
+            <th class="text-center table-sec">45.92 y (SD: 17.32%)</th>
+        </thead>
         <thead class="text-center">
             <th class="table-light"></th>
-            <th class="table-main">n = 428</th>
-            <th class="table-main">n = 169</th>
-            <th class="table-sec">n = 15,193</th>
-            <th class="table-sec">n = 58,182</th>
+            <th class="table-main">n = 428 (%)</th>
+            <th class="table-main">n = 169 (%)</th>
+            <th class="table-sec">n = 15,193 (%)</th>
+            <th class="table-sec">n = 58,182 (%)</th>
         </thead>
+        
         <tbody>
             <tr class="table-secondary fw-bold">
-                <td colspan="5">Sex (%)</td>
+                <td colspan="5">Sex </td>
             </tr>
             <tr>
                 <td>Female</td>
-                <td class="text-center">237 (55.4)</td>
-                <td class="text-center">127 (75.1)</td>
-                <td class="text-center">8,465 +/-5 (55.7)</td>
-                <td class="text-center">34,771 (59.8)</td>
+                <td class="text-center">237 (55.4%)</td>
+                <td class="text-center">127 (75.1%)</td>
+                <td class="text-center">8,465 +/-5 (55.7%)</td>
+                <td class="text-center">34,771 (59.8%)</td>
             </tr>
             <tr>
                 <td>Male</td>
-                <td class="text-center">191 (44.6)</td>
-                <td class="text-center">42 (24.9)</td>
-                <td class="text-center">6,716 +/-5 (44.2)</td>
-                <td class="text-center">23,258 (40.0)</td>
+                <td class="text-center">191 (44.6%)</td>
+                <td class="text-center">42 (24.9%)</td>
+                <td class="text-center">6,716 +/-5 (44.2%)</td>
+                <td class="text-center">23,258 (40.0%)</td>
             </tr>
             <tr>
                 <td>Unknown</td>
-                <td class="text-center">0 (0.0)</td>
-                <td class="text-center">0 (0.0)</td>
+                <td class="text-center">0 (0.0%)</td>
+                <td class="text-center">0 (0.0%)</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">153 (0.3)</td>
+                <td class="text-center">153 (0.3%)</td>
             </tr>
-            <tr class="table-secondary-2 fw-bold">
-                <td>Age (mean (SD))</td>
-                <td class="text-center">58.29 y (15.03)</td>
-                <td class="text-center">48.14 y (14.02)</td>
-                <td class="text-center">56.50 y (18.60)</td>
-                <td class="text-center">45.92 y (17.32)</td>
-            </tr>
+           
             <tr class="table-secondary fw-bold">
-                <td colspan="5">Race (%)</td>
+                <td colspan="5">Race </td>
             </tr>
             <tr>
                 <td>Asian</td>
                 <td class="text-center">&lt;20</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">571 (3.8)</td>
-                <td class="text-center">1361 (2.3)</td>
+                <td class="text-center">571 (3.8%)</td>
+                <td class="text-center">1361 (2.3%)</td>
             </tr>
             <tr>
                 <td>Black</td>
-                <td class="text-center">190 (44.4)</td>
-                <td class="text-center">31 (18.3)</td>
-                <td class="text-center">3,207 (21.1)</td>
-                <td class="text-center">6,370 (10.9)</td>
+                <td class="text-center">190 (44.4%)</td>
+                <td class="text-center">31 (18.3%)</td>
+                <td class="text-center">3,207 (21.1%)</td>
+                <td class="text-center">6,370 (10.9%)</td>
             </tr>
             <tr>
                 <td>Native Haw./Pac. Islander</td>
                 <td class="text-center">&lt;20</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">43 (0.3)</td>
-                <td class="text-center">138 (0.2)</td>
+                <td class="text-center">43 (0.3%)</td>
+                <td class="text-center">138 (0.2%)</td>
             </tr>
             <tr>
                 <td>Other</td>
                 <td class="text-center">&lt;20</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">85 (0.6)</td>
-                <td class="text-center">254 (0.4)</td>
+                <td class="text-center">85 (0.6%)</td>
+                <td class="text-center">254 (0.4%)</td>
             </tr>
             <tr>
                 <td>Unknown</td>
-                <td class="text-center">81 (18.9)</td>
-                <td class="text-center">27 (16.0)</td>
-                <td class="text-center">2,695 (17.7)</td>
-                <td class="text-center">9,842 (16.9)</td>
+                <td class="text-center">81 (18.9%)</td>
+                <td class="text-center">27 (16.0%)</td>
+                <td class="text-center">2,695 (17.7%)</td>
+                <td class="text-center">9,842 (16.9%)</td>
             </tr>
             <tr>
                 <td>White</td>
-                <td class="text-center">142 (33.2)</td>
-                <td class="text-center">107 (63.3)</td>
-                <td class="text-center">8,592 (56.6)</td>
-                <td class="text-center">40,217 (69.1)</td>
+                <td class="text-center">142 (33.2%)</td>
+                <td class="text-center">107 (63.3%)</td>
+                <td class="text-center">8,592 (56.6%)</td>
+                <td class="text-center">40,217 (69.1%)</td>
             </tr>
             <tr class="table-secondary fw-bold">
-                <td colspan="5">Ethnicity (%)</td>
+                <td colspan="5">Ethnicity </td>
             </tr>
             <tr>
                 <td>Hispanic/Latino</td>
-                <td class="text-center">69 +/-5 (16.1)</td>
-                <td class="text-center">26 +/-5 (15.4)</td>
-                <td class="text-center">3,064 (20.2)</td>
-                <td class="text-center">11,416 (19.6)</td>
+                <td class="text-center">69 +/-5 (16.1%)</td>
+                <td class="text-center">26 +/-5 (15.4%)</td>
+                <td class="text-center">3,064 (20.2%)</td>
+                <td class="text-center">11,416 (19.6%)</td>
             </tr>
             <tr>
                 <td>Not Hispanic/Latino</td>
-                <td class="text-center">354 +/-5 (82.7)</td>
-                <td class="text-center">128 +/-5 (75.7)</td>
-                <td class="text-center">11,869 (78.1)</td>
-                <td class="text-center">45,119 (77.5)</td>
+                <td class="text-center">354 +/-5 (82.7%)</td>
+                <td class="text-center">128 +/-5 (75.7%)</td>
+                <td class="text-center">11,869 (78.1%)</td>
+                <td class="text-center">45,119 (77.5%)</td>
             </tr>
             <tr>
                 <td>Unknown</td>
                 <td class="text-center">&lt;20</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">260 (1.7)</td>
-                <td class="text-center">1,647 (2.8)</td>
+                <td class="text-center">260 (1.7%)</td>
+                <td class="text-center">1,647 (2.8%)</td>
             </tr>
             <tr class="table-secondary fw-bold">
-                <td colspan="5">Age Group (%)</td>
+                <td colspan="5">Age Group </td>
             </tr>
             <tr>
                 <td>18-25</td>
                 <td class="text-center">&lt;20</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">790 (5.2)</td>
-                <td class="text-center">7,573 (13.0)</td>
+                <td class="text-center">790 (5.2%)</td>
+                <td class="text-center">7,573 (13.0%)</td>
             </tr>
             <tr>
                 <td>26-45</td>
-                <td class="text-center">86 +/-5 (20.1)</td>
-                <td class="text-center">75 (44.4)</td>
-                <td class="text-center">3,824 (25.2)</td>
-                <td class="text-center">22,732 (39.1)</td>
+                <td class="text-center">86 +/-5 (20.1%)</td>
+                <td class="text-center">75 (44.4%)</td>
+                <td class="text-center">3,824 (25.2%)</td>
+                <td class="text-center">22,732 (39.1%)</td>
             </tr>
             <tr>
                 <td>46-65</td>
-                <td class="text-center">188 +/-5 (43.9)</td>
-                <td class="text-center">69 (40.8)</td>
-                <td class="text-center">5,249 (34.5)</td>
-                <td class="text-center">19,015 (32.7)</td>
+                <td class="text-center">188 +/-5 (43.9%)</td>
+                <td class="text-center">69 (40.8%)</td>
+                <td class="text-center">5,249 (34.5%)</td>
+                <td class="text-center">19,015 (32.7%)</td>
             </tr>
             <tr>
                 <td>66+</td>
-                <td class="text-center">147 +/-5 (34.3)</td>
+                <td class="text-center">147 +/-5 (34.3%)</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">5,330 (35.1)</td>
-                <td class="text-center">8,862 (15.2)</td>
+                <td class="text-center">5,330 (35.1%)</td>
+                <td class="text-center">8,862 (15.2%)</td>
             </tr>
             <tr class="table-secondary fw-bold">
-                <td colspan="5">Pre-COVID comorbidities(%)</td>
+                <td colspan="5">Pre-COVID comorbidities</td>
             </tr>
             <tr>
                 <td>Diabetes</td>
-                <td class="text-center">86 (20.1)</td>
+                <td class="text-center">86 (20.1%)</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">2,412 (15.9)</td>
-                <td class="text-center">4,842 (8.3)</td>
+                <td class="text-center">2,412 (15.9%)</td>
+                <td class="text-center">4,842 (8.3%)</td>
             </tr>
             <tr>
                 <td>Chronic kidney disease</td>
-                <td class="text-center">70 (16.4)</td>
+                <td class="text-center">70 (16.4%)</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">1,721 (11.3)</td>
-                <td class="text-center">2,272 (3.9)</td>
+                <td class="text-center">1,721 (11.3%)</td>
+                <td class="text-center">2,272 (3.9%)</td>
             </tr>
             <tr>
                 <td>Congestive heart failure</td>
-                <td class="text-center">48 (11.2)</td>
+                <td class="text-center">48 (11.2%)</td>
                 <td class="text-center">&lt;20</td>
-                <td class="text-center">960 (6.3)</td>
-                <td class="text-center">1,133 (1.9)</td>
+                <td class="text-center">960 (6.3%)</td>
+                <td class="text-center">1,133 (1.9%)</td>
             </tr>
             <tr>
                 <td>Chronic pulmonary disease</td>
-                <td class="text-center">45 (10.5)</td>
-                <td class="text-center">29 (17.2)</td>
-                <td class="text-center">1,415 (9.3)</td>
-                <td class="text-center">3,698 (6.4)</td>
+                <td class="text-center">45 (10.5%)</td>
+                <td class="text-center">29 (17.2%)</td>
+                <td class="text-center">1,415 (9.3%)</td>
+                <td class="text-center">3,698 (6.4%)</td>
             </tr>
         </tbody>
     </table>
