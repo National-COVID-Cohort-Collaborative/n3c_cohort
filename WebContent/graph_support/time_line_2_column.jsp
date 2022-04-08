@@ -393,10 +393,20 @@
 			
 				function dua_dta_mousemove() {
 				    var x0 = ${param.namespace}x.invert(d3.mouse(this)[0]),
-				        i = bisectDate_dua_dta(data, x0, 1),
+				        i = bisectDate_dua_dta(data, x0),
 				        d0 = data[i - 1],
-				        d1 = data[i],
-				        d = x0 - d0.${param.date_column} > d1.${param.date_column} - x0 ? d1 : d0;
+				        d1 = data[i];
+					
+					if (d0 && !d1){
+				    	d1 = d0;
+				    };
+				    
+				    if (d1 && !d0){
+				    	d0 = d1;
+				    };
+
+				    
+				    var d = x0 - d0.${param.date_column} > d1.${param.date_column} - x0 ? d1 : d0;
 				    
 				    
 				    if (width/2 > d3.mouse(this)[0]){
