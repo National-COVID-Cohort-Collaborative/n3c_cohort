@@ -37,7 +37,7 @@ button {
 		</div>
 		<c:set var="feedPath2"><util:applicationRoot/>/feeds/diabetes_t2_detail.jsp</c:set>
 		<div id="diabetes_type2_detail">
-			<jsp:include page="../graph_support/diabetes_t2_detail.jsp">
+			<jsp:include page="../graph_support/grouped_stacked_bar_horizontal.jsp">
 				<jsp:param name="data_page" value="${feedPath2}" />
 				<jsp:param name="dom_element" value="#diabetes_type2_detail" />
 				<jsp:param name="namespace" value="diabetes_type2_detail" />
